@@ -1,0 +1,12 @@
+Class -->
+  --> one ".java" file must contain only one class. must open and close with curly braces --> {}
+  --> must start with uppercase letter
+  
+main method is the starting point of execution of program. [ public static void main (String[] args) ]
+    --> must open and close with curly braces --> {}
+
+8 primitive data types --> small case letters in starting
+  int, short, long, char, double, float, boolean, byte
+  String --> not primitive data type, its a class, starting with Uppercase letter
+  every line statement must end with semicolon
+  
