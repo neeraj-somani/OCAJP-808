@@ -21,3 +21,6 @@ print statement in java -->
  Scanner --> import java.util.Scanner;
     --> its a class used to get user entered input from command prompt
     --> Scanner input = new Scanner(System.in); --> this statement initialize an object to hold user entered values
+
+a variable declaration exists within curly braces -- { }. If we have to use any variable outside of braces, we should declare it outside.
+
