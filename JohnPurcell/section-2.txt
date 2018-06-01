@@ -24,3 +24,8 @@ print statement in java -->
 
 a variable declaration exists within curly braces -- { }. If we have to use any variable outside of braces, we should declare it outside.
 
+switch statement --> mostly used to compare text and int values. it can't be used for all primitive data types.
+  only switch can take variables.
+  case is for contant values and its will be checked against switch statement variable.
+  default must be at the end of switch statement and it will executed if no values matches other case statement values.
+  
