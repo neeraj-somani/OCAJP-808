@@ -10,3 +10,6 @@ main method is the starting point of execution of program. [ public static void 
   String --> not primitive data type, its a class, starting with Uppercase letter
   every line statement must end with semicolon
   
+print statement in java --> 
+  1) System.out.println("Hello World");
+  2) System.out.printf("Hello World : %d\n", i) --> in this 
