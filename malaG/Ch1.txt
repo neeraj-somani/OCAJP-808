@@ -17,3 +17,25 @@ Chapter 1 - Java Basics
     java source code file -- Person.java
     java bytecode file -- Person.class (compiled code for JVM) -- compiled by java compiler
     
+  Java class components --
+    package statements -- 
+      package statement must be the first statement in the java class, if specified
+      package contains java classes, if not explicitly defined then java class becomes part of default package, which doesn't have name.
+      classes and interfaces within same package can be used without prefixing their name with package name, but if used from another package then fully qualified name is required, like, "java.lang.String".
+        -- to avoid writting fully qualified names repeteadly, we can use import statements to import packages and their classes.
+      
+      following are few compile errors related to package statements:
+        a. package statments can't be placed with in class curly braces, or after class definition. code wouldn't compile.
+        b. a class can't define multiple package statements
+        
+    import statements --
+    comments --
+    class declaration {
+      variables
+      comments 
+      constructors 
+      methods
+      nested classes -- not included in this exam and book
+      nested interfaces -- not included in this exam and book
+      ENUM -- not included in this exam and book
+    }
