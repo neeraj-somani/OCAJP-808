@@ -102,9 +102,46 @@ Chapter 1 - Java Basics
         3. single or multiple classes or interfaces. No perticular order is mendatory.
         4. public class or public interface name must match java source code file name. Not doing so leads to compile error.
         5. One ".java" source code file = one public class or one public interface. can't have more than one. Not doing so leads to compile error.
-    
+        6. classes and interfaces defined in source code file can't be defined in multiple packages.
+        7. import statement in source code file will apply to all classes and interfaces within file.
+        
+        
     Twist in the Tale --> 1.1 --> option (c) and (d)
     Twist in the Tale --> 1.2 --> option (a) , (c) and (d)
      
-        
+ 1.2 -- executable java applications
+  what makes a regular java class an executable java class.
+  execuatble classes (with main menthod) vs non-executable classes (without main method)
+    --> A java application can define more than one executable classes but JVM uses only one as per instruction of code. 
+   
+  Rules for main method -->
+      - must be marked as public
+      - must be marked as static
+      - name must be "main"
+      - return type must be void
+      - method aurgument String array or String variable aurgument (varargs).
+      
+      Some compile error scenarios -->
+        public static void main(String... args) --> its valid statement
+        public static void main(String args...) --> its invalid statement, because ellipsis (...) should not follow variable name.
+        public static void main(String[] arguments) --> its valid statement
+        public static void main(String HelloWorld[]) --> its valid statement
+        static public void main(String HelloWorld[]) --> its valid statement, keywords "public" and "static" are inter-changable
+       
+    Example for running java code with main method -->
+    HelloWorld.java file code -->
+      class HelloWorld {
+          public static void main(String args[]) {
+            System.out.println(args[0]);
+            System.out.println(args[1]);
+          }
+        }
+    Execution on CLI --> java HelloWorld 1 2
+    Result --> 1
+               2
+    explanation --> 1 and 2 are the arguments for the main method of class.
+    
+    Exam Tip --> values written after keyword "java" and classname will be passed to main method. not the keyword "java" or classname.
+    
+    Twist in the Tale --> 1.3 --> option (a) , (b)
        
