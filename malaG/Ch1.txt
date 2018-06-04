@@ -18,7 +18,7 @@ Chapter 1 - Java Basics
     java bytecode file -- Person.class (compiled code for JVM) -- compiled by java compiler
     
   Java class components --
-    package statements -- 
+    1. package statements -- 
       package statement must be the first statement in the java class, if specified. only exception is comments. comments can be first line and package statement can come after that.
       package contains java classes, if not explicitly defined then java class becomes part of default package, which doesn't have name.
       classes and interfaces within same package can be used without prefixing their name with package name, but if used from another package then fully qualified name is required, like, "java.lang.String".
@@ -28,19 +28,19 @@ Chapter 1 - Java Basics
         a. package statments can't be placed with in class curly braces, or after class definition. code wouldn't compile.
         b. a class can't define multiple package statements
         
-    import statements --
+   2. import statements --
       this always comes after package statement but before class definition.
       if order of this statment changes then code will not compile.
-    comments --
+   
+   3. comments --
       are used to describe or add comments to code.
+      comments can precede package statement.
       two way can be implemented --
         a. multiline comment --> /* to start , */ to end
         b. single line comment --> //
-      comments can precede package statement
-      
-      
-      
-    class declaration {
+        c. special type commenting to create API documentation --> /** to start, */ to end
+
+   4. class declaration {
       variables
       comments 
       constructors 
@@ -49,3 +49,14 @@ Chapter 1 - Java Basics
       nested interfaces -- not included in this exam and book
       ENUM -- not included in this exam and book
     }
+    
+    class declaration -->
+      a class declaration composed of following parts -->
+        1. access modifier
+        2. non-access modifier
+        3. class name
+        4. name of base class if class extends another class
+        5. interfaces
+        6. class body within curly braces { }
+        example --> 
+        public final class Runner extends Person implements Athlete { }
