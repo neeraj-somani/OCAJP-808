@@ -1,0 +1,19 @@
+Chapter 1 - Java Basics
+  - structure of java class
+  - executable java application with main method, CLI, and consol output.
+  - import java packages 
+  - apply access modifier (private, public, protected, default)
+  - use of abstract classes and interfaces
+  - static keywords to methods and fields
+  - few imp features of java components
+  
+  Java analogy with Organization
+  - organizations hirarchical  structure and components =  Java's class hirarchical structure and components
+  - organizations department = java packages
+  - Restriction in Organizations data = java's access modifier
+  - organizations special priviledges = java's non-access modifier
+  
+  first topic -- structure of java class
+    java source code file -- Person.java
+    java bytecode file -- Person.class (compiled code for JVM) -- compiled by java compiler
+    
