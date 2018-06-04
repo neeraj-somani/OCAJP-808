@@ -162,4 +162,24 @@ Chapter 1 - Java Basics
     example, : (C:\MyCode)
  
 Exam Tip -->   
-      
+      1. No need to explicitely mention import statement for members from java.lang package.
+      2. you can't use the import statement to access multiple classes or interfaces with the same name from different packages.
+       for example --> 
+       1. Java Date class is defined in 2 packages and we need to use fully qualified name for both inorder to use both
+          class AnnualExam {
+            java.util.Date date1;
+            
+          }
+        2. alternative valid approach
+          import java.util.Date;
+           class AnnualExam {
+           java.sql.Date date2;
+           }
+           
+       3. below code will give compile error -->
+           import java.util.Date;
+           import java.sql.Date;
+           class AnnualExam { }
+           
+           
+           
