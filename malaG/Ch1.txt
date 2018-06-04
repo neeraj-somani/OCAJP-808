@@ -83,6 +83,25 @@ Chapter 1 - Java Basics
      methods --> used to generally manipulate instance / static variables.
      constructors --> used to create and initialize an object of a class.
         A class can have multiple constructors, but can accept different set of method parameters.
+     
+     interface --> specifies a contract for the class to implement.
+        -> its a grouping of related methods and constants.
+        --> prior to java 8 interface methods are implicitly abstract.
+          but with Java 8, method in an interface can define default implementation.
+            interface can even define static methods.
+       
+       Analogy for interface -->
+        Television  == a class
+        volume and channel controls of TV = Interface named as "controls"
+        means, every TV has same functionality of changing channel and increase/decrease volume.
+        
+      
+      Exam tips -- A Java source code file can contain -->
+        1. a single class
+        2. single or multiple interfaces
+        3. single or multiple classes or interfaces. No perticular order is mendatory.
+        4. public class or public interface name must match java source code file name. Not doing so leads to compile error.
+        5. One ".java" source code file = one public class or one public interface. can't have more than one. Not doing so leads to compile error.
         
         
      
