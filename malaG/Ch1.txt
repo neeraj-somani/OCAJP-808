@@ -40,7 +40,7 @@ Chapter 1 - Java Basics
         b. single line comment --> //
         c. special type commenting to create API documentation --> /** to start, */ to end
 
-   4. class declaration {
+   4. class definition {
       variables
       comments 
       constructors 
@@ -58,5 +58,33 @@ Chapter 1 - Java Basics
         4. name of base class if class extends another class
         5. interfaces
         6. class body within curly braces { }
+        
         example --> 
+        
         public final class Runner extends Person implements Athlete { }
+        
+        description of each word in above statemnet:
+        public --> Access modifier (optional)
+        final --> non-access modifier (optional)
+        class --> class Keyword (compulsory)
+        Runner --> class name (compulsory)
+        extends --> keyword (optional)
+        Person --> Base class name  (optional)
+        implements --> keyword for interface (optional)
+        Athlete --> interface name (optional)
+        { } --> (compulsory)
+        
+     class definition --> design used to specify the attributes and behavior of an object. Hence, an object can be created from a class.
+            attributes of an objects are implemented using variables
+            behavior is implemented using methods
+     variables --> used to store the state of an object (also known as instance)
+        each object has its own copy instance variables, values associated with it
+        instance variables are define within a class but outside all method of class
+     methods --> used to generally manipulate instance / static variables.
+     constructors --> used to create and initialize an object of a class.
+        A class can have multiple constructors, but can accept different set of method parameters.
+        
+        
+     
+        
+       
