@@ -144,4 +144,22 @@ Chapter 1 - Java Basics
     Exam Tip --> values written after keyword "java" and classname will be passed to main method. not the keyword "java" or classname.
     
     Twist in the Tale --> 1.3 --> option (a) , (b)
-       
+
+  1.3 - Java Packages -->
+    1. What are java packages and its need? 
+        --> to group together set of classes and interfaces
+        --> also provides access protection and namespace management
+        --> this can be defined in a java source code file as first line of code in the file
+        --> each package can contain other packages known as subpackages.
+    2. Difference between classes defined in java packages and classes without java packages
+
+  Rules about package names -->
+    1. all lowercase letters
+    2. package and subpackages are seperated by dot (.)
+    
+ Points to remember -->
+  1. Need to set CLASSPATH of JRE, inorder for JRE to find these packages. Classpath is the directory base location where .java source code file exsits with proper packages/subpackages directory hirarchy.
+    example, : (C:\MyCode)
+ 
+Exam Tip -->   
+      
