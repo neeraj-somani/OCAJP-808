@@ -103,8 +103,8 @@ Chapter 1 - Java Basics
         4. public class or public interface name must match java source code file name. Not doing so leads to compile error.
         5. One ".java" source code file = one public class or one public interface. can't have more than one. Not doing so leads to compile error.
     
-    Twist in the Tale --> 1.1 --> option (d) - code will fail to compile 
-    Twist in the Tale --> 1.2 --> option (c) and (d)
+    Twist in the Tale --> 1.1 --> option (c) and (d)
+    Twist in the Tale --> 1.2 --> option (a) , (c) and (d)
      
         
        
