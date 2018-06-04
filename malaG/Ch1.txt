@@ -19,7 +19,7 @@ Chapter 1 - Java Basics
     
   Java class components --
     package statements -- 
-      package statement must be the first statement in the java class, if specified
+      package statement must be the first statement in the java class, if specified. only exception is comments. comments can be first line and package statement can come after that.
       package contains java classes, if not explicitly defined then java class becomes part of default package, which doesn't have name.
       classes and interfaces within same package can be used without prefixing their name with package name, but if used from another package then fully qualified name is required, like, "java.lang.String".
         -- to avoid writting fully qualified names repeteadly, we can use import statements to import packages and their classes.
@@ -29,7 +29,17 @@ Chapter 1 - Java Basics
         b. a class can't define multiple package statements
         
     import statements --
+      this always comes after package statement but before class definition.
+      if order of this statment changes then code will not compile.
     comments --
+      are used to describe or add comments to code.
+      two way can be implemented --
+        a. multiline comment --> /* to start , */ to end
+        b. single line comment --> //
+      comments can precede package statement
+      
+      
+      
     class declaration {
       variables
       comments 
