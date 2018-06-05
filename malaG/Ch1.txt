@@ -186,4 +186,20 @@ Exam Tip -->
       c. Members of a named package can't access classes and interfaces defined in the default package. 
           In other words, A class from a default package can't be used in named package class, regardless of same directory of not.
            
-           
+      d. In-order to import only static methods and variables, we can use import static statements. This feature is called static import but the correct command is "import static". example:- import static certification.ExamQuestion.marks;  
+      
+
+1.4 Java Access modifier -->
+      helps to limit access to java class, interfaces, and there members (methods and variables)
+        4 types -->
+        public (least restrictive) --> can be accessed by classes of same packages or seperate packages.
+        protected --> 
+          A derived class inherit the protected members of its base class irrespective of the packages in which they are defined.
+          
+        default -->
+        
+        private (most restrictive) -->
+        
+     Local variables, and method parameters cann't be defined using access modifier.
+     
+        
