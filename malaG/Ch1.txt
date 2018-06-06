@@ -202,4 +202,20 @@ Exam Tip -->
         
      Local variables, and method parameters cann't be defined using access modifier.
      
-        
+ 1.6 - Non-Access Modifiers -->
+  Exam Tips -->
+    Abstract --> 
+      --> An abstract class may or may not define an abstract method, but a concrete class can't define an abstract method.
+      --> An interface is an abstract entity by default. Abstract keyword will be added by Java compiler.
+      --> Abstract method doesn't have a body. Note:- A method with an empty body is not an abstract method.
+      --> abstract keyword doesn't apply to variables. Code wouldn't compile.
+    final -->
+      valid with class, method and variables. || invalid with Interface
+      final class --> can't be extended by another class
+      final variable --> can't allow reassignment of value to variable, value can be assigned one time only.
+          --> on final variable we can call method to assign some value to it and that might chnage its state, but can't reassign another object to the final variable.
+      final method --> final method defined in base class can't be overridden in derived class.
+    Static --> valid for variables, methods, classes, interfaces.
+      static variables belong to a class. Same value of static variable will be shared across all objects of class.
+      static variable also known as shared variable. 
+  
