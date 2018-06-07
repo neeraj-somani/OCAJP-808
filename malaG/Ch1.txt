@@ -221,7 +221,21 @@ Exam Tip -->
       static method can be accessed using the name of the object reference variables. means cant override the method but can access it in derived class.
       Non-static can access static members but opposite is not true.
       static methods and variables can't access the instance members of a class.
-      you can access static variables and methods using a NULL reference.
+      you can access static variables and methods using a NULL reference. Hence, as per above statement you didn't instantiated the class but you reference class name to NULL and used it for static variables and methods.
+      Static doesn't work with top-level class and interface definition but it can work with nested class or interface. means, class or interface within a class.
+      
+ 
+1.6 Java Features and components -->
+  1.6.1 --> Plateform independent --> "Write Once, Run Anywhere". (WORA)
+        Java code compile into ByteCode via Javac (java compiler), 
+        This byteCode then can be run / executed anywhere using JVM (java virtual machine). JVM interpretes byteCode and translate to machine specifics OS, like MacOS, Linux, Windows, etc.
+        Other language like C, C++ compile code specific to the system, hence code has to recompile for different plateforms.
+ 1.6.2 --> Object Oriented --> State and behaviour are tied to an object. (just like, H2O has different state and behaviour -- water, ice and steam ). Similarly, all java code needs to be created within class, interface or enum and need to create objects to use them.
+ 1.6.3 --> Abstraction --> quality of dealing with ideas rather than events.
+      Its the process of hiding the implementation details from user and only functionality will be provided to user. 
+      Only what is given to user not how. example, sending email -- user just have to type email content and send_to address. Not to worry about server protocol security, etc.
+1.6.4 --> Encapsulation --> control the level of access and modification to your object.     
+        
       
       
   
