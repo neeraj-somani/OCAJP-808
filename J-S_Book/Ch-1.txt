@@ -1,0 +1,4 @@
+An object is a runtime instance of a class in memory
+Objects of classes represents state of program. (Need more understanding on this statement)
+Variables hold the state of the program, and methods operate on that state.
+The keyword static binds a method to its class so it can be called by just the class name, as in, for example, Zoo.main().
