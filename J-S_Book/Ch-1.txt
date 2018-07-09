@@ -19,3 +19,20 @@ three rules to remember for legal identifiers:
 ■ Subsequent characters may also be numbers.
 ■ You cannot use the same name as a Java reserved word.
 valid letters in Java are not just characters in the English alphabet. Java supports the Unicode character set, so there are more than 45,000 characters that can start a legal Java identifier.
+
+Local Variable -->
+local variable is a variable defi ned within a method. Local variables must be initialized before use. They do not have a default value and compiler will not let you read an uninitialized value.
+
+Instance and Class Variables -->
+Variables that are not local variables are known as instance variables or class variables.
+Instance variables are also called fields. Class variables are shared across multiple objects.
+A variable is a class variable if it has the static keyword in its declaration.
+
+Instance and class variables do not require you to initialize them. As soon as you declare these variables, they are given a default value.
+Variable_type --> Default initialization value
+boolean --> false
+byte, short, int, long --> 0 (in the type’s bit-length)
+float, double --> 0.0 (in the type’s bit-length)
+char --> '\u0000' (NUL)
+All object references (everything else) --> null
+
