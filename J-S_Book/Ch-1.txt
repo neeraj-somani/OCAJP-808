@@ -8,3 +8,14 @@ Java compiler compiles ".java" files and create ".class" file.
 JVM runs that ".class" files. JVM is responsible for executing the java program line by line hence it is also known as interpreter.
 JRE - provides the minimum requirements for executing a Java application; includes JVM, core class, and supporting files
 JDK - includes JRE, Java interpreter, Javac (compiler), javadoc (for documentation), jar (archiver), other tools for java dev.
+
+Declaring multiple variables --
+You can also declare and initialize multiple variables in the same statement. Same data type variable can be in same statement.
+declare means just defining which type of variable it is.
+initialize means assigning a value to the variable.
+
+three rules to remember for legal identifiers:
+■ The name must begin with a letter or the symbol $ or _.
+■ Subsequent characters may also be numbers.
+■ You cannot use the same name as a Java reserved word.
+valid letters in Java are not just characters in the English alphabet. Java supports the Unicode character set, so there are more than 45,000 characters that can start a legal Java identifier.
