@@ -36,3 +36,12 @@ float, double --> 0.0 (in the type’s bit-length)
 char --> '\u0000' (NUL)
 All object references (everything else) --> null
 
+The rules on scope of variables:-
+■ Local variables—in scope from declaration to end of block
+■ Instance variables—in scope from declaration until object garbage collected
+■ Class variables—in scope from declaration until program ends
+
+Imp -->
+multiple classes can be defined in a file, but only one of them is allowed to be public. The public class matches the name of the file.
+A file is also allowed to have neither class be public.
+
