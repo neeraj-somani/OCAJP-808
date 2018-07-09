@@ -45,3 +45,28 @@ Imp -->
 multiple classes can be defined in a file, but only one of them is allowed to be public. The public class matches the name of the file.
 A file is also allowed to have neither class be public.
 
+Garbage Collection:
+Garbage collection refers to the process of automatically freeing memory on the heap by deleting objects that are no longer reachable in your program.
+An object is no longer reachable when one of two situations occurs:
+■ The object no longer has any references pointing to it.
+■ All references to the object have gone out of scope.
+
+Objects vs. References -->
+The reference is a variable that has a name and can be used to access the contents of an object. A reference can be assigned to another reference, passed to a method, or returned from a method. All references are the same size, no matter what their type is.
+
+An object sits on the heap and does not have a name. Therefore, you have no way to access an object except through a reference. Objects come in all different shapes and sizes and consume varying amounts of memory. An object cannot be assigned to another object, nor can an object be passed to a method or returned from a method. It is the object that gets garbage collected, not its reference.
+
+finalize()
+Java allows objects to implement a method called finalize() that might get called. This method gets called if the garbage collector tries to collect the object. If the garbage collector doesn’t run, the method doesn’t get called. If the garbage collector fails to collect the object and tries to run it again later, the method doesn’t get called a second time.
+Just keep in mind that it might not get called and that it defi nitely won’t be called twice.
+
+Benefits of Java -->
+Object Oriented Programming --> means code is defined in classes and classes can be instantiated by objects
+Encapsulation --> Java supports access modifi ers to protect data from unintended access and modification. 
+Platform Independent --> compile once and run in all OS.
+Robust --> prevents memory leaks, using garbage collection
+Simple --> In addition to eliminating pointers, it got rid of operator overloading.
+Secure --> Java code runs inside the JVM. Hence, less harmfull.
+
+Review Question Attempt 1 -->
+  
