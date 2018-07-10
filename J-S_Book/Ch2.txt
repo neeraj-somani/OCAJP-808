@@ -14,3 +14,4 @@ default block --> if there is no matching case value for the switch statement, r
 
 the data type for case statements must all match the data type of the switch variable.
 the case statement value must be a literal, enum constant, or final constant variable.
+
