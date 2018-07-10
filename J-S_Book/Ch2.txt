@@ -1,0 +1,16 @@
+
+switch statement 
+Data types supported by switch statements include the following:
+■ int and Integer wrapper class
+■ byte and Byte wrapper class
+■ short and Short wrapper class
+■ char and Character wrapper class
+■ String
+■ enum values
+
+Note that boolean and long, and their associated wrapper classes, are not supported by switch statements.
+
+default block --> if there is no matching case value for the switch statement, regardless of its position.
+
+the data type for case statements must all match the data type of the switch variable.
+the case statement value must be a literal, enum constant, or final constant variable.
