@@ -15,3 +15,24 @@ default block --> if there is no matching case value for the switch statement, r
 the data type for case statements must all match the data type of the switch variable.
 the case statement value must be a literal, enum constant, or final constant variable.
 
+Review questions:- Attempt 1
+1. A, D
+2. A, B, D, E, F (N)
+3. F 
+4. B, C, F (N)
+5. C
+6. F
+7. F (N)
+8. D (N)
+9. B (N)
+10. C (N)
+11. A
+12. D
+13. A
+14. C
+15. E
+16. E (N)
+17. D 
+18. B (N)
+19. D 
+20. C (N)
