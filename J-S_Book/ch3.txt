@@ -3,3 +3,16 @@ Interface:- Consist of classes and interfaces that provide some functionality or
 
 String 
 StringBuilder
+ArrayList
+
+<-- String -->
+  Concatenation --> 3 rules 
+    1. If both operands are numeric, + means numeric addition.
+    2. If either operand is a String, + means concatenation.
+    3. The expression is evaluated left to right.
+
+  Immutability -> (unchangable)
+    String objects can't be changed once created.
+
+  The String Pool --> is a location in the Java virtual machine (JVM)  that collects all these strings.
+    It contains literal values.
