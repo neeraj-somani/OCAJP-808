@@ -1,0 +1,5 @@
+Core Java APIs:-  API (Application Programming Interface)
+Interface:- Consist of classes and interfaces that provide some functionality or service.
+
+String 
+StringBuilder
