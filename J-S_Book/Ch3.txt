@@ -51,25 +51,104 @@ ArrayList
         System.out.println("abc".trim()); // abc
         System.out.println("\t a b c\n".trim()); // a b c
   
+<-- StringBuilder -->  
+ This class creates a String without storing all those interim String values. Unlike the String class, StringBuilder is mutable.
+  Chaining --> the StringBuilder changes its own state and returns a reference to itself!
   
+Creating a StringBuilder
+There are three ways to construct a StringBuilder:
+StringBuilder sb1 = new StringBuilder(); // creating sb1 reference to empty StringBuilder object 
+StringBuilder sb2 = new StringBuilder("animal"); // creating sb2 reference to StringBuilder object that contains "animal"
+StringBuilder sb3 = new StringBuilder(10); //creating sb3 reference to empty StringBuilder object having initial capacity of storing 10 charachters. 
+  Size vs Capacity --> Size is the number of characters currently in the sequence, and capacity is the number of characters the sequence can currently hold.
+    important --> Size <= capacity or capacity >= size
+
+StringBuilder Methods -->
+  charAt(), indexOf(), length(), and substring()
+  All above methods works exactly same as described in String class. Notice that substring() returns a String rather than a StringBuilder. Hence when used with StringBuilder, doesn't directly change StringBuilder object.
+ append() --> it adds the parameter to the StringBuilder and returns a reference to the current StringBuilder.
+  One of the method signatures is as follows:
+    StringBuilder append(String str) // Notice there are around 10 similar method signature for different datatypes as parameter.
+insert() --> method adds characters to the StringBuilder at the requested index and returns a reference to the current StringBuilder.    Just like append(), there are lots of  method signatures for different types. Here’s one:
+  StringBuilder insert(int offset, String str)
+delete() and deleteCharAt() --> 
+  The delete() method , It removes characters from the sequence and returns a reference to the current StringBuilder. 
+  The deleteCharAt() method to delete only one character. 
+    The method signatures are as follows:
+        StringBuilder delete(int start, int end)
+        StringBuilder deleteCharAt(int index) 
+reverse() --> it reverses the characters in the sequences and returns a reference to the current StringBuilder.
+  The method signature : StringBuilder reverse()
+toString() --> converts a StringBuilder into a String.
   
+StringBuilder vs. StringBuffer -->
+  StringBuilder was added to Java in Java 5. In older version / code, you will see StringBuffer used for this purpose.
+  StringBuffer does the same thing but more slowly because it is thread safe.
   
+Understanding Equality -->
+equals() method to check the values inside the String rather than the String itself.
+If you call equals() on two StringBuilder instances, it will check reference equality.
+If a class doesn’t have an equals method, Java determines whether the references point to the same object—which is exactly what == does.
+"==" this checks whether two references pointing to same object or not.
+
+Java Arrays -->
+  An array is an area of memory on the heap with space for a designated number of elements. An array is an ordered list. It can contain duplicates.
+  String Array --> when dealing with characters specifically.
+  StringBuilder Array --> implemented so that, the array object is replaced with a new bigger array object when it runs out of space to store all the characters.
+  Important --> big difference is that an array can be of any other Java type.
   
+Creating an Array of Primitives -->
+  int[] numbers1 = new int[3]; --> It specifi es the type of the array (int) and the size (3). The brackets tell you this is an array.
+  Another way to create an array is to specify all the elements it should start out with:
+    int[] numbers2 = new int[] {42, 55, 99};
+  or int[] numbers2 = {42, 55, 99};
   
+  below are 4 different valid ways for creating Array -->
+  int[] numAnimals;
+  int [] numAnimals2; // adding space in between int and []
+  int numAnimals3[];
+  int numAnimals4 []; // adding space in between reference variable and []
   
+  Multiple “Arrays” in Declarations -->
+    int[] ids, types; // creates two array variables of type int
+    int ids[], types; // creates one array variable of type int and one regular variable of type int
+    
+Creating an Array with Reference Variables -->
+  As per below code we have created "alias" array from "bugs" array. where "alias" and "bugs" both are referece variable of String type array. 
+  Below is sample code -->
+      public class ArrayType {
+      public static void main(String args[]) {
+      String [] bugs = { "cricket", "beetle", "ladybug" };
+      String [] alias = bugs;
+      System.out.println(bugs.equals(alias)); // true
+      System.out.println(bugs.toString()); // [Ljava.lang.String;@160bc7c0
+      } }
+
+Using an Array --> Example 
+  4: String[] mammals = {"monkey", "chimp", "donkey"};
+  5: System.out.println(mammals.length); // 3
+  6: System.out.println(mammals[0]); // monkey
+  7: System.out.println(mammals[1]); // chimp
+  8: System.out.println(mammals[2]); // donkey
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+Sorting -->
+  This requires an import statement to inport sort method of Array class.
+    import java.util.* // import whole package including Arrays
+    import java.util.Arrays; // import just Arrays
+
+using int type -->
+  int[] numbers = { 6, 9, 1 };
+  Arrays.sort(numbers);
+  for (int i = 0; i < numbers.length; i++)
+  L System.out.print (numbers[i] + " ");
+    The result is 1 6 9, Notice that we had to loop through the output to print the values in the array. Just printing the array variable directly would give the annoying hash of [I@2bd9c3e7.
+
+using String type -->    
+    String[] strings = { "10", "9", "100" };
+    Arrays.sort(strings);
+    for (String string : strings)
+    System.out.print(string + " ");
+    
+    This time the result might not be what you expect. This code outputs 10 100 9. The problem is that String sorts in alphabetic order, and 1 sorts before 9. (Numbers sort before letters and uppercase sorts before lowercase, in case you were wondering.)
+    
+    
