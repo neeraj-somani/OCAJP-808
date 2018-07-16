@@ -1,6 +1,7 @@
 Core Java APIs:-  API (Application Programming Interface)
 Interface:- Consist of classes and interfaces that provide some functionality or service.
 
+Few important fundamental Classes -->
 String 
 StringBuilder
 ArrayList
@@ -16,6 +17,7 @@ ArrayList
 
   The String Pool --> is a location in the Java virtual machine (JVM)  that collects all these strings.
     It contains literal values.
+    
   Important String Methods --> 
     length() --> returns the number of characters in the String.
     charAt() --> lets you query the string using index value, 
@@ -30,4 +32,44 @@ ArrayList
       The method signatures are as follows:
         int substring(int beginIndex)
         int substring(int beginIndex, int endIndex) // endIndex is non-inclusive
-        
+    toLowerCase() and toUpperCase() --> converts characters to uppercase/lowercase in the returned string.
+      String toLowerCase(String str)
+      String toUpperCase(String str)
+  equals() and equalsIgnoreCase() --> checks whether two String objects contain exactly the same characters in the same order.
+    boolean equals(String str)
+    boolean equalsIgnoreCase(String str)
+  startsWith() and endsWith() --> methods look at whether the provided value matches part of the String.
+    boolean startsWith(String prefix)
+    boolean endsWith(String suffix)
+  contains() --> method also looks for matches in the String. the match can be anywhere in the String. 
+    boolean contains(String str)
+  replace() --> method does a simple search and replace on the string.
+    String replace(char oldChar, char newChar) // notice here we can pass char values
+    String replace(CharSequence oldChar, CharSequence newChar) // notice here we can pass String values
+  trim() --> method removes whitespace from the beginning and end of a String.
+     example -->
+        System.out.println("abc".trim()); // abc
+        System.out.println("\t a b c\n".trim()); // a b c
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
