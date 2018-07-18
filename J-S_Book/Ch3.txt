@@ -331,3 +331,34 @@ Autoboxing --> just type the primitive value and Java will convert it to the rel
       3: List<Integer> heights = new ArrayList<>();
       4: heights.add(null);
       5: int h = heights.get(0); // NullPointerException
+
+**//While using different methods need to understand which method looks for index value and which looks for actual data value.
+
+Converting Between array and List (ArrayList) -->
+  1) turning an ArrayList into an array: 
+        this will convert an Arraylist into an Array of same size at the time of conversion. Array size can't be chnaged after that.
+        Example:- 
+          3: List<String> list = new ArrayList<>();
+          4: list.add("hawk");
+          Understanding an ArrayList 137
+          5: list.add("robin");
+          6: Object[] objectArray = list.toArray();
+          7: System.out.println(objectArray.length); // 2
+          8: String[] stringArray = list.toArray(new String[0]);
+          9: System.out.println(stringArray.length); // 2
+  2) turning an array into an List: 
+        this will convert a fixed size array into fixed size List at the time of conversion. As we know we can't change array size once created but list can grow and Shrink. In this case List also can't chnages its size and hence known as Backed-List. 
+        The original array and created array backed List are linked. When a change is made to one, it is available in the other. Although, chnage here means updating values, not changing the size. Chnaging the size will through exception.
+        Example:-
+          20: String[] array = { "hawk", "robin" }; // [hawk, robin]
+          21: List<String> list = Arrays.asList(array); // returns fixed size list
+          22: System.out.println(list.size()); // 2
+          23: list.set(1, "test"); // [hawk, test]
+          24: array[0] = "new"; // [new, test]
+          25: for (String b : array) System.out.print(b + " "); // new test
+          26: list.remove(1); // throws UnsupportedOperation Exception
+          
+Another method of Arraylist -->
+asList() method -->
+  List<String> list = Arrays.asList("one", "two");
+        
