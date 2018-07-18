@@ -358,7 +358,21 @@ Converting Between array and List (ArrayList) -->
           25: for (String b : array) System.out.print(b + " "); // new test
           26: list.remove(1); // throws UnsupportedOperation Exception
           
-Another method of Arraylist -->
-asList() method -->
+methods of Arraylist -->
+asList() method --> takes varargs, which let you pass in an array or just type out the String values.
   List<String> list = Arrays.asList("one", "two");
         
+Sort() method --> Sorting an ArrayList is very similar to sorting an array. You just use a different helper class:
+    example-->
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(99);
+        numbers.add(5);
+        numbers.add(81);
+        Collections.sort(numbers); // Collections is the helper class
+        System.out.println(numbers); [5, 81, 99]
+        
+Working with Dates and Times -->
+  import java.time.*; // import time classes 
+  LocalDate --> Contains just a date—no time and no time zone.
+  LocalTime --> Contains just a time—no date and no time zone.
+  LocalDateTime --> Contains both a date and time but no time zone.
