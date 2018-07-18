@@ -290,3 +290,44 @@ equals() method --> to compare two lists,  if they contain the same elements in 
       39: two.add(0, "b"); // [b,a]
       40: System.out.println(one.equals(two)); // false
      
+Wrapper Classes --> This is helpful when we need to store any value (means primitive type) other than String type in Array or ArrayList.
+  wrapper class is an object type that corresponds to the primitive type.
+  
+      Primitive type -- Wrapper class -- Example of constructing
+      boolean -- Boolean -- new Boolean(true)
+      byte -- Byte -- new Byte((byte) 1)
+      short -- Short -- new Short((short) 1)
+      int -- Integer -- new Integer(1)
+      long -- Long -- new Long(1)
+      float -- Float -- new Float(1.0)
+      double -- Double -- new Double(1.0)
+      char -- Character -- new Character('c')
+      
+   Wrapper classes methods -->
+      a method that converts back to a primitive type
+      methods for converting a String to a primitive or wrapper class
+          The parse methods, such as parseInt(), return a primitive
+          The valueOf() method returns a wrapper class
+      **// need to understand with example what is the need for converting these values to primitve and wrapper class.
+      
+    example --> 
+      int primitive = Integer.parseInt("123"); // converts a String to an int primitive
+      Integer wrapper = Integer.valueOf("123"); // converts a String to an Integer wrapper class.
+    
+    If the String passed in is not valid for the given type, Java throws an exception. In these examples, letters and dots are not valid for an integer value:
+    int bad1 = Integer.parseInt("a"); // throws NumberFormatException
+    Integer bad2 = Integer.valueOf("123.45"); // throws NumberFormatException
+
+
+Autoboxing --> just type the primitive value and Java will convert it to the relevant wrapper class for you.
+    Example -->
+      4: List<Double> weights = new ArrayList<>();
+      5: weights.add(50.5); // [50.5] // autoboxes the double primitive into a Double object
+      6: weights.add(new Double(60)); // [50.5, 60.0] // still write code the long way and pass in a wrapper object
+      7: weights.remove(50.5); // [60.0] // autoboxes into the wrapper object and passes it to remove().
+      8: double first = weights.get(0); // 60.0 // retrieves the Double and unboxes it into a double primitive
+      
+      Note --> if you try to unbox a null, you will get NullPointerException
+      3: List<Integer> heights = new ArrayList<>();
+      4: heights.add(null);
+      5: int h = heights.get(0); // NullPointerException
