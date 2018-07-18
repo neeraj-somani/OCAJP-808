@@ -189,5 +189,104 @@ Multidimensional Arrays -->
 
 ArrayList -->
   ArrayList can change size at runtime as needed.
-  ArrayList is an ordered
-sequence that allows duplicates.
+  ArrayList is an ordered sequence that allows duplicates.
+    ArrayList also requires import class:
+    import java.util.* // import whole package including ArrayList
+    import java.util.ArrayList; // import just ArrayList
+
+three ways to create an ArrayList: These works today as well but defined before java 5
+ArrayList list1 = new ArrayList();
+ArrayList list2 = new ArrayList(10);
+ArrayList list3 = new ArrayList(list2);
+
+two other ways to create an ArrayList:
+ArrayList<String> list4 = new ArrayList<String>(); // this introduced starting java 5
+ArrayList<String> list5 = new ArrayList<>(); // this introduced starting java 7
+
+**ArrayList implements an interface called List.
+List<String> list6 = new ArrayList<>();
+ArrayList<String> list7 = new List<>(); // DOES NOT COMPILE // reason is that List is an interface and interfaces can’t be instantiated.
+
+Using an ArrayList -->
+  you will see something new in the method signatures: a “class” named E. In generics this mean “any class that this array can hold.”
+  If you didn’t specify a type when creating the ArrayList, E means Object. Otherwise, it means the class you put between < and >.
+
+add() methods --> insert a new value in the ArrayList
+  boolean add(E element) // means it can hold “any class that this array can hold.”
+  void add(int index, E element) // means need to provide index number and any object class
+  
+  example -->
+    4: List<String> birds = new ArrayList<>();
+    5: birds.add("hawk"); // [hawk]
+    6: birds.add(1, "robin"); // [hawk, robin]
+    7: birds.add(0, "blue jay"); // [blue jay, hawk, robin]
+    8: birds.add(1, "cardinal"); // [blue jay, cardinal, hawk, robin]
+    9: System.out.println(birds); // [blue jay, cardinal, hawk, robin]
+
+remove() methods --> remove the fi rst matching value in the ArrayList or remove the element at a specifi ed index. 
+  boolean remove(Object object) // this tells us whether a match was removed (true or false)
+  E remove(int index) // this tells us the element that actually got removed
+     Example -->
+      3: List<String> birds = new ArrayList<>();
+      4: birds.add("hawk"); // [hawk]
+      5: birds.add("hawk"); // [hawk, hawk]
+      6: System.out.println(birds.remove("cardinal")); // prints false
+      7: System.out.println(birds.remove("hawk")); // prints true
+      8: System.out.println(birds.remove(0)); // prints hawk
+      9: System.out.println(birds); // []
+      
+set() method --> changes one of the elements of the ArrayList without changing the size.
+  E set(int index, E newElement) // The E return type is the element that got replaced.
+  Example -->
+    15: List<String> birds = new ArrayList<>();
+    16: birds.add("hawk"); // [hawk]
+    17: System.out.println(birds.size()); // 1
+    18: birds.set(0, "robin"); // [robin]
+    19: System.out.println(birds.size()); // 1
+    20: birds.set(1, "robin"); // IndexOutOfBoundsException
+
+isEmpty() and size() methods --> look at how many of the slots are in use.
+  boolean isEmpty()
+  int size()
+  Example --> 
+      System.out.println(birds.isEmpty()); // true
+      System.out.println(birds.size()); // 0
+      birds.add("hawk"); // [hawk]
+      birds.add("hawk"); // [hawk, hawk]
+      System.out.println(birds.isEmpty()); // false
+      System.out.println(birds.size()); // 2
+
+clear() method --> provides an easy way to discard all elements of the ArrayList.
+    void clear() 
+      example -->
+        List<String> birds = new ArrayList<>();
+        birds.add("hawk"); // [hawk]
+        birds.add("hawk"); // [hawk, hawk]
+        System.out.println(birds.isEmpty()); // false
+        System.out.println(birds.size()); // 2
+        birds.clear(); // []
+        System.out.println(birds.isEmpty()); // true
+        System.out.println(birds.size()); // 0
+
+contains() method --> checks whether a certain value is in the ArrayList. This method calls equals() on each element of the ArrayList to see whether there are any matches.
+  boolean contains(Object object)
+  example -->
+    List<String> birds = new ArrayList<>();
+    birds.add("hawk"); // [hawk]
+    System.out.println(birds.contains("hawk")); // true
+    System.out.println(birds.contains("robin")); // false
+
+equals() method --> to compare two lists,  if they contain the same elements in the same order.
+  boolean equals(Object object)
+  exmaple -->
+      31: List<String> one = new ArrayList<>();
+      32: List<String> two = new ArrayList<>();
+      33: System.out.println(one.equals(two)); // true
+      34: one.add("a"); // [a]
+      35: System.out.println(one.equals(two)); // false
+      36: two.add("a"); // [a]
+      37: System.out.println(one.equals(two)); // true
+      38: one.add("b"); // [a,b]
+      39: two.add(0, "b"); // [b,a]
+      40: System.out.println(one.equals(two)); // false
+     
