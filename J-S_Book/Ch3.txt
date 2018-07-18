@@ -187,3 +187,7 @@ Multidimensional Arrays -->
     int[] vars3[]; // 2D array
     int[] vars4 [], space [][]; // a 2D AND a 3D array
 
+ArrayList -->
+  ArrayList can change size at runtime as needed.
+  ArrayList is an ordered
+sequence that allows duplicates.
