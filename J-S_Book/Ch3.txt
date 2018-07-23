@@ -420,4 +420,18 @@ Working with Dates and Times -->
    
    
    ---- Working with Periods ---
+    There are fi ve ways to create a Period class:
+      Period annually = Period.ofYears(1); // every 1 year
+      Period quarterly = Period.ofMonths(3); // every 3 months
+      Working with Dates and Times 147
+      Period everyThreeWeeks = Period.ofWeeks(3); // every 3 weeks
+      Period everyOtherDay = Period.ofDays(2); // every 2 days
+      Period everyYearAndAWeek = Period.of(1, 0, 7); // every year and 7 days
    
+   Tricks to remember: 
+    You cannot chain methods when creating a Period. 
+        Period wrong = Period.ofYears(1).ofWeeks(1); // every week // DOES NOT COMPILE
+
+  --- Formatting Dates and Times ---
+  --- Parsing Dates and Times ----
+    Just like the format() method, the parse() method takes a formatter as well. If you don’t specify one, it uses the default for that type. 
