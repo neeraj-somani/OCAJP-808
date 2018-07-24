@@ -73,8 +73,17 @@ Method signature and its components -->
       Instance member can call static member without classname or reference variable, if its calling within same class.
    
    ---- Static Variables -->
+    Some static variables are meant to change as the program runs. Means, value of same variable change as the program runs.
+    Other static variables are meant to never change during the program. This type of variable is known as a constant. final modifier is used for this.
+    We are allowed to call methods on reference variables.
+      
+  ----- Static Initialization -->
+    --> static initialization block, is the block with curly braces {} that contain definition and initial assignment for all static variables.
+    --> define static variable with keyword "static".
+    --> you can assign a value to static variable while defining it or in the static initialization block.
+    --> if "final" keyword is used with "static", then reassignment of value not allowed.
+    --> Defining a static variable and not assigning any value to it is not allowed. Code will not compile.
     
-      
-      
+    
       
       
