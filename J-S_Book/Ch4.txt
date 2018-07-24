@@ -1,0 +1,9 @@
+chapter 4 - Methods and Encapsulation
+
+Method signature and its components -->
+  Access Modifiers -->
+    public --> The method can be called from any class.
+    private --> The method can only be called from within the same class.
+    protected --> The method can only be called from classes in the same package or subclasses.
+    Default (Package Private) Access --> The method can only be called from classes in the same package.
+      There is no "default" keyword and hence we don't need to specify this in method declaration.
