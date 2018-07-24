@@ -1,9 +1,38 @@
 chapter 4 - Methods and Encapsulation
 
 Method signature and its components -->
-  Access Modifiers -->
+  Access Modifiers --> in order from most restritive to least restrictive
+    private --> Only accessible within the same class. The method can only be called from within the same class.
+    Default (Package Private) Access --> can access in same package. The method can only be called from classes in the same package. There is no "default" keyword and hence we don't need to specify this in method declaration.
+    protected --> same package classes and subclasses. The method can only be called from classes in the same package or subclasses.
     public --> The method can be called from any class.
-    private --> The method can only be called from within the same class.
-    protected --> The method can only be called from classes in the same package or subclasses.
-    Default (Package Private) Access --> The method can only be called from classes in the same package.
-      There is no "default" keyword and hence we don't need to specify this in method declaration.
+    
+    
+    
+  Optional Specifiers --> you can have zero or more specifi ers in a method declaration.
+    static --> Used for class methods.
+    abstract --> Used when not providing a method body.
+    final --> Used when a method is not allowed to be overridden by a subclass.
+    synchronized, native, strictfp  --> not in OCA exam.
+
+  Return Type --> a method must have a return type. If no value is returned, the return type is void. You cannot omit the return type.
+    return type such as String or int --> return statement must include the primitive or object to be returned.
+    void return type --> method body can have return statement with no value returned or omit the return statement entirely.
+ 
+ Method Name --> contain letters, numbers, $, or _. Also, the first character is not allowed to be a number and reserved words are not allowed.
+  
+  Parameter List --> is required and it doesn’t have to contain any parameters.
+      multiple parameters, you separate them with a comma.
+ 
+ Optional Exception List --> it is an optional and method can specify exception in-case something go wrong and Can handle them.
+  can specify multiple exception seperated by comma.
+
+ Method Body --> is simply a code block. It has braces that contain zero or more Java statements.
+
+  Working with Varargs --> vararg parameter (variable argument) as if it is an array.
+      A vararg parameter must be the last element in a method’s parameter list.
+      only allowed to have one vararg parameter per method.
+      When calling a method with a vararg parameter, you can pass in an array, or you can list the elements of the array and let Java create it for you.
+      You can even omit the vararg values in the method call and Java will create an array of length zero for you.
+      it is still possible to pass null explicitly to varargs. Java might throw null exception if you try to perform some operation of this null value array.
+      
