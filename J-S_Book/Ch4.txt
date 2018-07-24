@@ -4,11 +4,10 @@ Method signature and its components -->
   Access Modifiers --> in order from most restritive to least restrictive
     private --> Only accessible within the same class. The method can only be called from within the same class.
     Default (Package Private) Access --> can access in same package. The method can only be called from classes in the same package. There is no "default" keyword and hence we don't need to specify this in method declaration.
-    protected --> same package classes and subclasses. The method can only be called from classes in the same package or subclasses.
+    protected --> The method can only be called from classes in the same package or subclasses (means, can be called from same package or different package). (page 178, 179 very important). Table on page 180.
+      Subclasses means those classes which extends other parent class and become child class.  
     public --> The method can be called from any class.
-    
-    
-    
+ 
   Optional Specifiers --> you can have zero or more specifi ers in a method declaration.
     static --> Used for class methods.
     abstract --> Used when not providing a method body.
@@ -35,4 +34,47 @@ Method signature and its components -->
       When calling a method with a vararg parameter, you can pass in an array, or you can list the elements of the array and let Java create it for you.
       You can even omit the vararg values in the method call and Java will create an array of length zero for you.
       it is still possible to pass null explicitly to varargs. Java might throw null exception if you try to perform some operation of this null value array.
+      
+
+    Designing Static Methods and Fields --> 
+      Static methods don’t require an instance of the class. They are shared among all users of the class.
+      as being a member of the single class object that exist independently of any instances of that class.
+      instance variables --> Each class has a copy of the instance variables.
+      instance methods --> There is only one copy of the code for the instance methods. it can be called as many times as needed.
+                           However, Each call gets space on the stack for method parameters and local variables.
+                           Remember that only data gets its “own copy.” There is no need to duplicate copies of the code itself.
+      
+      static methods --> 
+        The main() method is a static method. That means you can call it by the classname.
+        In addition to main() methods, static methods have two main purposes:
+          --> For utility or helper methods that don’t require any object state. Since there is no need to access instance variables, having static methods eliminates the need for the caller to instantiate the object just to call the method.
+          --> For state that is shared by all instances of a class, like a counter. All instances must share the same state. Methods that merely use that state should be static as well.
+      
+      
+     Calling a Static Variable or Method -->
+        just put the classname before the method or variable and you are done. you don't need to create an instance of the class to call static member of the class.
+        For example:
+              System.out.println(Koala.count);
+              Koala.main(new String[0]);
+      one rule that is trickier:-
+        You can use an instance of the object to call a static method. The compiler checks for the type of the reference and uses that instead of the object. Example:
+          5: Koala k = new Koala();
+          6: System.out.println(k.count); // k is a Koala
+          7: k = null;
+          8: System.out.println(k.count); // k is still a Koala
+      // Java doesn’t care that k happens to be null. Since we are looking for a static method or variable. for java, k is still Koala reference type.
+      // Remember to look at the reference type for a variable when you see a static method or variable.
+      Static variable, means pointing same variable even if it is called by different objects references. (top 7 lines of page 183)
+      
+   Static vs Instance --> *************(very imp for exam)*********** (page 183)
+      A static member cannot call an instance member. since static doesn’t require any instances of the class to be around.
+      A static method or instance method can call a static method because static methods don’t require an object to use. 
+      An instance method can call another instance method on the same class without using a reference variable, because instance methods do require an object. 
+      Instance member can call static member without classname or reference variable, if its calling within same class.
+   
+   ---- Static Variables -->
+    
+      
+      
+      
       
