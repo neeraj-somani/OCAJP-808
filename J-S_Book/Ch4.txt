@@ -84,6 +84,8 @@ Method signature and its components -->
     --> if "final" keyword is used with "static", then reassignment of value not allowed.
     --> Defining a static variable and not assigning any value to it is not allowed. Code will not compile.
     
-    
+ ---- Static Imports --->
+  --> Static imports are for importing static members of classes.
+  
       
       
