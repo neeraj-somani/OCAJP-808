@@ -182,6 +182,7 @@ Method signature and its components -->
 
   ------- Encapsulating Data --> Encapsulation means we set up the class so only methods in the class with the variables can refer to the instance variables. Callers are required to use these methods. Example, getters (accessor method) and setters (mutator method) method.
       --> remember that data (an instance variable) is private and getters/setters are public.
+      --> Encapsulating data is helpful because it prevents callers from making uncontrolled changes to your class.
   
 Rules for JavaBeans naming conventions -->                     
 1. Properties are private.  ---> Example:-- private int numEggs;
@@ -203,5 +204,13 @@ Rules for JavaBeans naming conventions -->
     }
 
 
-    ----- Creating Immutable Classes -->
+    ----- Creating Immutable Classes --> creating unchangable classes
+      One step in making a class immutable is to omit the setters.
+      but we include a constructor that allows a value to be set. This is to set initial value.
+      Remember, immutable is only measured after the object is constructed. Immutable classes are allowed to have values. They just can't change after instantiation.
       
+      
+      **** important to remember --->
+      encapsulation refers to preventing callers from changing the instance variables directly.
+      Immutability refers to preventing callers from changing the instance variables at all.
+        
