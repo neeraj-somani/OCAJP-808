@@ -216,3 +216,5 @@ Rules for JavaBeans naming conventions -->
         
 --- Writing Simple Lambdas --->
   Functional programming is a way of writing code more declaratively. You specify what you want to do rather than dealing with the state of objects. You focus more on expressions than loops.
+    --> a lambda expression is like a method that you can pass as if it were a variable.
+    --> an interface specifies the methods that our class needs to implement.
