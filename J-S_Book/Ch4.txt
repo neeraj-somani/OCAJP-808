@@ -214,3 +214,5 @@ Rules for JavaBeans naming conventions -->
       encapsulation refers to preventing callers from changing the instance variables directly.
       Immutability refers to preventing callers from changing the instance variables at all.
         
+--- Writing Simple Lambdas --->
+  Functional programming is a way of writing code more declaratively. You specify what you want to do rather than dealing with the state of objects. You focus more on expressions than loops.
