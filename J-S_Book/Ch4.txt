@@ -141,8 +141,28 @@ Method signature and its components -->
       
 ------- Creating Constructors ----> a constructor is a special method that matches the name of the class and has no return type.
   Remember Java is case-sensitive.
-  
-  
+      Constructors are used when creating a new object. This process is called instantiation because it creates a new instance of the class. A constructor is called when we write new followed by the name of the class we want to instantiate. For example: new Bunny()
+     The this keyword tells Java you want to reference an instance variable. If you don’t say otherwise, Java gives you the one with the most granular scope.
+     example:
+      1: public class Bunny {
+      2: private String color;
+      3: public Bunny(String color) {
+      4: this.color = color;  // notice, color = this.color is not allowed. code won't complie in that case.
+      5: } }
+
+  -------- Default Constructor --> Every class in Java has a constructor whether you code one or not. If you don’t include any constructors in the class, Java will create one for you without any parameters. This Java-created constructor is called the default constructor or no-arguments constructor.
+    The default constructor has an empty parameter list and an empty body.
+    We keep saying generated. This happens during the compile step.
+    Remember that a default constructor is only supplied if there are no constructors present.
+   ** Having a private constructor in a class tells the compiler not to provide a default noargument constructor. It also prevents other classes from instantiating the class. This is useful when a class only has static methods or the class wants to control all calls to create new instances of itself.
+   
+------- Overloading Constructors --> means, multiple constructors in the same class with same name as of class, as long as they have different method signatures.
+
+  ---> Constructors can be called only by writing new before the name of the constructor. They are not like normal methods that you can just call.
+
+
+
+
 
 
 
