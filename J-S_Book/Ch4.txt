@@ -85,7 +85,66 @@ Method signature and its components -->
     --> Defining a static variable and not assigning any value to it is not allowed. Code will not compile.
     
  ---- Static Imports --->
-  --> Static imports are for importing static members of classes.
+  --> Static imports are for importing static members of classes. (always remember members of class means methods / variables)
+      example:
+      import static java.util.Arrays.asList; // static import
+   --> The compiler will complain if you try to explicitly do a static import of two methods with the same name or two static variables with the same name. In such case we use class name with method name while using in code.
+ 
+ ----- Passing Data Among Methods ---> Java is a “pass-by-value” language (page 190 - 191)
+      --> methods on the parameters --> means, passing value of parameters to methods.
+          example:-- String name = "Webby";
+                     speak(name);
+     --> method on the StringBuilder passed into the method: --> means passing value to inbuild method of StringBuilder
+          example:- // In below example both name and s pointing to same StringBuilder object.
+                    StringBuilder name = new StringBuilder();
+                    speak(name);
+                    public static void speak(StringBuilder s) {
+                    s.append("Webby");
+                    }
   
+      --> Another trick to remember --> (page 191) ** very imp
+            If result of method (returned value from method) is not stored in variable, it is being ignored by Java.
+            But if it is stored in variable then Java uses that and doesn't ignore it.
+            
+----------- Overloading Methods --> different method signatures with the same name but different type parameters. This means there can be different access modifiers, specifiers (like static), return types, and exception lists.
+      -- another tricky thing ---> Overloading and Varargs ----
+        Java treats "varargs" as if they were an array. Hence, below 2 methods are same, which brings compile error for 2nd.
+          public void fly(int[] lengths) { }
+          public void fly(int... lengths) { } // DOES NOT COMPILE
+      Although, it is also important to understand how they are not the same
+      example -->
+        fly(new int[] { 1, 2, 3 }); //either method can be called using this statement
+        fly(1, 2, 3); // However, you can only call the varargs version with stand-alone parameters like this. This is important to understand regarding varargs.
+    
+ ---- Autoboxing --> Java will convert a primitive (int) to an object (Integer) to add it to an ArrayList through the wonders of autoboxing.
+    --> If both version of method is available then java will give preference to primitive type method and will not bother to do extra work of outoboxing. When the primitive  (int) version isn't present, it will autobox.
+        
+    --> Hence, we can say Java calls the most specific method it can.
+    In eralier verion of java 1.4 or older, Autoboxing and varargs doesn't exists. Hence, older code has to still work.
+      Due to this reason there are few rules which Java uses to choose the right overloaded method.
+      Rule --> Example of what will be chosen for glide(1,2)
+      Exact match by type --> public String glide(int i, int j) {}
+      Larger primitive type -->  public String glide(long i, long j) {}
+      Autoboxed type -->  public String glide(Integer i, Integer j) {}
+      Varargs --> public String glide(int... nums) {}
+
+      Below example is interesting and tricky to understand -->
+        public class TooManyConversions {
+        public static void play(Long l) { }
+        public static void play(Long... l) { }
+        public static void main(String[] args) {
+        play(4); // DOES NOT COMPILE
+        play(4L); // calls the Long version
+        } }
       
+      --> The reason for comile error in above code is, because java won't be able to convert int primitive value to Long object type directly. For this it requires two step, first convert int primitive type to lonbg primitive type and then to Long object type. Hence, two step conversion directly is not possible in java right now and we received compile error.
       
+------- Creating Constructors ---->
+
+
+
+
+
+
+
+
