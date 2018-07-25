@@ -180,5 +180,28 @@ Method signature and its components -->
 
       ///// Keep in mind that the four rules apply only if an object is instantiated. If the class is referred to without a new call, only rules 1 and 2 apply. The other two rules relate to instances and constructors. They have to wait until there is code to instantiate the object.
 
+  ------- Encapsulating Data --> Encapsulation means we set up the class so only methods in the class with the variables can refer to the instance variables. Callers are required to use these methods. Example, getters (accessor method) and setters (mutator method) method.
+      --> remember that data (an instance variable) is private and getters/setters are public.
+  
+Rules for JavaBeans naming conventions -->                     
+1. Properties are private.  ---> Example:-- private int numEggs;
+2. Getter methods begin with "is" if the property is a boolean. Example:--
+    public boolean isHappy() {
+    return happy;
+    }
+3. Getter methods begin with get if the property is not a boolean. Example:-- 
+    public int getNumEggs() {
+    return numEggs;
+    }
+4. Setter methods begin with set. return type is void.  Example:--
+    public void setHappy(boolean happy) {
+    this.happy = happy;
+    }
+5. The method name must have a prefix of set/get/is, followed by the first letter of the property in uppercase, followed by the rest of the property name. Example:--
+    public void setNumEggs(int num) {
+    numEggs = num;
+    }
 
 
+    ----- Creating Immutable Classes -->
+      
