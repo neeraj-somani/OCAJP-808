@@ -160,9 +160,18 @@ Method signature and its components -->
 
   ---> Constructors can be called only by writing new before the name of the constructor. They are not like normal methods that you can just call.
 
+    --> another tricky concept ---> When you have 2 constructors, means methods with same name as of class, but with different parameter and you want to call one constructor inside another, you can use this keyword, as discussed below. (page 200)
+      When this is used as if it were a method, Java calls another constructor on the same instance of the class.
+          public Hamster(int weight) {
+          this(weight, "brown");
+          }
 
-
-
+      --> this() has one special rule! If you choose to call it, the this() call must be the first noncommented statement in the constructor. Comments don't run Java statements and are allowed anywhere.
+      
+      ------ Constructor Chaining --> Overloaded constructors often call each other. One common technique is to have each constructor add one parameter until getting to the constructor that does all the work. This approach is called constructor chaining.
+      
+      
+      
 
 
 
