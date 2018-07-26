@@ -2,8 +2,11 @@ Chapter 5 -- Class Design
 Proper Java class design is about code reusability, increased functionality, and standardization.
 
 ------- Introducing Class Inheritance -->
-Inheritance is the process by which the new child subclass automatically includes any public or protected primitives, objects, or methods defi ned in the parent class.
+Inheritance is the process by which the new child subclass automatically includes any public or protected primitives, objects, or methods defined in the parent class.
 Java supports single inheritance, by which a class may inherit from only one direct parent class. Java does allow one exception to the single inheritance rule: classes may implement multiple interfaces, as you’ll see later in this chapter.
+Each child has exactly one parent, but one parent can have multiple children.
 
 Java doesn’t support multiple inheritance. Although, Java also supports multiple levels of inheritance. means one class (X) inherit other (Y) and that (Y) can inherit another class (Z).
 
+It is possible in Java to prevent a class from being extended by marking the class with
+the final modifi er. If you try the compiler will throw an error and not compile.
