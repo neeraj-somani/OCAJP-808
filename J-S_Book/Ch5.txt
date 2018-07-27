@@ -6,7 +6,39 @@ Inheritance is the process by which the new child subclass automatically include
 Java supports single inheritance, by which a class may inherit from only one direct parent class. Java does allow one exception to the single inheritance rule: classes may implement multiple interfaces, as you’ll see later in this chapter.
 Each child has exactly one parent, but one parent can have multiple children.
 
-Java doesn’t support multiple inheritance. Although, Java also supports multiple levels of inheritance. means one class (X) inherit other (Y) and that (Y) can inherit another class (Z).
+Java doesn’t support multiple inheritance. Although, Java also supports multiple levels of inheritance. means one class (X) inherit other class (Y) and that class (Y) can inherit another class (Z).
 
-It is possible in Java to prevent a class from being extended by marking the class with
-the final modifi er. If you try the compiler will throw an error and not compile.
+It is possible in Java to prevent a class from being extended by marking the class with the final modifier. If you try a class that inherits from a final class, the compiler will throw an error and not compile.
+
+--- Extending a Class --> using the extends keyword, adding the parent class name in the definition of child class. Example below:
+    public abstract class ElephantSeal extends Seal {
+        // Methods and Variables defined here
+    }
+
+    --> Java allows only one or zero public class or interface per file.
+    --> any private members of parent class is not accessible directly to child class, but using object reference we can fetch private members.
+    
+--- Applying Class Access Modifiers -->
+  The public access modifier applied to a class indicates that it can be referenced and used in any class. 
+  The default package private modifier, indicates the class can be accessed only by a subclass or class within the same package.
+  ---> The rules for applying class access modifi ers are identical for interfaces.
+
+----- Creating Java Objects ---> In Java, all classes inherit from a single class, java.lang.Object. 
+  java.lang.Object is the only class that doesn’t have any parent classes. This is top most class in java.
+  
+----- Defining Constructors -->
+    every class has at least one constructor, if no constructor is declared, the compiler will automatically insert a default no argument constructor. 
+    In Java, the first statement of every constructor is either a call to another constructor within the class, using this(), or a call to a constructor in the direct parent class, using super(). If a parent constructor takes arguments, the super constructor would also take arguments.
+    Like the this() command, he super() command may only be used as the first statement of the constructor. code will not compile if this condition doesn't meet.
+
+
+---- Understanding Compiler Enhancements --->
+  
+    
+    
+    
+    
+    
+    
+    
+    
