@@ -91,10 +91,27 @@ It is possible in Java to prevent a class from being extended by marking the cla
     5. The method defined in the child class must be marked as static if it is marked as static in the parent class (method hiding). Likewise, the method must not be marked as static in the child class if it is not marked as static in the parent class (method overriding).
     
     Note:- You should not reuse the name of a static method in your class if it is already used in the parent class. To avoid compile errors.
-    
-    
+
  ------ Overriding vs. Hiding Methods --->
+    overriding a method --> a child method replaces the parent method in calls defined in both the parent and child.
+          At runtime the child version of an overridden method is always executed for an instance regardless of whether the method call is defined in a parent or child class method.
+          In this manner, the parent method is never used unless an explicit call to the parent method is referenced, using the syntax ParentClassName.method().
+    hidden methods --> only replace parent methods in the calls defined in the child class.
+        Alternatively, at runtime the parent version of a hidden method is always executed if the call to the method is defined in the parent class.
     
+ ----- Creating final methods ---> (page 256 -- need to test concept with code run)
+    one more rule: final methods cannot be overridden.
+    This rule is in place both when you override a method and when you hide a method.
+    In other words, you cannot hide a static method in a parent class if it is marked as final.
+    one more point to Note that whether or not the child method used the final keyword is irrelevant—the code will not compile either way.
     
-    
-    
+---- Why Mark a Method as final? ---> prevents them from being overridden
+   In short, the final modifi er is only used on methods when the author of the parent method wants to guarantee very precise behavior.
+   
+----- Inheriting Variables ---> Java doesn’t allow variables to be overridden but instead hidden.
+    --- Hiding Variables --> When you hide a variable, you defi ne a variable with the same name as a variable in a parent
+class. This creates two copies of the variable within an instance of the child class: one instance defi ned for the parent reference and another defined for the child reference.
+    there is no notion of overriding a member variable. 
+    super keyword is used to access the parent variable’s value.
+    These rules are the same regardless of whether the variable is an instance variable or a static variable.
+    Notice if the same type of object was created then, the reference to the object determines which value is seen as output.
