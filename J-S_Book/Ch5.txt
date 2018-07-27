@@ -33,7 +33,50 @@ It is possible in Java to prevent a class from being extended by marking the cla
 
 
 ---- Understanding Compiler Enhancements --->
-  
+  Java compiler automatically inserts a call to the no-argument constructor super() if the first statement is not a call to the parent constructor.
+ Subclasses may defi ne no-argument constructors even if their parent classes do not, provided the constructor of the child maps to a parent constructor via an explicit call of the super() command.
+
+----- Reviewing Constructor Rules -->
+    Constructor Definition Rules:
+        1. The first statement of every constructor is a call to another constructor within the class using this(), or a call to a constructor in the direct parent class using super().
+        2. The super() call may not be used after the first statement of the constructor.
+        3. If no super() call is declared in a constructor, Java will insert a no-argument super() as the first statement of the constructor.
+        4. If the parent doesn’t have a no-argument constructor and the child doesn’t define any constructors, the compiler will throw an error and try to insert a default no-argument constructor into the child class.
+        5. If the parent doesn’t have a no-argument constructor, the compiler requires an explicit call to a parent constructor in each child constructor.
+    
+------ Calling Constructors --> In Java, the parent constructor is always executed before the child constructor.
+---- Calling Inherited Class Members --> 
+    If the parent class and child class are part of the same package, 
+        the child class may also use any default members defined in the parent class.
+        A child class may never access a private member of the parent class, at least not through any direct reference.
+    
+    To reference a member in a parent class, you can just call it directly, or this and super may both be used for referencing methods or variables defined in the parent class, but only this may be used for referencing members defined in the current class.
+    
+    Remember, if the child class overrides a member of the parent class, this and super could have very different effects when applied to a class member.
+    
+------ super() vs. super ----> super() method vs super keyword ---> ** imp topic for exam
+    super() and super are quite different but may be used in the same methods.
+    The first, super(), is a statement that explicitly calls a parent constructor and may only be used in the first line of a constructor of a child class. 
+    The second, super, is a keyword used to reference a member defined in a parent class and may be used throughout the child class.
+        
+---- Inheriting Methods --> brings the stage for collisions between methods defined in both the parent class and the subclass.   
+    Lets discuss rules for method inheritance and how Java handles such scenarios.
+    --- Overriding a Method -->
+        means, a same method name and definition in both the parent and child class.
+            When you override a method, you may reference the parent version of the method using the super keyword. In this manner, the keywords this and super allow you to select between the current and parent version of a method, respectively.
+    
+     -->   Rules, The compiler performs the following checks when you override a nonprivate method: -->
+    1. The method in the child class must have the same signature as the method in the parent class.
+    2. The method in the child class must be at least as accessible or more accessible than the method in the parent class.
+    3. The method in the child class may not throw a checked exception that is new or broader than the class of any exception thrown in the parent class method.
+    4. If the method returns a value, it must be the same or a subclass of the method in the parent class, known as covariant return types.
+
+    
+    ---> A recursive function is one that calls itself as part of execution, also it must have a termination condition to avoid infinite loop. in case of infinite loop, java throws/ produce a stack overflow error at runtime.
+    
+    
+    
+    
     
     
     
