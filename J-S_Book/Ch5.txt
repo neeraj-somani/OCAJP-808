@@ -68,14 +68,18 @@ It is possible in Java to prevent a class from being extended by marking the cla
      -->   Rules, The compiler performs the following checks when you override a nonprivate method: -->
     1. The method in the child class must have the same signature as the method in the parent class.
     2. The method in the child class must be at least as accessible or more accessible than the method in the parent class.
-    3. The method in the child class may not throw a checked exception that is new or broader than the class of any exception thrown in the parent class method.
+    3. The method in the child class may not throw a checked exception that is new or broader than the class of any exception thrown in the parent class method. In other words, a child method may hide or eliminate a parent method’s exception without issue.
     4. If the method returns a value, it must be the same or a subclass of the method in the parent class, known as covariant return types.
 
     
     ---> A recursive function is one that calls itself as part of execution, also it must have a termination condition to avoid infinite loop. in case of infinite loop, java throws/ produce a stack overflow error at runtime.
     
-    
-    
+    --- overloading vs overriding ---->  
+        If two methods have the same name but different signatures, the methods are overloaded, not overridden.
+        overload --> Different signature for same name method
+        override --> same signature for same name method, with few addional rules listed above.
+     --- tips for exam -->
+        Any time you see a method on the exam with the same name as a method in the parent class, determine whether the method is being overloaded or overridden first; doing so will help you with questions about whether the code will compile.
     
     
     
