@@ -134,7 +134,40 @@ class. This creates two copies of the variable within an instance of the child c
         
         
   ----- Creating a Concrete Class -->
-    A concrete class is the fi rst nonabstract subclass that extends an abstract class and is required to implement all inherited abstract methods.
+    A concrete class is the first non-abstract subclass that extends an abstract class and is required to implement all inherited abstract methods.
+    
 ---- extending an abstract class with another abstract --->
     An abstract class can extend another abstract class, and may or may not implement abstract methods of the extended class.
     But if an intermediate class provides an implementation for an abstract method, that method is inherited by subclasses as a concrete method, not as an abstract one.
+
+
+------- Implementing Interfaces --> Java does allow classes to implement any number of interfaces. each separated by a comma.
+    An interface is an abstract data type that defines a list of abstract public methods that any class implementing the interface must provide. An interface can also include a list of constant variables and default methods.
+    An interface is defined with the interface keyword. 
+    A class invokes the interface by using the implements keyword in its class definition.
+    
+** below topic very imp one or more question on this will be in exam
+------ Defining an Interface --> specialized kind of abstract class. Below are rules:
+    1. Interfaces cannot be instantiated directly.
+    2. An interface is not required to have any methods.
+    3. An interface may not be marked as final.
+    4. All top-level interfaces are assumed to have public or default access, and they must include the abstract modifier in their definition. Therefore, marking an interface as private, protected, or final will trigger a compiler error, since this is incompatible with these assumptions.
+    5. All nondefault methods in an interface are assumed to have the modifiers abstract and public in their definition. Therefore, marking a method as private, protected, or final will trigger compiler errors as these are incompatible with the abstract and public keywords.
+    
+----- Inheriting an Interface --> two inheritance rules:   
+    1. An interface that extends another interface, as well as an abstract class that implements an interface, inherits all of the abstract methods as its own abstract methods.
+2. The first concrete class that implements an interface, or extends an abstract class that implements an interface, must provide an implementation for all of the inherited abstract methods.
+    
+    abstract class vs interface --->
+        1. Like an abstract class, an interface may be extended using the extend keyword. In this manner, the new child interface inherits all the abstract methods of the parent interface.
+        2. Unlike an abstract class, though, an interface may extend multiple interfaces.
+        
+------- Classes, Interfaces, and Keywords ---> points to remember ---- (-- class implements interface --)
+    A class can implement an interface, a class cannot extend an interface.
+    Whereas, an interface can extend another interface, an interface cannot implement another interface.
+    Also, An interface cannot extend a class.
+
+------- Abstract Methods and Multiple Inheritance -->
+    points to remember -->
+        1. 
+    
