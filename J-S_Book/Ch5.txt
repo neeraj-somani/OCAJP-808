@@ -184,7 +184,7 @@ class. This creates two copies of the variable within an instance of the child c
    2. they are assumed to be static, they are accessible even without an instance of the interface.
    3. it is a common coding practice to use uppercase letters to denote constant variable names within a class.
    
------- Default Interface Methods ---> (new in Java 8)
+------ Default Interface Methods ---> (introduced in Java 8)
    Is a method with the default keyword in which a method body is provided, means default implementation. Contrast to abstract methods, which do not have method body. classes have the option to override the default method if they need to, but they are not required to do so.
    Note that methods are assumed to be public, as all methods of an interface are public.
        Below is an example of definition:-
@@ -202,4 +202,18 @@ class. This creates two copies of the variable within an instance of the child c
         4. Like all methods in an interface, a default method is assumed to be public and will not compile if marked as private or protected.
 
 ------ Default Methods and Multiple Inheritance ---->
+     1. If a class implements two interfaces that have default methods with the same name and signature, the compiler will throw an error. There is an exception to this rule, though: if the subclass overrides the duplicate default methods, the code will compile without issue—the ambiguity about which version of the method to call has been removed.
+    2. This rule holds true even for abstract classes that implement multiple interfaces, because the default method could be called in a concrete method within the abstract class. 
+     
+------ Static Interface Methods ----> (introduced in Java 8)
+rules:
+    1. Like all methods in an interface, a static method is assumed to be public and will not compile if marked as private or protected.
+    2. To reference the static method, a reference to the name of the interface must be used.
+    3. A static method defi ned in an interface is not inherited in any classes that implement the interface.
+    4. a class that implements two interfaces containing static methods with the same signature will still compile at runtime, because the static methods are not inherited by the subclass and must be accessed with a reference to the interface name.
     
+------ Understanding Polymorphism ---->
+
+     
+     
+     
