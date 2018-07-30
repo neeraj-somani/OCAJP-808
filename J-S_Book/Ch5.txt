@@ -168,6 +168,14 @@ class. This creates two copies of the variable within an instance of the child c
     Also, An interface cannot extend a class.
 
 ------- Abstract Methods and Multiple Inheritance -->
-    points to remember -->
-        1. 
+   points to remember --> Scenario: what will happen if a class that inherits from two interfaces that contain the same abstract method:
+        1. If only the abstract method name is same in both the interfaces, then one definition would be enough for both, in the concrete class and code will compile.
+        2. If the method name is the same but the input parameters are different, there is no confl ict because this is considered a method overload.
+        3. if the method name and input parameters are the same but the return types are different between the two methods, the class or interface attempting to inherit both interfaces will not compile. Even, if we implement one method definition then also compiler will complain as it is missing other method definition.
+        3.2 - The compiler would also throw an exception if you defi ne an interface or abstract class that inherits from two conflicting interfaces. Even without implementation details, the compiler detects the problem with the abstract definition and prevents compilation.
+   ---- things work a bit differently with default interface methods. ---
+   
+
+----- Interface Variables ---->
+    
     
