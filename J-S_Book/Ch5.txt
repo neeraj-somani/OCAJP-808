@@ -212,8 +212,15 @@ rules:
     3. A static method defi ned in an interface is not inherited in any classes that implement the interface.
     4. a class that implements two interfaces containing static methods with the same signature will still compile at runtime, because the static methods are not inherited by the subclass and must be accessed with a reference to the interface name.
     
------- Understanding Polymorphism ---->
-
-     
+------ Understanding Polymorphism ----> the property of an object to take on many different forms.
+    a Java object may be accessed using a reference:
+        1. with the same type as the object
+        2. a reference that is a superclass of the object
+        3. a reference that defines an interface the object implements, either directly or through a superclass.
+   Hence, a cast is not required if the object is being reassigned to a super type or interface of the object.
+  The ability of an instance of a class to be passed as an instance of an interface it implements, as well as an instance of one of its superclasses, is the nature of polymorphism.
+  Note:-- Once the object has been assigned a new reference type, only the methods and variables available to that reference type are callable on the object without an explicit cast.
+  
+---- Object vs. Reference -->  
      
      
