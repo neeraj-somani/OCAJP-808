@@ -173,7 +173,7 @@ class. This creates two copies of the variable within an instance of the child c
         2. If the method name is the same but the input parameters are different, there is no confl ict because this is considered a method overload.
         3. if the method name and input parameters are the same but the return types are different between the two methods, the class or interface attempting to inherit both interfaces will not compile. Even, if we implement one method definition then also compiler will complain as it is missing other method definition.
         3.2 - The compiler would also throw an exception if you defi ne an interface or abstract class that inherits from two conflicting interfaces. Even without implementation details, the compiler detects the problem with the abstract definition and prevents compilation.
-   ---- things work a bit differently with default interface methods. ---
+   ---- things work a bit differently with default interface methods. Discussed below: ---
    
 
 ----- Interface Variables ---->  two interface variables rules:
@@ -200,3 +200,6 @@ class. This creates two copies of the variable within an instance of the child c
         2. A default method must be marked with the default keyword. If a method is marked as default, it must provide a method body.
         3. A default method is not assumed to be static, final, or abstract, as it may be used or overridden by a class that implements the interface.
         4. Like all methods in an interface, a default method is assumed to be public and will not compile if marked as private or protected.
+
+------ Default Methods and Multiple Inheritance ---->
+    
