@@ -1,1 +1,9 @@
-hello
+Chapter 6 -- Exceptions
+
+---- Understanding Exceptions --> A program can fail for just about any reason. Here are just a few possibilities:
+■ The code tries to connect to a website, but the Internet connection is down.
+■ You made a coding mistake and tried to access an invalid index in an array.
+■ One method calls another with a value that the method doesn’t support.
+
+---- The Role of Exceptions --> An exception is Java’s way of saying, “I give up. I don’t know what to do right now. You deal with it.”
+  The two approaches Java uses when dealing with exceptions. A method can handle the exception case itself or make it the caller’s responsibility.
