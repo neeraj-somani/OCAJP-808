@@ -248,3 +248,9 @@ Need to understand it again
     For example, you can defi ne a method that takes an instance of an interface as a parameter.
     In this manner, any class that implements the interface can be passed to the method. Since you’re casting from a subtype to a supertype, an explicit cast is not required. This property is referred to as polymorphic parameters.
     
+Points to remember --->
+    1. java.util.List is an interface, not a class.
+    2. java.util.ArrayList and java.util.Vector, are classes that implements List interface.
+    example:-->  java.util.List list = new java.util.ArrayList();
+     
+----- Polymorphism and Method Overriding -->     
