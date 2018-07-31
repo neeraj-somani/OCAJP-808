@@ -99,3 +99,64 @@ Recognizing Common Exception Types --> three types of exceptions for the OCA exa
  --- ArrayIndexOutOfBoundsException --> You know by now that array indexes start with 0 and go up to 1 less than the length of the
 array—which means, if accessing any index that is not valid for array will throw this exception. 
 -- ClassCastException --> Java tries to protect you from impossible casts. means, casting from higher to lower not possibe. Example:- you can't cast String to Integer.
+--- llegalArgumentException --> is a way for your program to protect itself.
+The program throws an exception when it’s not happy with the parameter values. The output looks like this:
+  Exception in thread "main" java.lang.IllegalArgumentException: # eggs must not be negative
+-- NullPointerException --> Instance variables and methods must be called on a non-null reference. If the reference is null, the JVM will throw a NullPointerException.
+
+--- NumberFormatException --> Java provides methods to convert strings to numbers. When these are passed an invalid value, they throw a NumberFormatException. The idea is similar to IllegalArgumentException. Since this is a common problem, Java gives it a separate class. In fact, NumberFormatException is a subclass of IllegalArgumentException.
+
+
+ --- Checked Exceptions --> Checked exceptions have Exception in their hierarchy but not RuntimeException. They must be handled or declared. They can be thrown by the programmer or by the JVM.
+   FileNotFoundException --> Thrown programmatically when code tries to reference a fi le that does not exist. FileNotFoundException is a subclass of IOException.
+  IOException --> Thrown programmatically when there’s a problem reading or writing a file
+
+-- Errors --> Errors extend the Error class. They are thrown by the JVM and should not be handled or declared. Errors are rare, but you might see these:
+-- ExceptionInInitializerError --> Thrown by the JVM when a static initializer throws an exception and doesn’t handle it.
+    --- Java runs static initializers the fi rst time a class is used. If one of the static initializers throws an exception, Java can’t start using the class. It declares defeat by throwing an ExceptionInInitializerError.
+  The ExceptionInInitializerError is an error because Java failed to load the whole class. This failure prevents Java from continuing.
+
+-- StackOverflowError --> Thrown by the JVM when a method calls itself too many times (this is called infinite recursion because the method typically calls itself without end).
+    It is better than an infinite loop because at least Java will catch it and throw the error. With an infi nite loop, Java just uses all your CPU until you can kill it.
+
+NoClassDefFoundError --> Thrown by the JVM when a class that the code uses is available at compile time but not runtime. 
+ 
+ 
+ ---- Calling Methods That Throw Exceptions ---> When you’re calling a method that throws an exception, the rules are the same as within a method. 
+  Checked exceptions must be handled or declared.
+  
+Subclasses --> let’s look at overriding methods with exceptions in the method declaration. 
+  -- very imp point ---
+  --> When a class overrides a method from a superclass or implements a method from an interface, it’s not allowed to add new checked
+exceptions to the method signature.
+  --> A subclass is allowed to declare fewer exceptions than the superclass or interface. This is legal because callers are already handling them.
+  --> A subclass not declaring an exception is similar to a method declaring it throws an exception that it never actually throws. This is perfectly legal.
+  ---> Similarly, a class is allowed to declare a subclass of an exception type. The idea is the same. The superclass or interface has already taken care of a broader type.
+  
+--- Printing an Exception --> three ways to print an exception
+    1. let Java print it out, 
+    2. print just the message, or
+    3. print where the stack trace comes from
+  This example shows all three approaches:
+      5: public static void main(String[] args) {
+      6: try {
+      7: hop();
+      8: } catch (Exception e) {
+      9: System.out.println(e);
+      10: System.out.println(e.getMessage());
+      11: e.printStackTrace();
+      12: }
+      13: }
+      14: private static void hop() {
+      15: throw new RuntimeException("cannot hop");
+      16: }
+    This code results in the following output:
+        java.lang.RuntimeException: cannot hop
+        cannot hop
+        java.lang.RuntimeException: cannot hop
+        at trycatch.Handling.hop(Handling.java:15)
+        at trycatch.Handling.main(Handling.java:7)
+  
+  
+  
+  
