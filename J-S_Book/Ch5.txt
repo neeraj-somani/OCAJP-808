@@ -237,5 +237,14 @@ Need to understand it again
     3. The compiler will not allow casts to unrelated types.
     4. Even when the code compiles without issue, an exception may be thrown at runtime if the object being cast is not actually an instance of that class.
   
---- Virtual Methods -->  
+--- Virtual Methods -->  most important feature of polymorphism
+    Is a method in which the specific implementation is not determined until runtime.
+    In fact, all non-fi nal, nonstatic, and non-private Java methods are considered virtual methods, since any of them can be overridden at runtime.
+    --- virtual method special in Java ---->
+        If you call a method on an object that overrides a method, you get the overridden method, even if the call to the method is on a parent reference or within the parent class.
+
+----- Polymorphic Parameters --->
+    The most useful applications of polymorphism is the ability to pass instances of a subclass or interface to a method.
+    For example, you can defi ne a method that takes an instance of an interface as a parameter.
+    In this manner, any class that implements the interface can be passed to the method. Since you’re casting from a subtype to a supertype, an explicit cast is not required. This property is referred to as polymorphic parameters.
     
