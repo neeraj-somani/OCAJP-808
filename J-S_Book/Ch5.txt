@@ -253,4 +253,7 @@ Points to remember --->
     2. java.util.ArrayList and java.util.Vector, are classes that implements List interface.
     example:-->  java.util.List list = new java.util.ArrayList();
      
------ Polymorphism and Method Overriding -->     
+----- Polymorphism and Method Overriding -->   same 3 last rules of overridding a method:
+    1. An overridden method (in child class) must be at least as accessible as the method (in parent class) it is overriding.
+    2. a subclass cannot declare an overridden method with a new or broader exception than in the superclass, since the method may be accessed using a reference to the superclass.
+    3. overridden methods must use covariant return types for the same kinds of reasons as just discussed. If an object is cast to a superclass reference and the overridden method is called, the return type must be compatible with the return type of the parent method. If the return type in the child is too broad, it will result an inherent cast exception when accessed through the superclass reference.
