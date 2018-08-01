@@ -1,3 +1,32 @@
+Chapter 2 -- Operators and Statements
+
+--- Understanding Java Operators --
+it is a special symbol that can be applied to a set of variables, values, or literals—referred to as operands—and that returns a result.
+3 types --> unary, binary, and ternary
+Java operators are not necessarily evaluated from left-to-right order.
+
+Unless overridden with parentheses, Java operators follow order of operation from higher-to-lower precedence.
+If two operators have the same level of precedence, then Java guarantees left-to-right evaluation.
+
+Order of operator     precedence
+Operator   ----------->      Symbols and examples
+Post-unary operators   ----------->       expression++, expression--
+Pre-unary operators   ----------->       ++expression, --expression
+Other unary operators   ----------->       +, -, !
+Multiplication/Division/Modulus   ----------->       *, /, %
+Addition/Subtraction   ----------->      +, -
+Shift operators   ----------->      <<, >>, >>>  (// not in OCA exam)
+Relational operators   ----------->      <, >, <=, >=, instanceof
+Equal to/not equal to   ----------->      ==, !=
+Logical operators   ----------->      &, ^, |
+Short-circuit logical operators   ----------->      &&, ||
+Ternary operators   ----------->      boolean expression ? expression1 : expression2
+Assignment operators   ----------->      =, +=, -=, *=, /=, %=, &=, ^=, !=, <<=, >>=, >>>=
+
+
+---- Working with Binary Arithmetic Operators --> used to perform mathematical operations on variables, create logical expressions, as well as perform basic variable assignments.
+
+  --- Arithmetic Operators --> 
 
 switch statement 
 Data types supported by switch statements include the following:
