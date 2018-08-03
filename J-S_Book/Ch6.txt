@@ -108,16 +108,16 @@ The program throws an exception when it’s not happy with the parameter values.
 
 
  --- Checked Exceptions --> Checked exceptions have Exception in their hierarchy but not RuntimeException. They must be handled or declared. They can be thrown by the programmer or by the JVM.
-   FileNotFoundException --> Thrown programmatically when code tries to reference a fi le that does not exist. FileNotFoundException is a subclass of IOException.
+   FileNotFoundException --> Thrown programmatically when code tries to reference a file that does not exist. FileNotFoundException is a subclass of IOException.
   IOException --> Thrown programmatically when there’s a problem reading or writing a file
 
 -- Errors --> Errors extend the Error class. They are thrown by the JVM and should not be handled or declared. Errors are rare, but you might see these:
 -- ExceptionInInitializerError --> Thrown by the JVM when a static initializer throws an exception and doesn’t handle it.
-    --- Java runs static initializers the fi rst time a class is used. If one of the static initializers throws an exception, Java can’t start using the class. It declares defeat by throwing an ExceptionInInitializerError.
+    --- Java runs static initializers the first time a class is used. If one of the static initializers throws an exception, Java can’t start using the class. It declares defeat by throwing an ExceptionInInitializerError.
   The ExceptionInInitializerError is an error because Java failed to load the whole class. This failure prevents Java from continuing.
 
 -- StackOverflowError --> Thrown by the JVM when a method calls itself too many times (this is called infinite recursion because the method typically calls itself without end).
-    It is better than an infinite loop because at least Java will catch it and throw the error. With an infi nite loop, Java just uses all your CPU until you can kill it.
+    It is better than an infinite loop because at least Java will catch it and throw the error. With an infinite loop, Java just uses all your CPU until you can kill it.
 
 NoClassDefFoundError --> Thrown by the JVM when a class that the code uses is available at compile time but not runtime. 
  
@@ -158,5 +158,70 @@ exceptions to the method signature.
         at trycatch.Handling.main(Handling.java:7)
   
   
-  
-  
+Notes from Review Question -->
+Runtime exceptions are also known as unchecked exceptions. They are allowed
+to be declared, but they don’t have to be. Checked exceptions must be handled or
+declared. Legally, you can handle java.lang.Error subclasses, but it’s not a good idea.
+
+java.io.IOException is thrown by many methods in the java.io package, but it is always thrown programmatically. 
+The same is true for NumberFormatException; it is thrown programmatically by the wrapper classes of java.lang. 
+The other three exceptions are all thrown by the JVM when the corresponding problem arises.
+ArrayIndexOutOfBoundsException
+ExceptionInInitializerError
+NullPointerException
+
+The compiler tests the operation for a valid type but not a valid result, so the code
+will still compile and run. At runtime, evaluation of the parameter takes place before
+passing it to the print() method, so an ArithmeticException object is raised.
+
+The order of catch blocks is important because they’re checked in the order they
+appear after the try block. Because ArithmeticException is a child class of Runtime-
+Exception, the catch block checks/expect first for ArithmeticException  and then for Runtime-
+Exception.
+
+If the exception occurs in try block in not caught or handled by catch block and not even handled in main method then program terminates and display stack trace.
+
+Whenever a statement with "throw" keyword occurs in program, it creates/triggered a new exception, that must be caught else program will stop.
+
+Classes listed in the throws part of a method declaration must extend java.lang.Throwable. This includes Error, Exception, and RuntimeException. Arbitrary classes such as String can’t go there. 
+Any Java type, including Exception, can be declared as the return type. However, this will simply return the object rather than throw an exception.
+
+A method that declares an exception isn’t required to throw one.
+Runtime exceptions can be thrown in any method, either you declare it or not in throws statement.
+A broader exception is not allowed in "throw" statement, means whatever you are declaring in "throws" statement, the "throw" statement can have only subclass of it.
+
+Rules for multiple catch block:
+1. Subclass of exception should be caught before the superclass.
+2. If any 2 class is not in same inheritance tree then they are allowed in any catch block position.
+3. Although, its not a good idea to catch any runtime expection and errors.
+4. you should not declare a catch block for any checked exception, if that checked exception is not thrown in code. means, if method declares in the try block doesn't declare that checked exception then comipler relaizes that there would be an unreachable catch block.
+
+example: method called inside the try block doesn’t declare an IOException to be thrown. The compiler realizes that IOException would be an unreachable catch block.
+5. the same exception can’t be specified in two different catch blocks.
+
+Rules how the code behaves when you have more than one catch block:
+1. your programm will not run all catch block, but it will run only one most specific matching catch block for which an exception was thrown.
+2. once, program completes one catch block it will go to finally block regardless of other catch block.
+3. Incase if there is an exception thrown in the finally clause, program will again run only one most specific matching catch block for which an exception was thrown in the finally block. 
+
+Result of Review Question attempt 1 -->
+1. B
+2. B, D
+3. C
+4. B
+5. A, D, E (N)
+6. C
+7. D (N)
+8. E
+9. B
+10. E
+11. E (N)
+12. A, B, D, E, F, G (N)
+13. E, C (N)
+14. A, B, D (N)
+15. A, B, D, E
+16. B
+17. A, B, C (N)
+18. A, B, E (N)
+19. B, C (N)
+20. F (N)
