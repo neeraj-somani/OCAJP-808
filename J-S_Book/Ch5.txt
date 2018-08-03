@@ -3,7 +3,7 @@ Proper Java class design is about code reusability, increased functionality, and
 
 ------- Introducing Class Inheritance -->
 Inheritance is the process by which the new child subclass automatically includes any public or protected primitives, objects, or methods defined in the parent class.
-Java supports single inheritance, by which a class may inherit from only one direct parent class. Java does allow one exception to the single inheritance rule: classes may implement multiple interfaces, as you’ll see later in this chapter.
+Java supports single inheritance, by which a class may inherit from only one direct parent class. Java does allow one exception to the single inheritance rule: classes may implement multiple interfaces.
 Each child has exactly one parent, but one parent can have multiple children.
 
 Java doesn’t support multiple inheritance. Although, Java also supports multiple levels of inheritance. means one class (X) inherit other class (Y) and that class (Y) can inherit another class (Z).
@@ -16,12 +16,12 @@ It is possible in Java to prevent a class from being extended by marking the cla
     }
 
     --> Java allows only one or zero public class or interface per file.
-    --> any private members of parent class is not accessible directly to child class, but using object reference we can fetch private members.
+    --> any private members of parent class is not accessible directly to child class, but using object reference we can fetch private members. (need to check how to fetch private members)
     
 --- Applying Class Access Modifiers -->
   The public access modifier applied to a class indicates that it can be referenced and used in any class. 
   The default package private modifier, indicates the class can be accessed only by a subclass or class within the same package.
-  ---> The rules for applying class access modifi ers are identical for interfaces.
+  ---> The rules for applying class access modifiers are identical for interfaces.
 
 ----- Creating Java Objects ---> In Java, all classes inherit from a single class, java.lang.Object. 
   java.lang.Object is the only class that doesn’t have any parent classes. This is top most class in java.
@@ -34,7 +34,7 @@ It is possible in Java to prevent a class from being extended by marking the cla
 
 ---- Understanding Compiler Enhancements --->
   Java compiler automatically inserts a call to the no-argument constructor super() if the first statement is not a call to the parent constructor.
- Subclasses may defi ne no-argument constructors even if their parent classes do not, provided the constructor of the child maps to a parent constructor via an explicit call of the super() command.
+ Subclasses may define no-argument constructors even if their parent classes do not, provided the constructor of the child maps to a parent constructor via an explicit call of the super() command.
 
 ----- Reviewing Constructor Rules -->
     Constructor Definition Rules:
@@ -65,11 +65,11 @@ It is possible in Java to prevent a class from being extended by marking the cla
         means, a same method name and definition in both the parent and child class.
             When you override a method, you may reference the parent version of the method using the super keyword. In this manner, the keywords this and super allow you to select between the current and parent version of a method, respectively.
     
-     -->   Rules, The compiler performs the following checks when you override a nonprivate method: -->
+     -->   Rules, The compiler performs the following checks when you override a non-private method: -->
     1. The method in the child class must have the same signature as the method in the parent class.
     2. The method in the child class must be at least as accessible or more accessible than the method in the parent class.
     3. The method in the child class may not throw a checked exception that is new or broader than the class of any exception thrown in the parent class method. In other words, a child method may hide or eliminate a parent method’s exception without issue.
-    4. If the method returns a value, it must be the same or a subclass of the method in the parent class, known as covariant return types.
+    4. If the method in the child class returns a value, it must be the same or a subclass of the method in the parent class, known as covariant return types.
 
     
     ---> A recursive function is one that calls itself as part of execution, also it must have a termination condition to avoid infinite loop. in case of infinite loop, java throws/ produce a stack overflow error at runtime.
@@ -83,10 +83,10 @@ It is possible in Java to prevent a class from being extended by marking the cla
     
   ----- Redeclaring private Methods -->  
     in above discussion, we saw how public and protected methods can be overridden.
-    In Java, it is not possible to override a private method in a parent class since the parent method is not accessible from the child class. but it doesn’t mean that the child class can’t define its own version of the method. It just means, that the new method is not an overridden version of the parent class’s method. so, none of the rules for overriding methods are invoked.
+    In Java, it is not possible to override a private method of a parent class since the parent method is not accessible from the child class. but it doesn’t mean that the child class can’t define its own version of the method. It just means, that the new method is not an overridden version of the parent class’s method. so, none of the rules for overriding methods are invoked.
     
   ---- Hiding Static Methods -->
-    A hidden method occurs when a child class defi nes a static method with the same name and signature as a static method defined in a parent class.
+    A hidden method occurs when a child class defines a static method with the same name and signature as a static method defined in a parent class.
     hidden method follow all 4 rules of overridden method, plus addition one rule:
     5. The method defined in the child class must be marked as static if it is marked as static in the parent class (method hiding). Likewise, the method must not be marked as static in the child class if it is not marked as static in the parent class (method overriding).
     
@@ -106,11 +106,11 @@ It is possible in Java to prevent a class from being extended by marking the cla
     one more point to Note that whether or not the child method used the final keyword is irrelevant—the code will not compile either way.
     
 ---- Why Mark a Method as final? ---> prevents them from being overridden
-   In short, the final modifi er is only used on methods when the author of the parent method wants to guarantee very precise behavior.
+   In short, the final modifier is only used on methods when the author of the parent method wants to guarantee very precise behavior.
    
 ----- Inheriting Variables ---> Java doesn’t allow variables to be overridden but instead hidden.
-    --- Hiding Variables --> When you hide a variable, you defi ne a variable with the same name as a variable in a parent
-class. This creates two copies of the variable within an instance of the child class: one instance defi ned for the parent reference and another defined for the child reference.
+    --- Hiding Variables --> When you hide a variable, you define a variable with the same name as a variable in a parent
+class. This creates two copies of the variable within an instance of the child class: one instance defined for the parent reference and another defined for the child reference.
     there is no notion of overriding a member variable. 
     super keyword is used to access the parent variable’s value.
     These rules are the same regardless of whether the variable is an instance variable or a static variable.
@@ -118,20 +118,19 @@ class. This creates two copies of the variable within an instance of the child c
 
 ----- Creating Abstract Classes ---> 
     Abstract Class --> is a class that is marked with the abstract keyword and cannot be instantiated.
-    An abstract method --> is a method marked with the abstract keyword defi ned in an abstract class, for which no implementation is provided in the class in which it is declared.
+    An abstract method --> is a method marked with the abstract keyword defined in an abstract class, for which no implementation is provided in the class in which it is declared.
 
     Abstract Class Definition Rules:
         1. Abstract classes cannot be instantiated directly.
         2. Abstract classes may be defined with any number, including zero, of abstract and nonabstract methods.
-        3. Abstract classes may not be marked as private or final.
+        3. Abstract classes may not be marked as private or final. (notice: may not)
         4. An abstract class that extends another abstract class inherits all of its abstract methods as its own abstract methods.
         5. The first concrete class that extends an abstract class must provide an implementation for all of the inherited abstract methods.
     Abstract Method Definition Rules:
         1. Abstract methods may only be defined in abstract classes.
-        2. Abstract methods may not be declared private or final.
+        2. Abstract methods may not be declared private or final. (notice: may not)
         3. Abstract methods must not provide a method body/implementation in the abstract class for which is it declared.
         4. Implementing an abstract method in a subclass follows the same rules for overriding a method. For example, the name and signature must be the same, and the visibility of the method in the subclass must be at least as accessible as the method in the parent class.
-        
         
   ----- Creating a Concrete Class -->
     A concrete class is the first non-abstract subclass that extends an abstract class and is required to implement all inherited abstract methods.
@@ -139,7 +138,6 @@ class. This creates two copies of the variable within an instance of the child c
 ---- extending an abstract class with another abstract --->
     An abstract class can extend another abstract class, and may or may not implement abstract methods of the extended class.
     But if an intermediate class provides an implementation for an abstract method, that method is inherited by subclasses as a concrete method, not as an abstract one.
-
 
 ------- Implementing Interfaces --> Java does allow classes to implement any number of interfaces. each separated by a comma.
     An interface is an abstract data type that defines a list of abstract public methods that any class implementing the interface must provide. An interface can also include a list of constant variables and default methods.
@@ -170,9 +168,9 @@ class. This creates two copies of the variable within an instance of the child c
 ------- Abstract Methods and Multiple Inheritance -->
    points to remember --> Scenario: what will happen if a class that inherits from two interfaces that contain the same abstract method:
         1. If only the abstract method name is same in both the interfaces, then one definition would be enough for both, in the concrete class and code will compile.
-        2. If the method name is the same but the input parameters are different, there is no confl ict because this is considered a method overload.
-        3. if the method name and input parameters are the same but the return types are different between the two methods, the class or interface attempting to inherit both interfaces will not compile. Even, if we implement one method definition then also compiler will complain as it is missing other method definition.
-        3.2 - The compiler would also throw an exception if you defi ne an interface or abstract class that inherits from two conflicting interfaces. Even without implementation details, the compiler detects the problem with the abstract definition and prevents compilation.
+        2. If the method name is the same but the input parameters are different, there is no conflict because this is considered a method overload.
+        3. if the method name and input parameters are the same but the return types are different between the two methods, the class or interface attempting to inherit both interfaces will not compile. Even, if we implement one method definition then also compiler will complain as it is missing other method definition. (need to test this)
+        3.2 - The compiler would also throw an exception if you define an interface or abstract class that inherits from two conflicting interfaces. Even without implementation details, the compiler detects the problem with the abstract definition and prevents compilation.
    ---- things work a bit differently with default interface methods. Discussed below: ---
    
 
@@ -180,7 +178,7 @@ class. This creates two copies of the variable within an instance of the child c
     1. Interface variables are assumed to be public, static, and final. Therefore, marking a variable as private or protected will trigger a compiler error, as will marking any variable as abstract.
     2. The value of an interface variable must be set when it is declared since it is marked as final.
   Hence, point to understand -->
-   1. interface variables are essentially constant variables defi ned on the interface level.
+   1. interface variables are essentially constant variables defined on the interface level.
    2. they are assumed to be static, they are accessible even without an instance of the interface.
    3. it is a common coding practice to use uppercase letters to denote constant variable names within a class.
    
@@ -209,7 +207,7 @@ class. This creates two copies of the variable within an instance of the child c
 rules:
     1. Like all methods in an interface, a static method is assumed to be public and will not compile if marked as private or protected.
     2. To reference the static method, a reference to the name of the interface must be used.
-    3. A static method defi ned in an interface is not inherited in any classes that implement the interface.
+    3. A static method defined in an interface is not inherited in any classes that implement the interface.
     4. a class that implements two interfaces containing static methods with the same signature will still compile at runtime, because the static methods are not inherited by the subclass and must be accessed with a reference to the interface name.
     
 ------ Understanding Polymorphism ----> the property of an object to take on many different forms.
@@ -239,13 +237,13 @@ Need to understand it again
   
 --- Virtual Methods -->  most important feature of polymorphism
     Is a method in which the specific implementation is not determined until runtime.
-    In fact, all non-fi nal, nonstatic, and non-private Java methods are considered virtual methods, since any of them can be overridden at runtime.
+    In fact, all non-final, non-static, and non-private Java methods are considered virtual methods, since any of them can be overridden at runtime.
     --- virtual method special in Java ---->
         If you call a method on an object that overrides a method, you get the overridden method, even if the call to the method is on a parent reference or within the parent class.
 
 ----- Polymorphic Parameters --->
     The most useful applications of polymorphism is the ability to pass instances of a subclass or interface to a method.
-    For example, you can defi ne a method that takes an instance of an interface as a parameter.
+    For example, you can define a method that takes an instance of an interface as a parameter.
     In this manner, any class that implements the interface can be passed to the method. Since you’re casting from a subtype to a supertype, an explicit cast is not required. This property is referred to as polymorphic parameters.
     
 Points to remember --->
