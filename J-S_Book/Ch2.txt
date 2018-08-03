@@ -52,8 +52,9 @@ Q:-  What is the data type of x + y?
       double x = 39.21;
       float y = 2.1;
 Answer:- Code will give compile error
-Reason:- floating-point literals are assumed to be double, unless postfi xed with an f, as in 2.1f.
+Reason:- floating-point literals are assumed to be double, unless postfixed with an f, as in 2.1f.
     If y = 2.1f, then it will be promoted to double while calculating the expression.
+    (similarly, we need do for long as well. example:- long x = 1078798685465L; but if we assign a valid int value to long then we don't need to postfix with L, for example:- long x = 7; would compile with no error.)
 Q:- What is the data type of x / y?
       short x = 10;
       short y = 3;
@@ -70,10 +71,89 @@ Answer:- the output data type would be "int". as per 3rd rule.
 
 ----- Logical Complement and Negation Operators ----> The logical complement operator, !, fl ips the value of a boolean expression.
 
-Imp rule to remember ---> you cannot apply a negation operator, -, to a boolean expression, nor can you apply a logical complement operator, !, to a numeric expression.
+-- there will be question on this in exam -->
+Imp rule to remember ---> you cannot apply a negation operator, -, to a boolean expression, nor can you apply a logical complement operator, !, to a numeric expression. You will get compile error in such case.
+--> in Java 1 and true are not related in any way, just as 0 and false are not related.
 
+--- Increment and Decrement Operators --> ++ and --, respectively, can be applied to numeric operands and have the higher order or precedence, as compared to binary operators. In other words, they often get applied fi rst to an expression.
+  --> pre-increment and pre--decrement operator, operator is placed before the operand, the operator is applied fi rst and the value return is the new value of the expression.
+  ---> post-increment operator and the post-decrement operator, operator is placed after the operand, then the original value of the expression is returned, with operator applied after the value is returned.
+      The following code snippet illustrates this distinction:
+      int counter = 0;
+      System.out.println(counter); // Outputs 0
+      System.out.println(++counter); // Outputs 1
+      System.out.println(counter); // Outputs 1
+      System.out.println(counter--); // Outputs 1
+      System.out.println(counter); // Outputs 0
 
+--- Using Additional Binary Operators --> 
+  -- Assignment Operators --> that modifi es, or assigns, the variable on the left-hand side of the operator, with the result of the value on the right-hand side of the equation. The simplest assignment operator is the = assignment, which you have seen already:
+  int x = 1;
+Java will automatically promote from smaller to larger data types, but it will throw a compiler exception if it detects you are trying to convert from larger to smaller data types.
 
+Casting Primitive Values --> Casting primitives is required any time you are going from a larger numerical data type to a smaller numerical data type, or converting from a fl oating-point number to an integral value.
+  example:- int x = (int)1.0;
+            short y = (short)1921222; // Stored as 20678
+            Using Additional Binary Operators 61
+            int z = (int)9l;
+            long t = 192301398193810323L;
+            
+---- Overflow and Underflow -->  The expressions in the previous example now compile, although there’s a cost. The second value, 1,921,222, is too large to be stored as a short, so numeric overfl ow occurs and it becomes 20,678. Overfl ow is when a number is so large that it will no longer fi t within the data type, so the system “wraps around” to the next lowest value and counts up from there. There’s also an analogous underfl ow, when the number is too low to fit in the data type. This is beyond the scope of the exam, but something to be careful of in your own code.
+  For example, the following statement outputs a negative number:
+  System.out.print(2147483647+1); // -2147483648
+  Since 2147483647 is the maximum int value, adding any strictly positive value to it will cause it to wrap to the next negative number.        
+Be wary of examples like this in exam:-
+examples for a moment:
+short x = 10;
+short y = 3;
+short z = x * y; // DOES NOT COMPILE
+Based on everything you have learned up until now, can you understand why the last line of this statement will not compile? If you remember, short values are automatically promoted to int when applying any arithmetic operator, with the resulting value being of type int. Trying to set a short variable to an int results in a compiler error, as Java thinks you are trying to implicitly convert from a larger data type to a smaller one.
+
+--- Compound Assignment Operators --->  Only two of the compound operators are required for the exam, += and -=.
+  compound operators cannot be used to declare a new variable. Variables, should be declared before using this.
+  compound oprator will automatically cast the lower data type value to upper data type value, while calculating the expression.
+  inserting the assignment operator = in the middle of an expression and apply that value in calculation is completely valid. for example:- long y = (x=3);
+          System.out.println(x); // Outputs 3
+          System.out.println(y); // Also, outputs 3
+
+---- Relational Operators ---> compare two expressions and return a boolean value
+  < ---> Strictly less than
+  <= ---> Less than or equal to
+  > ----> Strictly greater than
+  >= ---> Greater than or equal to
+
+  a instanceof b ---> True if the reference that a points to is an instance of a class, subclass, or class that implements a particular interface, as named in b. (out of scope for OCA)
+  
+----- Logical Operators --->  (&), (|), and (^), may be applied to both numeric and boolean data types. 
+  When they’re applied to boolean data types, they’re referred to as logical operators. 
+  (out of scope for OCA) Alternatively, when they’re applied to numeric data types, they’re referred to as bitwise operators.
+
+x & y (AND) --> if both are ture then only true, else always false.
+x | y (INCLUSIVE OR) --> if any of this is true then true, else false.
+x ^ y (EXCLUSIVE OR) --> if both are same then false, else true.
+
+--- conditional operators --> && and ||, which are often referred to as short-circuit operators.
+    nearly identical to the logical operators, & and |, respectively, except that the right-hand side of the expression may never be evaluated if the final result can be determined by the left-hand side of the expression. For example, consider the following statement:
+    boolean x = true || (y < 4); // result is true, but we don't need to evaluate the right hand side expression (y<4) for that 
+ /// useful in checking for null objects before performing an operation
+
+----- Equality Operators ---> the equals operator == and not equals operator !=. they compare two operands and return a boolean value.
+    The equality operators are strictly used in one of three scenarios: 
+      1. Comparing two numeric primitive types. If the numeric values are of different data types, the values are automatically promoted as previously described. For example, 5 == 5.00 returns true since the left side is promoted to a double.
+      2. Comparing two boolean values.
+      3. Comparing two objects, including null and String values.
+
+---- very important -----
+For object comparison, the equality operator is applied to the references to the objects,
+not the objects they point to. Two references are equal if and only if they point to the same
+object, or both point to null. Let’s take a look at some examples:
+File x = new File("myFile.txt");
+File y = new File("myFile.txt");
+File z = x;
+System.out.println(x == y); // Outputs false
+System.out.println(x == z); // Outputs true
+
+---- Understanding Java Statements ---> 
 
 
 
