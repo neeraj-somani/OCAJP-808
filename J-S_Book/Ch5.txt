@@ -89,7 +89,8 @@ It is possible in Java to prevent a class from being extended by marking the cla
     A hidden method occurs when a child class defines a static method with the same name and signature as a static method defined in a parent class.
     hidden method follow all 4 rules of overridden method, plus addition one rule:
     5. The method defined in the child class must be marked as static if it is marked as static in the parent class (method hiding). Likewise, the method must not be marked as static in the child class if it is not marked as static in the parent class (method overriding).
-    
+    For nonprivate methods in the parent class, both methods must use static (hide) or neither should use static (override).
+
     Note:- You should not reuse the name of a static method in your class if it is already used in the parent class. To avoid compile errors.
 
  ------ Overriding vs. Hiding Methods --->
@@ -255,3 +256,63 @@ Points to remember --->
     1. An overridden method (in child class) must be at least as accessible as the method (in parent class) it is overriding.
     2. a subclass cannot declare an overridden method with a new or broader exception than in the superclass, since the method may be accessed using a reference to the superclass.
     3. overridden methods must use covariant return types for the same kinds of reasons as just discussed. If an object is cast to a superclass reference and the overridden method is called, the return type must be compatible with the return type of the parent method. If the return type in the child is too broad, it will result an inherent cast exception when accessed through the superclass reference.
+
+Notes from Review Questions ---> 
+
+All interface methods are implicitly public
+Interface methods may be declared as static or default but are never implicitly added, means has to be declared explicitely.
+A tricky one, because prior to Java 8 all interface methods would be assumed to be abstract. Since Java 8 now includes default and static methods and they are never abstract, you cannot assume the abstract modifier will be implicitly applied to all methods by the compiler.
+A reference to a class object created can be same class or any class or interface that is a supertype of that specific class. 
+protected and public methods may be overridden, not hidden.
+static methods cannot be overridden, only hidden.
+private methods are always hidden in a subclass
+In an interface, variables may only be hidden, regardless of the access modifier.
+When an interface or abstract class has an abstract method, which is not implemented by concrete class then compiler will through error at the line of concrete class definition (where, it extends abstract class or implements interface).
+Polimorphism concept --> A method that takes a parameter with type java.lang.Object will take any reference.
+An Interface can define static or default method if it provides method body as well. 
+Otherwise, if method is non-static or non-default then method body should be empty.
+An Interface variable assumed to have public and static in its definition.
+An Interface can have public or default access modifier.
+All method of interface assumed to be public and abstract. 
+There is no default access modifier for method in interface.
+An abstract class may contain concrete methods.
+Since Java 8, interfaces may also contain concrete methods in form of static or default methods. 
+Although all variables in interfaces are assumed to be public static final, abstract classes may contain them as well.
+Both abstract classes and interfaces can be extended with the extends keyword.
+Only interfaces can contain default methods.
+Both abstract classes and interfaces can contain static methods.
+Both cann't be instantiated directly.
+interface doesn't inherits java.lang.Object. Though an instance of an object that implements an interface inherits java.lang.Object. Otherwise, Java would support multiple inheritance for objects, which it doesn’t.
+Interface variables can never be abstract.
+a superclass may have already implemented an inherited interface, so the
+concrete subclass would not need to implement the method. Concrete classes can be both final and not final.
+Its possible to have main method in abstract class.
+Its possible to create object of concrete class in abstract class and reference by abstract class to access members of abstract class.
+Its not possible to override a method that has final keyword in its definition.
+Abstract methods cannot contain a body, not even empty body ({}). Code won't compile in such case.
+An override method with same name and signature but different return type should follow covariant rule. Means, overridden method return type should be child or compatible with the actual method return type.
+A null value can always be passed as an object value, regardless of type.
+Since, Java.lang.Object is parent of all class and not child. It can't be passed as object value in child class. But it can be referenced for any child class object.
+Need to understand what will happen when you create an object of child class and reference of parent class, and try to access and overridden method. Will code access parent class method or child class overridden method.
+
+Result of Review Questions Attempt 1 -->
+1. B, E (N)
+2. E
+3. A, D, E (N)
+4. C, E
+5. A, D, E, F
+6. B (N)
+7. B, C 
+8. A (N)
+9. A
+10. B, D, E, F, G (N)
+11. A, D, E
+12. B
+13. A
+14. C 
+15. B, c (N)
+16. c (N)
+17. c (N)
+18. E
+19. A, C, D (N)
+20. A
