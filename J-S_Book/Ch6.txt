@@ -56,11 +56,11 @@ For the OCA exam, you need to know the rules for how checked versus unchecked ex
   
 --> try statements are like methods in that the curly braces are required even if there is only one statement inside the code blocks. if statements and loops are special in this respect as they allow you to omit the curly braces when you have only one statement for loop.
 
-Need to verify below statement again.
--->a try statement must have catch and/or finally. Having both is fine. Having neither is a problem, code wouldn't compile. 
+
+--> a try statement must have catch and/or finally. Having both is fine in proper order. Having neither is a problem, code wouldn't compile. 
   --> Remember, the point of a try statement is for something to happen if an exception is thrown. Without another clause, the try statement is lonely.
   
----- Adding a finally Block --> The try statement also lets you run code at the end with a fi nally clause regardless of whether an exception is thrown.
+---- Adding a finally Block --> The try statement also lets you run code at the end with a finally clause regardless of whether an exception is thrown.
 
 imp topic ---- System.exit ---> There is one exception to “the finally block always runs after the catch block” rule: When System.exit is called in the try or catch block, finally does not run.
   
@@ -68,18 +68,18 @@ imp topic ---- System.exit ---> There is one exception to “the finally block a
   1. you must be able to recognize if the exception is a checked or an unchecked exception.
   2. you need to determine if any of the exceptions are subclasses of the others.
 
-To review catching multiple exceptions, remember that at most one catch block will run and it will be the fi rst catch block that can handle it. the order of the catch blocks does matter. 
+To review catching multiple exceptions, remember that at most one catch block will run and it will be the first catch block that can handle it. the order of the catch blocks does matter. 
   A rule exists for the order of the catch blocks. Java looks at them in the order they appear. If it is impossible for one of the catch blocks to be executed, a compiler error about unreachable code occurs. This happens when a superclass is caught before a subclass.
 
 --- Throwing a Second Exception --> imp to remember for exam --
-  If the finally block throws an exception of its own, then The exception from the catch block gets forgotten about. But remember, this is only about throw statement. If there are other statements before throw statements then java will run them in sequncial order one by one and perform all written operations.
+  If the finally block throws an exception of its own, then The exception from the catch block gets forgotten about. But remember, this is only about throw statement. If there are other statements before throw statements then java will run them in sequencial order one by one and perform all written operations.
   This is why you often see another try/catch inside a finally block—to make sure it doesn’t mask the exception from the catch block.
   
   points to remember --> 
     String v = null;
     v.length(); // will throw NullPointerException
 
-Recognizing Common Exception Types --> three types of exceptions for the OCA exam: runtime exceptions, checked exceptions, and errors.
+Recognizing Common Exception Types --> three types of exceptions for the OCA exam: runtime exceptions (unchecked), checked exceptions, and errors.
   you’ll need to recognize which type of an exception it is and whether it’s thrown by the JVM or a programmer.
   
   --- Runtime Exceptions --> Runtime exceptions extend RuntimeException. They don’t have to be handled or declared.
@@ -91,7 +91,7 @@ Recognizing Common Exception Types --> three types of exceptions for the OCA exa
     NullPointerException --> Thrown by the JVM when there is a null reference where an object is required
     NumberFormatException --> Thrown by the programmer when an attempt is made to convert a string to a numeric type but the string doesn’t have an appropriate format.
     
-  --- ArithmeticException --> Trying to divide an int by zero gives an undefi ned result. When this occurs, the JVM will throw an ArithmeticException:
+  --- ArithmeticException --> Trying to divide an int by zero gives an undefined result. When this occurs, the JVM will throw an ArithmeticException:
     int answer = 11 / 0;
     Running this code results in the following output:
     Exception in thread "main" java.lang.ArithmeticException: / by zero
