@@ -44,12 +44,33 @@ System.out.print(10 % 3); // Outputs 1
 -- Numeric Promotion -->  Numeric Promotion Rules
     1. If two values have different data types, Java will automatically promote one of the values to the larger of the two data types.
     2. If one of the values is integral and the other is floating-point, Java will automatically promote the integral value to the floating-point value’s data type.
-    3. Smaller data types, namely byte, short, and char, are first promoted to int any time they’re used with a Java binary arithmetic operator, even if neither of the operands is int.
+    3. Smaller data types, namely byte, short, and char, are first promoted to int any time they’re used with a Java binary arithmetic operator, even if neither of the operands is int. For the third rule, note that unary operators are excluded from this rule. For example, applying ++ to a short value results in a short value.
     4. After all promotion has occurred and the operands have the same data type, the resulting value will have the same data type as its promoted operands.
 
+Need to remember below tricky question:-
+Q:-  What is the data type of x + y?
+      double x = 39.21;
+      float y = 2.1;
+Answer:- Code will give compile error
+Reason:- floating-point literals are assumed to be double, unless postfi xed with an f, as in 2.1f.
+    If y = 2.1f, then it will be promoted to double while calculating the expression.
+Q:- What is the data type of x / y?
+      short x = 10;
+      short y = 3;
+Answer:- the output data type would be "int". as per 3rd rule.
 
+---- Working with Unary Operators ---> a unary operator is one that requires exactly one operand, or variable, to function.
+    they often perform simple tasks, such as increasing a numeric variable by one, or negating a boolean value.
+    Unary operator ------> Description
+        + ------>  Indicates a number is positive, although numbers are assumed to be positive in Java unless accompanied by a negative unary operator.
+        - -----> Indicates a literal number is negative or negates an expression
+        ++ -----> Increments a value by 1
+        -- ------> Decrements a value by 1
+        ! ------> Inverts a Boolean’s logical value
 
+----- Logical Complement and Negation Operators ----> The logical complement operator, !, fl ips the value of a boolean expression.
 
+Imp rule to remember ---> you cannot apply a negation operator, -, to a boolean expression, nor can you apply a logical complement operator, !, to a numeric expression.
 
 
 
