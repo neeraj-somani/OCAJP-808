@@ -154,7 +154,7 @@ System.out.println(x == y); // Outputs false
 System.out.println(x == z); // Outputs true
 
 ---- Understanding Java Statements ---> 
-
+A Java statement is a complete unit of execution in Java, terminated with a semicolon (;).
 
 
 
