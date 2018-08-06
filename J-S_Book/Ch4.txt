@@ -64,7 +64,7 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
           7: k = null;
           8: System.out.println(k.count); // k is still a Koala
       // Java doesn’t care that k happens to be null. Since we are looking for a static method or variable. for java, k is still Koala reference type.
-      // Remember to look at the reference type for a variable when you see a static method or variable.
+      // Remember to look at the reference type for a variable when you see a static method or variable. The exam creators will try to trick you into thinking a NullPointerException is thrown because the variable happens to be null. Don’t be fooled!
       Static variable, means pointing same variable even if it is called by different objects references. (top 7 lines of page 183)
       
    Static vs Instance --> *************(very imp for exam)*********** (page 183)
