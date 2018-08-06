@@ -255,3 +255,17 @@ Immutability refers to preventing callers from changing the instance variables a
 
  --> Java 8 even integrated the Predicate interface into some existing classes. for OCA we need to know only one, 
     ArrayList declares a removeIf() method that takes a Predicate.
+
+
+Review Question Attempt 1:- 
+1. C, D, B (N)
+2. A, D
+3. A, C, D
+4. A, B (N)
+5. F, G (N)
+6. B, E (N)
+7. C
+8. B, C (N)
+9. C, E
+10. C, F (N)
+11. C (N)
