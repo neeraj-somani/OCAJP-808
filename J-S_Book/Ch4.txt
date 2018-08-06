@@ -79,23 +79,28 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
     We are allowed to call methods on reference variables.
       
   ----- Static Initialization -->
-    --> static initialization block, is the block with curly braces {} that contain definition and initial assignment for all static variables.
+    --> static initialization block, is the block with curly braces {} that contain definition and initial assignment for all static variables. example:--
+        static {
+          int numSecondsPerMinute = 60;
+          int numMinutesPerHour = 60;
+          NUM_SECONDS_PER_HOUR = numSecondsPerMinute * numMinutesPerHour;
+          }
     --> define static variable with keyword "static".
     --> you can assign a value to static variable while defining it or in the static initialization block.
     --> if "final" keyword is used with "static", then reassignment of value not allowed.
     --> Defining a static variable and not assigning any value to it is not allowed. Code will not compile.
     
  ---- Static Imports --->
-  --> Static imports are for importing static members of classes. (always remember members of class means methods / variables)
-      example:
-      import static java.util.Arrays.asList; // static import
+  --> Static imports are for importing static members of classes. (always remember members of class means methods/variables)
+      example:-
+        import static java.util.Arrays.asList; // static import
    --> The compiler will complain if you try to explicitly do a static import of two methods with the same name or two static variables with the same name. In such case we use class name with method name while using in code.
  
  ----- Passing Data Among Methods ---> Java is a “pass-by-value” language (page 190 - 191)
-      --> methods on the parameters --> means, passing value of parameters to methods.
+      --> methods with the parameters --> means, passing value of parameters to methods.
           example:-- String name = "Webby";
                      speak(name);
-     --> method on the StringBuilder passed into the method: --> means passing value to inbuild method of StringBuilder
+     --> StringBuilder passed into the method: --> means passing value to inbuild method of StringBuilder
           example:- // In below example both name and s pointing to same StringBuilder object.
                     StringBuilder name = new StringBuilder();
                     speak(name);
@@ -107,8 +112,8 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
             If result of method (returned value from method) is not stored in variable, it is being ignored by Java.
             But if it is stored in variable then Java uses that and doesn't ignore it.
             
------------ Overloading Methods --> different method signatures with the same name but different type parameters. This means there can be different access modifiers, specifiers (like static), return types, and exception lists.
-      -- another tricky thing ---> Overloading and Varargs ----
+------ Overloading Methods --> different method signatures with the same name but different type parameters. This means there can be different access modifiers, specifiers (like static), return types and exception lists.
+      --- another tricky thing ---> Overloading and Varargs ----
         Java treats "varargs" as if they were an array. Hence, below 2 methods are same, which brings compile error for 2nd.
           public void fly(int[] lengths) { }
           public void fly(int... lengths) { } // DOES NOT COMPILE
@@ -118,10 +123,10 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
         fly(1, 2, 3); // However, you can only call the varargs version with stand-alone parameters like this. This is important to understand regarding varargs.
     
  ---- Autoboxing --> Java will convert a primitive (int) to an object (Integer) to add it to an ArrayList through the wonders of autoboxing.
-    --> If both version of method is available then java will give preference to primitive type method and will not bother to do extra work of outoboxing. When the primitive  (int) version isn't present, it will autobox.
+    --> If both version of method is available then java will give preference to primitive type method and will not bother to do extra work of autoboxing. When the primitive (int) version isn't present, it will autobox.
         
     --> Hence, we can say Java calls the most specific method it can.
-    In eralier verion of java 1.4 or older, Autoboxing and varargs doesn't exists. Hence, older code has to still work.
+    In earlier verion of java 1.4 or older, Autoboxing and varargs doesn't exists. Hence, older code has to still work.
       Due to this reason there are few rules which Java uses to choose the right overloaded method.
       Rule --> Example of what will be chosen for glide(1,2)
       Exact match by type --> public String glide(int i, int j) {}
@@ -138,7 +143,7 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
         play(4L); // calls the Long version
         } }
       
-      --> The reason for comile error in above code is, because java won't be able to convert int primitive value to Long object type directly. For this it requires two step, first convert int primitive type to lonbg primitive type and then to Long object type. Hence, two step conversion directly is not possible in java right now and we received compile error.
+      --> The reason for comile error in above code is, because java won't be able to convert int primitive value to Long object type directly. For this it requires two step, first convert int primitive type to long primitive type and then to Long object type. Hence, two step conversion directly is not possible in java right now and we received compile error.
       
 ------- Creating Constructors ----> a constructor is a special method that matches the name of the class and has no return type.
   Remember Java is case-sensitive.
@@ -149,17 +154,18 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
       2: private String color;
       3: public Bunny(String color) {
       4: this.color = color;  // notice, color = this.color is not allowed. code won't complie in that case.
+          // in above statement this.color refers to instance variable of class and right hand side color refers to method parameter.
       5: } }
 
   -------- Default Constructor --> Every class in Java has a constructor whether you code one or not. If you don’t include any constructors in the class, Java will create one for you without any parameters. This Java-created constructor is called the default constructor or no-arguments constructor.
     The default constructor has an empty parameter list and an empty body.
     We keep saying generated. This happens during the compile step.
     Remember that a default constructor is only supplied if there are no constructors present.
-   ** Having a private constructor in a class tells the compiler not to provide a default noargument constructor. It also prevents other classes from instantiating the class. This is useful when a class only has static methods or the class wants to control all calls to create new instances of itself.
+   ** Having a private constructor in a class tells the compiler not to provide a default no-argument constructor. It also prevents other classes from instantiating the class. This is useful when a class only has static methods or the class wants to control all calls to create new instances of itself.
    
 ------- Overloading Constructors --> means, multiple constructors in the same class with same name as of class, as long as they have different method signatures.
 
-  ---> Constructors can be called only by writing new before the name of the constructor. They are not like normal methods that you can just call.
+  ---> Constructors can be called only by writing new before the name of the constructor. They are not like normal methods that you can just call. ** exam tricky ques on this **
 
     --> another tricky concept ---> When you have 2 constructors, means methods with same name as of class, but with different parameter and you want to call one constructor inside another, you can use this keyword, as discussed below. (page 200)
       When this is used as if it were a method, Java calls another constructor on the same instance of the class.
@@ -203,25 +209,28 @@ Rules for JavaBeans naming conventions -->
     public void setNumEggs(int num) {
     numEggs = num;
     }
-
-
-    ----- Creating Immutable Classes --> creating unchangable classes
+ ----- Creating Immutable Classes --> creating unchangable classes
       One step in making a class immutable is to omit the setters.
       but we include a constructor that allows a value to be set. This is to set initial value.
       Remember, immutable is only measured after the object is constructed. Immutable classes are allowed to have values. They just can't change after instantiation.
-      
-      
-      **** important to remember --->
-      encapsulation refers to preventing callers from changing the instance variables directly.
-      Immutability refers to preventing callers from changing the instance variables at all.
+   
+**** important to remember --->
+encapsulation refers to preventing callers from changing the instance variables directly.
+Immutability refers to preventing callers from changing the instance variables at all.
         
---- Writing Simple Lambdas --->
-  Functional programming is a way of writing code more declaratively. You specify what you want to do rather than dealing with the state of objects. You focus more on expressions than loops.
-    --> a lambda expression is like a method that you can pass as if it were a variable.
-    --> an interface specifies the methods that our class needs to implement.
-    example, simplest lambda expressions -->
-      a -> a.canHop();
+--- Writing Simple Lambdas ---> Functional programming is a way of writing code more declaratively. You specify what you want to do rather than dealing with the state of objects. You focus more on expressions than loops.
 
+    --> A lambda expression is like a method that you can be passed as if its a variable. It has parameters and a body just like full-fledged methods do, but it doesn’t have a name like a real method.
+    --> an interface specifies the methods that our class needs to implement.    
+     example, simplest lambda expressions -->
+      a -> a.canHop();
+      (Animal a) -> { return a.canHop(); } // both statement doing same
+      
+      Below are the three major parts of lambda:
+        ■ Specify a single parameter with the name a.
+            --> The parentheses can only be omitted if there is a single parameter and its type is not explicitly stated.
+        ■ The arrow operator to separate the parameter and body
+        ■ A body that calls a single method and returns the result of that method. 
 
 
 
