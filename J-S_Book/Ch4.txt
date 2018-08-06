@@ -231,6 +231,27 @@ Immutability refers to preventing callers from changing the instance variables a
             --> The parentheses can only be omitted if there is a single parameter and its type is not explicitly stated.
         ■ The arrow operator to separate the parameter and body
         ■ A body that calls a single method and returns the result of that method. 
+            --> Java doesn’t require you to type return or use a semicolon when no braces are used. but with two or more statements this is similar to any other method body.
+      few example --> 
+        3: print(() -> true); // 0 parameters
+        4: print(a -> a.startsWith("test")); // 1 parameter
+        5: print((String a) -> a.startsWith("test")); // 1 parameter
+        6: print((a, b) -> a.startsWith("test")); // 2 parameters
+        7: print((String a, String b) -> a.startsWith("test")); // 2 parameters
+        
+  --- redeclaring variable is not allowed in lambdas -->
+    Java doesn’t allow us to redeclare a local variable, the following is an issue:
+    (a, b) -> { int a = 0; return 5;} // DOES NOT COMPILE
+    We tried to redeclare a, which is not allowed. By contrast, the following line is okay
+    because it uses a different variable name:
+    (a, b) -> { int c = 0; return 5;}
+---> Lambdas work with interfaces that have only one method. These are called functional interfaces—interfaces that can be used with functional programming.
+  --> java provides such an interface as generic interface with one method. It’s in the package java.util.function and the gist of it is as follows. We can define the method definition in our lambda. Hence, now we can directly call this Predicate method in our class without coding it again.
+  Example:---         public interface Predicate<T> {
+                      boolean test(T t);
+                      }
 
 
 
+ --> Java 8 even integrated the Predicate interface into some existing classes. for OCA we need to know only one, 
+    ArrayList declares a removeIf() method that takes a Predicate.
