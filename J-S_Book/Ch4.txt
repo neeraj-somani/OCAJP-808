@@ -262,19 +262,6 @@ Immutability refers to preventing callers from changing the instance variables a
 
 
 Review Question Attempt 1:- 
-1. C, D, B (N)
-2. A, D
-3. A, C, D
-4. A, B (N)
-5. F, G (N)
-6. B, E (N)
-7. C
-8. B, C (N)
-9. C, E
-10. C, F (N)
-11. C (N)
--------------------------------
-
 1. B, C
 2. A, D
 3. A, C, D
@@ -284,9 +271,9 @@ Review Question Attempt 1:-
 7. C (N)
 8. B, C, D, E (N)
 9. C, E
-10.F (N)
+10. F (N)
 11. B, E
-12. E (N)
+12. E (N) -- start analysis from here --
 13. D (N)
 14. B, C (N)
 15. E
@@ -334,7 +321,7 @@ Answer:-
 26.
 Need to memorise how Predicate class works, and how test method behaves.
 
-27. Need to look concept of this question again
+27. Need to look concept of this question again.
  
 
 Review Notes from Questions -->
@@ -346,6 +333,22 @@ In method definition, "final" and "static" are optional specifiers and can be pl
 If any method tries to return null value using return statement as "return null;", then we must check that null requires a reference object as the return type of method. "void" is not a reference object since it is a marker for no return type. int is not a reference object since it is a primitive type. A reference type refers to an object (an instance of a class). 
 
 Unlike primitive types that hold their values in the memory where the variable is allocated, references do not hold the value of the object they refer to. Instead, a reference “points” to an object by storing the memory address where the object is located, a concept referred to as a pointer.
+
+Varargs (variable aurgument), It is a little different than an array, though. A vararg parameter must be the last element in a method’s parameter list. This implies you are only allowed to have one vararg parameter per method.
+Below is the example of varargs, declaration in method. Usually, varargs defined using "..." three dots.
+example:- public void moreB(String values, int... nums) {}
+
+Difference between varargs and array:-
+Remember, array can be more than one in method parameter, as shown below. Array can come at any place, but varargs must be last parameter. When calling a method with a vararg parameter, you have a choice. You can pass in an array (need to declare an array properly. It should be new boolean[] {array values here} or new boolean[array_size].), or you can list the elements of the array and let Java create it for you. You can even omit the vararg values in the method call and Java will create an array of length zero for you.
+example for method with array as parameter :- public void moreG(String[] values, int[] nums) {}
+
+Make sure you understood scope of each access modifier. Need to check it properly in exam questions.
+
+Immutability uses private instance variables and allowing only getters. common implementation for encapsulation by setting
+all fields to be private and all methods to be public. Encapsulation, allows getter and setter both.
+
+Static members can be called using instance variable as well as static members. Also, if we import Static member of other class into any specific class then we can directly call Static member, without explicitly using classname.
+Static member can't access or call instance members.
 
 
 
