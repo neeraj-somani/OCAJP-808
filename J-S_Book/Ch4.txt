@@ -53,7 +53,10 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
       
       
      Calling a Static Variable or Method -->
-        just put the classname before the method or variable and you are done. you don't need to create an instance of the class to call static member of the class.
+       1. just put the classname before the method or variable and you are done. you don't need to create an instance of the class to call static member of the class. 
+      2.  Also, we can not use "this" keyword in-place of classname to call static members. means, this can't be used with the context of static members.
+      3. you can call static members within the same class without even classname.
+      
         For example:
               System.out.println(Koala.count);
               Koala.main(new String[0]);
@@ -183,7 +186,8 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
         1. If there is a superclass, initialize it first (we’ll cover this rule in the next chapter. For now, just say “no superclass” and go on to the next rule.)
         2. Static variable declarations and static initializers in the order they appear in the file.
         3. Instance variable declarations and instance initializers in the order they appear in the file.
-        4. The constructor.
+        4. Any other statements that is making any changes to instance variable in the order they appear in the file.
+        5. The constructor.
 
       ///// Keep in mind that the four rules apply only if an object is instantiated. If the class is referred to without a new call, only rules 1 and 2 apply. The other two rules relate to instances and constructors. They have to wait until there is code to instantiate the object.
 
