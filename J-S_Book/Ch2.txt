@@ -156,7 +156,15 @@ System.out.println(x == z); // Outputs true
 ---- Understanding Java Statements ---> 
 A Java statement is a complete unit of execution in Java, terminated with a semicolon (;).
 
+----- The if-then Statement -->
+    exam tricks --> exam writers will try to trip you up is on if-then statements without braces ({}). Curly braces required for block of multiple statements, optional for single statement.
 
+----- The if-then-else Statement ---> order is important for multiple if-else.
+execution of each branch is mutually exclusive, means only one branch can execute.
+0 and 1 are not considered as boolean values.
+If statement requires boolean values. Exam will try to trick on this as well. Code will not compile in such case.
+
+---- Ternary Operator -->
 
 
 switch statement 
