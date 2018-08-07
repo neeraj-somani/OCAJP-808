@@ -273,3 +273,89 @@ Review Question Attempt 1:-
 9. C, E
 10. C, F (N)
 11. C (N)
+-------------------------------
+
+1. B, C
+2. A, D
+3. A, C, D
+4. A, B (N)
+5. F, G (N)
+6. B, D, (N)
+7. C (N)
+8. B, C, D, E (N)
+9. C, E
+10.F (N)
+11. B, E
+12. E (N)
+13. D (N)
+14. B, C (N)
+15. E
+16. B
+17. A, D (N)
+18. B, C, F (N)
+19. A, D (N)
+20. A, B, E, F (N)
+21. C
+22. B (N)
+23. D (N)
+24. C, E (N)
+25. A, F (N)
+26. A
+27. D (N)
+28. A, D, F
+29. A, F
+
+Confusing points / concepts -->
+18.
+Static method can access only static memebers. 
+Instance method can access both static and non-static (instance) members.
+constructor can never be private.
+
+19.
+Constructor have same name as class and no return type.
+
+20. 
+Can we have both super() and this() in the same constructor. As we know first line in every constructor is super(), if not explicitly specified.
+
+21. 
+Can we access instance variable within same class, without instantiating the class (new className).  
+
+22.
+Need to memories order of initialization rules. already noted in the notes.
+
+25. 
+Question:- Can we have constructor with wrapper class as well.
+Answer:- Yes
+Question:-what will happen if we have all these constructors with wrapper class, with varargs, and with object. Which will get preference.
+Answer:- 
+1. If we have only one aurgument pass to the cosntructor than wrapper class will get preference over varargs and Object parameter constructor.
+2. If wrapper class constructor is not present then Object parameter will get preference over varargs parameter constructor.
+
+26.
+Need to memorise how Predicate class works, and how test method behaves.
+
+27. Need to look concept of this question again
+ 
+
+Review Notes from Questions -->
+
+We don't need to specify "default" keyword for method to be package private. Which means if we don't specify any access modifier then it will automatically be default. default access omits the access modifier rather than specifying default.
+In method definition, there will be only method name can come after method return type. Only the access modifier or optional specifiers are allowed before the return type.
+In method definition, "final" and "static" are optional specifiers and can be placed interchagablly and are allowed in any order, anywhere between access modifier and return type of method. 
+
+If any method tries to return null value using return statement as "return null;", then we must check that null requires a reference object as the return type of method. "void" is not a reference object since it is a marker for no return type. int is not a reference object since it is a primitive type. A reference type refers to an object (an instance of a class). 
+
+Unlike primitive types that hold their values in the memory where the variable is allocated, references do not hold the value of the object they refer to. Instead, a reference “points” to an object by storing the memory address where the object is located, a concept referred to as a pointer.
+
+
+
+StringBuilder are mutable objects. Hence, if you perform any operation on same StringBuilder multiple times, it all referenece to same StringBuilder. Incase, you create new StringBuilder Object then thats the new reference for that object. It wouldn't impact the earlier StringBuilder.
+
+this() is used to call default constructor. 
+
+We can call any constructor within another constructor. 
+
+Lambda expression syntaxt --> if you specify data type of lambda function parameter then paranthesis [()] is needed, this is for left side of arrow. If you specify the curly braces [{}] then you need to mention return statement that should end with semi-colon ";". If you don't specify curly braces then single statment without return word and semi-colon would also work.
+
+In lambda function, Variable defined in left part of arrow can't be redefined in right part of arrow.
+
