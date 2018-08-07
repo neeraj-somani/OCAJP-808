@@ -164,10 +164,24 @@ execution of each branch is mutually exclusive, means only one branch can execut
 0 and 1 are not considered as boolean values.
 If statement requires boolean values. Exam will try to trick on this as well. Code will not compile in such case.
 
----- Ternary Operator -->
+---- Ternary Operator --> also known as conditional operator. only operator that takes three operands and is of the form:
+booleanExpression ? expression1 : expression2
+The ternary operation is really a condensed form of an if- then-else statement that returns a value. 
+
+int y = 10;
+int x = (y > 5) ? (2 * y) : (3 * y);
+Note that it is often helpful for readability to add parentheses around the expressions in ternary operations, although it is certainly not required.
+
+There is no requirement that second and third expressions in ternary operations have the same data types.
+
+exam tricks --> only one of the right-hand expressions of the ternary operator will be evaluated at runtime. Means, if boolean expression is true then 1st expression will only evaluate at run-time and if bollean expression is false then 2nd expression.
+Its very similar to short-circuit operators.
 
 
-switch statement 
+
+
+
+--- switch statement -->
 Data types supported by switch statements include the following:
 ■ int and Integer wrapper class
 ■ byte and Byte wrapper class
