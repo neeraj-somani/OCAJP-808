@@ -463,10 +463,14 @@ Review Question Attempt 1 -->
 23. D (N)
 24. C
 25. F (N)
-
-
-
-
+26. A, D (N)
+27. C (N)
+28. D, F
+29. D
+30. F
+31. B
+32. C (N)
+33. E (N)
 
 
 ---- Notes from Review Questions -->
@@ -522,7 +526,13 @@ example:- char[]c = new char[2]; // code will compile properly
 3. If you call remove(0) using an empty ArrayList object, it will compile successfully.
 4. If you call remove(0) using an empty ArrayList object, it will not run successfully. Because, it will throw "IndexOutOfBound" exception.
 
--- The method add(int, String) in the type List<String> is not applicable for the arguments (int). Need to understand all ArrayList and List methods properly.
+-- two lists are defined to be equal if they contain the same elements in the same order. --
+for example:-- if one and two are two list that contain same data then this statment return true --> one.equals(two)
+          but --> one == two will return false as objects reference are different.
+
+-- The method add(int, String) in the type List<String> is not applicable for the arguments (int). Need to understand all ArrayList and List methods properly. if List is of type String then it will accept only String type aurgument.
+-- List, add() method can't accept "null" value as aurgument. Code will compile but thrown NullPointerException.
+
 -- Need to memories all concepts regarding BinarySearch method of Arrays class.
 -- Remember, List uses special class library for sorting. ---> Collections.sort(list);
 -- Remember, List uses special class library for binary searching. --> Collections.binarySearch();
