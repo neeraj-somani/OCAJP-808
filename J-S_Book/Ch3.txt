@@ -453,6 +453,17 @@ Review Question Attempt 1 -->
 13. F
 14. A, C
 15. D, E (N)
+16. B, F (N)
+17. C (N) -- Need to verify answer --
+18. A, C, D, F -- Need to verify answer --
+19. A, B (N)
+20. B (N)
+21. C
+22. A
+23. D (N)
+24. C
+25. F (N)
+
 
 
 
@@ -496,11 +507,31 @@ example:- int[][] scores = new int[5][]; // compile properly
           java.util.Date[] dates[] = new java.util.Date[2][]; // compile properly
           int[][] java = new int[][]; // does not compile, no dimension expressions or an array initializer
 
+-- Java understand even if you don't provide space in between array declaration and array variable name. see example below:
+example:- char[]c = new char[2]; // code will compile properly
 
+  -- Need to understand all the methods/functions that can be invoke on array object.
+  for example:- you can't call size() or capacity() method on c array object, means there is not function like this for array. But you can call clone(), length for any primitive type array. and equals(), notify(), and wait() method on any object type array. Notice, length method don't have bracket in its definition.        
+
+  -- Need to understand all the methods/functions that can be invoke on ArrayList object and how ArrayList can be declared.
+  ** -- The equals() method on arrays does not look at the elements of the array, but it look either they both point/referencing to same object or not. Remember, this would work even on an int[] too. int is a primitive; int[] is an object.
+  
+ -- Remember and understand below points:-
+1. Two arrays with the same content are not equal. because, they might can point to different object.
+2. Two ArrayLists with the same content are equal.
+3. If you call remove(0) using an empty ArrayList object, it will compile successfully.
+4. If you call remove(0) using an empty ArrayList object, it will not run successfully. Because, it will throw "IndexOutOfBound" exception.
+
+-- The method add(int, String) in the type List<String> is not applicable for the arguments (int). Need to understand all ArrayList and List methods properly.
+-- Need to memories all concepts regarding BinarySearch method of Arrays class.
+-- Remember, List uses special class library for sorting. ---> Collections.sort(list);
+-- Remember, List uses special class library for binary searching. --> Collections.binarySearch();
 
 ---- Confusing points from Review Questions -->
+
 What are possible conditions for an object to be garbage collected? Can an immutable object be garbage collected?
 Need to check when we need to use "L" for creating long variable. 
   Example below:-
   long l2 = 12; 
   long l3 = 12L;
+-- Note sure if ArrayList is immutable and ordered, like Array. Need to check.
