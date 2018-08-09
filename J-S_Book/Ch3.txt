@@ -450,6 +450,11 @@ Review Question Attempt 1 -->
 10. C (N)
 11. A (N)
 12. A
+13. F
+14. A, C
+15. D, E (N)
+
+
 
 
 
@@ -477,12 +482,19 @@ Always check return type of method and save method returned result to an object 
 
 Remember, for Substring function of String or StringBuilder, if start index and end index are same then it will return blank result. Means, will not return anything but code will compile and run properly.
 Althrough, for Substring function of String or StringBuilder, if end index value is less then start index value, java will throw exception "StringIndexOutOfBoundsException". Because String index out of range: -1.
+Remember, if you apply a substring function on String or StringBuilder you need to store the result of it into another valriable. Substring function doesn't change original object value. 
 
 Remember, String can concatenate any data type variable value or object value using '+' operator.
 Remember, StringBuilder has insert, delete, append functions. While, ArrayList has add, remove function. Need to understand each functions definition and functionality properly.
 
+Remember, you can't pass directly an String value to an StringBuilder object. Code doesn't compile.
+example:- StringBuilder b = "rumble"; // code does not compile
 
-
+Remember, while declaring an array variable, we must provide either dimension expressions or an array initializer. Also, same data type should be declared at both the side of the definition.
+example:- int[][] scores = new int[5][]; // compile properly
+          String beans[] = new beans[6]; // does not compile, becoz incorrect datatype
+          java.util.Date[] dates[] = new java.util.Date[2][]; // compile properly
+          int[][] java = new int[][]; // does not compile, no dimension expressions or an array initializer
 
 
 
