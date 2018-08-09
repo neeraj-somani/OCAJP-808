@@ -435,3 +435,60 @@ Working with Dates and Times -->
   --- Formatting Dates and Times ---
   --- Parsing Dates and Times ----
     Just like the format() method, the parse() method takes a formatter as well. If you don’t specify one, it uses the default for that type. 
+
+
+Review Question Attempt 1 -->
+1. A, D (N)
+2. A, C, D
+3. B, E, D
+4. B
+5. E (N)
+6. D (N)
+7. E
+8. A (N)
+9. C
+10. C (N)
+11. A (N)
+12. A
+
+
+
+---- Notes from Review Questions -->
+String object can't directly convert other primitive type data. Means, incase we want to pass int value to String object, we need to cast it explicitly.
+String testStr = 4 + 1; // code will not compile. Either need explicit cast or need one string value to pass
+
+--- equals() method ---
+1. remember equals() method checks actual values of object. 
+2. We can't invoke equals() method on null or any other primitive type, code will give compile error. But we can pass null value to the equals() method as aurgument. (remember, you can't assign null value to any primitive type variable in java, so only objects like String, StringBuilder or wrapper classes like Interger, Boolean with null value can be passed).
+3. this is the method signature --> public boolean equals(Object anObject)]. 
+4. equals() method can compare for same type of object. Means, if we compare String with StringBuilder or Integer with String, equals() method return "false" without comparing any value. Remember, code will compile as both are objects.
+
+---- operator "==" ---
+1. this "==" operator checks where the left-side and right-side pointing/referencing to same object or different. Remember, for any object type, if you created 2 seperate object using "new" keyword, either with the same value or different value, this "==" consider them as two seperate reference point for object. Because, java created two seperate object.
+2. It can compare both object type as well as primitive type. means, this operator can compare same type wrapper classes with same primitive type. For example:- int primitive type can be compared with Integer wrapper class, same as boolean primitive type can be compared with Boolean wrapper class. 
+3. But you can't compare String with StringBuilder or with Integer wrapper class. code will not compile.
+4. Remember, it can't compare double with float even if it has same value. But it can compare byte, short, int, and long with each other. Because internally, java convert byte and short to int and even if needed converts byte, short and int to long. 
+5. only String class can be initiated with null value and this "==" operator compares values perfectly fine, even if String is null. means, code will compile properly. (remember, you can't assign null value to any primitive type variable in java and you can't create object of any wrapper class with null value)
+5.1 - 
+we can't create object of wrapper classes by passing "null" value as aurgument. code will not compile.
+example:- StringBuilder sb2 = new StringBuilder(null); // does not compile
+
+Always check return type of method and save method returned result to an object so that it will not get ignored or garbage collected.
+
+Remember, for Substring function of String or StringBuilder, if start index and end index are same then it will return blank result. Means, will not return anything but code will compile and run properly.
+Althrough, for Substring function of String or StringBuilder, if end index value is less then start index value, java will throw exception "StringIndexOutOfBoundsException". Because String index out of range: -1.
+
+Remember, String can concatenate any data type variable value or object value using '+' operator.
+Remember, StringBuilder has insert, delete, append functions. While, ArrayList has add, remove function. Need to understand each functions definition and functionality properly.
+
+
+
+
+
+
+---- Confusing points from Review Questions -->
+What are possible conditions for an object to be garbage collected? Can an immutable object be garbage collected?
+Need to check when we need to use "L" for creating long variable. 
+  Example below:-
+  long l2 = 12; 
+  long l3 = 12L;
