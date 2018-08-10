@@ -32,10 +32,10 @@ the multiplicative operators (*, /, %) have a higher order of precedence than th
 you can change the order of operation explicitly by wrapping parentheses around the sections you want evaluated first.
 
 arithmetic operators may be applied to any Java primitives, except boolean and String
-only the addition operators + and += may be applied to String values, which results in String concatenation.
+only the addition operators '+' and Assignment operators '+=' may be applied to String values, which results in String concatenation.
 The modulus (%), or remainder operator, is simply prints the remainder when two numbers are divided.
 
-For integer values, division results in the floor value of the nearest integer that fulfi lls the operation, whereas modulus is the remainder value. 
+For integer values, division results in the floor value of the nearest integer that fulfills the operation, whereas modulus is the remainder value. 
 For a given divisory, which is 3 in these examples, the modulus operation results in a value between 0 and (y - 1) for positive dividends. This means that the result of a modulus operation is always 0, 1, or 2.
 Example: 
 System.out.print(10 / 3); // Outputs 3
