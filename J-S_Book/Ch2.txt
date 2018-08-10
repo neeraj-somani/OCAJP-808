@@ -307,11 +307,9 @@ structure of an enhancement for statement:-
  --> Curly braces required for block of multiple statements, optional for single statement.
  --> colon is also required within bracketes.
  --> declaration is composed of an initialization section and an object to be iterated over.
---> The left-hand side of the for-each loop must include a
-declaration for an instance of a variable, whose type matches the type of a member of the
-array or collection in the right-hand side of the statement.
+--> The left-hand side of the for-each loop must include a declaration for an instance of a variable, whose type matches the type of a member of the array or collection in the right-hand side of the statement.
 
-
+Let’s review some examples: --> page 84
 
 
 
