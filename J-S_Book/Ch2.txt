@@ -69,11 +69,11 @@ Answer:- the output data type would be "int". as per 3rd rule.
         -- ------> Decrements a value by 1
         ! ------> Inverts a Boolean’s logical value
 
------ Logical Complement and Negation Operators ----> The logical complement operator, !, fl ips the value of a boolean expression.
+----- Logical Complement and Negation Operators ----> The logical complement operator, !, flips the value of a boolean expression.
 
 -- there will be question on this in exam -->
 Imp rule to remember ---> you cannot apply a negation operator, -, to a boolean expression, nor can you apply a logical complement operator, !, to a numeric expression. You will get compile error in such case.
---> in Java 1 and true are not related in any way, just as 0 and false are not related.
+--> in Java, true and '1' are not related in any way, just as '0' and false are not related.
 
 --- Increment and Decrement Operators --> ++ and --, respectively, can be applied to numeric operands and have the higher order or precedence, as compared to binary operators. In other words, they often get applied fi rst to an expression.
   --> pre-increment and pre--decrement operator, operator is placed before the operand, the operator is applied fi rst and the value return is the new value of the expression.
