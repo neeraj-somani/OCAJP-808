@@ -310,10 +310,20 @@ structure of an enhancement for statement:-
 --> The left-hand side of the for-each loop must include a declaration for an instance of a variable, whose type matches the type of a member of the array or collection in the right-hand side of the statement.
 
 Let’s review some examples: --> page 84
-
-
-
-
+*** ---------------------------
+When you see a for-each loop on the exam, make sure the right-hand side is an array or Iterable object and the left-hand side has a matching type.
+----------------------------
+Why will the following fail to compile?
+String names = "Lisa";
+for(String name : names) { // DOES NOT COMPILE // names is not iterable object
+System.out.print(name + " ");
+}
+Why will the following fail to compile?
+String[] names = new String[3];
+for(int name : names) { // DOES NOT COMPILE // int at left side and String at right side
+System.out.print(name + " ");
+}
+ ----- Notice that in this last example, the array is initialized with three null pointer values. In and of itself, that will not cause the code to not compile, as a corrected loop would just output null three times. ---- 
 
 
 
