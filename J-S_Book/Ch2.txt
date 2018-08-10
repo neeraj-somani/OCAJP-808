@@ -178,7 +178,9 @@ There is no requirement that second and third expressions in ternary operations 
 exam tricks --> only one of the right-hand expressions of the ternary operator will be evaluated at runtime. Means, if boolean expression is true then 1st expression will only evaluate at run-time and if boolean expression is false then 2nd expression.
 Its very similar to short-circuit operators.
 
---- switch statement -->
+--- switch statement --> is a complex decision-making structure in which a single value is evaluated and flow is redirected to the first matching branch, known as a case statement. If no such case statement is found that matches the value, an optional default statement will be called. If no such default option is available, the entire switch statement will be skipped. Remember, default block is optional and that may appear anywhere within switch statement.
+
+
 Data types supported by switch statements include the following:
 ■ int and Integer wrapper class
 ■ byte and Byte wrapper class
@@ -187,26 +189,79 @@ Data types supported by switch statements include the following:
 ■ String
 ■ enum values
 
-Note that boolean and long, and their associated wrapper classes, are not supported by switch statements.
-
+Note that boolean, long, double, float, and their associated wrapper classes, are not supported by switch statements yet.
 default block --> if there is no matching case value for the switch statement, regardless of its position.
 
-the data type for case statements must all match the data type of the switch variable.
-the case statement value must be a literal, enum constant, or final constant variable.
+---- Compile-time Constant Values --->
 
+The data type of case statements value must match the data type of the switch statment value and it must be compile-time constant values. means, The case statement value must be a literal, enum constant, or final constant variable so that it will not change at compile time.
 
+break; --> this statment is optional and it terminate the switch statement and return flow control to the enclosing statement. if you leave out the break statement, flow will continue to the next proceeding case without considering case value and it will execute case statements or default block automatically.
 
+***** -----------
+exam creators are fond of switch examples that are missing break statements! When evaluating switch statements on the exam, always consider that multiple branches may be visited in a single execution.
+----------
 
+-- example of switch statment, with proper syntext --> ** very imp to understand each stuff in below example properly
 
+private int getSortOrder(String firstName, final String lastName) {
+String middleName = "Patricia";
+final String suffix = "JR";
+int id = 0;
+switch(firstName) { 
+case "Test":
+return 52; /// a return statement, like a break statement, can be used to exit the switch statement early.
+case middleName: // DOES NOT COMPILE // because middleName is not a final variable or constant 
+id = 5;
+break;
+case suffix: // compiles because suffix is a final constant variable
+id = 0;
+break;
+case lastName: // DOES NOT COMPILE // despite lastName being final, it is not constant as it is passed to the function
+id = 8;
+break;
+case 5: // DOES NOT COMPILE // not have a matching type of String
+id = 7;
+break;
+case 'J': // DOES NOT COMPILE // not have a matching type of String
+id = 10;
+break;
+case java.time.DayOfWeek.SUNDAY: // DOES NOT COMPILE // not have a matching type of String, this is enum data type value
+id=15;
+break;
+}
+return id;
+}
 
+---- Remember, if there is no break; or return ; statement (as these are optional) then all the following case statement and default block will execute. In such scenario, case value doesn't need to be matched, but data type needs to be matched, else code wouldn't compile.
 
+--- if you pass null directly to switch statement [switch(null){}] or if you kept switch statement blank [switch(){}] then code will not compile.
+---- if you pass null to switch statement using any class method parameter then "NULLPointException" will be thrown.
+example:-- int a = gso.getSortOrder(null, "hello"); //"NULLPointException" will be thrown
+---- you can't have any constant variables with null value. code will not compile.
+example:--- final String suffix = null ; // DOES NOT COMPILE //
 
-
-
-
-
-
-
+----- The while Statement ---> Like all repetition control structures, it has a termination condition, implemented as a boolean expression, that will continue as long as the expression evaluates to true. example:-- while(booleanExpression){ //body }
+  -- the boolean expression is evaluated before each iteration of the loop and exits if the evaluation returns false.
+  -- hence, its possible the block may never be executed if the initial avaluation return false.
+  -- We need to make sure, that loop should terminate at some condition. There is no compile error or exception will be thrown with infite loop but its not a best programming practice.
+  
+---- The do-while Statement ---> same as while loop, though, a do-while loop guarantees that the statement or block will be executed at least once. example:-- do { //body } while(booleanExpression); // notice do-while has require semi-colon at the end. // there is no semi-colon in while loop.
+  
+--- The for Statement -->  structure of a basic for statement:- 
+  for(initialization; booleanExpression; updateStatement) { //body } 
+     --> Curly braces required for block of multiple statements, optional for single statement
+     --> Note that each section is separated by a semicolon.
+     --> The initialization and update sections may contain multiple statements, separated by commas.
+     --> be careful in exam, Variables declared in the initialization block of a for loop have limited scope and are only accessible within the for loop. if it is declared outside of for loop, then it can be used outside and inside for loop.
+     --> 
+     
+Steps in which for loop performs any operation -->
+    1 - Initialization statement executes
+    2 - If booleanExpression is true continue, else exit loop
+    3 - Body executes
+    4 - Execute updateStatements
+    5 - Return to Step 2
 
 
 
