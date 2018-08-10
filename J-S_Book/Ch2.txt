@@ -325,9 +325,9 @@ System.out.print(name + " ");
 }
  ----- Notice that in this last example, the array is initialized with three null pointer values. In and of itself, that will not cause the code to not compile, as a corrected loop would just output null three times. ---- 
 
+----> Remember, for array index "-1" would always throw exception IndexOutOfBoundsException error.
 
-
-
+----- Understanding Advanced Flow Control ---> 
 
 
 
