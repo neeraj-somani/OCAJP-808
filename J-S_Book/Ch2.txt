@@ -75,8 +75,8 @@ Answer:- the output data type would be "int". as per 3rd rule.
 Imp rule to remember ---> you cannot apply a negation operator, -, to a boolean expression, nor can you apply a logical complement operator, !, to a numeric expression. You will get compile error in such case.
 --> in Java, true and '1' are not related in any way, just as '0' and false are not related.
 
---- Increment and Decrement Operators --> ++ and --, respectively, can be applied to numeric operands and have the higher order or precedence, as compared to binary operators. In other words, they often get applied fi rst to an expression.
-  --> pre-increment and pre--decrement operator, operator is placed before the operand, the operator is applied fi rst and the value return is the new value of the expression.
+--- Increment and Decrement Operators --> ++ and --, respectively, can be applied to numeric operands and have the higher order or precedence, as compared to binary operators. In other words, they often get applied first to an expression.
+  --> pre-increment and pre-decrement operator, operator is placed before the operand, the operator is applied first and the value return is the new value of the expression.
   ---> post-increment operator and the post-decrement operator, operator is placed after the operand, then the original value of the expression is returned, with operator applied after the value is returned.
       The following code snippet illustrates this distinction:
       int counter = 0;
@@ -87,18 +87,18 @@ Imp rule to remember ---> you cannot apply a negation operator, -, to a boolean 
       System.out.println(counter); // Outputs 0
 
 --- Using Additional Binary Operators --> 
-  -- Assignment Operators --> that modifi es, or assigns, the variable on the left-hand side of the operator, with the result of the value on the right-hand side of the equation. The simplest assignment operator is the = assignment, which you have seen already:
+  -- Assignment Operators --> that modifies, or assigns, the variable on the left-hand side of the operator, with the result of the value on the right-hand side of the equation. The simplest assignment operator is the = assignment, which you have seen already:
   int x = 1;
 Java will automatically promote from smaller to larger data types, but it will throw a compiler exception if it detects you are trying to convert from larger to smaller data types.
 
-Casting Primitive Values --> Casting primitives is required any time you are going from a larger numerical data type to a smaller numerical data type, or converting from a fl oating-point number to an integral value.
+Casting Primitive Values --> Casting primitives is required any time you are going from a larger numerical data type to a smaller numerical data type, or converting from a floating-point number to an integral value.
   example:- int x = (int)1.0;
             short y = (short)1921222; // Stored as 20678
             Using Additional Binary Operators 61
             int z = (int)9l;
             long t = 192301398193810323L;
             
----- Overflow and Underflow -->  The expressions in the previous example now compile, although there’s a cost. The second value, 1,921,222, is too large to be stored as a short, so numeric overfl ow occurs and it becomes 20,678. Overfl ow is when a number is so large that it will no longer fi t within the data type, so the system “wraps around” to the next lowest value and counts up from there. There’s also an analogous underfl ow, when the number is too low to fit in the data type. This is beyond the scope of the exam, but something to be careful of in your own code.
+---- Overflow and Underflow -->  The expressions in the previous example now compile, although there’s a cost. The second value, 1,921,222, is too large to be stored as a short, so numeric overflow occurs and it becomes 20,678. Overflow is when a number is so large that it will no longer fit within the data type, so the system “wraps around” to the next lowest value and counts up from there. There’s also an analogous underflow, when the number is too low to fit in the data type. This is beyond the scope of the exam, but something to be careful of in your own code.
   For example, the following statement outputs a negative number:
   System.out.print(2147483647+1); // -2147483648
   Since 2147483647 is the maximum int value, adding any strictly positive value to it will cause it to wrap to the next negative number.        
@@ -142,11 +142,12 @@ x ^ y (EXCLUSIVE OR) --> if both are same then false, else true.
       1. Comparing two numeric primitive types. If the numeric values are of different data types, the values are automatically promoted as previously described. For example, 5 == 5.00 returns true since the left side is promoted to a double.
       2. Comparing two boolean values.
       3. Comparing two objects, including null and String values.
+          example:- String a = null;
+                    String b = null;
+                    System.out.println(a == b); // true
 
 ---- very important -----
-For object comparison, the equality operator is applied to the references to the objects,
-not the objects they point to. Two references are equal if and only if they point to the same
-object, or both point to null. Let’s take a look at some examples:
+For object comparison, the equality operator is applied to the references to the objects, not the objects they point to. Two references are equal if and only if they point to the same object, or both point to null. Let’s take a look at some examples:
 File x = new File("myFile.txt");
 File y = new File("myFile.txt");
 File z = x;
@@ -174,12 +175,8 @@ Note that it is often helpful for readability to add parentheses around the expr
 
 There is no requirement that second and third expressions in ternary operations have the same data types.
 
-exam tricks --> only one of the right-hand expressions of the ternary operator will be evaluated at runtime. Means, if boolean expression is true then 1st expression will only evaluate at run-time and if bollean expression is false then 2nd expression.
+exam tricks --> only one of the right-hand expressions of the ternary operator will be evaluated at runtime. Means, if boolean expression is true then 1st expression will only evaluate at run-time and if boolean expression is false then 2nd expression.
 Its very similar to short-circuit operators.
-
-
-
-
 
 --- switch statement -->
 Data types supported by switch statements include the following:
@@ -196,6 +193,72 @@ default block --> if there is no matching case value for the switch statement, r
 
 the data type for case statements must all match the data type of the switch variable.
 the case statement value must be a literal, enum constant, or final constant variable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Review questions:- Attempt 1
 1. A, D
