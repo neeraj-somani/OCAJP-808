@@ -328,9 +328,17 @@ System.out.print(name + " ");
 ----> Remember, for array index "-1" would always throw exception IndexOutOfBoundsException error.
 
 ----- Understanding Advanced Flow Control ---> 
-
-
-
+---- Nested Loops ---> loops can contain other loops
+--- Adding Optional Labels --> in loops, A label is an optional pointer to the head of a statement that allows the application fl ow to jump to it or break from it. It is a single word that is proceeded by a colon (:). For example, we can add optional labels to one of the previous examples:
+  ----- The break Statement --->  it will end the loop early, a break statement transfers the flow of control out to the enclosing statement. Below example shows labels and how break statement can help in that:--
+      PARENT_LOOP: for(int i=0; i<list.length; i++) {
+      for(int j=0; j<list[i].length; j++) {
+      if(list[i][j]==searchValue) {
+      positionX = i;
+      positionY = j;
+      break PARENT_LOOP;
+      }
+      }
 
 
 
