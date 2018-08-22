@@ -71,12 +71,41 @@ Instance Initializer Blocks --> code blocks appear outside a method, The code be
 Primitive Types --> eight built-in data types. (boolean, byte, short, int, long, float, double, char)
 -- a byte can hold a value from –128 to 127. A byte is 8 bits. A bit has two possible values (0 or 1).
 -- The number of bits is used by Java when it figures out how much memory to reserve for your variable.
+Reference Types --> refers to an object. Unlike primitive types that hold their values in the memory where the variable is allocated, references do not hold the value of the object they refer to. Instead, a reference “points” to an object by storing the memory address where the object is located, a concept referred to as a pointer.
+The objects do not have names and can be accessed only via their corresponding reference. Example:- 
+java.util.Date today; // today variable is a reference of type Date and can only point to a Date object.
+String greeting; // greeting variable is a reference that can only point to a String object
+today = new java.util.Date(); // today reference now points to a new Date object in memory
+greeting = "How are you?"; // greeting reference points to a new String object, "How are you?".
+A value is assigned to a reference in one of two ways:
+■ A reference can be assigned to another object of the same type.
+■ A reference can be assigned to a new object using the new keyword.
 
+Key Differences Between Object References and Primitives -->
+1. reference types can be assigned null, which means they do not currently refer to an object. Primitive types will give you a compiler error if you attempt to assign them null.
+int value = null; // DOES NOT COMPILE
+String s = null;
+2. reference types can be used to call methods when they do not point to null. Primitives do not have methods declared on them.
+String reference = "hello"; // Remember String is not primitive type, its reference type
+int len = reference.length(); // method call on reference type
+int bad = len.length(); // DOES NOT COMPILE // No methods exist on len because it is an int primitive. Primitives do not have methods.
+3. all the primitive types have lowercase type names, example (int, long, double). But all classes that come with Java begin with uppercase (example, String, ArrayList)
+
+-- Declaring and Initializing Variables --> A variable is a name for a piece of memory that stores data with specific data type.
+String zooName = "The Best Zoo";
+int numberAnimals = 100;
 
 Declaring multiple variables --
 You can also declare and initialize multiple variables in the same statement. Same data type variable can be in same statement.
 declare means just defining which type of variable it is.
 initialize means assigning a value to the variable.
+Example:- 
+boolean b1, b2;
+String s1 = "1", s2;
+double d1, double d2; // DOES NOT COMPILE, because double data type is used 2 times.
+int i1; int i2;
+int i3; i4; // DOES NOT COMPILE, because data type is missing for i4 variable
+
 
 three rules to remember for legal identifiers:
 ■ The name must begin with a letter or the symbol $ or _.
