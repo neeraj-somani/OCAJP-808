@@ -3,8 +3,8 @@ Chapter 2 -- Operators and Statements
 --- Understanding Java Operators --
 it is a special symbol that can be applied to a set of variables, values, or literals—referred to as operands—and that returns a result.
 3 types --> unary, binary, and ternary
-Java operators are not necessarily evaluated from left-to-right order.
 
+Java operators are not necessarily evaluated from left-to-right order.
 Unless overridden with parentheses, Java operators follow order of operation from higher-to-lower precedence.
 If two operators have the same level of precedence, then Java guarantees left-to-right evaluation.
 
@@ -29,7 +29,7 @@ Assignment operators   ----------->      =, +=, -=, *=, /=, %=, &=, ^=, !=, <<=,
   --- Arithmetic Operators -->  include addition (+), subtraction (-), multiplication (*), division (/), and modulus (%)
 , include the unary operators, ++ and --.
 the multiplicative operators (*, /, %) have a higher order of precedence than the additive operators (+, -).
-you can change the order of operation explicitly by wrapping parentheses around the sections you want evaluated first.
+you can change the order of operation explicitly by wrapping parentheses around the sections you want to evaluate first.
 
 arithmetic operators may be applied to any Java primitives, except boolean and String
 only the addition operators '+' and Assignment operators '+=' may be applied to String values, which results in String concatenation.
@@ -71,8 +71,7 @@ Answer:- the output data type would be "int". as per 3rd rule.
 
 ----- Logical Complement and Negation Operators ----> The logical complement operator, !, flips the value of a boolean expression.
 
--- there will be question on this in exam -->
-Imp rule to remember ---> you cannot apply a negation operator, -, to a boolean expression, nor can you apply a logical complement operator, !, to a numeric expression. You will get compile error in such case.
+Imp rule to remember for exam ---> you cannot apply a negation operator, -, to a boolean expression, nor can you apply a logical complement operator, !, to a numeric expression. You will get compile error in such case.
 --> in Java, true and '1' are not related in any way, just as '0' and false are not related.
 
 --- Increment and Decrement Operators --> ++ and --, respectively, can be applied to numeric operands and have the higher order or precedence, as compared to binary operators. In other words, they often get applied first to an expression.
@@ -94,7 +93,6 @@ Java will automatically promote from smaller to larger data types, but it will t
 Casting Primitive Values --> Casting primitives is required any time you are going from a larger numerical data type to a smaller numerical data type, or converting from a floating-point number to an integral value.
   example:- int x = (int)1.0;
             short y = (short)1921222; // Stored as 20678
-            Using Additional Binary Operators 61
             int z = (int)9l;
             long t = 192301398193810323L;
             
@@ -102,12 +100,11 @@ Casting Primitive Values --> Casting primitives is required any time you are goi
   For example, the following statement outputs a negative number:
   System.out.print(2147483647+1); // -2147483648
   Since 2147483647 is the maximum int value, adding any strictly positive value to it will cause it to wrap to the next negative number.        
-Be wary of examples like this in exam:-
-examples for a moment:
+Be wary of examples like this in exam:- examples:
 short x = 10;
 short y = 3;
 short z = x * y; // DOES NOT COMPILE
-Based on everything you have learned up until now, can you understand why the last line of this statement will not compile? If you remember, short values are automatically promoted to int when applying any arithmetic operator, with the resulting value being of type int. Trying to set a short variable to an int results in a compiler error, as Java thinks you are trying to implicitly convert from a larger data type to a smaller one.
+why the last line of this statement will not compile? Answer, short values are automatically promoted to int when applying any arithmetic operator, with the resulting value being of type int. Trying to set a short variable to an int results in a compiler error, as Java thinks you are trying to implicitly convert from a larger data type to a smaller one.
 
 --- Compound Assignment Operators --->  Only two of the compound operators are required for the exam, += and -=.
   compound operators cannot be used to declare a new variable. Variables, should be declared before using this.
@@ -134,7 +131,7 @@ x ^ y (EXCLUSIVE OR) --> if both are same then false, else true.
 
 --- conditional operators --> && and ||, which are often referred to as short-circuit operators.
     nearly identical to the logical operators, & and |, respectively, except that the right-hand side of the expression may never be evaluated if the final result can be determined by the left-hand side of the expression. For example, consider the following statement:
-    boolean x = true || (y < 4); // result is true, but we don't need to evaluate the right hand side expression (y<4) for that 
+    boolean x = true || (y < 4); // result is true, but we don't need to evaluate the right hand side expression (y<4). 
  /// useful in checking for null objects before performing an operation
 
 ----- Equality Operators ---> the equals operator == and not equals operator !=. they compare two operands and return a boolean value.
@@ -158,7 +155,7 @@ System.out.println(x == z); // Outputs true
 A Java statement is a complete unit of execution in Java, terminated with a semicolon (;).
 
 ----- The if-then Statement -->
-    exam tricks --> exam writers will try to trip you up is on if-then statements without braces ({}). Curly braces required for block of multiple statements, optional for single statement.
+    exam tricks --> exam writers will try to trip you up on if-then statements without braces ({}). Curly braces required for block of multiple statements, optional for single statement.
 
 ----- The if-then-else Statement ---> order is important for multiple if-else.
 execution of each branch is mutually exclusive, means only one branch can execute.
@@ -178,8 +175,7 @@ There is no requirement that second and third expressions in ternary operations 
 exam tricks --> only one of the right-hand expressions of the ternary operator will be evaluated at runtime. Means, if boolean expression is true then 1st expression will only evaluate at run-time and if boolean expression is false then 2nd expression.
 Its very similar to short-circuit operators.
 
---- switch statement --> is a complex decision-making structure in which a single value is evaluated and flow is redirected to the first matching branch, known as a case statement. If no such case statement is found that matches the value, an optional default statement will be called. If no such default option is available, the entire switch statement will be skipped. Remember, default block is optional and that may appear anywhere within switch statement.
-
+--- switch statement --> is a complex decision-making structure in which a single value is evaluated and flow is redirected to the first matching branch, known as a case statement. If no such case statement is found that matches the value, an optional default statement will be called. If no such default optional statement is available, the entire switch statement will be skipped. Remember, default block is optional and that may appear anywhere within switch statement.
 
 Data types supported by switch statements include the following:
 ■ int and Integer wrapper class
@@ -190,10 +186,9 @@ Data types supported by switch statements include the following:
 ■ enum values
 
 Note that boolean, long, double, float, and their associated wrapper classes, are not supported by switch statements yet.
-default block --> if there is no matching case value for the switch statement, regardless of its position.
+default block run only --> if there is no matching case value for the switch statement, regardless of its position.
 
 ---- Compile-time Constant Values --->
-
 The data type of case statements value must match the data type of the switch statment value and it must be compile-time constant values. means, The case statement value must be a literal, enum constant, or final constant variable so that it will not change at compile time.
 
 break; --> this statment is optional and it terminate the switch statement and return flow control to the enclosing statement. if you leave out the break statement, flow will continue to the next proceeding case without considering case value and it will execute case statements or default block automatically.
@@ -220,20 +215,20 @@ break;
 case lastName: // DOES NOT COMPILE // despite lastName being final, it is not constant as it is passed to the function
 id = 8;
 break;
-case 5: // DOES NOT COMPILE // not have a matching type of String
+case 5: // DOES NOT COMPILE // not have a matching data type (String)
 id = 7;
 break;
-case 'J': // DOES NOT COMPILE // not have a matching type of String
+case 'J': // DOES NOT COMPILE // not have a matching data type  (String)
 id = 10;
 break;
-case java.time.DayOfWeek.SUNDAY: // DOES NOT COMPILE // not have a matching type of String, this is enum data type value
+case java.time.DayOfWeek.SUNDAY: // DOES NOT COMPILE // not have a matching data type (String), this is enum data type value
 id=15;
 break;
 }
 return id;
 }
 
----- Remember, if there is no break; or return ; statement (as these are optional) then all the following case statement and default block will execute. In such scenario, case value doesn't need to be matched, but data type needs to be matched, else code wouldn't compile.
+---- Remember, if there is no break; or return ; statement (as these are optional) then all the subsequent case statement and default block will execute. In such scenario, case value doesn't need to be matched, but data type needs to be matched, else code wouldn't compile.
 
 --- if you pass null directly to switch statement [switch(null){}] or if you kept switch statement blank [switch(){}] then code will not compile.
 ---- if you pass null to switch statement using any class method parameter then "NULLPointException" will be thrown.
@@ -243,7 +238,7 @@ example:--- final String suffix = null ; // DOES NOT COMPILE //
 
 ----- The while Statement ---> Like all repetition control structures, it has a termination condition, implemented as a boolean expression, that will continue as long as the expression evaluates to true. example:-- while(booleanExpression){ //body }
   -- the boolean expression is evaluated before each iteration of the loop and exits if the evaluation returns false.
-  -- hence, its possible the block may never be executed if the initial avaluation return false.
+  -- hence, its possible the block may never be executed if the initial evaluation return false.
   -- We need to make sure, that loop should terminate at some condition. There is no compile error or exception will be thrown with infite loop but its not a best programming practice.
   
 ---- The do-while Statement ---> same as while loop, though, a do-while loop guarantees that the statement or block will be executed at least once. example:-- do { //body } while(booleanExpression); // notice do-while has require semi-colon at the end. // there is no semi-colon in while loop.
@@ -253,12 +248,12 @@ example:--- final String suffix = null ; // DOES NOT COMPILE //
      --> Curly braces required for block of multiple statements, optional for single statement
      --> Note that each section is separated by a semicolon.
      --> The initialization and update sections may contain multiple statements, separated by commas.
-     --> be careful in exam, Variables declared in the initialization block of a for loop have limited scope and are only accessible within the for loop. if it is declared outside of for loop, then it can be used outside and inside for loop.
+     --> be careful in exam, Variables declared in the initialization block of a for loop have limited scope and are only accessible within the for loop. if it is declared before and outside of for loop, then it can be used outside and inside for loop.
      --> 
      
 Steps in which for loop performs any operation -->
     1 - Initialization statement executes
-    2 - If booleanExpression is true continue, else exit loop
+    2 - If booleanExpression is true then continue else exit loop
     3 - Body executes
     4 - Execute updateStatements
     5 - Return to Step 2
@@ -301,13 +296,13 @@ Below are five kinds of scenarios that you might see on exam with some twists --
   --> notice, x is defi ned in the initialization block of the loop, and then used after the loop terminates. Since x was only scoped for the loop, using it outside the loop will throw a compiler error.
 
 ---- The for-each Statement --->  specifically designed for iterating over arrays and Collection objects.
-structure of an enhancement for statement:- 
+structure of an enhanced for statement:- 
     for(datatype instance : collection) { //body }
     
  --> Curly braces required for block of multiple statements, optional for single statement.
  --> colon is also required within bracketes.
  --> declaration is composed of an initialization section and an object to be iterated over.
---> The left-hand side of the for-each loop must include a declaration for an instance of a variable, whose type matches the type of a member of the array or collection in the right-hand side of the statement.
+--> The left-hand side of the for-each loop must include a declaration for an instance of a variable, whose data type matches the type of a member of the array or collection in the right-hand side of the statement.
 
 Let’s review some examples: --> page 84
 *** ---------------------------
