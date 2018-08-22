@@ -28,6 +28,8 @@ JDK - includes JRE, Java interpreter, Javac (compiler), javadoc (for documentati
 Below command To compile java code -->
   javac Zoo.java // this will compile Zoo class and creates Zoo.class file
   java Zoo "San Diago" Tiger // this command runs Zoo class and pass two aurguments to the class. space between words seperates the aurguments and double qutation helps to pass space within one aurgument. 
+  java Zoo.class "San Diago" Tiger  // Java will not be able to run command with Zoo.class  
+  
 
 --- Package Declarations and Imports -->
 Java puts classes in packages. These are logical groupings for classes.
@@ -157,6 +159,8 @@ The reference is a variable that has a name and can be used to access the conten
 An object sits on the heap and does not have a name. Therefore, you have no way to access an object except through a reference. Objects come in all different shapes and sizes and consume varying amounts of memory. An object cannot be assigned to another object, nor can an object be passed to a method or returned from a method. It is the object that gets garbage collected, not its reference.
 
 --- finalize() --> Java allows objects to implement a method called finalize() that might get called. This method gets called if the garbage collector tries to collect the object. If the garbage collector doesn’t run, the method doesn’t get called. If the garbage collector fails to collect the object and tries to run it again later, the method doesn’t get called a second time.
+
+The finalize() method will run once for each object if/when it is first garbage collected.
 Just keep in mind that it might not get called on first time and that it definitely won’t be called twice.
 
 Benefits of Java -->
