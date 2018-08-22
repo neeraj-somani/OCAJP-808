@@ -54,6 +54,11 @@ import java.util.Date;
 public class Conflicts { Date date;
 java.sql.Date sqlDate;}
 
+--> package statement should include all the directory and subdirectory structure from where we are planning to compile code. 
+for example, if we have Bird.java file at location "/my/directory/named/A/Bird.java", and if we want to compile this class at "/my/directory" location then package statement should be like "package named.A;". code wouldn't compile if you include full path in package statemnt "package my.directory.named.A;".
+
+
+
 -- imp for exam --> if code starts with line 1 in exam then make sure about import statement, class declaration, etc.
   if its doesn't start with line 1 then, follow as per instruction of question
   
@@ -199,3 +204,28 @@ Review Question Attempt 1 -->
 21. A
 22. B, E
 23. C (N)
+
+Attempt 2 -->
+1. A, B, E
+2. D
+3. B, D, E
+4. A, B
+5. C, D
+6. D (N) -- very nice and tricky question
+7. A, B, C
+8. B
+9. A, C, D, E
+10. E
+11. C, D
+12. G
+13. A, D
+14. B, D (N)
+15. A, E
+16. B, C, D
+17. A, E
+18. C, D, E
+19. B, D
+20. B, E
+21. A
+22. B, E, 
+23. C, F (N) -- very nice and tricky question
