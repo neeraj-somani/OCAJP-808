@@ -8,7 +8,7 @@ A JAR file is like a zip file of mainly Java class files.
 
 An array is a fixed-size list of items that are all of the same type.
 
-Java Classes --> multiple classes allowed, at most one of the classes in the file is allowed to be public and it needs to match the filename else code wouldn't compile.
+Java Classes --> multiple classes allowed, at most one of the classes in the file is allowed to be public and it needs to match the filename else code wouldn't compile. A file is also allowed to have neither class be public.
 
 -- Writing a main() Method --> Java program begins execution with its main() method.
   A main() method is the gateway between the startup of a Java process and the beginning of the programmer’s code. 
@@ -114,52 +114,62 @@ three rules to remember for legal identifiers:
 valid letters in Java are not just characters in the English alphabet. Java supports the Unicode character set, so there are more than 45,000 characters that can start a legal Java identifier.
 
 Local Variable -->
-local variable is a variable defi ned within a method. Local variables must be initialized before use. They do not have a default value and compiler will not let you read an uninitialized value.
+local variable is a variable defined within a method. Local variables must be initialized before use. They do not have a default value and compiler will not let you read an uninitialized value.
 
 Instance and Class Variables -->
 Variables that are not local variables are known as instance variables or class variables.
 Instance variables are also called fields. Class variables are shared across multiple objects.
 A variable is a class variable if it has the static keyword in its declaration.
-
 Instance and class variables do not require you to initialize them. As soon as you declare these variables, they are given a default value.
+
 Variable_type --> Default initialization value
 boolean --> false
 byte, short, int, long --> 0 (in the type’s bit-length)
 float, double --> 0.0 (in the type’s bit-length)
-char --> '\u0000' (NUL)
+char --> '\u0000' (NULL)
 All object references (everything else) --> null
 
 The rules on scope of variables:-
-■ Local variables—in scope from declaration to end of block
+■ Local variables — in scope from declaration to end of block
 ■ Instance variables—in scope from declaration until object garbage collected
-■ Class variables—in scope from declaration until program ends
+■ Class variables — in scope from declaration until program ends
 
-Imp -->
-multiple classes can be defined in a file, but only one of them is allowed to be public. The public class matches the name of the file.
-A file is also allowed to have neither class be public.
+Ordering Elements in a Class --> acronym PIC (picture): package, import, and class is sequential order.
+Package -- First line in the file
+Import statements -- Immediately after the package
+Class declaration -- Immediately after the import (required element)
+Field declarations -- Anywhere inside a class
+Method declarations -- Anywhere inside a class
 
-Garbage Collection:
-Garbage collection refers to the process of automatically freeing memory on the heap by deleting objects that are no longer reachable in your program.
-An object is no longer reachable when one of two situations occurs:
-■ The object no longer has any references pointing to it.
-■ All references to the object have gone out of scope.
+All Java objects are stored in your program memory’s heap. The heap, which is also referred to as the free store, represents a large pool of unused memory allocated to your Java application.
 
-Objects vs. References -->
+-- Garbage Collection --> Garbage collection refers to the process of automatically freeing memory on the heap by deleting objects that are no longer reachable in your program.
+  -- Java runs System.gc() method to clean object but is not guaranteed to run, Java is free to ignore the request. this method collects objects when objects become eligible for garbage collection.
+    An object is no longer reachable when one of two situations occurs:
+    ■ The object no longer has any references pointing to it.
+    ■ All references to the object have gone out of scope.
+
+exam tips --> When you get asked a question about garbage collection on the exam, we recommend you draw what’s going on. There’s a lot to keep track of in your head and it’s easy to make a silly mistake trying to keep it all in your memory.
+
+-- Objects vs. References -->
 The reference is a variable that has a name and can be used to access the contents of an object. A reference can be assigned to another reference, passed to a method, or returned from a method. All references are the same size, no matter what their type is.
 
 An object sits on the heap and does not have a name. Therefore, you have no way to access an object except through a reference. Objects come in all different shapes and sizes and consume varying amounts of memory. An object cannot be assigned to another object, nor can an object be passed to a method or returned from a method. It is the object that gets garbage collected, not its reference.
 
-finalize()
-Java allows objects to implement a method called finalize() that might get called. This method gets called if the garbage collector tries to collect the object. If the garbage collector doesn’t run, the method doesn’t get called. If the garbage collector fails to collect the object and tries to run it again later, the method doesn’t get called a second time.
-Just keep in mind that it might not get called and that it defi nitely won’t be called twice.
+--- finalize() --> Java allows objects to implement a method called finalize() that might get called. This method gets called if the garbage collector tries to collect the object. If the garbage collector doesn’t run, the method doesn’t get called. If the garbage collector fails to collect the object and tries to run it again later, the method doesn’t get called a second time.
+Just keep in mind that it might not get called on first time and that it definitely won’t be called twice.
 
 Benefits of Java -->
-Object Oriented Programming --> means code is defined in classes and classes can be instantiated by objects
-Encapsulation --> Java supports access modifi ers to protect data from unintended access and modification. 
+Object Oriented Programming --> means code is defined in classes and classes can be instantiated by objects.
+Encapsulation --> Java supports access modifiers to protect data from unintended access and modification. 
 Platform Independent --> compile once and run in all OS.
 Robust --> prevents memory leaks, using garbage collection
 Simple --> In addition to eliminating pointers, it got rid of operator overloading.
 Secure --> Java code runs inside the JVM. Hence, less harmfull.
+
+Some other type of programming patterns -->
+  Functional programming
+  Many other languages are procudural language means they have routines or methods but no classes.
 
 Review Question Attempt 1 -->
   1. A, B, E 
