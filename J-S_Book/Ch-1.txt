@@ -1,13 +1,77 @@
 An object is a runtime instance of a class in memory
 Objects of classes represents state of program. (Need more understanding on this statement)
+
 Variables hold the state of the program, and methods operate on that state.
-The keyword static binds a method to its class so it can be called by just the class name, as in, for example, Zoo.main().
+A variable stores that change, means state of the program. A method is an operation that can be called.
+
+A JAR file is like a zip file of mainly Java class files.
+
 An array is a fixed-size list of items that are all of the same type.
+
+Java Classes --> multiple classes allowed, at most one of the classes in the file is allowed to be public and it needs to match the filename else code wouldn't compile.
+
+-- Writing a main() Method --> Java program begins execution with its main() method.
+  A main() method is the gateway between the startup of a Java process and the beginning of the programmer’s code. 
+  JVM manage this and calls the underlying system to allocate memory and CPU time, access files, and so on.
+  The main() method lets us hook our code into this process.
+The keyword static binds a method to its class so it can be called by just the class name, as in, for example, Zoo.main(). Java doesn’t need to create an object to call the main() method, In fact, the JVM does this.
 
 Java compiler compiles ".java" files and create ".class" file.
 JVM runs that ".class" files. JVM is responsible for executing the java program line by line hence it is also known as interpreter.
 JRE - provides the minimum requirements for executing a Java application; includes JVM, core class, and supporting files
 JDK - includes JRE, Java interpreter, Javac (compiler), javadoc (for documentation), jar (archiver), other tools for java dev.
+
+-- The rules for what a Java code file contains:-
+    -- Each file can contain multiple classes but only one public class.
+    -- The filename must match the public class name, including case, and have a .java extension.
+
+Below command To compile java code -->
+  javac Zoo.java // this will compile Zoo class and creates Zoo.class file
+  java Zoo "San Diago" Tiger // this command runs Zoo class and pass two aurguments to the class. space between words seperates the aurguments and double qutation helps to pass space within one aurgument. 
+
+--- Package Declarations and Imports -->
+Java puts classes in packages. These are logical groupings for classes.
+Import statements tell Java which packages to look in for classes.
+The rule for package names is that they are mostly letters or numbers separated by dots.
+importing many classes using "*" wildcard symbol doesn't slow down process, as comipler handles what is needed in program.
+java.lang. This package is special in that it is automatically imported.
+
+-- some imports that don’t work ---
+import java.nio.*; // NO GOOD – a wildcard only matches //class names, not "file.*Files"
+import java.nio.*.*; // NO GOOD – you can only have one wildcard //and it must be at the end
+import java.nio.files.Paths.*; // NO GOOD – you cannot import methods //only class names
+
+--- When the same class is found in multiple packages, Java gives you the compiler error. example:- 
+import java.util.Date;
+import java.sql.Date; // DOES NOT COMPILE
+One way to resolve this issue, If you explicitly import a class name, it takes precedence over any wildcards present.
+import java.util.Date; import java.sql.*;
+
+If there is really a need to use two classes with the same name then either import only one or don't import any of these and use fully qualified name while using within class. Example:- 
+import java.util.Date;
+public class Conflicts { Date date;
+java.sql.Date sqlDate;}
+
+-- imp for exam --> if code starts with line 1 in exam then make sure about import statement, class declaration, etc.
+  if its doesn't start with line 1 then, follow as per instruction of question
+  
+Constructors --> To create an instance of a class, write new before it. For example: Random r = new Random();
+    This gives Java a place to store a reference to the object.
+A constructor, is a special type of method that creates a new object. 
+Two key points, the name of the constructor matches the name of the class, and there’s no return type.
+The purpose of a constructor is to initialize fields.
+If you don't define constructor, then the compiler will supply a “do nothing” default constructor for you.
+
+Instance Initializer Blocks --> code blocks appear outside a method, The code between the braces ({}) is called a code block.
+-- Order of Initialization -->
+  Fields and instance initializer blocks are run in the order in which they appear in the file
+  The constructor runs after all fields and instance initializer blocks have run.
+
+-- Distinguishing Between Object References and Primitives --> 
+Primitive Types --> eight built-in data types. (boolean, byte, short, int, long, float, double, char)
+-- a byte can hold a value from –128 to 127. A byte is 8 bits. A bit has two possible values (0 or 1).
+-- The number of bits is used by Java when it figures out how much memory to reserve for your variable.
+
 
 Declaring multiple variables --
 You can also declare and initialize multiple variables in the same statement. Same data type variable can be in same statement.
