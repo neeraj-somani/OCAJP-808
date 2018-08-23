@@ -181,7 +181,7 @@ exam tricks --> only one of the right-hand expressions of the ternary operator w
 Its very similar to short-circuit operators.
 
 --- switch statement --> a single value is evaluated and flow is redirected to the first matching branch, known as a case statement. 
-If no matching case statement is found then, an optional default statement will be called. If no such default optional statement is available, the entire switch statement will be skipped. Remember, default block is optional and position of case and default block is not fixed.
+If no matching case statement is found then, an optional default statement will be called. If no such default optional statement is available, the entire switch statement will be skipped. Remember, default block is optional and position of case and default block is not needed to be in a particular order.
 
 supported Data types by switch statements:
 ■ int and Integer wrapper class
@@ -221,13 +221,13 @@ break;
 case lastName: // DOES NOT COMPILE // despite lastName being final, it is not constant as it is passed to the function
 id = 8;
 break;
-case 5: // DOES NOT COMPILE // not have a matching data type (String)
+case 5: // DOES NOT COMPILE // do not have a matching data type (String)
 id = 7;
 break;
-case 'J': // DOES NOT COMPILE // not have a matching data type  (String)
+case 'J': // DOES NOT COMPILE // do not have a matching data type  (String)
 id = 10;
 break;
-case java.time.DayOfWeek.SUNDAY: // DOES NOT COMPILE // not have a matching data type (String), this is enum data type value
+case java.time.DayOfWeek.SUNDAY: // DOES NOT COMPILE // do not have a matching data type (String), this is enum data type value
 id=15;
 break;
 }
@@ -247,12 +247,12 @@ example:--- final String suffix = null ; // DOES NOT COMPILE //
   -- hence, its possible the block may never be executed if the initial evaluation return false.
   -- We need to make sure, that loop should terminate at some condition. There is no compile error or exception will be thrown with infite loop but its not a best programming practice.
   
----- The do-while Statement ---> same as while loop, though, a do-while loop guarantees that the statement or block will be executed at least once. example:-- do { //body } while(booleanExpression); // notice do-while has require semi-colon at the end. // there is no semi-colon in while loop.
+---- The do-while Statement ---> same as while loop, though, a do-while loop guarantees that the statement or block will be executed at least once. example:-- do { //body } while(booleanExpression); // notice do-while has require semicolon at the end. // there is no semicolon in while loop.
   
 --- The for Statement -->  structure of a basic for statement:- 
   for(initialization; booleanExpression; updateStatement) { //body } 
-     --> Curly braces required for block of multiple statements, optional for single statement
-     --> Note that each section is separated by a semicolon.
+     --> Curly braces are required for block of multiple statements, optional for single statement
+     --> Note that each section is separated by a semicolon, which is also required
      --> The initialization and update sections may contain multiple statements, separated by commas.
      --> be careful in exam, Variables declared in the initialization block of a for loop have limited scope and are only accessible within the for loop. if it is declared before and outside of for loop, then it can be used outside and inside for loop.
      --> 
@@ -301,10 +301,7 @@ Below are five kinds of scenarios that you might see on exam with some twists --
     System.out.print(x); // DOES NOT COMPILE
   --> notice, x is defi ned in the initialization block of the loop, and then used after the loop terminates. Since x was only scoped for the loop, using it outside the loop will throw a compiler error.
 
----- The for-each Statement --->  specifically designed for iterating over arrays and Collection objects.
-structure of an enhanced for statement:- 
-    for(datatype instance : collection) { //body }
-    
+---- The for-each Statement --->  specifically designed for iterating over arrays and Collection objects. structure of an enhanced for statement:-   for(datatype instance : collection) { //body }
  --> Curly braces required for block of multiple statements, optional for single statement.
  --> colon is also required within bracketes.
  --> declaration is composed of an initialization section and an object to be iterated over.
@@ -329,19 +326,25 @@ System.out.print(name + " ");
 ----> Remember, for array index "-1" would always throw exception IndexOutOfBoundsException error.
 
 ----- Understanding Advanced Flow Control ---> 
+
 ---- Nested Loops ---> loops can contain other loops
---- Adding Optional Labels --> in loops, A label is an optional pointer to the head of a statement that allows the application fl ow to jump to it or break from it. It is a single word that is proceeded by a colon (:). For example, we can add optional labels to one of the previous examples:
-  ----- The break Statement --->  it will end the loop early, a break statement transfers the flow of control out to the enclosing statement. Below example shows labels and how break statement can help in that:--
+
+--- Adding Optional Labels --> (Not in OCA exam) in loops, A label is an optional pointer to the head of a statement that allows the application flow to jump to it or break from it. It is a single word that is proceeded by a colon (:). For example, we can add optional labels to one of the previous examples:
+
+----- The break Statement --->  it will end the loop early, a break statement transfers the flow of control out to the enclosing statement. Below example shows nested loops, labels and how break statement can help in that:--
       PARENT_LOOP: for(int i=0; i<list.length; i++) {
-      for(int j=0; j<list[i].length; j++) {
-      if(list[i][j]==searchValue) {
-      positionX = i;
-      positionY = j;
-      break PARENT_LOOP;
-      }
+        for(int j=0; j<list[i].length; j++) {
+          if(list[i][j]==searchValue) {
+            positionX = i;
+            positionY = j;
+            break PARENT_LOOP;
+          }
+          ...
+        }
+        ...
       }
 
-  
+----- The continue Statement ---> a statement that causes flow to finish the execution of the current loop. The structure of a continue statement is same as block statement. They are even used in similar way but differ in result. means, While the break statement transfers control to the enclosing statement, the continue statement transfers control to the boolean expression that determines if the loop should continue. In other words, it ends the current iteration of the loop, but loop can continue to iterate again if boolean expression of loop still continue to satisfy condition.
 
 
 
