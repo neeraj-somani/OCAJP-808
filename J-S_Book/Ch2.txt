@@ -180,9 +180,10 @@ int animal = (y < 91) ? 9 : "Horse"; // DOES NOT COMPILE
 exam tricks --> only one of the right-hand expressions of the ternary operator will be evaluated at runtime. Means, if boolean expression is true then 1st expression will only evaluate at run-time and if boolean expression is false then 2nd expression.
 Its very similar to short-circuit operators.
 
---- switch statement --> is a complex decision-making structure in which a single value is evaluated and flow is redirected to the first matching branch, known as a case statement. If no such case statement is found that matches the value, an optional default statement will be called. If no such default optional statement is available, the entire switch statement will be skipped. Remember, default block is optional and that may appear anywhere within switch statement.
+--- switch statement --> a single value is evaluated and flow is redirected to the first matching branch, known as a case statement. 
+If no matching case statement is found then, an optional default statement will be called. If no such default optional statement is available, the entire switch statement will be skipped. Remember, default block is optional and position of case and default block is not fixed.
 
-Data types supported by switch statements include the following:
+supported Data types by switch statements:
 ■ int and Integer wrapper class
 ■ byte and Byte wrapper class
 ■ short and Short wrapper class
@@ -190,7 +191,7 @@ Data types supported by switch statements include the following:
 ■ String
 ■ enum values
 
-Note that boolean, long, double, float, and their associated wrapper classes, are not supported by switch statements yet.
+**Note that boolean, long, double, float, and their associated wrapper classes, are not supported by switch statements yet.
 default block run only --> if there is no matching case value for the switch statement, regardless of its position.
 
 ---- Compile-time Constant Values --->
