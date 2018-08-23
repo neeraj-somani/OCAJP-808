@@ -375,7 +375,7 @@ System.out.print(name + " ");
 
 
 
-
+----------
 
 Review questions:- Attempt 1
 1. A, D
@@ -398,3 +398,27 @@ Review questions:- Attempt 1
 18. B (N)
 19. D 
 20. C (N)
+
+
+--- Attempt 2 --
+ch 2 -->
+1. A, D
+2. A, B
+3. F
+4. B, C, D, F (N)
+5. C
+6. E (N)
+7. D
+8. B
+9. B (N) -- need to understand the logic
+10. C (N) -- nice and tricky question, very imp for exam
+11. A
+12. D
+13. A
+14. C
+15. E
+16. E (N) -- nice and tricky question, very imp for exam
+17. D
+18. B
+19. D
+20. E (N) -- nice question, need to practice more for switch statement
