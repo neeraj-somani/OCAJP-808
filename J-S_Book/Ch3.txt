@@ -77,10 +77,44 @@ StringBuilder vs. StringBuffer -->
   StringBuffer does the same thing but more slowly because it is thread safe.
   
 Understanding Equality -->
-equals() method is used to check the values inside the String rather than the String itself.
-If you call equals() on two StringBuilder instances, it will check reference equality.
-If a class doesn’t have an equals method, Java determines whether the references point to the same object—which is exactly what == does.
-"==" this checks whether two references pointing to same object or not.
+    equals() method is used to check the values inside the String rather than the String itself.
+    If you call equals() on two StringBuilder instances, it will check reference equality.
+    If a class doesn’t have an equals method, Java determines whether the references point to the same object—which is exactly what == does.
+    "==" this checks whether two references pointing to same object or not.
+
+-- Difference between == and .equals() method in Java -->
+    1. Main difference between .equals() method and == operator is that one is method and other is operator.
+    2. We can use == operators for reference comparison (address comparison) and .equals() method for content/data comparison. In simple words, == checks if both objects point to the same memory location whereas .equals() evaluates to the comparison of values in the objects.
+    3. If a class does not override the equals method, then by default it uses equals(Object o) method of the closest parent class that has overridden this method.
+Example -->
+    public class Rope {
+        public static void main(String[] agrs) {
+            Thread t1 = new Thread();
+            Thread t2 = new Thread();
+            Thread t3 = t1;
+
+            String s1 = new String("GEEKS"); // Both s1 and s2 refers to different objects
+            String s2 = new String("GEEKS"); // Both s1 and s2 refers to different objects
+            String s3 = s1;
+
+            System.out.println(t1 == t3); // true, as both t1 and t3 pointing to same object 
+            System.out.println(t1 == t2); // false, as both t1 and t2 pointing to different objects 
+            System.out.println(t1.equals(t3)); // true, as both t1 and t3 pointing to same object, having same value
+            System.out.println(t1.equals(t2)); // false, as both t1 and t2 pointing to different objects, even having same null value
+
+            System.out.println(" ");
+
+            System.out.println(s1 == s3); // true, as both t1 and t3 pointing to same object 
+            System.out.println(s1 == s2); // false,  as both have different addresses in memory **
+            System.out.println(s1.equals(s3)); // true, as both s1 and s3 pointing to same object, having same value
+            System.out.println(s1.equals(s2)); // true because its only comparing the values given in s1 and s2 **
+        }
+    }
+
+Notes:-  
+1. We can apply equality operators (==) for every primitive types including boolean type. we can also apply equality operators for object types.
+2. If we apply equality operators (==) for object types then, there should be compatibility between arguments types (either child to parent or parent to child or same type). Otherwise code will get compile time error.
+3. 
 
 Java Arrays --> An array is an area of memory on the heap with space for a designated number of elements. An array is an ordered list. It can contain duplicates. It is fixed in size.
   String Array --> when dealing with characters specifically.
