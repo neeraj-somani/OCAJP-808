@@ -1,0 +1,8 @@
+from ch 2 -->
+1. questions on the exam that try to apply a logical complement operator, !, to a numeric expression, and a negation operator, -, to a boolean expression. cause the code to fail to compile.
+2. pay attention to questions that use Increment and decrement operators, ++ and --, on the same variable multiple time in same statement.
+3. short-circuit operators or conditional operators, && and ||, --> the right-hand side of the expression may never be evaluated if the final result can be determined by the left-hand side of the expression.
+4. Pay close attention to the data types when you see an equality operator (== and !=) on the exam. The exam creators also have a habit of mixing assignment operators and equality operators.
+5. during the OCA exam, you may be pre- sented with classnames that are unfamiliar, such as File. Many times you can answer ques- tions about these classes without knowing the specific details of these classes. 
+6. exam writers will try to trip you up is on if-then statements without braces ({}). For example, take a look at this slightly modified form of our example:
+if(hourOfDay < 11) System.out.println("Good Morning"); morningGreetingCount++;
