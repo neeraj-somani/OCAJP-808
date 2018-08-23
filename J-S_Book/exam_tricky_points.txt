@@ -18,4 +18,9 @@ if(x) { // DOES NOT COMPILE
 9. exam tricks --> only one of the right-hand expressions of the ternary operator will be evaluated at runtime. Means, if boolean expression is true then 1st expression will only evaluate at run-time and if boolean expression is false then 2nd expression.
 Its very similar to short-circuit operators.
 int x = y<10 ? y++ : z++; // only one will increment, either y or z based on y value
-10. 
+10. The exam creators are fond of switch examples that are missing break statements! on the exam, always consider that multiple branches
+may be visited in a single execution.
+11. Be wary of any exam questions in which a variable declared within the initialization block of a for loop is available outside the loop.
+12. Need to understand the traditional difference between List and Array
+** 13. "break;" statements are not allowed in if-else statement directly, means its allowed on all loops (do, for, while) and switch statements. Understand few things here carefully, if-else and switch are statements not loops, but (do, for, while) are loops and not statements. Hence, if you use break; statement directly in if-else statement, code will not compile but if you use break; statement in if-else statement, which is inside a for loop (like, a nested loop), then this break statement will apply on for loop and code will run properly.
+14. 
