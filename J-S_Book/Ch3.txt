@@ -214,11 +214,11 @@ Multidimensional Arrays -->
 ArrayList -->
   ArrayList can change size at runtime as needed.
   ArrayList is an ordered sequence that allows duplicates.
-    ArrayList also requires import class:
+    ArrayList also requires import statements:
     import java.util.* // import whole package including ArrayList
     import java.util.ArrayList; // import just ArrayList
 
-three ways to create an ArrayList: These works today as well but defined before java 5
+three old ways but still valid ways, to create an ArrayList: These works today as well but defined before java 5
 ArrayList list1 = new ArrayList();
 ArrayList list2 = new ArrayList(10);
 ArrayList list3 = new ArrayList(list2);
@@ -247,7 +247,7 @@ add() methods --> insert a new value in the ArrayList
     8: birds.add(1, "cardinal"); // [blue jay, cardinal, hawk, robin]
     9: System.out.println(birds); // [blue jay, cardinal, hawk, robin]
 
-remove() methods --> remove the fi rst matching value in the ArrayList or remove the element at a specifi ed index. 
+remove() methods --> remove the first matching value in the ArrayList or remove the element at a specified index. 
   boolean remove(Object object) // this tells us whether a match was removed (true or false)
   E remove(int index) // this tells us the element that actually got removed
      Example -->
@@ -351,7 +351,7 @@ Autoboxing --> just type the primitive value and Java will convert it to the rel
       7: weights.remove(50.5); // [60.0] // autoboxes into the wrapper object and passes it to remove().
       8: double first = weights.get(0); // 60.0 // retrieves the Double and unboxes it into a double primitive
       
-      Note --> if you try to unbox a null, you will get NullPointerException
+      Note --> if you try to unbox a null, you will get NullPointerException, but you can autobox or pass null without any issue
       3: List<Integer> heights = new ArrayList<>();
       4: heights.add(null);
       5: int h = heights.get(0); // NullPointerException
@@ -372,7 +372,7 @@ Converting Between array and List (ArrayList) -->
           9: System.out.println(stringArray.length); // 2
   2) turning an array into an List: 
         this will convert a fixed size array into fixed size List at the time of conversion. As we know we can't change array size once created but list can grow and Shrink. In this case List also can't chnages its size and hence known as Backed-List. 
-        The original array and created array backed List are linked. When a change is made to one, it is available in the other. Although, chnage here means updating values, not changing the size. Chnaging the size will through exception.
+        The original array and created array backed List are linked. When a change is made to one, it is available in the other. Although, change here means updating values, not changing the size. Changing the size will through exception.
         Example:-
           20: String[] array = { "hawk", "robin" }; // [hawk, robin]
           21: List<String> list = Arrays.asList(array); // returns fixed size list
@@ -380,7 +380,7 @@ Converting Between array and List (ArrayList) -->
           23: list.set(1, "test"); // [hawk, test]
           24: array[0] = "new"; // [new, test]
           25: for (String b : array) System.out.print(b + " "); // new test
-          26: list.remove(1); // throws UnsupportedOperation Exception
+          26: list.remove(1); // throws UnsupportedOperation Exception, because changing list size is not allowed here
           
 methods of Arraylist -->
 asList() method --> takes varargs, which let you pass in an array or just type out the String values.
