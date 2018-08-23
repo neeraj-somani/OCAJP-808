@@ -106,14 +106,15 @@ short y = 3;
 short z = x * y; // DOES NOT COMPILE
 why the last line of this statement will not compile? Answer, short values are automatically promoted to int when applying any arithmetic operator, with the resulting value being of type int. Trying to set a short variable to an int results in a compiler error, as Java thinks you are trying to implicitly convert from a larger data type to a smaller one.
 
---- Compound Assignment Operators --->  Only two of the compound operators are required for the exam, += and -=.
+--- Compound Assignment Operators --->  Only few of the compound operators are required for the exam, += and -=, *=, etc.
   compound operators cannot be used to declare a new variable. Variables, should be declared before using this.
-  compound oprator will automatically cast the lower data type value to upper data type value, while calculating the expression.
+-- very imp for exam --> compound oprator will automatically cast the lower data type value to upper data type value, while calculating the expression.
   inserting the assignment operator = in the middle of an expression and apply that value in calculation is completely valid. for example:- long y = (x=3);
           System.out.println(x); // Outputs 3
           System.out.println(y); // Also, outputs 3
 
----- Relational Operators ---> compare two expressions and return a boolean value
+---- Relational Operators ---> compare two expressions and return a *boolean* value
+    If the two numeric operands are not of the same data type, the smaller one is promoted to upper numerical data type.
   < ---> Strictly less than
   <= ---> Less than or equal to
   > ----> Strictly greater than
@@ -138,21 +139,23 @@ x ^ y (EXCLUSIVE OR) --> if both are same then false, else true.
     The equality operators are strictly used in one of three scenarios: 
       1. Comparing two numeric primitive types. If the numeric values are of different data types, the values are automatically promoted as previously described. For example, 5 == 5.00 returns true since the left side is promoted to a double.
       2. Comparing two boolean values.
-      3. Comparing two objects, including null and String values.
-          example:- String a = null;
+      3. Comparing two objects, including null and String values. 
+        For object comparison, the equality operator is applied to the references to the objects, not the objects they point to.
+        Two references are equal if and only if they point to the same object, or both point to null.
+          example 1:- String a = null;
                     String b = null;
                     System.out.println(a == b); // true
 
----- very important -----
-For object comparison, the equality operator is applied to the references to the objects, not the objects they point to. Two references are equal if and only if they point to the same object, or both point to null. Let’s take a look at some examples:
-File x = new File("myFile.txt");
-File y = new File("myFile.txt");
-File z = x;
-System.out.println(x == y); // Outputs false
-System.out.println(x == z); // Outputs true
+          example 2:
+          File x = new File("myFile.txt");
+          File y = new File("myFile.txt");
+          File z = x;
+          System.out.println(x == y); // Outputs false
+          System.out.println(x == z); // Outputs true
 
 ---- Understanding Java Statements ---> 
 A Java statement is a complete unit of execution in Java, terminated with a semicolon (;).
+Control flow statements break up the flow of execution by using decision making, looping, and branching, allowing the application to selectively execute particular segments of code.
 
 ----- The if-then Statement -->
     exam tricks --> exam writers will try to trip you up on if-then statements without braces ({}). Curly braces required for block of multiple statements, optional for single statement.
@@ -170,7 +173,9 @@ int y = 10;
 int x = (y > 5) ? (2 * y) : (3 * y);
 Note that it is often helpful for readability to add parentheses around the expressions in ternary operations, although it is certainly not required.
 
-There is no requirement that second and third expressions in ternary operations have the same data types.
+There is no requirement that second and third expressions in ternary operations have the same data types, although it may come into play when combined with the assignment operator. Compare the following two statements:
+System.out.println((y > 5) ? 21 : "Zebra");
+int animal = (y < 91) ? 9 : "Horse"; // DOES NOT COMPILE
 
 exam tricks --> only one of the right-hand expressions of the ternary operator will be evaluated at runtime. Means, if boolean expression is true then 1st expression will only evaluate at run-time and if boolean expression is false then 2nd expression.
 Its very similar to short-circuit operators.
