@@ -255,7 +255,7 @@ example:--- final String suffix = null ; // DOES NOT COMPILE //
      --> Note that each section is separated by a semicolon, which is also required
      --> The initialization and update sections may contain multiple statements, separated by commas.
      --> be careful in exam, Variables declared in the initialization block of a for loop have limited scope and are only accessible within the for loop. if it is declared before and outside of for loop, then it can be used outside and inside for loop.
-     --> 
+   
      
 Steps in which for loop performs any operation -->
     1 - Initialization statement executes
@@ -299,8 +299,16 @@ Below are five kinds of scenarios that you might see on exam with some twists --
     System.out.print(y + " ");
     }
     System.out.print(x); // DOES NOT COMPILE
-  --> notice, x is defi ned in the initialization block of the loop, and then used after the loop terminates. Since x was only scoped for the loop, using it outside the loop will throw a compiler error.
-
+  --> notice, x is defined in the initialization block of the loop, and then used after the loop terminates. Since x was only scoped for the loop, using it outside the loop will throw a compiler error.
+ 
+ 6. if only update statement missing in for loop -->
+      for(int i=0; i<10 ; ) {
+         i = i++; 
+         System.out.println("Hello World");
+       }
+    --> loop will become infinite in this case as "0" value of i is assigned every time loop executes.
+    --> if we change above code with "i = ++i;", loop will terminate after 10 time. Means, print "Hello World" - 10 times.
+     
 ---- The for-each Statement --->  specifically designed for iterating over arrays and Collection objects. structure of an enhanced for statement:-   for(datatype instance : collection) { //body }
  --> Curly braces required for block of multiple statements, optional for single statement.
  --> colon is also required within bracketes.
