@@ -1,24 +1,18 @@
 Core Java APIs:-  API (Application Programming Interface)
 Interface:- Consist of classes and interfaces that provide some functionality or service.
 
-Few important fundamental Classes -->
-String 
-StringBuilder
-ArrayList
+Few important fundamental Classes (Java Core APIs) --> String  , StringBuilder , ArrayList
 
-<-- String -->
-  Concatenation --> 3 rules 
+<-- String --> Concatenation --> 3 rules 
     1. If both operands are numeric, + means numeric addition.
     2. If either operand is a String, + means concatenation.
     3. The expression is evaluated left to right.
 
-  Immutability -> (unchangable)
-    String objects can't be changed once created.
+Immutability -> (unchangable) --> String objects can't be changed once created.
 
-  The String Pool --> is a location in the Java virtual machine (JVM)  that collects all these strings.
-    It contains literal values.
+The String Pool --> is a location in the Java virtual machine (JVM) that collects all these strings. It contains literal values.
     
-  Important String Methods --> 
+Important String Methods --> 
     length() --> returns the number of characters in the String.
     charAt() --> lets you query the string using index value, 
     indexOf() --> indexOf can work with an individual character or a whole String as input. 
@@ -51,8 +45,7 @@ ArrayList
         System.out.println("abc".trim()); // abc
         System.out.println("\t a b c\n".trim()); // a b c
   
-<-- StringBuilder -->  
- This class creates a String without storing all those interim String values. Unlike the String class, StringBuilder is mutable.
+<-- StringBuilder --> This class creates a String without storing all those interim String values. Unlike the String class, StringBuilder is mutable/changable.
   Chaining --> the StringBuilder changes its own state and returns a reference to itself!
   
 Creating a StringBuilder
@@ -60,8 +53,7 @@ There are three ways to construct a StringBuilder:
 StringBuilder sb1 = new StringBuilder(); // creating sb1 reference to empty StringBuilder object 
 StringBuilder sb2 = new StringBuilder("animal"); // creating sb2 reference to StringBuilder object that contains "animal"
 StringBuilder sb3 = new StringBuilder(10); //creating sb3 reference to empty StringBuilder object having initial capacity of storing 10 charachters. 
-  Size vs Capacity --> Size is the number of characters currently in the sequence, and capacity is the number of characters the sequence can currently hold.
-    important --> Size <= capacity or capacity >= size
+  Size vs Capacity --> Size is the number of characters currently in the sequence, and capacity is the number of characters the sequence can currently hold. important --> Size <= capacity or capacity >= size
 
 StringBuilder Methods -->
   charAt(), indexOf(), length(), and substring()
@@ -73,8 +65,7 @@ insert() --> method adds characters to the StringBuilder at the requested index 
   StringBuilder insert(int offset, String str)
 delete() and deleteCharAt() --> 
   The delete() method , It removes characters from the sequence and returns a reference to the current StringBuilder. 
-  The deleteCharAt() method to delete only one character. 
-    The method signatures are as follows:
+  The deleteCharAt() method to delete only one character. The method signatures are as follows:
         StringBuilder delete(int start, int end)
         StringBuilder deleteCharAt(int index) 
 reverse() --> it reverses the characters in the sequences and returns a reference to the current StringBuilder.
@@ -86,19 +77,18 @@ StringBuilder vs. StringBuffer -->
   StringBuffer does the same thing but more slowly because it is thread safe.
   
 Understanding Equality -->
-equals() method to check the values inside the String rather than the String itself.
+equals() method is used to check the values inside the String rather than the String itself.
 If you call equals() on two StringBuilder instances, it will check reference equality.
 If a class doesn’t have an equals method, Java determines whether the references point to the same object—which is exactly what == does.
 "==" this checks whether two references pointing to same object or not.
 
-Java Arrays -->
-  An array is an area of memory on the heap with space for a designated number of elements. An array is an ordered list. It can contain duplicates.
+Java Arrays --> An array is an area of memory on the heap with space for a designated number of elements. An array is an ordered list. It can contain duplicates. It is fixed in size.
   String Array --> when dealing with characters specifically.
   StringBuilder Array --> implemented so that, the array object is replaced with a new bigger array object when it runs out of space to store all the characters.
-  Important --> big difference is that an array can be of any other Java type.
+  Important --> big difference is that an array can be of any other Java data type.
   
 Creating an Array of Primitives -->
-  int[] numbers1 = new int[3]; --> It specifi es the type of the array (int) and the size (3). The brackets tell you this is an array.
+  int[] numbers1 = new int[3]; --> It specifies the type of the array (int) and the size (3). The brackets tell you this is an array.
   Another way to create an array is to specify all the elements it should start out with:
     int[] numbers2 = new int[] {42, 55, 99};
   or int[] numbers2 = {42, 55, 99};
@@ -120,7 +110,7 @@ Creating an Array with Reference Variables -->
       public static void main(String args[]) {
       String [] bugs = { "cricket", "beetle", "ladybug" };
       String [] alias = bugs;
-      System.out.println(bugs.equals(alias)); // true
+      System.out.println(bugs.equals(alias)); // true // why??
       System.out.println(bugs.toString()); // [Ljava.lang.String;@160bc7c0
       } }
 
