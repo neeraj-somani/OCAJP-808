@@ -344,7 +344,10 @@ System.out.print(name + " ");
         ...
       }
 
+** "break;" statements are not allowed in if-else statement directly, means its allowed on all loops (do, for, while) and switch statements. Understand few things here carefully, if-else and switch are statements not loops, but (do, for, while) are loops and not statements. Hence, if you use break; statement directly in if-else statement, code will not compile but if you use break; statement in if-else statement, which is inside a for loop (like, a nested loop), then this break statement will apply on for loop and code will run properly.
+
 ----- The continue Statement ---> a statement that causes flow to finish the execution of the current loop. The structure of a continue statement is same as block statement. They are even used in similar way but differ in result. means, While the break statement transfers control to the enclosing statement, the continue statement transfers control to the boolean expression that determines if the loop should continue. In other words, it ends the current iteration of the loop, but loop can continue to iterate again if boolean expression of loop still continue to satisfy condition.
+  -- remember, continue statement only allowed in loops (do, for, while) and not in if-else or switch statement.
 
 
 
