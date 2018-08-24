@@ -30,6 +30,7 @@ may be visited in a single execution.
 String s1 = "1"; 
 String s2 = s1.concat("2");
 s2.concat("3");
-System.out.println(s2); \\ it will print "12", as string is immutable. s2 can't be changed.
+System.out.println(s2); \\ it will print "12", as string is immutable. s1 can't be changed but s2 is object created using String methods. Hence, s2 can be changed but we need to assign an method output back to variable so that it gets updated.
+Remember, left-side is reference pointing to objects created on right-side. Hence, in every assignement a new String object is created and assigned to String reference and the old object becomes eligible for garbage collection.
 3. The substring() method is the trickiest String method on the exam.
-4. 
+4. The exam will likely try to trick you with respect to String being immutable and StringBuilder being mutable.
