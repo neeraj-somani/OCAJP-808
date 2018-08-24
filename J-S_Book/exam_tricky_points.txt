@@ -1,4 +1,4 @@
-from ch 2 -->
+-- from ch 2 -->
 1. questions on the exam that try to apply a logical complement operator, !, to a numeric expression, and a negation operator, -, to a boolean expression. cause the code to fail to compile.
 2. pay attention to questions that use Increment and decrement operators, ++ and --, on the same variable multiple time in same statement.
 3. short-circuit operators or conditional operators, && and ||, --> the right-hand side of the expression may never be evaluated if the final result can be determined by the left-hand side of the expression.
@@ -23,4 +23,13 @@ may be visited in a single execution.
 11. Be wary of any exam questions in which a variable declared within the initialization block of a for loop is available outside the loop.
 12. Need to understand the traditional difference between List and Array
 ** 13. "break;" statements are not allowed in if-else statement directly, means its allowed on all loops (do, for, while) and switch statements. Understand few things here carefully, if-else and switch are statements not loops, but (do, for, while) are loops and not statements. Hence, if you use break; statement directly in if-else statement, code will not compile but if you use break; statement in if-else statement, which is inside a for loop (like, a nested loop), then this break statement will apply on for loop and code will run properly.
-14. 
+
+-- from ch 3 ---->
+1. OCA exam creators like string concatenation because the + operator can be used in two ways within the same line of code. (addition and concatenation)
+2. String is immutable, means cant be changed once created. Exam will trick you with concate method, but dont get tricked. Example:
+String s1 = "1"; 
+String s2 = s1.concat("2");
+s2.concat("3");
+System.out.println(s2); \\ it will print "12", as string is immutable. s2 can't be changed.
+3. The substring() method is the trickiest String method on the exam.
+4. 
