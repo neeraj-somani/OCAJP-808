@@ -1,7 +1,17 @@
 Core Java APIs:-  API (Application Programming Interface)
-Interface:- Consist of classes and interfaces that provide some functionality or service.
+Interface:- it can be a group of class or interface defi nitions that gives you access to a service or functionality.
 
 Few important fundamental Classes (Java Core APIs) --> String  , StringBuilder , ArrayList
+String and StringBuilder are used for text data.
+Array and ArrayList are used when we have multiple values to process.
+
+A string is basically a sequence of characters; here’s an example: String name = "Fluffy";
+A string has reference types and are created using the new keyword.
+String class is special and doesn’t need to be instantiated with new, as Both give you a reference variable of type name pointing to the String object "Fluffy", but they are subtly different.
+String name = "Fluffy"; // this will get store in string pool
+String name = new String("Fluffy"); // this will create a new object, even though its less efficient
+
+String API imp properties --> concatenation, immutability, the string pool, common methods, and method chaining.
 
 <-- String --> Concatenation --> 3 rules 
     1. If both operands are numeric, + means numeric addition.
@@ -10,52 +20,66 @@ Few important fundamental Classes (Java Core APIs) --> String  , StringBuilder ,
 
 Immutability -> (unchangable) --> String objects can't be changed once created.
 
-The String Pool --> is a location in the Java virtual machine (JVM) that collects all these strings. It contains literal values.
+The String Pool --> also known as the intern pool, is a location in the Java virtual machine (JVM) that collects all these strings.  It contains literal values.
+For example, “name” is a literal and therefore goes into the string pool. myObject.toString() is a string but not a literal, so it does not go into the string pool. Strings not in the string pool are garbage collected just like any other object.
     
-Important String Methods --> 
-    length() --> returns the number of characters in the String.
-    charAt() --> lets you query the string using index value, 
-    indexOf() --> indexOf can work with an individual character or a whole String as input. 
-        indexOf() returns –1 when no match is found.
+Important String Methods --> a string is a sequence of characters and Java counts from 0 when indexed.
+   1.  length() --> returns the number of characters in the String.
+   2.  charAt() --> lets you query the string using index value, return specific charachter at that index.
+        An Exception "IndexOutOfBound" will be thrown if index not found. 
+   3.  indexOf() --> indexOf can work with an individual character or a whole String as input and return index. It can also start from a requested index position. indexOf() returns –1 when no match is found and doesn't throw an exception.
       The method signatures are as follows:
         int indexOf(char ch)
         int indexOf(char ch, index fromIndex)
         int indexOf(String str)
         int indexOf(String str, index fromIndex)
-     substring() --> returns parts of the string.
-      The method signatures are as follows:
+   4. substring() --> returns parts of the string. There can be 2 parameters first one is to start with and second one to end at specific index position (endIndex is non-inclusive). The method signatures are as follows:
         int substring(int beginIndex)
         int substring(int beginIndex, int endIndex) // endIndex is non-inclusive
-    toLowerCase() and toUpperCase() --> converts characters to uppercase/lowercase in the returned string.
+        tricks --> 
+        1. if endIndex is one greater than the last index value of the String, it wouldn't throw exception. Reason, as its non-inclusive
+        2. but if endIndex is two greater than the last index value of the String, it will throw exception "IndexOutOfBound"
+        3. if start index and end index is same, substring function will return empty string.ex:-string.substring(3, 3); // empty string
+        4. if endIndex is less than StartIndex, then it will throw exception. as java knows indexes cant be backward. ex:- string.substring(3, 2)); // throws exception
+  5.  toLowerCase() and toUpperCase() --> converts characters to uppercase/lowercase and return new string, as original string is immutable.
       String toLowerCase(String str)
       String toUpperCase(String str)
-  equals() and equalsIgnoreCase() --> checks whether two String objects contain exactly the same characters in the same order.
-    boolean equals(String str)
-    boolean equalsIgnoreCase(String str)
-  startsWith() and endsWith() --> methods look at whether the provided value matches part of the String.
+  6.  equals() and equalsIgnoreCase() --> checks whether two String objects contain exactly the same characters in the same order.
+    boolean equals(String str) 
+    boolean equalsIgnoreCase(String str) 
+ 7.  startsWith() and endsWith() --> methods look at whether the provided value matches part of the String.
     boolean startsWith(String prefix)
     boolean endsWith(String suffix)
-  contains() --> method also looks for matches in the String. the match can be anywhere in the String. 
+8.  contains() --> method also looks for matches in the String. the match can be anywhere in the String. 
     boolean contains(String str)
-  replace() --> method does a simple search and replace on the string.
+9.  replace() --> method does a simple search and replace on the string.
     String replace(char oldChar, char newChar) // notice here we can pass char values
     String replace(CharSequence oldChar, CharSequence newChar) // notice here we can pass String values
-  trim() --> method removes whitespace from the beginning and end of a String.
+10.  trim() --> method removes whitespace from the beginning and end of a String.
      example -->
         System.out.println("abc".trim()); // abc
         System.out.println("\t a b c\n".trim()); // a b c
   
-<-- StringBuilder --> This class creates a String without storing all those interim String values. Unlike the String class, StringBuilder is mutable/changable.
+<-- StringBuilder --> This class creates a String without storing all interim String values. StringBuilder is mutable/changable.
   Chaining --> the StringBuilder changes its own state and returns a reference to itself!
   
-Creating a StringBuilder
-There are three ways to construct a StringBuilder:
+StringBuilder API imp properties -->  creating a StringBuilder, Mutability and Chaining,  common methods, and a comparison to StringBuffer.
+
+1. Creating a StringBuilder -->  There are three ways to construct a StringBuilder:
 StringBuilder sb1 = new StringBuilder(); // creating sb1 reference to empty StringBuilder object 
 StringBuilder sb2 = new StringBuilder("animal"); // creating sb2 reference to StringBuilder object that contains "animal"
 StringBuilder sb3 = new StringBuilder(10); //creating sb3 reference to empty StringBuilder object having initial capacity of storing 10 charachters. 
   Size vs Capacity --> Size is the number of characters currently in the sequence, and capacity is the number of characters the sequence can currently hold. important --> Size <= capacity or capacity >= size
 
-StringBuilder Methods -->
+2. Mutability and Chaining --> StringBuilder is mutable. Chaining StringBuilder objects, changes its own state and returns a reference to itself! example:-
+        StringBuilder a = new StringBuilder("abc");
+        StringBuilder b = a.append("de");
+        b = b.append("f").append("g");
+        System.out.println("a=" + a); // abcdefg // a and b both pointing to same StringBuilder object
+        System.out.println("b=" + b); // abcdefg // a and b both pointing to same StringBuilder object
+reason:- We know that because new StringBuilder() was called only once.
+
+3. StringBuilder Methods -->
   charAt(), indexOf(), length(), and substring()
   All above methods works exactly same as described in String class. Notice that substring() returns a String rather than a StringBuilder. Hence when used with StringBuilder, doesn't directly change StringBuilder object.
  append() --> it adds the parameter to the StringBuilder and returns a reference to the current StringBuilder.
