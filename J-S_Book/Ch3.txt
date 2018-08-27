@@ -141,13 +141,15 @@ Notes:-
 Java Arrays --> An array is an area of memory on the heap with space for a designated number of elements. An array is an ordered list. It can contain duplicates. It is fixed in size.
   String Array --> A String is implemented as an array, when dealing with characters specifically.
   StringBuilder Array --> implemented so that, the array object is replaced with a new bigger array object when it runs out of space to store all the characters.
-  Important --> big difference is that an array can be of any other Java data type.
+  Important --> big difference is that an array can be of any other Java primitive data type.
   
+Array imp concepts --> look at creating an array of primitives and objects, sorting, searching, varargs, and multidimensional arrays.  
+
 Creating an Array of Primitives -->
   int[] numbers1 = new int[3]; --> It specifies the type of the array (int) and the size (3). The brackets tell you this is an array.
   Another way to create an array is to specify all the elements it should start out with:
-    int[] numbers2 = new int[] {42, 55, 99};
-  or int[] numbers2 = {42, 55, 99};
+    int[] numbers2 = new int[] {42, 55, 99}; 
+  or int[] numbers2 = {42, 55, 99}; // known as anonymous array
   
   below are 4 different valid ways for creating Array -->
   int[] numAnimals;
@@ -166,21 +168,36 @@ Creating an Array with Reference Variables -->
       public static void main(String args[]) {
       String [] bugs = { "cricket", "beetle", "ladybug" };
       String [] alias = bugs;
-      System.out.println(bugs.equals(alias)); // true // why??
+      System.out.println(bugs.equals(alias)); // true // why?? answer explanation below --
       System.out.println(bugs.toString()); // [Ljava.lang.String;@160bc7c0
       } }
+answer explanation below --
+** imp points --> The equals() method on arrays does not look at the elements of the array.
+    Remember, this would work even on an int[] too. int is a primitive; int[] is an object. We can call equals() because an array is an object. It returns true because of reference equality. this is because,  If a class doesn’t have an equals method, Java determines whether the references point to the same object—which is exactly what == does. "==" this checks whether two references pointing to same object or not.
+** imp points --> bugs.toString() method wouldn't convert array to string but it will return some object reference value, that consist of [L means it is an array, java.lang.String is the reference type, and 160bc7c0 is the hash code. 
 
-Using an Array --> Example 
+** imp --> all exam questions are written long back hence, new Array method is not still used in exam. Java has provided a method that prints an array nicely: java.util.Arrays.toString(bugs) would print [cricket, beetle, ladybug]. 
+
+** --> The array does not allocate space for the String objects. Instead, it allocates space for a reference to where the objects are really stored.
+
+** very imp --> casting is possible in array as well, when you wanted to force a bigger type into a smaller type.
+example:- 
+String[] strings = { "stringValue" }; // creates an array of type String 
+Object[] objects = strings; // reference object name "objects" of type Object pointing to strings object. this doesn’t require a cast because Object is a broader type than String.
+String[] againStrings = (String[]) objects; // a cast is needed because we are moving to a more specific type.
+againStrings[0] = new StringBuilder(); // DOES NOT COMPILE // because a String[] only allows String objects and StringBuilder is not a String.
+objects[0] = new StringBuilder(); // careful! a runtime exception will be thrown // because A StringBuilder object can clearly go in an Object[]. The problem is that we don’t actually have an Object[]. We have a String[] referred to from an Object[] variable. At runtime, the code throws an ArrayStoreException.
+
+Using an Array --> Example, declaing, initiallizing and accessing array using index.
   4: String[] mammals = {"monkey", "chimp", "donkey"};
   5: System.out.println(mammals.length); // 3
   6: System.out.println(mammals[0]); // monkey
   7: System.out.println(mammals[1]); // chimp
   8: System.out.println(mammals[2]); // donkey
   
-Sorting -->
-  This requires an import statement to inport sort method of Array class.
+Sorting --> This requires an import statement to inport sort method of Array class.
     import java.util.* // import whole package including Arrays
-    import java.util.Arrays; // import just Arrays
+    import java.util.Arrays; // import just Arrays // or use this full path while using Arrays class
 
 using int type -->
   int[] numbers = { 6, 9, 1 };
@@ -188,6 +205,7 @@ using int type -->
   for (int i = 0; i < numbers.length; i++)
   L System.out.print (numbers[i] + " ");
     The result is 1 6 9, Notice that we had to loop through the output to print the values in the array. Just printing the array variable directly would give the annoying hash of [I@2bd9c3e7.
+The sort method sorts original array and assign it to original reference object, no need to assign to create new object for sort result to store.
 
 using String type -->    
     String[] strings = { "10", "9", "100" };
