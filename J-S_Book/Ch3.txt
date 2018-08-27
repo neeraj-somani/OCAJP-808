@@ -101,10 +101,9 @@ StringBuilder vs. StringBuffer -->
   StringBuffer does the same thing but more slowly because it is thread safe.
   
 Understanding Equality -->
-    equals() method is used to check the values inside the String rather than the String itself.
+    equals() method is used to check the values inside the String rather than the String object itself.
     If you call equals() on two StringBuilder instances, it will check reference equality.
-    If a class doesn’t have an equals method, Java determines whether the references point to the same object—which is exactly what == does.
-    "==" this checks whether two references pointing to same object or not.
+    If a class doesn’t have an equals method, Java determines whether the references point to the same object—which is exactly what == does. "==" this checks whether two references pointing to same object or not.
 
 -- Difference between == and .equals() method in Java -->
     1. Main difference between .equals() method and == operator is that one is method and other is operator.
@@ -124,7 +123,7 @@ Example -->
             System.out.println(t1 == t3); // true, as both t1 and t3 pointing to same object 
             System.out.println(t1 == t2); // false, as both t1 and t2 pointing to different objects 
             System.out.println(t1.equals(t3)); // true, as both t1 and t3 pointing to same object, having same value
-            System.out.println(t1.equals(t2)); // false, as both t1 and t2 pointing to different objects, even having same null value
+            System.out.println(t1.equals(t2)); // false, as both t1 and t2 pointing to different objects, even having same null value, // also Thread has not implemented equals method to compare values.
 
             System.out.println(" ");
 
@@ -137,11 +136,10 @@ Example -->
 
 Notes:-  
 1. We can apply equality operators (==) for every primitive types including boolean type. we can also apply equality operators for object types.
-2. If we apply equality operators (==) for object types then, there should be compatibility between arguments types (either child to parent or parent to child or same type). Otherwise code will get compile time error.
-3. 
+2. If we apply equality operators (==) for object types then, there should be compatibility between arguments types (either child to parent or parent to child or same type). Otherwise code will throw compile time error.
 
 Java Arrays --> An array is an area of memory on the heap with space for a designated number of elements. An array is an ordered list. It can contain duplicates. It is fixed in size.
-  String Array --> when dealing with characters specifically.
+  String Array --> A String is implemented as an array, when dealing with characters specifically.
   StringBuilder Array --> implemented so that, the array object is replaced with a new bigger array object when it runs out of space to store all the characters.
   Important --> big difference is that an array can be of any other Java data type.
   
