@@ -250,15 +250,15 @@ Multidimensional Arrays -->
     int vars2 [][]; // 2D array
     int[] vars3[]; // 2D array
     int[] vars4 [], space [][]; // a 2D AND a 3D array
-    String [][] rectangle = new String[3][2]; // declaring the size as well
+    String [][] args = new String[3][2]; // declaring the size as well // note args.length is 3 here. which is how many rows in 2D array
     int [][] args = new int[4][];
     
-ArrayList -->
-  ArrayList can change size at runtime as needed.
-  ArrayList is an ordered sequence that allows duplicates.
+ArrayList --> ArrayList can change size at runtime as needed. ArrayList is an ordered sequence that allows duplicates.
     ArrayList also requires import statements:
     import java.util.* // import whole package including ArrayList
     import java.util.ArrayList; // import just ArrayList
+
+imp concepts --> creating an ArrayList, common methods, autoboxing, conversion, and sorting.
 
 three old ways but still valid ways, to create an ArrayList: These works today as well but defined before java 5
 ArrayList list1 = new ArrayList();
