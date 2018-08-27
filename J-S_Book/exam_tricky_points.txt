@@ -34,3 +34,5 @@ System.out.println(s2); \\ it will print "12", as string is immutable. s1 can't 
 Remember, left-side is reference pointing to objects created on right-side. Hence, in every assignement a new String object is created and assigned to String reference and the old object becomes eligible for garbage collection.
 3. The substring() method is the trickiest String method on the exam.
 4. The exam will likely try to trick you with respect to String being immutable and StringBuilder being mutable.
+5. stringBuilder insert method --> The exam creators will try to trip you up on this. As we add and remove characters, their indexes change. When you see a question dealing with such operations, draw what is going on so you won’t be confused.
+6. Remember, IndexOutofBound exceptions are very 
