@@ -216,8 +216,8 @@ using String type -->
     This time the result might not be what you expect. This code outputs 10 100 9. The problem is that String sorts in alphabetic order, and 1 sorts before 9. (Numbers sort before letters and uppercase sorts before lowercase, in case you were wondering.)
     
     
-Searching -->
-  Three rules for binary search -->
+Searching --> only sorted array
+Three rules for binary search -->
     1. Target element found in sorted array --> Index of match
     2. Target element not found in sorted array --> Negative value showing one smaller than the negative of index, where a match needs to be inserted to preserve sorted order.
     3. Unsorted array -->  A surprise—this result isn’t predictable
@@ -231,26 +231,28 @@ Searching -->
     8: System.out.println(Arrays.binarySearch(numbers, 9)); // -5
     
   example for unsorted array: 
-    5: int numbers = new int[] {3,2,1};
+    5: int numbers[] = new int[] {3,2,1}; // in book it is wrongly printed, be careful!
     6: System.out.println(Arrays.binarySearch(numbers, 2)); // unpredictable output.
     7: System.out.println(Arrays.binarySearch(numbers, 3)); // unpredictable output.
     
     Note for Exam --> As soon as you see the array isn’t sorted, look for an answer choice about unpredictable output.
     
-Varargs --> (variable arguments)
-  Below are few valid example for declaring Array in method and how to use Array methods within method defination.
+Varargs --> (variable arguments) -- chapter 4 has more details.
+  Below are few valid example for declaring Array in method and how to use Array methods within method definition.
     public static void main(String[] args)
     public static void main(String args[])
     public static void main(String... args) // varargs
 
 Multidimensional Arrays -->
-  Arrays are objects, and of course array components can be objects. arrays can hold other arrays.
+  Arrays are objects, and array components can also be an objects. arrays can hold other arrays.
   few example of Multidimensional Array declaration :
     int[][] vars1; // 2D array
     int vars2 [][]; // 2D array
     int[] vars3[]; // 2D array
     int[] vars4 [], space [][]; // a 2D AND a 3D array
-
+    String [][] rectangle = new String[3][2]; // declaring the size as well
+    int [][] args = new int[4][];
+    
 ArrayList -->
   ArrayList can change size at runtime as needed.
   ArrayList is an ordered sequence that allows duplicates.
