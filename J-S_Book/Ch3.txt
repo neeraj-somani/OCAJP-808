@@ -273,9 +273,9 @@ ArrayList<String> list5 = new ArrayList<>(); // this introduced starting java 7
 List<String> list6 = new ArrayList<>();
 ArrayList<String> list7 = new List<>(); // DOES NOT COMPILE // reason is that List is an interface and interfaces can’t be instantiated.
 
-Using an ArrayList -->
-  you will see something new in the method signatures: a “class” named E. In generics this mean “any class that this array can hold.”
-  If you didn’t specify a type when creating the ArrayList, E means Object. Otherwise, it means the class you put between < and >.
+Using an ArrayList --> 
+    ArrayList methods signature consist of a “class” named E. E is used by convention in generics to mean “any class that this array can hold.” If you didn’t specify a type when creating the ArrayList, E means Object. Otherwise, it means the class you put between < and >.
+  --> ArrayList implements toString() to print content easily. Arrays do not do produce such pretty output.
 
 add() methods --> insert a new value in the ArrayList
   boolean add(E element) // means it can hold “any class that this array can hold.”
