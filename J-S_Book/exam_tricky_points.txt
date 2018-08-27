@@ -35,4 +35,6 @@ Remember, left-side is reference pointing to objects created on right-side. Henc
 3. The substring() method is the trickiest String method on the exam.
 4. The exam will likely try to trick you with respect to String being immutable and StringBuilder being mutable.
 5. stringBuilder insert method --> The exam creators will try to trip you up on this. As we add and remove characters, their indexes change. When you see a question dealing with such operations, draw what is going on so you won’t be confused.
-6. Remember, IndexOutofBound exceptions are very 
+6. Remember, IndexOutofBound exceptions are very common scenarios for exam when using StringBuilder methods.
+7. pay attention to object reference, while creating object using String class or the Class in which it is used. like Tiger class. Since, Tiger class did't implement equals method, object comparison "t1.equals(t2)" results false.
+8. 
