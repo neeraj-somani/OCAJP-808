@@ -39,4 +39,4 @@ Remember, left-side is reference pointing to objects created on right-side. Henc
 7. pay attention to object reference, while creating object using String class or the Class in which it is used. like Tiger class. Since, Tiger class did't implement equals method, object comparison "t1.equals(t2)" results false.
 8. for an array, The exam will test whether you are being observant by trying to access elements that are not in the array. why,  there can be ArrayIndexOutOfBoundsException will be thrown.
 9. binarySearch for unsorted array means result will be unpredictable output.
-10. 
+10. arrayList method signature important for exam. Remember add method returns boolean type.
