@@ -4,6 +4,7 @@ Method signature and its components -->
   Access Modifiers --> below is the order from most restritive to least restrictive
     private --> Only accessible within the same class. The method can only be called from within the same class.
     Default (Package Private) Access --> can access in same package. The method can only be called from classes in the same package. There is no "default" keyword and hence we don't need to specify this in method declaration.
+    **(protected access is very imp for exam) -->
     protected --> The method can only be called from classes in the same package or subclasses (means, can be called from same package or different package incase it got inheriteted). (page 178, 179 very important). Table on page 180.
       Subclasses means those classes which extends other parent class and become child class. (inheritance) 
     public --> The method can be called from any class.
