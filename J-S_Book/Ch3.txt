@@ -358,7 +358,7 @@ contains() method --> checks whether a certain value is in the ArrayList. This m
       40: System.out.println(one.equals(two)); // false
      
 Wrapper Classes --> This is helpful when we need to store any value other than String type in Array or ArrayList. (means primitive type) 
-  wrapper class is an object type that corresponds to the primitive type.
+  wrapper class is an object type that corresponds to the specific primitive type.
   
       Primitive type -- Wrapper class -- Example of constructing
       boolean -- Boolean -- new Boolean(true)
@@ -370,21 +370,25 @@ Wrapper Classes --> This is helpful when we need to store any value other than S
       double -- Double -- new Double(1.0)
       char -- Character -- new Character('c')
       
-   Wrapper classes methods -->
-      a method that converts back to a primitive type
-      methods for converting a String to a primitive or wrapper class
-          The parse methods, such as parseInt(), return a primitive
-          The valueOf() method returns a wrapper class
+   Wrapper classes methods --> a method that converts back to a primitive type. 
+   ** for exam, no need to know much about constructors of wrapper class and intValue() type method. you might see in exam because question was written long back but it was not in OCA because of Autoboxing. No need to search for any trick in those statements.
+      
+      imp methods --> for converting a String to a primitive or wrapper class
+          parseInt() --> The parse methods, return a primitive. In this case int value
+          The valueOf() --> method returns a wrapper class
       **// need to understand with example what is the need for converting these values to primitve and wrapper class.
       
     example --> 
       int primitive = Integer.parseInt("123"); // converts a String to an int primitive
       Integer wrapper = Integer.valueOf("123"); // converts a String to an Integer wrapper class.
     
-    If the String passed in is not valid for the given type, Java throws an exception. In these examples, letters and dots are not valid for an integer value:
+Java throws an exception for any invalid match -->
     int bad1 = Integer.parseInt("a"); // throws NumberFormatException
     Integer bad2 = Integer.valueOf("123.45"); // throws NumberFormatException
 
+very imp **--> There is no ParseCharachter() or valueOf() method for Charachter wrapper class. Since a String is made up of characters, you can just call charAt() normally.
+
+In general we don't need to be worry about these parseInt() or valueOf() method, because autoboxing is taking care of it by itself.
 
 Autoboxing --> just type the primitive value and Java will convert it to the relevant wrapper class for you.
     Example -->
@@ -396,14 +400,21 @@ Autoboxing --> just type the primitive value and Java will convert it to the rel
       
       Note --> if you try to unbox a null, you will get NullPointerException, but you can autobox or pass null without any issue
       3: List<Integer> heights = new ArrayList<>();
-      4: heights.add(null);
-      5: int h = heights.get(0); // NullPointerException
+      4: heights.add(null); // this is legal, because a null reference can be assigned to any reference variable.
+      5: int h = heights.get(0); // NullPointerException // because we try to unbox that null to an int primitive.
 
 **//While using different methods need to understand which method looks for index value and which looks for actual data value.
+example:-- 
+    List<Integer> numbers = new ArrayList<>(); 
+    numbers.add(1); // [1]
+    numbers.add(2); // [1,2]
+    numbers.remove(1); //[1]
+    System.out.println(numbers); // [1], this will print 1. 
+Reason, there is already one remove method in ArrayList that takes index value to remove element of List. Hence, be careful.
 
-Converting Between array and List (ArrayList) -->
-  1) turning an ArrayList into an array: 
-        this will convert an Arraylist into an Array of same size at the time of conversion. Array size can't be chnaged after that.
+
+Converting Between array and List (ArrayList) --> toArray() method and Arrays.asList() method
+  1) List to array --> this will convert an Arraylist into an Array of same size at the time of conversion. Array size can't be chnaged after that.
         Example:- 
           3: List<String> list = new ArrayList<>();
           4: list.add("hawk");
@@ -413,7 +424,7 @@ Converting Between array and List (ArrayList) -->
           7: System.out.println(objectArray.length); // 2
           8: String[] stringArray = list.toArray(new String[0]);
           9: System.out.println(stringArray.length); // 2
-  2) turning an array into an List: 
+  2) Array to a List --> 
         this will convert a fixed size array into fixed size List at the time of conversion. As we know we can't change array size once created but list can grow and Shrink. In this case List also can't chnages its size and hence known as Backed-List. 
         The original array and created array backed List are linked. When a change is made to one, it is available in the other. Although, change here means updating values, not changing the size. Changing the size will through exception.
         Example:-
@@ -425,11 +436,11 @@ Converting Between array and List (ArrayList) -->
           25: for (String b : array) System.out.print(b + " "); // new test
           26: list.remove(1); // throws UnsupportedOperation Exception, because changing list size is not allowed here
           
-methods of Arraylist -->
+few imp methods -->
 asList() method --> takes varargs, which let you pass in an array or just type out the String values.
   List<String> list = Arrays.asList("one", "two");
         
-Sort() method --> Sorting an ArrayList is very similar to sorting an array. You just use a different helper class:
+Sort() method --> Sorting an ArrayList is very similar to sorting an array. You just use a different (Collections) helper class:
     example-->
         List<Integer> numbers = new ArrayList<>();
         numbers.add(99);
@@ -438,12 +449,15 @@ Sort() method --> Sorting an ArrayList is very similar to sorting an array. You 
         Collections.sort(numbers); // Collections is the helper class
         System.out.println(numbers); [5, 81, 99]
         
-Working with Dates and Times -->
-  import java.time.*; // import time classes 
-  LocalDate --> Contains just a date—no time and no time zone.
+Working with Dates and Times --> all date and time classes are in this package. 
+    import java.time.*; // import date and time classes 
+    ** Month is a special type of class called an enum, which is like constant variable.
+    
+  LocalDate --> this class Contains just a date — no time and no time zone.
     LocalDate date1 = LocalDate.of(2015, Month.JANUARY, 20);
     LocalDate date2 = LocalDate.of(2015, 1, 20);
-    ---LocalDateTime can use below methods----
+    System.out.println(LocalDate.now()); // this will print current date as per system
+    ---LocalDate can use below methods----
       plusYears/minusYears 
       plusMonths/minusMonths 
       plusWeeks/minusWeeks 
@@ -453,6 +467,7 @@ Working with Dates and Times -->
     LocalTime time1 = LocalTime.of(6, 15); // hour and minute
     LocalTime time2 = LocalTime.of(6, 15, 30); // + seconds
     LocalTime time3 = LocalTime.of(6, 15, 30, 200); // + nanoseconds
+    System.out.println(LocalTime.now()); // this will print current time as per system
       ---LocalTime can use below methods---- 
       plusHours/minusHours 
       plusMinutes/minusMinutes 
@@ -460,6 +475,8 @@ Working with Dates and Times -->
       plusNanos/minusNanos
       
   LocalDateTime --> Contains both a date and time but no time zone.
+    System.out.println(LocalDateTime.now()); // this will print current date and time as per system
+  
       public static LocalDateTime of(int year, int month, int dayOfMonth, int hour, int minute)
       public static LocalDateTime of(int year, int month, int dayOfMonth, int hour, int minute, int second)
       public static LocalDateTime of(int year, int month, int dayOfMonth, int hour, int minute, int second, int nanos)
@@ -477,31 +494,116 @@ Working with Dates and Times -->
       plusMinutes/minusMinutes 
       plusSeconds/minusSeconds
       plusNanos/minusNanos
+ 
+imp points / tricks --> 
+ 1. No constructor for Date and Time classes. The exam creators may try to throw something like this at you. Don’t fall for this. You are not allowed to construct a date or time object directly.
+    LocalDate d = new LocalDate(); // DOES NOT COMPILE
   
-  Below package needs to be imported before use:
-  import java.time.*; // import time classes
-      Tricks to remember -->
-        You are not allowed to construct a date or time object directly. There is no constructor for Date and Time objects.
-          LocalDate d = new LocalDate(); // DOES NOT COMPILE
-        The date and time classes are immutable, just like String was. Means, remember to assign the results of these methods to a reference variable, so they are not lost because of Garbage Collector. 
+2. you can't pass wrong values
+LocalDate.of(2015, Month.JANUARY, 32) // throws DateTimeException // 
+
+3. The date and time classes are immutable, just like String was. Means, remember to assign the results of these methods to a reference variable, so they are not lost because of Garbage Collector. 
+
+4. There are two ways the exam creators can try to trick you. What do you think this prints?
+LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); 
+date.plusDays(10);
+System.out.println(date); // It prints January 20, 2020. Adding 10 days was useless because we ignored the result.
+
+5. The exam also may test to see if you remember what each of the date and time objects includes. Do you see what is wrong here?
+LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(1); // DOES NOT COMPILE //LocalDate does not contain time.
    
-   
-   ---- Working with Periods ---
-    There are fi ve ways to create a Period class:
+---- Working with Periods --- 
+    A Period is generic class used for creating a specific periods of time and that can be used to manipulate dates.
+    plus() method is used to manipulate date with period generic class.
+    
+    There are five ways to create a Period class:
       Period annually = Period.ofYears(1); // every 1 year
       Period quarterly = Period.ofMonths(3); // every 3 months
-      Working with Dates and Times 147
       Period everyThreeWeeks = Period.ofWeeks(3); // every 3 weeks
       Period everyOtherDay = Period.ofDays(2); // every 2 days
       Period everyYearAndAWeek = Period.of(1, 0, 7); // every year and 7 days
    
+   LocalDate start = LocalDate.of(2015, Month.JANUARY, 1);
+   LocalDate end = LocalDate.of(2015, Month.MARCH, 30);
+        start = start.plus(annually);
+        
    Tricks to remember: 
-    You cannot chain methods when creating a Period. 
+    1. You cannot chain methods when creating a Period. 
         Period wrong = Period.ofYears(1).ofWeeks(1); // every week // DOES NOT COMPILE
+    2. a Period is a day or more of time, means ofDays(), ofWeeks(), ofMonths() and ofYears().
+    3. There is another class known as Duration, For Duration, you can specify the number of days, hours, minutes, seconds, or nanoseconds. This is not on OCA exam.
+    
 
-  --- Formatting Dates and Times ---
+  --- Formatting Dates and Times --- 
+  lets look at some method which are useful to fetch specific details from date or time objects
+    LocalDate date = LocalDate.of(2020, Month.MARCH, 20);
+    System.out.println(date.getDayOfWeek());  // MONDAY
+    System.out.println(date.getMonth()); // JANUARY
+    System.out.println(date.getYear()); // 2020
+    System.out.println(date.getDayOfYear());  // 80
+    System.out.println(date.getDayOfMonth());  // 20
+ 
+DateTimeFormatter can be used to format any type of date and/or time object. 
+DateTimeFormatter is in the package java.time.format.
+
+import java.time.format.*;
+import java.time.*;
+
+LocalDate date = LocalDate.of(2020, Month.JANUARY, 20);
+LocalTime time = LocalTime.of(11, 12, 34);
+LocalDateTime dateTime = LocalDateTime.of(date, time);
+System.out.println(date.format(DateTimeFormatter.ISO_LOCAL_DATE)); //2020-01-20
+System.out.println(time.format(DateTimeFormatter.ISO_LOCAL_TIME)); // 11:12:34
+System.out.println(dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)); //2020-01-20T11:12:34
+
+there are some predefined formats that are more useful and easy to format the display of date and time -->
+
+DateTimeFormatter shortDateTime = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+System.out.println(shortDateTime.format(dateTime)); // 1/20/20 
+System.out.println(shortDateTime.format(date)); // 1/20/20 
+System.out.println(shortDateTime.format(time)); // UnsupportedTemporalTypeException, because a time cannot be formatted as a date
+
+above commands can also be written as below. The format() method is declared on both the formatter objects and the date/time objects, allowing you to reference the objects in either order.
+
+DateTimeFormatter shortDateTime = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+System.out.println(dateTime.format(shortDateTime)); // 1/20/20 
+System.out.println(date.format(shortDateTime)); // 1/20/20 
+System.out.println(time.format(shortDateTime)); // UnsupportedTemporalTypeException, because a time cannot be formatted as a date
+
+** imp for exam -->
+Remember below method uses (else understand from page - 149)
+    1. ofLocalizedDate method --> can be used only with LocalDate and LocalDateTime objects.
+    2. ofLocalizedDateTime method --> can be used only with LocalDateTime objects.
+    3. ofLocalizedTime method --> can be used only with LocalTime and LocalDateTime objects.
+
+** imp --> There are two predefined formats that can show up on the exam: SHORT and MEDIUM.
+example:-
+LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); 
+LocalTime time = LocalTime.of(11, 12, 34); 
+LocalDateTime dateTime = LocalDateTime.of(date, time);
+DateTimeFormatter shortF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+DateTimeFormatter mediumF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+System.out.println(shortF.format(dateTime));  // 1/20/20 11:12 AM
+System.out.println(mediumF.format(dateTime)); // Jan 20, 2020 11:12:34 AM
+
+DateTimeFormat class allow you to create your own custom format style. ofPattern() method we need to use.
+example:-
+DateTimeFormatter f = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm"); 
+System.out.println(dateTime.format(f)); // January 20, 2020, 11:12
+
+
   --- Parsing Dates and Times ----
     Just like the format() method, the parse() method takes a formatter as well. If you don’t specify one, it uses the default for that type. 
+
+
+
+
+
+
+
+
+
+
 
 
 Review Question Attempt 1 -->
