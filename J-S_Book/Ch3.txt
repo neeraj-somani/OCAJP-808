@@ -528,8 +528,8 @@ LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(
         start = start.plus(annually);
         
    Tricks to remember: 
-    1. You cannot chain methods when creating a Period. 
-        Period wrong = Period.ofYears(1).ofWeeks(1); // every week // DOES NOT COMPILE
+    1. Chain methods in Periods doesn't work, only the last method in chain will be evaluated.
+        Period wrong = Period.ofYears(1).ofWeeks(1); // every week
     2. a Period is a day or more of time, means ofDays(), ofWeeks(), ofMonths() and ofYears().
     3. There is another class known as Duration, For Duration, you can specify the number of days, hours, minutes, seconds, or nanoseconds. This is not on OCA exam.
     
@@ -563,7 +563,9 @@ System.out.println(shortDateTime.format(dateTime)); // 1/20/20
 System.out.println(shortDateTime.format(date)); // 1/20/20 
 System.out.println(shortDateTime.format(time)); // UnsupportedTemporalTypeException, because a time cannot be formatted as a date
 
-above commands can also be written as below. The format() method is declared on both the formatter objects and the date/time objects, allowing you to reference the objects in either order.
+--> above commands can also be written as below. The format() method is declared on both the formatter objects and the date/time objects, allowing you to reference the objects in either order.
+--> The format() method Formats the date using the specified formatter. This date will be passed to the formatter to produce a string.
+
 
 DateTimeFormatter shortDateTime = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
 System.out.println(dateTime.format(shortDateTime)); // 1/20/20 
@@ -593,8 +595,15 @@ System.out.println(dateTime.format(f)); // January 20, 2020, 11:12
 
 
   --- Parsing Dates and Times ----
-    Just like the format() method, the parse() method takes a formatter as well. If you don’t specify one, it uses the default for that type. 
+    Just like the format() method, the parse() method also takes a formatter. If you don’t specify one, it uses the default for that type. 
+    So, parse method is used to display date or time in most readable format, from the entered DateTimeFormatter pattern. 
+    Obtains an instance of LocalTime from a text string such as 10:15.  The string must represent a valid time and is parsed using DateTimeFormatter.ISO_LOCAL_TIME.
 
+    DateTimeFormatter f = DateTimeFormatter.ofPattern("MM dd yyyy");
+    LocalDate date = LocalDate.parse("01 02 2015", f);
+    LocalTime time = LocalTime.parse("11:22");
+    System.out.println(date); // 2015-01-02
+    System.out.println(time); // 11:22
 
 
 
