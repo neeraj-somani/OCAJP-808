@@ -24,7 +24,7 @@ may be visited in a single execution.
 12. Need to understand the traditional difference between List and Array
 ** 13. "break;" statements are not allowed in if-else statement directly, means its allowed on all loops (do, for, while) and switch statements. Understand few things here carefully, if-else and switch are statements not loops, but (do, for, while) are loops and not statements. Hence, if you use break; statement directly in if-else statement, code will not compile but if you use break; statement in if-else statement, which is inside a for loop (like, a nested loop), then this break statement will apply on for loop and code will run properly.
 
--- from ch 3 ---->
+-- from ch 3 ----> very weak on this chapter (need to work on it again)
 1. OCA exam creators like string concatenation because the + operator can be used in two ways within the same line of code. (addition and concatenation)
 2. String is immutable, means cant be changed once created. Exam will trick you with concate method, but dont get tricked. Example:
 String s1 = "1"; 
@@ -54,4 +54,9 @@ LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(
 17. Exam, will trick you to see which ofLocalizedXXXX() method can be used with which date and time objects.
 18. LocalDate and LocalTime objects are immutable, hence we need to store it in variable, in order not to get lost.
 19. Exam will trick you on inserting wrong date or time values. Code will compile but there will be runTime exception.
-20. 
+20. Remember, asList() is the method of Arrays class and in aurgument we need to pass array object. example below:
+  List<Integer> list = Arrays.asList(10, 4, -1, 5); // this will compile 
+  but below will give compile error -->
+  String [] names = {"Tom", "Dick", "Harry"};
+  List<String> list = names.asList(); // compile error because asList() method can't be used on array object.
+21. 
