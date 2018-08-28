@@ -39,5 +39,17 @@ Remember, left-side is reference pointing to objects created on right-side. Henc
 7. pay attention to object reference, while creating object using String class or the Class in which it is used. like Tiger class. Since, Tiger class did't implement equals method, object comparison "t1.equals(t2)" results false.
 8. for an array, The exam will test whether you are being observant by trying to access elements that are not in the array. why,  there can be ArrayIndexOutOfBoundsException will be thrown.
 9. binarySearch for unsorted array means result will be unpredictable output.
-10. arrayList method signature important for exam. In exam, note on paper to keep track of items in ArrayList.
-11. 
+10. arrayList method signature important for exam. In exam, note on paper to keep track of items in ArrayList, add(), remove().
+11. Also, which method takes what aurgument, means data value or index value. Whats there written type.
+12. Remember, OCA exam doesn't cover timezone part for Date and time new API.
+13. No constructor for Date and Time classes. The exam creators may try to throw something like this at you. Don’t fall for this. You are not allowed to construct a date or time object directly.
+LocalDate d = new LocalDate(); // DOES NOT COMPILE
+14. When you have a lot of manipulations to make, this chaining comes in handy. There are two ways the exam creators can try to trick you. What do you think this prints?
+LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); 
+date.plusDays(10);
+System.out.println(date); // It prints January 20, 2020. Adding 10 days was useless because we ignored the result.
+15. The exam also may test to see if you remember what each of the date and time objects includes. Do you see what is wrong here?
+LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(1); // DOES NOT COMPILE //LocalDate does not contain time.
+16. There are two predefined formats that can show up on the exam: SHORT and MEDIUM. This is to format date and time objects.
+17. Exam, will trick you to see which ofLocalizedXXXX() method can be used with which date and time objects.
+18. 
