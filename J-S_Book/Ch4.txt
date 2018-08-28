@@ -1,17 +1,20 @@
 chapter 4 - Methods and Encapsulation
 
 Method signature and its components -->
-  Access Modifiers --> in order from most restritive to least restrictive
+  Access Modifiers --> below is the order from most restritive to least restrictive
     private --> Only accessible within the same class. The method can only be called from within the same class.
     Default (Package Private) Access --> can access in same package. The method can only be called from classes in the same package. There is no "default" keyword and hence we don't need to specify this in method declaration.
-    protected --> The method can only be called from classes in the same package or subclasses (means, can be called from same package or different package). (page 178, 179 very important). Table on page 180.
-      Subclasses means those classes which extends other parent class and become child class.  
+    protected --> The method can only be called from classes in the same package or subclasses (means, can be called from same package or different package incase it got inheriteted). (page 178, 179 very important). Table on page 180.
+      Subclasses means those classes which extends other parent class and become child class. (inheritance) 
     public --> The method can be called from any class.
  
-  Optional Specifiers --> you can have zero or more specifiers in a method declaration.
+  Optional Specifiers --> you can have zero or more specifiers in a method declaration, in any order. (although not all combinations are legal).
     static --> Used for class methods. Static methods don’t require an instance of the class. They are shared among all users of the class.
     abstract --> Used when not providing a method body.
-    final --> Used when a method is not allowed to be overridden by a subclass.
+    final --> below are 3 possible uses of final keyword
+        Final Variable --> To create constant variable
+        Final Method --> prevent method overriding
+        Final Class --> prevent inheritance
     synchronized, native, strictfp  --> not in OCA exam.
 
   Return Type --> a method must have a return type. If no value is returned, the return type is void. You cannot omit the return type.
@@ -20,8 +23,7 @@ Method signature and its components -->
  
  Method Name --> contain letters, numbers, $, or _. Also, the first character is not allowed to be a number and reserved words are not allowed.
   
-  Parameter List --> is required and it doesn’t have to contain any parameters.
-      multiple parameters, you separate them with a comma.
+  Parameter List --> is required and it doesn’t have to contain any parameters. multiple parameters, you separate them with a comma.
  
  Optional Exception List --> it is an optional and method can specify exception in-case something go wrong and Can handle them.
   can specify multiple exception seperated by comma.
@@ -30,12 +32,21 @@ Method signature and its components -->
 
 **** very imp **** 
 Working with Varargs --> vararg parameter (variable argument) as if it is an array.
-      A vararg parameter must be the last element in a method’s parameter list. 
-      only allowed to have one vararg parameter per method.
-      When calling a method with a vararg parameter, you can pass in an array, or you can list the elements of the array and let Java create it for you.
+      1. if present, then A vararg parameter must be the last element in a method’s parameter list. 
+      2. only allowed to have one vararg parameter per method.
+     3. When calling a method with a vararg parameter, you can pass in an array, or you can list the elements of the array and let Java create it for you.
       You can even omit the vararg values in the method call and Java will create an array of length zero for you.
-      it is still possible to pass null explicitly to varargs. Although, Java might throw null exception if you try to perform some operation on this null value array.
-      
+      it is still possible to pass null explicitly to varargs. Although, Java might throw null exception if you try to perform some operation on this null value array. (example:- walk(1, null); // this is valid if we dont try to get length, otherwise will throw exception.)
+      below example:- 
+          15: public static void walk(int start, int... nums) {
+          16: System.out.println(nums.length);
+          17: }
+          18: public static void main(String[] args) {
+          19: walk(1); // 0
+          20: walk(1, 2); // 1
+          21: walk(1, 2, 3); // 2
+          22: walk(1, new int[] {4, 5}); // 2
+          23: }
 
     Designing Static Methods and Fields --> 
       Static methods don’t require an instance of the class. They are shared among all users of the class.
@@ -255,10 +266,21 @@ Immutability refers to preventing callers from changing the instance variables a
                       boolean test(T t);
                       }
 
-
-
  --> Java 8 even integrated the Predicate interface into some existing classes. for OCA we need to know only one, 
     ArrayList declares a removeIf() method that takes a Predicate.
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 Review Question Attempt 1:- 
