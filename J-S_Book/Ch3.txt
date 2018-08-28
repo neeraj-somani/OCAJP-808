@@ -157,6 +157,12 @@ Creating an Array of Primitives -->
   int numAnimals3[];
   int numAnimals4 []; // adding space in between reference variable and []
   
+ ** Tricks to remember --> array Variable must provide either dimension expressions or an array initializer.
+  below are few invalid array declaration:
+        String beans[] = new beans[6]; // beans can't be a data type
+        int[][] types = new int[]; // incorrect declaration
+        int[][] java = new int[][]; // no dimension expressions
+  
   Multiple “Arrays” in Declarations -->
     int[] ids, types; // creates two array variables of type int
     int ids[], types; // creates one array variable of type int and one regular variable of type int
@@ -236,6 +242,8 @@ Three rules for binary search -->
     7: System.out.println(Arrays.binarySearch(numbers, 3)); // unpredictable output.
     
     Note for Exam --> As soon as you see the array isn’t sorted, look for an answer choice about unpredictable output.
+    you can get length of array but there is no method for capacity or size.
+    
     
 Varargs --> (variable arguments) -- chapter 4 has more details.
   Below are few valid example for declaring Array in method and how to use Array methods within method definition.
@@ -259,6 +267,7 @@ ArrayList --> ArrayList can change size at runtime as needed. ArrayList is an or
     import java.util.ArrayList; // import just ArrayList
 
 imp concepts --> creating an ArrayList, common methods, autoboxing, conversion, and sorting.
+
 
 three old ways but still valid ways, to create an ArrayList: These works today as well but defined before java 5
 ArrayList list1 = new ArrayList();
@@ -321,6 +330,8 @@ isEmpty() and size() methods --> look at how many of the slots are in use.
       birds.add("hawk"); // [hawk, hawk]
       System.out.println(birds.isEmpty()); // false
       System.out.println(birds.size()); // 2
+
+**Arraylist don't have any method for capacity and length.
 
 clear() method --> provides an easy way to discard all elements of the ArrayList.
     void clear() 
@@ -499,7 +510,7 @@ imp points / tricks -->
  1. No constructor for Date and Time classes. The exam creators may try to throw something like this at you. Don’t fall for this. You are not allowed to construct a date or time object directly.
     LocalDate d = new LocalDate(); // DOES NOT COMPILE
   
-2. you can't pass wrong values
+2. you can't pass wrong values, code will compile but there will be runTime exception.
 LocalDate.of(2015, Month.JANUARY, 32) // throws DateTimeException // 
 
 3. The date and time classes are immutable, just like String was. Means, remember to assign the results of these methods to a reference variable, so they are not lost because of Garbage Collector. 
@@ -511,7 +522,12 @@ System.out.println(date); // It prints January 20, 2020. Adding 10 days was usel
 
 5. The exam also may test to see if you remember what each of the date and time objects includes. Do you see what is wrong here?
 LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(1); // DOES NOT COMPILE //LocalDate does not contain time.
-   
+
+6. Earlier to Java 8, there was Calendar class in java.util package to create date & time objects. you can see some question with this code as well in exam. example:
+   import java.util.Calendar;
+   LocalDate date = LocalDate.of(2014, Calendar.JUNE, 21);
+    
+    
 ---- Working with Periods --- 
     A Period is generic class used for creating a specific periods of time and that can be used to manipulate dates.
     plus() method is used to manipulate date with period generic class.
@@ -528,7 +544,7 @@ LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(
         start = start.plus(annually);
         
    Tricks to remember: 
-    1. Chain methods in Periods doesn't work, only the last method in chain will be evaluated.
+    1. when you chain methods in Period, only the last method in chain will be evaluated. example below:
         Period wrong = Period.ofYears(1).ofWeeks(1); // every week
     2. a Period is a day or more of time, means ofDays(), ofWeeks(), ofMonths() and ofYears().
     3. There is another class known as Duration, For Duration, you can specify the number of days, hours, minutes, seconds, or nanoseconds. This is not on OCA exam.
