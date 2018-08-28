@@ -623,52 +623,6 @@ System.out.println(dateTime.format(f)); // January 20, 2020, 11:12
     System.out.println(date); // 2015-01-02
     System.out.println(time); // 11:22
 
-
-
-
-
-
-
-
-
-
-
-Review Question Attempt 1 -->
-1. A, D (N)
-2. A, C, D
-3. B, E, D
-4. B
-5. E (N)
-6. D (N)
-7. E
-8. A (N)
-9. C
-10. C (N)
-11. A (N)
-12. A
-13. F
-14. A, C
-15. D, E (N)
-16. B, F (N)
-17. C (N) -- Need to verify answer --
-18. A, C, D, F -- Need to verify answer --
-19. A, B (N)
-20. B (N)
-21. C
-22. A
-23. D (N)
-24. C
-25. F (N)
-26. A, D (N)
-27. C (N)
-28. D, F
-29. D
-30. F
-31. B
-32. C (N)
-33. E (N)
-
-
 ---- Notes from Review Questions -->
 String object can't directly convert other primitive type data. Means, incase we want to pass int value to String object, we need to cast it explicitly.
 String testStr = 4 + 1; // code will not compile. Either need explicit cast or need one string value to pass
@@ -741,6 +695,56 @@ Need to check when we need to use "L" for creating long variable.
   long l2 = 12; 
   long l3 = 12L;
 -- Note sure if ArrayList is immutable and ordered, like Array. Need to check.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Review Question Attempt 1 -->
+1. A, D (N)
+2. A, C, D
+3. B, E, D
+4. B
+5. E (N)
+6. D (N)
+7. E
+8. A (N)
+9. C
+10. C (N)
+11. A (N)
+12. A
+13. F
+14. A, C
+15. D, E (N)
+16. B, F (N)
+17. C (N) -- Need to verify answer --
+18. A, C, D, F -- Need to verify answer --
+19. A, B (N)
+20. B (N)
+21. C
+22. A
+23. D (N)
+24. C
+25. F (N)
+26. A, D (N)
+27. C (N)
+28. D, F
+29. D
+30. F
+31. B
+32. C (N)
+33. E (N)
+
+
+------------------------------------------------------------
 
 Review Questions -- Attempt -2 --->
 1. G
