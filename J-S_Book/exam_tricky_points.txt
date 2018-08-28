@@ -49,7 +49,9 @@ LocalDate date = LocalDate.of(2020, Month.JANUARY, 20);
 date.plusDays(10);
 System.out.println(date); // It prints January 20, 2020. Adding 10 days was useless because we ignored the result.
 15. The exam also may test to see if you remember what each of the date and time objects includes. Do you see what is wrong here?
-LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(1); // DOES NOT COMPILE //LocalDate does not contain time.
+LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(1); // DOES NOT COMPILE //LocalDate does not contain time, so we can't use manupulating methods for minutes.
 16. There are two predefined formats that can show up on the exam: SHORT and MEDIUM. This is to format date and time objects.
 17. Exam, will trick you to see which ofLocalizedXXXX() method can be used with which date and time objects.
-18. 
+18. LocalDate and LocalTime objects are immutable, hence we need to store it in variable, in order not to get lost.
+19. Exam will trick you on inserting wrong date or time values. Code will compile but there will be runTime exception.
+20. 
