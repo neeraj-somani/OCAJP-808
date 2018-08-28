@@ -162,6 +162,8 @@ Creating an Array of Primitives -->
         String beans[] = new beans[6]; // beans can't be a data type
         int[][] types = new int[]; // incorrect declaration
         int[][] java = new int[][]; // no dimension expressions
+  ** we can create array even for Wrapper classes as well. example:
+    Integer array[] = list.toArray(new Integer[4]);
   
   Multiple “Arrays” in Declarations -->
     int[] ids, types; // creates two array variables of type int
@@ -739,3 +741,38 @@ Need to check when we need to use "L" for creating long variable.
   long l2 = 12; 
   long l3 = 12L;
 -- Note sure if ArrayList is immutable and ordered, like Array. Need to check.
+
+Review Questions -- Attempt -2 --->
+1. G
+2. A, C, D
+3. B, D, E
+4. B 
+5. B (N) -- very nice and tricky question
+6. B
+7. B, D, E
+8. A, E, D
+9. C
+10. E, F (N)
+11. E
+12. A
+13. F
+14. A, D (N) -- need to be more careful for calculating result
+15. D, E (N)
+16. C, F (N)
+17. B, F (N)
+18. A, C, D, E 
+19. C (N)
+20. D
+21. C
+22. D 
+23. E (N)
+24. A (N)
+25. D
+26. B, D (N) -- good trick, need to verify all the options
+27. B
+28. D, E, F (N)
+29. B (N)
+30. F
+31. B
+32. A (N)
+33. B
