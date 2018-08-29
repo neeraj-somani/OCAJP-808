@@ -126,8 +126,7 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
         example:- {
                   count++; }
            
-  ----- Static Initialization --> 
-    --> static initialization block, is the block with curly braces {} that contain definition and initial assignment for all static variables. example:--
+  ----- Static Initialization --> static initialization block, is the block with curly braces {} that contain definition and initial assignment for all static variables. example:--
         static {
           int numSecondsPerMinute = 60;
           int numMinutesPerHour = 60;
@@ -140,8 +139,7 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
     
     ** static or instance Initialization not recommended in real world. The same thing can be done in constructors.
     
- ---- Static Imports --->
-  --> Static imports are for importing static members of classes. (always remember members of class means methods/variables)
+ ---- Static Imports ---> Static imports are for importing static members of classes. (always remember members of class means methods/variables)
       example:-
         import static java.util.Arrays.asList; // static import
    --> The compiler will complain if you try to explicitly do a static import of two methods with the same name or two static variables with the same name. In such case we use class name with method name while using in code.
