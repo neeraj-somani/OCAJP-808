@@ -173,6 +173,7 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
     --> exceptions are different return type not allowed.  
     --> same method one with static keyword and one without not allowed.
     --> java looks for matching types and calls the appropriate method.
+    --> Java tries to use the most specific parameter list method it can find. Means, if we have method both with primitive and wrapper  class, java will prefer primitive incase we pass primitive value to method while calling. Considering, why to do extra autoboxing.
     
       Below are few valid/invalid overloaded methods:
             public void fly(int numMiles) { }
@@ -228,7 +229,7 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
       5: } }
 
   -------- Default Constructor --> Every class in Java has a constructor whether you code one or not. If you don’t include any constructors in the class, Java will create one for you without any parameters. This Java-created constructor is called the default constructor or no-arguments constructor.
-    The default constructor has an empty parameter list and an empty body.
+    The default constructor has an empty parameter list and an empty body. example:- public Rabbit() {}
     We keep saying generated. This happens during the compile step.
     Remember that a default constructor is only supplied if there are no constructors present.
    ** Having a private constructor in a class tells the compiler not to provide a default no-argument constructor. It also prevents other classes from instantiating the class. This is useful when a class only has static methods or the class wants to control all calls to create new instances of itself.
