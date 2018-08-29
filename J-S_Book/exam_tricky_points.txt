@@ -69,5 +69,6 @@ LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(
 6. exam will trick on the way we should refer this keyword in method. "this" not allowed in right hand side of "=" assignment operator.
   Doest Not compile --> length = this.length;
   compile --> this.length = length;
-  
-7. 
+7. be careful in exam for private constructors. As its not possible to instantiate private constructors.
+8. Constructors can be called only by writing new before the name of the constructor. They are not like normal methods that you can just call. ** exam tricky ques on this **
+9. For encapsulation, remember javaBeans nameing convention for variables and methods name.
