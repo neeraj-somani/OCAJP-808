@@ -63,4 +63,11 @@ LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(
 ---- ch 4 --->
 1. to access static members, just put the classname before the method or variable. you don't need to create an instance of the class. but even if you create an instane of class, The compiler checks for the type of the reference and uses that instead of the object. exam creator use this trick.
 2. another exam trick, A static member cannot call an instance member. 
-3. 
+3. The exam will try to trick you with misusing static imports statement.
+4. exam tricks,  If result of method (returned value from method) is not stored in variable, it is being ignored by Java. But if it is stored in variable then Java uses that and doesn't ignore it.
+5. overloading methods complex scenarios can be seen in exam for sure.
+6. exam will trick on the way we should refer this keyword in method. "this" not allowed in right hand side of "=" assignment operator.
+  Doest Not compile --> length = this.length;
+  compile --> this.length = length;
+  
+7. 
