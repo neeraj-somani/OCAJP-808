@@ -239,16 +239,20 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
   ---> Constructors can be called only by writing new before the name of the constructor. They are not like normal methods that you can just call. ** exam tricky ques on this **
 
     --> another tricky concept ---> When you have 2 constructors, means methods with same name as of class, but with different parameter and you want to call one constructor inside another, you can use this keyword, as discussed below. (page 200)
-      When this is used as if it were a method, Java calls another constructor on the same instance of the class.
-          public Hamster(int weight) {
-          this(weight, "brown");
-          }
+   --> When "this" is used as if it were a method, Java calls another constructor on the same instance of the class.
+    --> this() has one special rule! If you choose to call it, the this() call must be the first noncommented statement in the constructor. Comments don't run Java statements and are allowed anywhere.
+   Example:-
+      public Hamster(int weight) {
+        this(weight, "brown"); // it will call a constructor Hamster(int a, String b){}
+        Hamster(weight, "brown"); // DOES NOT COMPILE
+        new Hamster(weight, "brown"); // Compiles but does not do what we want, because of multiple object being created on method call 
+        this(weight, "brown"); // Does not compile, because it has to be first uncommented line
+      }
 
-      --> this() has one special rule! If you choose to call it, the this() call must be the first noncommented statement in the constructor. Comments don't run Java statements and are allowed anywhere.
-      
       ------ Constructor Chaining --> Overloaded constructors often call each other. One common technique is to have each constructor add one parameter until getting to the constructor that does all the work. This approach is called constructor chaining.
       
  ------- Final Fields ---> final instance variables must be assigned a value exactly once. We saw this happen in the line of the declaration and in an instance initializer. There is one more location this assignment can be done: in the constructor.
+ By the time the constructor completes, all final instance variables must have been set.
  
   -------- Order of Initialization ---->  *** Very imp (page 202)    
         1. If there is a superclass, initialize it first (we’ll cover this rule in the next chapter. For now, just say “no superclass” and go on to the next rule.)
@@ -257,7 +261,27 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
         4. Any other statements that is making any changes to instance variable in the order they appear in the file.
         5. The constructor.
 
-      ///// Keep in mind that the four rules apply only if an object is instantiated. If the class is referred to without a new call, only rules 1 and 2 apply. The other two rules relate to instances and constructors. They have to wait until there is code to instantiate the object.
+      /// Keep in mind that the four rules apply only if an object is instantiated. If the class is referred to without a new call, only rules 1 and 2 apply. The other two rules relate to instances and constructors. They have to wait until there is code to instantiate the object. Example:- (page 203)
+        1: public class InitializationOrder {
+        2: private String name = "Torchie";
+        3: { System.out.println(name); }
+        4: private static int COUNT = 0;
+        5: static { System.out.println(COUNT); }
+        6: { COUNT++; System.out.println(COUNT); }
+        7: public InitializationOrder() {
+        8: System.out.println("constructor");
+        9: }
+        10: public static void main(String[] args) {
+        11: System.out.println("read to construct");
+        12: new InitializationOrder();
+        13: }
+        14: }
+        The output looks like this:
+        0
+        read to construct
+        Torchie
+        1
+        constructor
 
   ------- Encapsulating Data --> Encapsulation means we set up the class so only methods in the class with the variables can refer to the instance variables. Callers are required to use these methods. Example, getters (accessor method) and setters (mutator method) method.
       --> remember that data (an instance variable) is private and getters/setters are public.
@@ -314,8 +338,7 @@ Immutability refers to preventing callers from changing the instance variables a
   --- redeclaring variable is not allowed in lambdas -->
     Java doesn’t allow us to redeclare a local variable, the following is an issue:
     (a, b) -> { int a = 0; return 5;} // DOES NOT COMPILE
-    We tried to redeclare a, which is not allowed. By contrast, the following line is okay
-    because it uses a different variable name:
+    We tried to redeclare a, which is not allowed. By contrast, the following line is okay because it uses a different variable name:
     (a, b) -> { int c = 0; return 5;}
 ---> Lambdas work with interfaces that have only one method. These are called functional interfaces—interfaces that can be used with functional programming.
   --> java provides such an interface as generic interface with one method. It’s in the package java.util.function and the gist of it is as follows. We can define the method definition in our lambda. Hence, now we can directly call this Predicate method in our class without coding it again.
