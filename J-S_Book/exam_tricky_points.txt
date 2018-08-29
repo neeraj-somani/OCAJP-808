@@ -59,4 +59,8 @@ LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(
   but below will give compile error -->
   String [] names = {"Tom", "Dick", "Harry"};
   List<String> list = names.asList(); // compile error because asList() method can't be used on array object.
-21. 
+
+---- ch 4 --->
+1. to access static members, just put the classname before the method or variable. you don't need to create an instance of the class. but even if you create an instane of class, The compiler checks for the type of the reference and uses that instead of the object. exam creator use this trick.
+2. another exam trick, A static member cannot call an instance member. 
+3. 
