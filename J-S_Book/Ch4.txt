@@ -140,9 +140,19 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
     ** static or instance Initialization not recommended in real world. The same thing can be done in constructors.
     
  ---- Static Imports ---> Static imports are for importing static members of classes. (always remember members of class means methods/variables)
-      example:-
-        import static java.util.Arrays.asList; // static import
-   --> The compiler will complain if you try to explicitly do a static import of two methods with the same name or two static variables with the same name. In such case we use class name with method name while using in code.
+    --> The compiler will complain if you try to explicitly do a static import of two methods with the same name or two static variables with the same name. In such case we use class name with method name while using in code.
+    --> if we created an asList method in our class. Java would give it preference over the imported one and the method we coded would be used.
+      example:-   
+          1: import static java.util.Arrays; // DOES NOT COMPILE
+          2: import static java.util.Arrays.asList;
+          3: static import java.util.Arrays.*; // DOES NOT COMPILE
+          4: import static statics.A.TYPE;
+          5: import static statics.B.TYPE; // DOES NOT COMPILE
+          6: public class BadStaticImports {
+          7: public static void main(String[] args) {
+          8: Arrays.asList("one"); // DOES NOT COMPILE
+          9: List<String> list = asList("one", "two"); // Arrays class name not needed
+          10: } }
  
  ----- Passing Data Among Methods ---> Java is a “pass-by-value” language (page 190 - 191)
       --> methods with the parameters --> means, passing value of parameters to methods.
@@ -157,10 +167,22 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
                     }
   
       --> Another trick to remember --> (page 191) ** very imp
-            If result of method (returned value from method) is not stored in variable, it is being ignored by Java.
-            But if it is stored in variable then Java uses that and doesn't ignore it.
+            If result of method (returned value from method) is not stored in variable, it is being ignored by Java. But if it is stored in variable then Java uses that and doesn't ignore it.
             
------- Overloading Methods --> different method signatures with the same name but different type parameters. This means there can be different access modifiers, specifiers (like static), return types and exception lists.
+------ Overloading Methods --> different method signatures with the same name but different type parameters. This means there can be different access modifiers, specifiers (like static), return types, exception lists and parameters. 
+    --> exceptions are different return type not allowed.  
+    --> same method one with static keyword and one without not allowed.
+    --> java looks for matching types and calls the appropriate method.
+    
+      Below are few valid/invalid overloaded methods:
+            public void fly(int numMiles) { }
+            public void fly(short numFeet) { }
+            public boolean fly() { return false; }
+            void fly(int numMiles, short numFeet) { }
+            public void fly(short numFeet, int numMiles) throws Exception { }
+            public int fly(int numMiles) { } // DOES NOT COMPILE // java consider this as duplicate method
+            public static void fly(int numMiles) { } // DOES NOT COMPILE
+
       --- another tricky thing ---> Overloading and Varargs ----
         Java treats "varargs" as if they were an array. Hence, below 2 methods are same, which brings compile error for 2nd.
           public void fly(int[] lengths) { }
