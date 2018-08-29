@@ -118,8 +118,15 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
     Some static variables are meant to change as the program runs. Means, value of same variable change as the program runs.
     Other static variables are meant to never change during the program. This type of variable is known as a constant. final modifier is used for this.
     We are allowed to call methods on reference variables.
+    example:- private static final ArrayList<String> values = new ArrayList<>(); 
+              public static void main(String[] args) {
+              values.add("changed"); } // this is legal
       
-  ----- Static Initialization -->
+  ----- Instance Initialization --> that looked like unnamed methods. Just code inside braces. 
+        example:- {
+                  count++; }
+           
+  ----- Static Initialization --> 
     --> static initialization block, is the block with curly braces {} that contain definition and initial assignment for all static variables. example:--
         static {
           int numSecondsPerMinute = 60;
@@ -130,6 +137,8 @@ Working with Varargs --> vararg parameter (variable argument) as if it is an arr
     --> you can assign a value to static variable while defining it or in the static initialization block.
     --> if "final" keyword is used with "static", then reassignment of value not allowed.
     --> Defining a static variable and not assigning any value to it is not allowed. Code will not compile.
+    
+    ** static or instance Initialization not recommended in real world. The same thing can be done in constructors.
     
  ---- Static Imports --->
   --> Static imports are for importing static members of classes. (always remember members of class means methods/variables)
