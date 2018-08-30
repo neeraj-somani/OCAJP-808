@@ -312,7 +312,7 @@ Rules for JavaBeans naming conventions -->
    
 **** important to remember --->
 encapsulation refers to preventing callers from changing the instance variables directly.
-Immutability refers to preventing callers from changing the instance variables at all.
+Immutability refers to preventing callers from changing the instance variables at all. means, not changable.
         
 --- Writing Simple Lambdas ---> Functional programming is a way of writing code more declaratively. You specify what you want to do rather than dealing with the state of objects. You focus more on expressions than loops.
 
@@ -328,28 +328,87 @@ Immutability refers to preventing callers from changing the instance variables a
         ■ The arrow operator to separate the parameter and body
         ■ A body that calls a single method and returns the result of that method. 
             --> Java doesn’t require you to type return or use a semicolon when no braces are used. but with two or more statements this is similar to any other method body.
-      few example --> 
+      few example for valid lambda expression --> 
         3: print(() -> true); // 0 parameters
         4: print(a -> a.startsWith("test")); // 1 parameter
         5: print((String a) -> a.startsWith("test")); // 1 parameter
         6: print((a, b) -> a.startsWith("test")); // 2 parameters
         7: print((String a, String b) -> a.startsWith("test")); // 2 parameters
+      few example for invalid lambda expression --> 
+        print(a, b -> a.startsWith("test")); // DOES NOT COMPILE // needs parentheses around the parameter list
+        print(a -> { a.startsWith("test"); }); // DOES NOT COMPILE // missing the return keyword
+        print(a -> { return a.startsWith("test") }); // DOES NOT COMPILE // missing the semicolon for return statement
+        
         
   --- redeclaring variable is not allowed in lambdas -->
     Java doesn’t allow us to redeclare a local variable, the following is an issue:
     (a, b) -> { int a = 0; return 5;} // DOES NOT COMPILE
     We tried to redeclare a, which is not allowed. By contrast, the following line is okay because it uses a different variable name:
     (a, b) -> { int c = 0; return 5;}
----> Lambdas work with interfaces that have only one method. These are called functional interfaces—interfaces that can be used with functional programming.
+    
+** ---> Lambdas work with interfaces that have only one method. These are called functional interfaces—interfaces that can be used with functional programming.
+--> Hence, what to do if you want more than one method, you need to create multiple interfaces with one method in each or create on generic interface that can handle all types of method. see below:
   --> java provides such an interface as generic interface with one method. It’s in the package java.util.function and the gist of it is as follows. We can define the method definition in our lambda. Hence, now we can directly call this Predicate method in our class without coding it again.
   Example:---         public interface Predicate<T> {
                       boolean test(T t);
                       }
-
+  example, how to use predicate method:-
+      1: import java.util.*;
+      2: import java.util.function.*;
+      3: public class PredicateSearch {
+      4: public static void main(String[] args) {
+      5: List<Animal> animals = new ArrayList<Animal>();
+      6: animals.add(new Animal("fish", false, true));
+      7:
+      8: print(animals, a -> a.canHop());
+      9: }
+      10: private static void print(List<Animal> animals, Predicate<Animal>↵
+      checker) {
+      11: for (Animal animal : animals) {
+      12: if (checker.test(animal))
+      13: System.out.print(animal + " ");
+      14: }
+      15: System.out.println();
+      16: }
+      17: }
+      
  --> Java 8 even integrated the Predicate interface into some existing classes. for OCA we need to know only one, 
     ArrayList declares a removeIf() method that takes a Predicate.
     
-    
+see example below:-
+3: List<String> bunnies = new ArrayList<>();
+4: bunnies.add("long ear");
+5: bunnies.add("floppy");
+6: bunnies.add("hoppy");
+7: System.out.println(bunnies); // [long ear, floppy, hoppy]
+8: bunnies.removeIf(s -> s.charAt(0) != 'h'); // It defines a predicate that takes a String and returns a boolean. The removeIf() method does the rest.
+9: System.out.println(bunnies); // [hoppy]
+
+Review Notes from Questions in attempt 1 -->
+
+We don't need to specify "default" keyword for method to be package private. Which means if we don't specify any access modifier then it will automatically be default. default access omits the access modifier rather than specifying default.
+
+In method definition, there will be only method name can come after method return type. Only the access modifier or optional specifiers are allowed before the return type.
+
+In method definition, "final" and "static" are optional specifiers and can be placed interchagablly and are allowed in any order, anywhere between access modifier and return type of method. 
+
+If any method tries to return null value using return statement as "return null;", then we must check that null requires a reference object as the return type of method. "void" is not a reference object since it is a marker for no return type, hence code does not compile. int is not a reference object since it is a primitive type, hence code does not compile. A reference type refers to an object (an instance of a class). 
+
+Difference between varargs and array:-
+Remember, array can be more than one in method parameter, as shown below. Array can come at any place, but varargs must be last parameter in method. When calling a method with a vararg parameter, you have a choice. You can pass in an array (need to declare an array properly. It should be new boolean[] {array values here} or new boolean[array_size].), or you can list the elements of the array and let Java create it for you. You can even omit the vararg values in the method call and Java will create an array of length zero for you.
+example for method with array as parameter :- public void moreG(String[] values, int[] nums) {}
+
+Immutability uses private instance variables and allowing only getters. common implementation for encapsulation by setting
+all fields to be private and all methods to be public. Encapsulation, allows getter and setter both.
+
+Static members can be called using instance variable as well as static members. Also, if we import Static member of other class into any specific class then we can directly call Static member, without explicitly using classname.
+Static member can't access or call instance members.
+
+StringBuilder are mutable objects. Hence, if you perform any operation on same StringBuilder multiple times, it all referenece to same StringBuilder. Incase, you create new StringBuilder Object then thats the new reference for that object. It wouldn't impact the earlier StringBuilder.
+
+this() is used to call default constructor. We can call any constructor within another constructor. 
+
+Remember, method parameters have no business in an import statements.
     
     
     
@@ -427,42 +486,4 @@ Need to memorise how Predicate class works, and how test method behaves.
 27. Need to look concept of this question again.
  
 
-Review Notes from Questions -->
 
-We don't need to specify "default" keyword for method to be package private. Which means if we don't specify any access modifier then it will automatically be default. default access omits the access modifier rather than specifying default.
-In method definition, there will be only method name can come after method return type. Only the access modifier or optional specifiers are allowed before the return type.
-In method definition, "final" and "static" are optional specifiers and can be placed interchagablly and are allowed in any order, anywhere between access modifier and return type of method. 
-
-If any method tries to return null value using return statement as "return null;", then we must check that null requires a reference object as the return type of method. "void" is not a reference object since it is a marker for no return type. int is not a reference object since it is a primitive type. A reference type refers to an object (an instance of a class). 
-
-Unlike primitive types that hold their values in the memory where the variable is allocated, references do not hold the value of the object they refer to. Instead, a reference “points” to an object by storing the memory address where the object is located, a concept referred to as a pointer.
-
-Varargs (variable aurgument), It is a little different than an array, though. A vararg parameter must be the last element in a method’s parameter list. This implies you are only allowed to have one vararg parameter per method.
-Below is the example of varargs, declaration in method. Usually, varargs defined using "..." three dots.
-example:- public void moreB(String values, int... nums) {}
-
-Difference between varargs and array:-
-Remember, array can be more than one in method parameter, as shown below. Array can come at any place, but varargs must be last parameter. When calling a method with a vararg parameter, you have a choice. You can pass in an array (need to declare an array properly. It should be new boolean[] {array values here} or new boolean[array_size].), or you can list the elements of the array and let Java create it for you. You can even omit the vararg values in the method call and Java will create an array of length zero for you.
-example for method with array as parameter :- public void moreG(String[] values, int[] nums) {}
-
-Make sure you understood scope of each access modifier. Need to check it properly in exam questions.
-
-Immutability uses private instance variables and allowing only getters. common implementation for encapsulation by setting
-all fields to be private and all methods to be public. Encapsulation, allows getter and setter both.
-
-Static members can be called using instance variable as well as static members. Also, if we import Static member of other class into any specific class then we can directly call Static member, without explicitly using classname.
-Static member can't access or call instance members.
-
-
-
-StringBuilder are mutable objects. Hence, if you perform any operation on same StringBuilder multiple times, it all referenece to same StringBuilder. Incase, you create new StringBuilder Object then thats the new reference for that object. It wouldn't impact the earlier StringBuilder.
-
-this() is used to call default constructor. 
-
-We can call any constructor within another constructor. 
-
-Lambda expression syntaxt --> if you specify data type of lambda function parameter then paranthesis [()] is needed, this is for left side of arrow. If you specify the curly braces [{}] then you need to mention return statement that should end with semi-colon ";". If you don't specify curly braces then single statment without return word and semi-colon would also work.
-
-In lambda function, Variable defined in left part of arrow can't be redefined in right part of arrow.
-
-Remember, method parameters have no business in an import statements.
