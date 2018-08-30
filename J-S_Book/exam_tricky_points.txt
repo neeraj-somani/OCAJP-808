@@ -72,3 +72,5 @@ LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(
 7. be careful in exam for private constructors. As its not possible to instantiate private constructors.
 8. Constructors can be called only by writing new before the name of the constructor. They are not like normal methods that you can just call. ** exam tricky ques on this **
 9. For encapsulation, remember javaBeans nameing convention for variables and methods name.
+10. OCA exam limits the scope for lambda, lambdas return a boolean only for now.
+11. For the OCA exam, you only need to know how to implement lambda expressions that use the Predicate interface.
