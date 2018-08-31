@@ -486,4 +486,27 @@ Need to memorise how Predicate class works, and how test method behaves.
 27. Need to look concept of this question again.
  
 
-
+-------------------------------------
+1. B, C
+2. A, D, 
+3. A, C, D, 
+4. A, B, G
+5. D, F, G
+6. B
+7. C, D, F
+8. B, C, D, F
+9. C, E
+10. D (N) --> very imp question for exam, need to understand it very carefully
+11. B, E
+12. A (N) --> very imp question and need to remember static variable properties. Also, all the rules for Order of Initialization and how it works.
+13. D (N) --> very tricky, need to calculate properly and carefully
+14. B, C (N) --> very nice tricky question
+15. E
+16. B
+17. B, D, E
+18. F, C
+19. A, C, 
+20. E, F (N) --> very good question. you almost correct identified all reasons. remember, this() call must be first in constructor.
+21. C
+22. E
+23. D
