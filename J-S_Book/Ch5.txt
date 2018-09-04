@@ -92,13 +92,10 @@ exam trick 4 --> When you see super() or super on the exam, be sure to check tha
      --- tips for exam -->
         Any time you see a method on the exam with the same name as a method in the parent class, determine whether the method is being overloaded or overridden first; doing so will help you with questions about whether the code will compile.
     
-  ----- Redeclaring private Methods -->  
-    in above discussion, we saw how public and protected methods can be overridden.
-    In Java, it is not possible to override a private method of a parent class since the parent method is not accessible from the child class. but it doesn’t mean that the child class can’t define its own version of the method. It just means, that the new method is not an overridden version of the parent class’s method. so, none of the rules for overriding methods are invoked.
+  ----- Redeclaring private Methods --> it is not possible to override a private method of a parent class since the parent method is not accessible from the child class. but it doesn’t mean that the child class can’t define its own version of the method. It just means, that the new method is not an overridden version of the parent class’s method. so, none of the rules for overriding methods are invoked.
     
-  ---- Hiding Static Methods -->
-    A hidden method occurs when a child class defines a static method with the same name and signature as a static method defined in a parent class.
-    hidden method follow all 4 rules of overridden method, plus addition one rule:
+  ---- Hiding Static Methods --> A hidden method occurs when a child class defines a static method with the same name and signature as a static method defined in a parent class.
+    hidden method follow all 4 rules of overridden method, plus additional one rule:
     5. The method defined in the child class must be marked as static if it is marked as static in the parent class (method hiding). Likewise, the method must not be marked as static in the child class if it is not marked as static in the parent class (method overriding).
     For nonprivate methods in the parent class and child class, both methods must use static (hide) or neither should use static (override).
 
@@ -110,6 +107,11 @@ exam trick 4 --> When you see super() or super on the exam, be sure to check tha
           In this manner, the parent method is never used unless an explicit call to the parent method is referenced, using the syntax ParentClassName.method().
     hidden methods --> only replace parent methods in the calls defined in the child class.
         Alternatively, at runtime the parent version of a hidden method is always executed if the call to the method is defined in the parent class.
+    Summary --> Override method call --> 
+       1. parent method call for overridden method only when an explicit call to the parent method is referenced, using the syntax ParentClassName.method().
+       2. child method call for overridden method always regardless of call from parent or child class. as method is overridden.
+       3. parent method call for hidden method when call is from parent class, because of static keyword.
+       4. child method call for  hidden method when call is from child class, because of static keyword.
     
  ----- Creating final methods ---> (page 256 -- need to test concept with code run)
     one more rule: final methods cannot be overridden.
