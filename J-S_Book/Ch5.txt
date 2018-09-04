@@ -113,41 +113,38 @@ exam trick 4 --> When you see super() or super on the exam, be sure to check tha
        3. parent method call for hidden method when call is from parent class, because of static keyword.
        4. child method call for  hidden method when call is from child class, because of static keyword.
     
- ----- Creating final methods ---> (page 256 -- need to test concept with code run)
-    one more rule: final methods cannot be overridden.
+ ----- Creating final methods ---> one more rule: final methods cannot be overridden.
     This rule is in place both when you override a method and when you hide a method.
-    In other words, you cannot hide a static method in a parent class if it is marked as final.
-    one more point to Note that whether or not the child method used the final keyword is irrelevant—the code will not compile either way.
-    
+    In other words, you cannot hide a static method in a parent class if it is marked as final.    
 ---- Why Mark a Method as final? ---> prevents them from being overridden
    In short, the final modifier is only used on methods when the author of the parent method wants to guarantee very precise behavior.
    
------ Inheriting Variables ---> Java doesn’t allow variables to be overridden but instead hidden.
-    --- Hiding Variables --> When you hide a variable, you define a variable with the same name as a variable in a parent
-class. This creates two copies of the variable within an instance of the child class: one instance defined for the parent reference and another defined for the child reference.
+----- Inheriting Variables ---> Java doesn’t allow variables to be overridden but instead allow to be hidden.
+    --- Hiding Variables --> When you hide a variable, you define a variable with the same name as a variable in a parent class. This creates two copies of the variable within an instance of the child class: one instance defined for the parent reference and another defined for the child reference.
     there is no concept of overriding a member variable. 
     super keyword is used to access the parent variable’s value.
     These rules are the same regardless of whether the variable is an instance variable or a static variable.
-    Notice if the same type of object was created then, the reference to the object determines which value is seen as output.
+    Notice if the same type of object was created then, the reference to the object determines which value is seen as output. This concept is only valid for variables as they are not overridden.
 
 ----- Creating Abstract Classes ---> 
     Abstract Class --> is a class that is marked with the abstract keyword and cannot be instantiated.
     An abstract method --> is a method marked with the abstract keyword defined in an abstract class, for which no implementation is provided in the class in which it is declared.
 
+---- Default Method Implementations in Abstract Classes ---> you can still define a method with a body—you just can’t mark it as abstract.
+
     Abstract Class Definition Rules:
         1. Abstract classes cannot be instantiated directly.
         2. Abstract classes may be defined with zero or more, of abstract and nonabstract methods.
-        3. Abstract classes may not be marked as private or final. (notice: may not)
+        3. Abstract classes may not be marked as private or final.
         4. An abstract class that extends another abstract class inherits all of its abstract methods as its own abstract methods.
         5. The first concrete class that extends an abstract class must provide an implementation for all of the inherited abstract methods.
     Abstract Method Definition Rules:
         1. Abstract methods may only be defined in abstract classes.
-        2. Abstract methods may not be declared private or final. (notice: may not)
+        2. Abstract methods may not be declared private or final.
         3. Abstract methods must not provide a method body/implementation in the abstract class for which is it declared.
         4. Implementing an abstract method in a subclass follows the same rules for overriding a method. For example, the name and signature must be the same, and the visibility of the method in the subclass must be at least as accessible as the method in the parent class.
         
-  ----- Creating a Concrete Class -->
-    A concrete class is the first non-abstract subclass that extends an abstract class and is required to implement all inherited abstract methods.
+  ----- Creating a Concrete Class --> A concrete class is the first non-abstract subclass that extends an abstract class and is required to implement all inherited abstract methods.
     
 ---- extending an abstract class with another abstract --->
     An abstract class can extend another abstract class, and may or may not implement abstract methods of the extended class.
@@ -158,21 +155,26 @@ class. This creates two copies of the variable within an instance of the child c
     An interface is defined with the interface keyword. 
     A class invokes the interface by using the implements keyword in its class definition.
     
-** below topic very imp one or more question on this will be in exam
------- Defining an Interface --> specialized kind of abstract class. Below are rules:
+Note that, 
+1. abstract and public keyword assumed for method definitions in interface.
+2. public, static, final keywords are assumed while defining a variable in interface.
+
+** New to Java 8 is the notion of default and static interface methods.
+
+** imp for exam ------ Defining an Interface --> specialized kind of abstract class. Below are rules:
     1. Interfaces cannot be instantiated directly.
     2. An interface is not required to have any methods.
-    3. An interface may not be marked as final.
+    3. An interface may not be marked as private or final.
     4. All top-level interfaces are assumed to have public or default access, and they must include the abstract modifier in their definition. Therefore, marking an interface as private, protected, or final will trigger a compiler error, since this is incompatible with these assumptions.
     5. All non-default methods in an interface are assumed to have the modifiers abstract and public in their definition. Therefore, marking a method as private, protected, or final will trigger compiler errors as these are incompatible with the abstract and public keywords.
     
------ Inheriting an Interface --> two inheritance rules:   
-    1. An interface that extends another interface, as well as an abstract class that implements an interface, inherits all of the abstract methods as its own abstract methods.
+----- Inheriting an Interface --> means one interface extends another interface  
+1. An interface that extends another interface, as well as an abstract class that implements an interface, inherits all of the abstract methods as its own abstract methods.
 2. The first concrete class that implements an interface, or extends an abstract class that implements an interface, must provide an implementation for all of the inherited abstract methods.
     
-    abstract class vs interface --->
-        1. Like an abstract class, an interface may be extended using the extend keyword. In this manner, the new child interface inherits all the abstract methods of the parent interface.
-        2. Unlike an abstract class, though, an interface may extend multiple interfaces.
+ abstract class vs interface --->
+1. Like an abstract class, an interface may be extended using the extend keyword. In this manner, the new child interface inherits all the abstract methods of the parent interface.
+2. Unlike an abstract class, though, an interface may extend multiple interfaces.
         
 ------- Classes, Interfaces, and Keywords ---> points to remember ---- (-- class implements interface --)
     A class can implement an interface, a class cannot extend an interface.
