@@ -17,65 +17,77 @@ It is possible in Java to prevent a class from being extended by marking the cla
     --> Java allows only one or zero public class or interface per file.
     --> any private members of parent class is not accessible directly to child class, but using object reference we can fetch private members. (need to check how to fetch private members)
     
---- Applying Class Access Modifiers -->
-  The public access modifier applied to a class indicates that it can be referenced and used in any class. 
-  The default package private modifier, indicates the class can be accessed only by a subclass or class within the same package.
-  ---> The rules for applying class access modifiers are identical for interfaces.
+--- Applying Class Access Modifiers --> 4 types (public, private, protected, default)
+     --> all 4 can be applied to memebers of class.
+     --> only public and default can be applied to class definition. (for OCA exam)
+  The public access modifier --> class and its memebers can be accessible from anywhere.
+  The default (package private) modifier -->  indicates the class can be accessed only by a subclass or class within the same package.
+  
+  --> There can be only one public class in a .java file. Remember, .java filename must match that public class name. Here, public class can be child or parent.
+  example:- class Rodent {}
+            public class Groundhog extends Rodent {}
+
+---> The rules for applying class access modifiers are identical for interfaces.
 
 ----- Creating Java Objects ---> In Java, all classes inherit from a single class, java.lang.Object. 
   java.lang.Object is the only class that doesn’t have any parent classes. This is top most class in java.
+  Hence, basically every class extends another class. If you don't specifically extend a class then the compiler extends java.lang.Object class. Hence, all classes inherit from java.lang.Object.
   
------ Defining Constructors -->
-    every class has at least one constructor, if no constructor is declared, the compiler will automatically insert a default no argument constructor. 
+----- Defining Constructors --> every class has at least one constructor, if no constructor is declared, the compiler will automatically insert a default no argument constructor. 
     In Java, the first statement of every constructor is either a call to another constructor within the class, using this(), or a call to a constructor in the direct parent class, using super(). If a parent constructor takes arguments, the super constructor would also take arguments.
-    Like the this() command, he super() command may only be used as the first statement of the constructor. code will not compile if this condition doesn't meet.
+    Like the this() command, the super() command may only be used as the first statement of the constructor. code will not compile if this condition doesn't meet.
+    example:-   public class Zoo {
+                    public Zoo() {
+                        super();
+                        System.out.println("Zoo created");
+                        super(); // DOES NOT COMPILE, it can only be first statement
+                    }
+                }
 
+If the parent class has more than one constructor, the child class may use any valid parent constructor in its definition.
 
----- Understanding Compiler Enhancements --->
-  Java compiler automatically inserts a call to the no-argument constructor super() if the first statement is not a call to the parent constructor.
- Subclasses may define no-argument constructors even if their parent classes do not, provided the constructor of the child maps to a parent constructor via an explicit call of the super() command.
+---- Understanding Compiler Enhancements ---> Java compiler automatically inserts a call to the no-argument constructor super() if the first statement is not a call to the parent constructor.
+    Subclasses may define no-argument constructors even if their parent classes do not, provided the constructor of the child maps to a parent constructor via an explicit call of the super() command.
 
------ Reviewing Constructor Rules -->
-    Constructor Definition Rules:
-        1. The first statement of every constructor is a call to another constructor within the class using this(), or a call to a constructor in the direct parent class using super().
-        2. The super() call may not be used after the first statement of the constructor.
-        3. If no super() call is declared in a constructor, Java will insert a no-argument super() as the first statement of the constructor.
-        4. If the parent doesn’t have a no-argument constructor and the child doesn’t define any constructors, the compiler will throw an error and try to insert a default no-argument constructor into the child class.
-        5. If the parent doesn’t have a no-argument constructor, the compiler requires an explicit call to a parent constructor in each child constructor.
+----- Reviewing Constructor Rules --> Constructor Definition Rules:
+1. The first statement of every constructor is a call to another constructor within the class using this(), or a call to a constructor in the direct parent class using super().
+2. The constructor call {super() or this()} may not be used after the first statement of the constructor.
+3. If no super() call is declared in a constructor, Java will insert a no-argument super() as the first statement of the constructor.
+4. If the parent doesn’t have a no-argument constructor and the child doesn’t define any constructors, the compiler will throw an error and try to insert a default no-argument constructor into the child class.
+5. If the parent doesn’t have a no-argument constructor, the compiler requires an explicit call to a parent constructor in each child constructor.
     
 ------ Calling Constructors --> In Java, the parent constructor is always executed before the child constructor.
----- Calling Inherited Class Members --> 
-    If the parent class and child class are part of the same package, 
+---- Calling Inherited Class Members -->  If the parent class and child class are part of the same package, 
         the child class may also use any default members defined in the parent class.
         A child class may never access a private member of the parent class, at least not through any direct reference.
     
-    To reference a member in a parent class, you can just call it directly, or this and super may both be used for referencing methods or variables defined in the parent class, but only this may be used for referencing members defined in the current class.
+    if a class extends another class, then the child class can access members of parent class by using either this or super keyword. 
+    but "this" is used for acceessing members of child class only.
     
     Remember, if the child class overrides a member of the parent class, this and super could have very different effects when applied to a class member.
     
+exam trick 4 --> When you see super() or super on the exam, be sure to check that they are being used correctly. The exam may try to trick you by using both super() and super in a constructor.
+
 ------ super() vs. super ----> super() method vs super keyword ---> ** imp topic for exam
     super() and super are quite different but may be used in the same methods.
     The first, super(), is a statement that explicitly calls a parent constructor and may only be used in the first line of a constructor of a child class. 
-    The second, super, is a keyword used to reference a member defined in a parent class and may be used throughout the child class.
+    The second, super, is a keyword used to reference a member defined in a parent class and may be used throughout the child class, means even after first line or second line.
         
----- Inheriting Methods --> brings the stage for collisions between methods defined in both the parent class and the subclass.   
+---- Inheriting Methods --> brings the stage for collisions between methods defined in both the parent class and the child class.   
     Lets discuss rules for method inheritance and how Java handles such scenarios.
-    --- Overriding a Method -->
-        means, a same method name and definition in both the parent and child class.
-            When you override a method, you may reference the parent version of the method using the super keyword. In this manner, the keywords this and super allow you to select between the current and parent version of a method, respectively.
+    --- Overriding a Method --> means, a same method name and definition in both the parent and child class.
+            When you override a method, you may reference the parent version of the method using the super keyword. In this manner, the keywords this and super allow you to select between the child and parent version of a method, respectively.
     
      -->   Rules, The compiler performs the following checks when you override a non-private method: -->
     1. The method in the child class must have the same signature as the method in the parent class.
     2. The method in the child class must be at least as accessible or more accessible than the method in the parent class.
     3. The method in the child class may not throw a checked exception that is new or broader than the class of any exception thrown in the parent class method. In other words, a child method may hide or eliminate a parent method’s exception without issue.
     4. If the method in the child class returns a value, it must be the same or a subclass of the method in the parent class, known as covariant return types.
-
     
     ---> A recursive function is one that calls itself as part of execution, also it must have a termination condition to avoid infinite loop. in case of infinite loop, java throws/ produce a stack overflow error at runtime.
     
-    --- overloading vs overriding ---->  
-        If two methods have the same name but different signatures, the methods are overloaded, not overridden.
-        overload --> Different signature for same name method
+    --- overloading vs overriding ----> If two methods have the same name but different signatures, the methods are overloaded, not overridden.
+        overload --> Different signature for same method name.
         override --> same signature for same name method, with few addional rules listed above.
      --- tips for exam -->
         Any time you see a method on the exam with the same name as a method in the parent class, determine whether the method is being overloaded or overridden first; doing so will help you with questions about whether the code will compile.
@@ -88,7 +100,7 @@ It is possible in Java to prevent a class from being extended by marking the cla
     A hidden method occurs when a child class defines a static method with the same name and signature as a static method defined in a parent class.
     hidden method follow all 4 rules of overridden method, plus addition one rule:
     5. The method defined in the child class must be marked as static if it is marked as static in the parent class (method hiding). Likewise, the method must not be marked as static in the child class if it is not marked as static in the parent class (method overriding).
-    For nonprivate methods in the parent class, both methods must use static (hide) or neither should use static (override).
+    For nonprivate methods in the parent class and child class, both methods must use static (hide) or neither should use static (override).
 
     Note:- You should not reuse the name of a static method in your class if it is already used in the parent class. To avoid compile errors.
 
@@ -111,7 +123,7 @@ It is possible in Java to prevent a class from being extended by marking the cla
 ----- Inheriting Variables ---> Java doesn’t allow variables to be overridden but instead hidden.
     --- Hiding Variables --> When you hide a variable, you define a variable with the same name as a variable in a parent
 class. This creates two copies of the variable within an instance of the child class: one instance defined for the parent reference and another defined for the child reference.
-    there is no notion of overriding a member variable. 
+    there is no concept of overriding a member variable. 
     super keyword is used to access the parent variable’s value.
     These rules are the same regardless of whether the variable is an instance variable or a static variable.
     Notice if the same type of object was created then, the reference to the object determines which value is seen as output.
@@ -122,7 +134,7 @@ class. This creates two copies of the variable within an instance of the child c
 
     Abstract Class Definition Rules:
         1. Abstract classes cannot be instantiated directly.
-        2. Abstract classes may be defined with any number, including zero, of abstract and nonabstract methods.
+        2. Abstract classes may be defined with zero or more, of abstract and nonabstract methods.
         3. Abstract classes may not be marked as private or final. (notice: may not)
         4. An abstract class that extends another abstract class inherits all of its abstract methods as its own abstract methods.
         5. The first concrete class that extends an abstract class must provide an implementation for all of the inherited abstract methods.
@@ -140,7 +152,7 @@ class. This creates two copies of the variable within an instance of the child c
     But if an intermediate class provides an implementation for an abstract method, that method is inherited by subclasses as a concrete method, not as an abstract one.
 
 ------- Implementing Interfaces --> Java does allow classes to implement any number of interfaces. each separated by a comma.
-    An interface is an abstract data type that defines a list of abstract public methods that any class implementing the interface must provide. An interface can also include a list of constant variables and default methods.
+    An interface is of abstract type that defines a list of abstract public methods that any class implementing the interface must provide. An interface can also include a list of constant variables and default methods.
     An interface is defined with the interface keyword. 
     A class invokes the interface by using the implements keyword in its class definition.
     
@@ -150,7 +162,7 @@ class. This creates two copies of the variable within an instance of the child c
     2. An interface is not required to have any methods.
     3. An interface may not be marked as final.
     4. All top-level interfaces are assumed to have public or default access, and they must include the abstract modifier in their definition. Therefore, marking an interface as private, protected, or final will trigger a compiler error, since this is incompatible with these assumptions.
-    5. All nondefault methods in an interface are assumed to have the modifiers abstract and public in their definition. Therefore, marking a method as private, protected, or final will trigger compiler errors as these are incompatible with the abstract and public keywords.
+    5. All non-default methods in an interface are assumed to have the modifiers abstract and public in their definition. Therefore, marking a method as private, protected, or final will trigger compiler errors as these are incompatible with the abstract and public keywords.
     
 ----- Inheriting an Interface --> two inheritance rules:   
     1. An interface that extends another interface, as well as an abstract class that implements an interface, inherits all of the abstract methods as its own abstract methods.
@@ -163,7 +175,9 @@ class. This creates two copies of the variable within an instance of the child c
 ------- Classes, Interfaces, and Keywords ---> points to remember ---- (-- class implements interface --)
     A class can implement an interface, a class cannot extend an interface.
     Whereas, an interface can extend another interface, an interface cannot implement another interface.
-    Also, An interface cannot extend a class.
+    Also, An interface cannot extend or implement a class.
+
+** protected access modifier cannot be applied to class and interfaces.
 
 ------- Abstract Methods and Multiple Inheritance -->
    points to remember --> Scenario: what will happen if a class that inherits from two interfaces that contain the same abstract method:
