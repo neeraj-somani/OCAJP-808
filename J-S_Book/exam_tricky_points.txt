@@ -82,4 +82,10 @@ LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(
 3. The exam creators are fond of questions that try to get you to determine the output of statements involving constructors. Just remember to “think like the compiler” as much as possible and insert the missing constructors or statements as needed.
 4. When you see super() or super on the exam, be sure to check that they are being used correctly. The exam may try to trick you by using both super() and super in a constructor.
 5. Any time you see a method on the exam with the same name as a method in the parent class, determine whether the method is being overloaded or overridden first; doing so will help you with questions about whether the code will compile.
-6. 
+6. Exam will trick you on questions regarding hidden vs overridden method.
+7. The exam creators are fond of questions like this one, which mixes nonabstract classes with abstract methods and vice versa.
+8. They are also fond of questions with abstract methods marked as abstract for which an implementation is also defined. Code will not compile in such cases.
+9. When you see a concrete class extending an abstract class on the exam, check that it implements all of the required abstract methods. Sometime, question miss implementation of one or more method. That causes code not to compile.
+10. at least one question on the exam in which an interface or interface method uses an invalid modifier.
+11. 
+
