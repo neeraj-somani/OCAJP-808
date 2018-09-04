@@ -87,5 +87,10 @@ LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(
 8. They are also fond of questions with abstract methods marked as abstract for which an implementation is also defined. Code will not compile in such cases.
 9. When you see a concrete class extending an abstract class on the exam, check that it implements all of the required abstract methods. Sometime, question miss implementation of one or more method. That causes code not to compile.
 10. at least one question on the exam in which an interface or interface method uses an invalid modifier.
-11. 
+11. Be wary of examples on the exam that mix class and interface defi nitions. Make sure the only connection between a class and an interface is with the class implements interface syntax.
+12. there will probably be a few questions on the exam about default method in interfaces.
+13. Exam trick you on rules of casting objects for polymorphism. especially rule 3.
+14. When reviewing a question on the exam that involves casting and polymorphism, be sure to remember what the instance of the object actually is. Then, focus on whether the compiler will allow the object to be referenced with or without explicit casts.
+
+---------- ch 6 --->
 
