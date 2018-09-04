@@ -74,3 +74,12 @@ LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(
 9. For encapsulation, remember javaBeans nameing convention for variables and methods name.
 10. OCA exam limits the scope for lambda, lambdas return a boolean only for now.
 11. For the OCA exam, you only need to know how to implement lambda expressions that use the Predicate interface.
+
+
+---------- ch 5 --->
+1. You should be wary of any exam question in which the parent class defines a constructor that takes arguments and doesn’t define a no-argument constructor. Be sure to check that the code compiles before answering a question about it.
+2. Make sure you understand defining Constructor Rules; the exam will often provide code that breaks one or many of these rules and therefore doesn’t compile.
+3. The exam creators are fond of questions that try to get you to determine the output of statements involving constructors. Just remember to “think like the compiler” as much as possible and insert the missing constructors or statements as needed.
+4. When you see super() or super on the exam, be sure to check that they are being used correctly. The exam may try to trick you by using both super() and super in a constructor.
+5. Any time you see a method on the exam with the same name as a method in the parent class, determine whether the method is being overloaded or overridden first; doing so will help you with questions about whether the code will compile.
+6. 
