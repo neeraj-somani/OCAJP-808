@@ -176,12 +176,10 @@ Note that,
 1. Like an abstract class, an interface may be extended using the extend keyword. In this manner, the new child interface inherits all the abstract methods of the parent interface.
 2. Unlike an abstract class, though, an interface may extend multiple interfaces.
         
-------- Classes, Interfaces, and Keywords ---> points to remember ---- (-- class implements interface --)
+------- Classes, Interfaces, and Keywords ---> 
     A class can implement an interface, a class cannot extend an interface.
     Whereas, an interface can extend another interface, an interface cannot implement another interface.
     Also, An interface cannot extend or implement a class.
-
-** protected access modifier cannot be applied to class and interfaces.
 
 ------- Abstract Methods and Multiple Inheritance -->
    points to remember --> Scenario: what will happen if a class that inherits from two interfaces that contain the same abstract method:
@@ -221,8 +219,7 @@ Note that,
      1. If a class implements two interfaces that have default methods with the same name and signature, the compiler will throw an error. There is an exception to this rule, though: if the subclass overrides the duplicate default methods, the code will compile without issue—the ambiguity about which version of the method to call has been removed.
     2. This rule holds true even for abstract classes that implement multiple interfaces, because the default method could be called in a concrete method within the abstract class. 
      
------- Static Interface Methods ----> (introduced in Java 8)
-rules:
+------ Static Interface Methods ----> (introduced in Java 8) rules:
     1. Like all methods in an interface, a static method is assumed to be public and will not compile if marked as private or protected.
     2. To reference the static method, a reference to the name of the interface must be used.
     3. A static method defined in an interface is not inherited in any classes that implement the interface.
