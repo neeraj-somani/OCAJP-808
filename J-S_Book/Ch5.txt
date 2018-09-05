@@ -346,3 +346,27 @@ Result of Review Questions Attempt 1 -->
 18. E
 19. A, C, D (N)
 20. A
+
+
+Attempt - 2 ---->
+ch - 5 -->
+1. B -- remember (public modifier can be applied implicitely, but abstract modifier can be applied only when no method definition is given and default modifier can be applied only when method definition is written while creating method)
+2. B (N) -- need to understand constructor more precisely
+3. A, B, D, E
+4. C, E
+5. A, D, F (N) 
+6. B (N)
+7. A, B (N)
+8. C, D, F (N)
+9. B (N)
+10. B, C, D, F, G (N)
+11. A, D, E
+12. A (N) -- nice tricky question -- need to understand concept carefully -- 
+13. A
+14. B, C (N)
+15. B, D (N)
+16. E -- Need to understand everyline of code and its concepts
+17. C (N)
+18. E
+19. A, C, D, F (N) -- remember, only subclass can be used, here Object is a superclass of Snake, not a subclass, so it also cannot be used
+20. A
