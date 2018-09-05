@@ -25,7 +25,7 @@ Chapter 6 -- Exceptions
   Error --> means something went so horribly wrong that your program should not attempt to recover from it. For example, the disk drive “disappeared.” These are abnormal conditions that you aren’t likely to encounter.
   A runtime (unchecked) exception --> is defined as the RuntimeException class and its subclasses. Runtime exceptions tend to be unexpected but not necessarily fatal. For example, accessing an invalid array index is unexpected. Runtime exceptions are also known as unchecked exceptions. Example, NullPointerException, which happens when you try to call a member on a null reference.
   A checked exception --> includes Exception and all subclasses that do not extend RuntimeException. Checked exceptions tend to be more anticipated—for example, trying to read a file that doesn’t exist. 
-    Java has a rule called the handle or declare rule. For checked exceptions, Java requires the code to either handle them or declare them in the method signature. throw tells Java that you want to throw an Exception. throws simply declares that the method might throw an Exception. It also might not. For example, this method declares that it might throw an exception:
+    For checked exceptions, Java has a rule called the handle or declare rule in the method signature. throw tells Java that you want to throw an Exception. throws simply declares that the method might throw an Exception. It also might not. For example, this method declares that it might throw an exception:
         void fall() throws Exception {
         throw new Exception();
         }
@@ -56,31 +56,29 @@ For the OCA exam, you need to know the rules for how checked versus unchecked ex
   
 --> try statements are like methods in that the curly braces are required even if there is only one statement inside the code blocks. if statements and loops are special in this respect as they allow you to omit the curly braces when you have only one statement for loop.
 
-
 --> a try statement must have catch and/or finally. Having both is fine in proper order. Having neither is a problem, code wouldn't compile. 
-  --> Remember, the point of a try statement is for something to happen if an exception is thrown. Without another clause, the try statement is lonely.
+--> Remember, the point of a try statement is for something to happen if an exception is thrown. Without another clause, the try statement is lonely.
   
 ---- Adding a finally Block --> The try statement also lets you run code at the end with a finally clause regardless of whether an exception is thrown.
 
 imp topic ---- System.exit ---> There is one exception to “the finally block always runs after the catch block” rule: When System.exit is called in the try or catch block, finally does not run.
   
 ---- Catching Various Types of Exceptions --> 2 things to understand for OCA
-  1. you must be able to recognize if the exception is a checked or an unchecked exception.
+  1. you must be able to recognize if the exception is a checked or an unchecked (runtime) exception.
   2. you need to determine if any of the exceptions are subclasses of the others.
 
 To review catching multiple exceptions, remember that at most one catch block will run and it will be the first catch block that can handle it. the order of the catch blocks does matter. 
   A rule exists for the order of the catch blocks. Java looks at them in the order they appear. If it is impossible for one of the catch blocks to be executed, a compiler error about unreachable code occurs. This happens when a superclass is caught before a subclass.
 
---- Throwing a Second Exception --> imp to remember for exam --
+**--- Throwing a Second Exception --> imp to remember for exam --
   If the finally block throws an exception of its own, then The exception from the catch block gets forgotten about. But remember, this is only about throw statement. If there are other statements before throw statements then java will run them in sequencial order one by one and perform all written operations.
   This is why you often see another try/catch inside a finally block—to make sure it doesn’t mask the exception from the catch block.
   
-  points to remember --> 
+points to remember --> 
     String v = null;
     v.length(); // will throw NullPointerException
 
-Recognizing Common Exception Types --> three types of exceptions for the OCA exam: runtime exceptions (unchecked), checked exceptions, and errors.
-  you’ll need to recognize which type of an exception it is and whether it’s thrown by the JVM or a programmer.
+Recognizing Common Exception Types --> three types of exceptions for the OCA exam: runtime exceptions (unchecked), checked exceptions, and errors. you’ll need to recognize which type of an exception it is and whether it’s thrown by the JVM or a programmer.
   
   --- Runtime Exceptions --> Runtime exceptions extend RuntimeException. They don’t have to be handled or declared.
     They can be thrown by the programmer or by the JVM. Common runtime exceptions include the following:
@@ -122,16 +120,24 @@ The program throws an exception when it’s not happy with the parameter values.
 NoClassDefFoundError --> Thrown by the JVM when a class that the code uses is available at compile time but not runtime. 
  
  
- ---- Calling Methods That Throw Exceptions ---> When you’re calling a method that throws an exception, the rules are the same as within a method. 
-  Checked exceptions must be handled or declared.
-  
+ ---- Calling Methods That Throw Exceptions ---> (page 319)
+ When you’re calling a method that throws an exception, the rules are the same as within a method.  Checked exceptions must be handled or declared. for unchecked (runtime exception) no specific rule.
+  1. If a method just declared an exception in its definition, This is enough for the compiler to require the caller to handle or declare the exception.
+  2. Remember, compiler is looking for unreachable catch block, inorder to through compile error.
+  3. If a method definition doesn't declare an exception then the caller must also not declare or handle that exception. compiler knows that if method can't throw an exception then it doesn't make sense to handle it, the catch block will never reach.
+    3.1 --> on the other side its ok to declare an excption in the caller method.  
+
+-- very imp point --- how does method overriding with exception works -->
 Subclasses --> let’s look at overriding methods with exceptions in the method declaration. 
-  -- very imp point ---
   --> When a class overrides a method from a superclass or implements a method from an interface, it’s not allowed to add new checked
 exceptions to the method signature.
   --> A subclass is allowed to declare fewer exceptions than the superclass or interface. This is legal because callers are already handling them.
   --> A subclass not declaring an exception is similar to a method declaring it throws an exception that it never actually throws. This is perfectly legal.
   ---> Similarly, a class is allowed to declare a subclass of an exception type. The idea is the same. The superclass or interface has already taken care of a broader type.
+  
+  
+  
+  
   
 --- Printing an Exception --> three ways to print an exception
     1. let Java print it out, 
@@ -203,6 +209,16 @@ Rules how the code behaves when you have more than one catch block:
 1. your programm will not run all catch block, but it will run only one most specific matching catch block for which an exception was thrown.
 2. once, program completes one catch block it will go to finally block regardless of other catch block.
 3. Incase if there is an exception thrown in the finally clause, program will again run only one most specific matching catch block for which an exception was thrown in the finally block. 
+
+
+
+
+
+
+
+
+
+
 
 Result of Review Question attempt 1 -->
 1. B
