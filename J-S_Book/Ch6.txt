@@ -125,16 +125,42 @@ NoClassDefFoundError --> Thrown by the JVM when a class that the code uses is av
   1. If a method just declared an exception in its definition, This is enough for the compiler to require the caller to handle or declare the exception.
   2. Remember, compiler is looking for unreachable catch block, inorder to through compile error.
   3. If a method definition doesn't declare an exception then the caller must also not declare or handle that exception. compiler knows that if method can't throw an exception then it doesn't make sense to handle it, the catch block will never reach.
-    3.1 --> on the other side its ok to declare an excption in the caller method.  
+    3.1 --> on the other side its ok to declare an exception in the caller method.  
+
 
 -- very imp point --- how does method overriding with exception works -->
-Subclasses --> let’s look at overriding methods with exceptions in the method declaration. 
-  --> When a class overrides a method from a superclass or implements a method from an interface, it’s not allowed to add new checked
-exceptions to the method signature.
-  --> A subclass is allowed to declare fewer exceptions than the superclass or interface. This is legal because callers are already handling them.
-  --> A subclass not declaring an exception is similar to a method declaring it throws an exception that it never actually throws. This is perfectly legal.
-  ---> Similarly, a class is allowed to declare a subclass of an exception type. The idea is the same. The superclass or interface has already taken care of a broader type.
-  
+Subclasses --> rules for checked exception
+  1. --> When a class overrides a method from a superclass or implements a method from an interface, it’s not allowed to add a new checked exceptions to the method signature. example:- 
+    class CanNotHopException extends Exception { }
+    class Hopper {
+    public void hop() { }
+    }
+    class Bunny extends Hopper {
+    public void hop() throws CanNotHopException { } // DOES NOT COMPILE
+    }
+ 2.  --> A subclass is allowed to declare fewer exceptions than the superclass or interface. This is legal because callers are already handling them.  A subclass not declaring an exception is similar to a method declaring it throws an exception that it never actually throws. This is perfectly legal. example:- 
+    class Hopper {
+    public void hop() throws CanNotHopException { }
+    }
+    class Bunny extends Hopper {
+    public void hop() { }
+    }
+    
+  3. ---> The superclass or interface has broader exception type declaration then the subclass. example:- 
+    class Hopper {
+    public void hop() throws Exception { }
+    }
+    class Bunny extends Hopper {
+    public void hop() throws CanNotHopException { }
+    }
+    
+The above 3 rules applied to only checked exception. Methods are free to throw any runtime exceptions they want without mentioning them in the method declaration. The reason that it’s okay to declare new runtime exceptions in a subclass method is that the declaration is redundant.   example:- 
+    class Hopper {
+      public void hop() { }
+    }
+    class Bunny extends Hopper {
+      public void hop() throws IllegalStateException { }
+    }
   
   
   
@@ -165,9 +191,7 @@ exceptions to the method signature.
   
   
 Notes from Review Question -->
-Runtime exceptions are also known as unchecked exceptions. They are allowed
-to be declared, but they don’t have to be. Checked exceptions must be handled or
-declared. Legally, you can handle java.lang.Error subclasses, but it’s not a good idea.
+Runtime exceptions are also known as unchecked exceptions. They are allowed to be declared, but they don’t have to be. Checked exceptions must be handled or declared. Legally, you can handle java.lang.Error subclasses, but it’s not a good idea.
 
 java.io.IOException is thrown by many methods in the java.io package, but it is always thrown programmatically. 
 The same is true for NumberFormatException; it is thrown programmatically by the wrapper classes of java.lang. 
@@ -241,3 +265,27 @@ Result of Review Question attempt 1 -->
 18. A, B, E (N)
 19. B, C (N)
 20. F (N)
+
+-------- attempt 2 --->
+1. B
+2. B, D
+3. C
+4. B
+5. A, B, D
+6. C
+7. C -- very nice question (trick, incase of exception is thworn, any statement after finally block wouldn't run)
+8. E
+9. B
+10. E
+11. A
+12. A, B, D, G
+13. B, C, E (N) -- Need to remember -- Classes listed in the throws part of a method declaration must extend java.lang.Throwable. This includes Error, Exception, and RuntimeException. Any Java type, including Exception, can be declared as the return type. However, this will simply return the object rather than throw an exception.
+14. A, C, D, E (N) -- Note runtime exception can be thrown even without declaing them
+15. A, B, D, E
+16. B
+17. A, C, D, E
+18. B, E (N) -- need to be very careful about wordings of sentences
+19. B, C, E (N) -- nice tricky question -- we should consider only those exception in catch block which can actually be thrown by try block, else will get comiple error
+20. A, C, E (N) -- nice tricky question -- definately will come into exam --- remember, if there is exception in finally block, compiler will ignore all exception thrown by catch block.
+
+
