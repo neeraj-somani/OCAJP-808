@@ -1,0 +1,231 @@
+An object is a runtime instance of a class in memory
+Objects of classes represents state of program. (Need more understanding on this statement)
+
+Variables hold the state of the program, and methods operate on that state.
+A variable stores that change, means state of the program. A method is an operation that can be called.
+
+A JAR file is like a zip file of mainly Java class files.
+
+An array is a fixed-size list of items that are all of the same type.
+
+Java Classes --> multiple classes allowed, at most one of the classes in the file is allowed to be public and it needs to match the filename else code wouldn't compile. A file is also allowed to have neither class be public.
+
+-- Writing a main() Method --> Java program begins execution with its main() method.
+  A main() method is the gateway between the startup of a Java process and the beginning of the programmer’s code. 
+  JVM manage this and calls the underlying system to allocate memory and CPU time, access files, and so on.
+  The main() method lets us hook our code into this process.
+The keyword static binds a method to its class so it can be called by just the class name, as in, for example, Zoo.main(). Java doesn’t need to create an object to call the main() method, In fact, the JVM does this.
+
+Java compiler compiles ".java" files and create ".class" file.
+JVM runs that ".class" files. JVM is responsible for executing the java program line by line hence it is also known as interpreter.
+JRE - provides the minimum requirements for executing a Java application; includes JVM, core class, and supporting files
+JDK - includes JRE, Java interpreter, Javac (compiler), javadoc (for documentation), jar (archiver), other tools for java dev.
+
+-- The rules for what a Java code file contains:-
+    -- Each file can contain multiple classes but only one public class.
+    -- The filename must match the public class name, including case, and have a .java extension.
+
+Below command To compile java code -->
+  javac Zoo.java // this will compile Zoo class and creates Zoo.class file
+  java Zoo "San Diago" Tiger // this command runs Zoo class and pass two aurguments to the class. space between words seperates the aurguments and double qutation helps to pass space within one aurgument. 
+  java Zoo.class "San Diago" Tiger  // Java will not be able to run command with Zoo.class  
+  
+
+--- Package Declarations and Imports -->
+Java puts classes in packages. These are logical groupings for classes.
+Import statements tell Java which packages to look in for classes.
+The rule for package names is that they are mostly letters or numbers separated by dots.
+importing many classes using "*" wildcard symbol doesn't slow down process, as comipler handles what is needed in program.
+java.lang. This package is special in that it is automatically imported.
+
+-- some imports that don’t work ---
+import java.nio.*; // NO GOOD – a wildcard only matches //class names, not "file.*Files"
+import java.nio.*.*; // NO GOOD – you can only have one wildcard //and it must be at the end
+import java.nio.files.Paths.*; // NO GOOD – you cannot import methods //only class names
+
+--- When the same class is found in multiple packages, Java gives you the compiler error. example:- 
+import java.util.Date;
+import java.sql.Date; // DOES NOT COMPILE
+One way to resolve this issue, If you explicitly import a class name, it takes precedence over any wildcards present.
+import java.util.Date; import java.sql.*;
+
+If there is really a need to use two classes with the same name then either import only one or don't import any of these and use fully qualified name while using within class. Example:- 
+import java.util.Date;
+public class Conflicts { Date date;
+java.sql.Date sqlDate;}
+
+--> package statement should include all the directory and subdirectory structure from where we are planning to compile code. 
+for example, if we have Bird.java file at location "/my/directory/named/A/Bird.java", and if we want to compile this class at "/my/directory" location then package statement should be like "package named.A;". code wouldn't compile if you include full path in package statemnt "package my.directory.named.A;".
+
+
+
+-- imp for exam --> if code starts with line 1 in exam then make sure about import statement, class declaration, etc.
+  if its doesn't start with line 1 then, follow as per instruction of question
+  
+Constructors --> To create an instance of a class, write new before it. For example: Random r = new Random();
+    This gives Java a place to store a reference to the object.
+A constructor, is a special type of method that creates a new object. 
+Two key points, the name of the constructor matches the name of the class, and there’s no return type.
+The purpose of a constructor is to initialize fields.
+If you don't define constructor, then the compiler will supply a “do nothing” default constructor for you.
+
+Instance Initializer Blocks --> code blocks appear outside a method, The code between the braces ({}) is called a code block.
+-- Order of Initialization -->
+  Fields and instance initializer blocks are run in the order in which they appear in the file
+  The constructor runs after all fields and instance initializer blocks have run.
+
+-- Distinguishing Between Object References and Primitives --> 
+Primitive Types --> eight built-in data types. (boolean, byte, short, int, long, float, double, char)
+-- a byte can hold a value from –128 to 127. A byte is 8 bits. A bit has two possible values (0 or 1).
+-- The number of bits is used by Java when it figures out how much memory to reserve for your variable.
+Reference Types --> refers to an object. Unlike primitive types that hold their values in the memory where the variable is allocated, references do not hold the value of the object they refer to. Instead, a reference “points” to an object by storing the memory address where the object is located, a concept referred to as a pointer.
+The objects do not have names and can be accessed only via their corresponding reference. Example:- 
+java.util.Date today; // today variable is a reference of type Date and can only point to a Date object.
+String greeting; // greeting variable is a reference that can only point to a String object
+today = new java.util.Date(); // today reference now points to a new Date object in memory
+greeting = "How are you?"; // greeting reference points to a new String object, "How are you?".
+A value is assigned to a reference in one of two ways:
+■ A reference can be assigned to another object of the same type.
+■ A reference can be assigned to a new object using the new keyword.
+
+Key Differences Between Object References and Primitives -->
+1. reference types can be assigned null, which means they do not currently refer to an object. Primitive types will give you a compiler error if you attempt to assign them null.
+int value = null; // DOES NOT COMPILE
+String s = null;
+2. reference types can be used to call methods when they do not point to null. Primitives do not have methods declared on them.
+String reference = "hello"; // Remember String is not primitive type, its reference type
+int len = reference.length(); // method call on reference type
+int bad = len.length(); // DOES NOT COMPILE // No methods exist on len because it is an int primitive. Primitives do not have methods.
+3. all the primitive types have lowercase type names, example (int, long, double). But all classes that come with Java begin with uppercase (example, String, ArrayList)
+
+-- Declaring and Initializing Variables --> A variable is a name for a piece of memory that stores data with specific data type.
+String zooName = "The Best Zoo";
+int numberAnimals = 100;
+
+Declaring multiple variables --
+You can also declare and initialize multiple variables in the same statement. Same data type variable can be in same statement.
+declare means just defining which type of variable it is.
+initialize means assigning a value to the variable.
+Example:- 
+boolean b1, b2;
+String s1 = "1", s2;
+double d1, double d2; // DOES NOT COMPILE, because double data type is used 2 times.
+int i1; int i2;
+int i3; i4; // DOES NOT COMPILE, because data type is missing for i4 variable
+
+
+three rules to remember for legal identifiers:
+■ The name must begin with a letter or the symbol $ or _.
+■ Subsequent characters may also be numbers.
+■ You cannot use the same name as a Java reserved word.
+valid letters in Java are not just characters in the English alphabet. Java supports the Unicode character set, so there are more than 45,000 characters that can start a legal Java identifier.
+
+Local Variable -->
+local variable is a variable defined within a method. Local variables must be initialized before use. They do not have a default value and compiler will not let you read an uninitialized value.
+
+Instance and Class Variables -->
+Variables that are not local variables are known as instance variables or class variables.
+Instance variables are also called fields. Class variables are shared across multiple objects.
+A variable is a class variable if it has the static keyword in its declaration.
+Instance and class variables do not require you to initialize them. As soon as you declare these variables, they are given a default value.
+
+Variable_type --> Default initialization value
+boolean --> false
+byte, short, int, long --> 0 (in the type’s bit-length)
+float, double --> 0.0 (in the type’s bit-length)
+char --> '\u0000' (NULL)
+All object references (everything else) --> null
+
+The rules on scope of variables:-
+■ Local variables — in scope from declaration to end of block
+■ Instance variables—in scope from declaration until object garbage collected
+■ Class variables — in scope from declaration until program ends
+
+Ordering Elements in a Class --> acronym PIC (picture): package, import, and class is sequential order.
+Package -- First line in the file
+Import statements -- Immediately after the package
+Class declaration -- Immediately after the import (required element)
+Field declarations -- Anywhere inside a class
+Method declarations -- Anywhere inside a class
+
+All Java objects are stored in your program memory’s heap. The heap, which is also referred to as the free store, represents a large pool of unused memory allocated to your Java application.
+
+-- Garbage Collection --> Garbage collection refers to the process of automatically freeing memory on the heap by deleting objects that are no longer reachable in your program.
+  -- Java runs System.gc() method to clean object but is not guaranteed to run, Java is free to ignore the request. this method collects objects when objects become eligible for garbage collection.
+    An object is no longer reachable when one of two situations occurs:
+    ■ The object no longer has any references pointing to it.
+    ■ All references to the object have gone out of scope.
+
+exam tips --> When you get asked a question about garbage collection on the exam, we recommend you draw what’s going on. There’s a lot to keep track of in your head and it’s easy to make a silly mistake trying to keep it all in your memory.
+
+-- Objects vs. References -->
+The reference is a variable that has a name and can be used to access the contents of an object. A reference can be assigned to another reference, passed to a method, or returned from a method. All references are the same size, no matter what their type is.
+
+An object sits on the heap and does not have a name. Therefore, you have no way to access an object except through a reference. Objects come in all different shapes and sizes and consume varying amounts of memory. An object cannot be assigned to another object, nor can an object be passed to a method or returned from a method. It is the object that gets garbage collected, not its reference.
+
+--- finalize() --> Java allows objects to implement a method called finalize() that might get called. This method gets called if the garbage collector tries to collect the object. If the garbage collector doesn’t run, the method doesn’t get called. If the garbage collector fails to collect the object and tries to run it again later, the method doesn’t get called a second time.
+
+The finalize() method will run once for each object if/when it is first garbage collected.
+Just keep in mind that it might not get called on first time and that it definitely won’t be called twice.
+
+Benefits of Java -->
+Object Oriented Programming --> means code is defined in classes and classes can be instantiated by objects.
+Encapsulation --> Java supports access modifiers to protect data from unintended access and modification. 
+Platform Independent --> compile once and run in all OS.
+Robust --> prevents memory leaks, using garbage collection
+Simple --> In addition to eliminating pointers, it got rid of operator overloading.
+Secure --> Java code runs inside the JVM. Hence, less harmfull.
+
+Some other type of programming patterns -->
+  Functional programming
+  Many other languages are procudural language means they have routines or methods but no classes.
+
+Review Question Attempt 1 -->
+  1. A, B, E 
+2. A (N)
+3. B, D, E
+4. A, B 
+5. C, D 
+6. E 
+7. A (N)
+8. B, E (N)
+9. A, C, D, E 
+10. E, D (N)
+11. C, D
+12. C (N)
+13. A, D 
+14. B, D (N)
+15. A, E
+16. B, C (N)
+17. A, E 
+18. C, D, E
+19. B (N)
+20. C, E (N)
+21. A
+22. B, E
+23. C (N)
+
+Attempt 2 -->
+1. A, B, E
+2. D
+3. B, D, E
+4. A, B
+5. C, D
+6. D (N) -- very nice and tricky question
+7. A, B, C
+8. B
+9. A, C, D, E
+10. E
+11. C, D
+12. G
+13. A, D
+14. B, D (N)
+15. A, E
+16. B, C, D
+17. A, E
+18. C, D, E
+19. B, D
+20. B, E
+21. A
+22. B, E, 
+23. C, F (N) -- very nice and tricky question

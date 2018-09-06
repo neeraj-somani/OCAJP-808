@@ -1,0 +1,556 @@
+chapter 4 - Methods and Encapsulation
+
+Method signature and its components -->
+  Access Modifiers --> below is the order from most restritive to least restrictive
+    1. private --> Only accessible within the same class. The method can only be called from within the same class.
+   2.  Default (Package Private) Access --> can access in same package. The method can only be called from classes in the same package. There is no "default" keyword and hence we don't need to specify this in method declaration.
+    **(protected access is very imp for exam) -->
+    3. protected --> The method can only be called from classes in the same package or subclasses (means, can be called from same package or different package incase it got inheriteted). (page 178, 179 very important). Table on page 180.
+      Subclasses means those classes which extends other parent class and become child class. (inheritance) 
+      There are few confusing situation to understand, so that you can recognize how those scenarios are invalid:
+        --> keep in mind, you can't access protected members, if you create object of parent class which is in different package and the reference is also of parent class. Only child class has access to protected members in-case of inheritance.
+        --> keep in mind, child can access protected members even with reference variable or without reference variable.
+        Example:- 
+            package pond.goose;
+            import pond.shore.Bird;
+            public class Goose extends Bird {
+            public void helpGooseSwim() { 
+            Goose other = new Goose(); 
+            other.floatInWater(); 
+            System.out.println(other.text);
+            }
+            public void helpOtherGooseSwim() {
+            Bird other = new Goose();
+            other.floatInWater(); // DOES NOT COMPILE 
+            System.out.println(other.text); // DOES NOT COMPILE
+            }}
+        
+    4. public --> The method can be called from any class.
+ 
+  Optional Specifiers --> you can have zero or more specifiers in a method declaration, in any order. (although not all combinations are legal).
+    static --> Used for class methods. Static methods don’t require an instance of the class. They are shared among all users of the class.
+    abstract --> Used when not providing a method body.
+    final --> below are 3 possible uses of final keyword
+        Final Variable --> To create constant variable
+        Final Method --> prevent method overriding
+        Final Class --> prevent inheritance
+    synchronized, native, strictfp  --> not in OCA exam.
+
+  Return Type --> a method must have a return type. If no value is returned, the return type is void. You cannot omit the return type.
+    return type such as String or int --> return statement must include the primitive or object to be returned.
+    void return type --> method body can have return statement with no value returned or omit the return statement entirely.
+ 
+ Method Name --> contain letters, numbers, $, or _. Also, the first character is not allowed to be a number and reserved words are not allowed.
+  
+  Parameter List --> is required and it doesn’t have to contain any parameters. multiple parameters, you separate them with a comma.
+ 
+ Optional Exception List --> it is an optional and method can specify exception in-case something go wrong and Can handle them.
+  can specify multiple exception seperated by comma.
+
+ Method Body --> is simply a code block. It has braces that contain zero or more Java statements. This is required.
+
+**** very imp **** 
+Working with Varargs --> vararg parameter (variable argument) as if it is an array.
+      1. if present, then A vararg parameter must be the last element in a method’s parameter list. 
+      2. only allowed to have one vararg parameter per method.
+     3. When calling a method with a vararg parameter, you can pass in an array, or you can list the elements of the array and let Java create it for you.
+      You can even omit the vararg values in the method call and Java will create an array of length zero for you.
+      it is still possible to pass null explicitly to varargs. Although, Java might throw null exception if you try to perform some operation on this null value array. (example:- walk(1, null); // this is valid if we dont try to get length, otherwise will throw exception.)
+      below example:- 
+          15: public static void walk(int start, int... nums) {
+          16: System.out.println(nums.length);
+          17: }
+          18: public static void main(String[] args) {
+          19: walk(1); // 0
+          20: walk(1, 2); // 1
+          21: walk(1, 2, 3); // 2
+          22: walk(1, new int[] {4, 5}); // 2
+          23: }
+
+    Designing Static Methods and Fields --> 
+      Static methods don’t require an instance of the class. No need to instantiate the object of the class.
+      They are shared among all users of the class. consider as being a member of the single class object that exist independently of any instances of that class.
+      
+      instance variables --> Each class has a copy of the instance variables.
+      instance methods --> There is only one copy of the code for the instance methods. it can be called as many times as needed.
+                           However, Each call gets space on the stack for method parameters and local variables.
+                           Remember that only data gets its “own copy.” There is no need to duplicate copies of the code itself.
+      
+      static methods --> below 3 imp points
+        --> The main() method is a static method. That means you can call it directly by the classname. No need to instantiate the object of the class.
+          --> For utility or helper methods that don’t require any object state. Since there is no need to access instance variables, having static methods eliminates the need for the caller to instantiate the object just to call the method.
+          --> For state that is shared by all instances of a class, like a counter (static variable). All instances must share the same state. Methods that merely use that state should be static as well. (hence, method and variable both must be static)
+      
+      
+     Calling a Static Variable or Method -->
+       1. just put the classname before the method or variable. you don't need to create an instance of the class to call static member of the class. 
+      2. but even if you create an instane of class, The compiler checks for the type of the reference and uses that instead of the object.
+      example:- even k is null, still code works fine
+          5: Koala k = new Koala();
+          6: System.out.println(k.count); // k is a Koala
+          7: k = null;
+          8: System.out.println(k.count); // k is still a Koala
+
+      3.  Also, we can not use "this" keyword in-place of classname to call static members. means, this can't be used with the context of static members.
+      4. you can call static members within the same class without even classname.
+      
+        For example:
+              System.out.println(Koala.count);
+              Koala.main(new String[0]);
+      
+      one rule that is trickier:-
+        You can use an instance of the object to call a static method. The compiler checks for the type of the reference and uses that instead of the object. Example:-
+          5: Koala k = new Koala();
+          6: System.out.println(k.count); // k is a Koala reference type
+          7: k = null;
+          8: System.out.println(k.count); // k is still a Koala
+      // Java doesn’t care that k happens to be null. Since we are looking for a static method or variable. for java, k is still Koala reference type.
+      // Remember to look at the reference type for a variable when you see a static method or variable. The exam creators will try to trick you into thinking a NullPointerException is thrown because the variable happens to be null. Don’t be fooled!
+      Static variable, means pointing same variable even if it is called by different objects references. (top 7 lines of page 183)
+      
+   Static vs Instance --> *************(very imp for exam)*********** (page 183)
+      A static member cannot call an instance member. since static doesn’t require any instances of the class to be around.
+      A static method or instance method can call a static method because static methods don’t require an object to use. 
+      An instance method can call another instance method on the same class without using a reference variable, because instance methods do require an object. 
+      Instance member can call static member without classname or reference variable, if its calling within same class.
+   
+   ---- Static Variables -->
+    Some static variables are meant to change as the program runs. Means, value of same variable change as the program runs.
+    Other static variables are meant to never change during the program. This type of variable is known as a constant. final modifier is used for this.
+    We are allowed to call methods on reference variables.
+    example:- private static final ArrayList<String> values = new ArrayList<>(); 
+              public static void main(String[] args) {
+              values.add("changed"); } // this is legal
+      
+  ----- Instance Initialization --> that looked like unnamed methods. Just code inside braces. 
+        example:- {
+                  count++; }
+           
+  ----- Static Initialization --> static initialization block, is the block with curly braces {} that contain definition and initial assignment for all static variables. example:--
+        static {
+          int numSecondsPerMinute = 60;
+          int numMinutesPerHour = 60;
+          NUM_SECONDS_PER_HOUR = numSecondsPerMinute * numMinutesPerHour;
+          }
+    --> define static variable with keyword "static".
+    --> you can assign a value to static variable while defining it or in the static initialization block.
+    --> if "final" keyword is used with "static", then reassignment of value not allowed.
+    --> Defining a static variable and not assigning any value to it is not allowed. Code will not compile.
+    
+    ** static or instance Initialization not recommended in real world. The same thing can be done in constructors.
+    
+ ---- Static Imports ---> Static imports are for importing static members of classes. (always remember members of class means methods/variables)
+    --> The compiler will complain if you try to explicitly do a static import of two methods with the same name or two static variables with the same name. In such case we use class name with method name while using in code.
+    --> if we created an asList method in our class. Java would give it preference over the imported one and the method we coded would be used.
+      example:-   
+          1: import static java.util.Arrays; // DOES NOT COMPILE
+          2: import static java.util.Arrays.asList;
+          3: static import java.util.Arrays.*; // DOES NOT COMPILE
+          4: import static statics.A.TYPE;
+          5: import static statics.B.TYPE; // DOES NOT COMPILE
+          6: public class BadStaticImports {
+          7: public static void main(String[] args) {
+          8: Arrays.asList("one"); // DOES NOT COMPILE
+          9: List<String> list = asList("one", "two"); // notice Arrays class name not needed
+ //  List<String> list = Arrays.asList("one", "two"); // this line will also work if we import arrays class (import java.util.Arrays;)
+          10: } }
+ 
+ ----- Passing Data Among Methods ---> Java is a “pass-by-value” language (page 190 - 191)
+      --> methods with the parameters --> means, passing value of parameters to methods.
+          example:-- String name = "Webby";
+                     speak(name);
+     --> StringBuilder passed into the method: --> means passing value to inbuild method of StringBuilder
+          example:- // In below example both name and s pointing to same StringBuilder object.
+                    StringBuilder name = new StringBuilder();
+                    speak(name);
+                    public static void speak(StringBuilder s) {
+                    s.append("Webby");
+                    }
+  
+      --> Another trick to remember --> (page 191) ** very imp
+            If result of method (returned value from method) is not stored in variable, it is being ignored by Java. But if it is stored in variable then Java uses that and doesn't ignore it.
+            
+------ Overloading Methods --> different method signatures with the same name but different type parameters. This means there can be different access modifiers, specifiers (like static), return types, exception lists and parameters. 
+    --> exceptions are different return type not allowed.  
+    --> same method one with static keyword and one without not allowed.
+    --> java looks for matching types and calls the appropriate method.
+    --> Java tries to use the most specific parameter list method it can find. Means, if we have method both with primitive and wrapper  class, java will prefer primitive incase we pass primitive value to method while calling. Considering, why to do extra autoboxing.
+    
+      Below are few valid/invalid overloaded methods:
+            public void fly(int numMiles) { }
+            public void fly(short numFeet) { }
+            public boolean fly() { return false; }
+            void fly(int numMiles, short numFeet) { }
+            public void fly(short numFeet, int numMiles) throws Exception { }
+            public int fly(int numMiles) { } // DOES NOT COMPILE // java consider this as duplicate method
+            public static void fly(int numMiles) { } // DOES NOT COMPILE
+
+      --- another tricky thing ---> Overloading and Varargs ----
+        Java treats "varargs" as if they were an array. Hence, below 2 methods are same, which brings compile error for 2nd.
+          public void fly(int[] lengths) { }
+          public void fly(int... lengths) { } // DOES NOT COMPILE
+      Although, it is also important to understand how they are not the same
+      example -->
+        fly(new int[] { 1, 2, 3 }); //either method can be called using this statement
+        fly(1, 2, 3); // However, you can only call the varargs version with stand-alone parameters like this. This is important to understand regarding varargs.
+    
+ ---- Autoboxing --> Java will convert a primitive (int) to an object (Integer) to add it to an ArrayList through the wonders of autoboxing.
+    --> If both version of method is available then java will give preference to primitive type method and will not bother to do extra work of autoboxing. When the primitive (int) version isn't present, it will autobox.
+        
+    --> Hence, we can say Java calls the most specific method it can.
+    In earlier verion of java 1.4 or older, Autoboxing and varargs doesn't exists. Hence, older code has to still work.
+      Due to this reason there are few rules which Java uses to choose the right overloaded method.
+      Rule --> Example of what will be chosen for glide(1,2)
+      Exact match by type --> public String glide(int i, int j) {}
+      Larger primitive type -->  public String glide(long i, long j) {}
+      Autoboxed type -->  public String glide(Integer i, Integer j) {}
+      Varargs --> public String glide(int... nums) {}
+
+      Below example is interesting and tricky to understand -->
+        public class TooManyConversions {
+        public static void play(Long l) { }
+        public static void play(Long... l) { }
+        public static void main(String[] args) {
+        play(4); // DOES NOT COMPILE
+        play(4L); // calls the Long version
+        } }
+      
+      --> The reason for comile error in above code is, because java won't be able to convert int primitive value to Long object type directly. For this it requires two step, first convert int primitive type to long primitive type and then to Long object type. Hence, two step conversion directly is not possible in java right now and we received compile error.
+      
+------- Creating Constructors ----> a constructor is a special method that matches the name of the class and has no return type.
+  Remember Java is case-sensitive.
+      Constructors are used when creating a new object. This process is called instantiation because it creates a new instance of the class. A constructor is called when we write new followed by the name of the class we want to instantiate. For example: new Bunny()
+     The this keyword tells Java you want to reference an instance variable. If you don’t say otherwise, Java gives you the one with the most granular scope.
+     example:
+      1: public class Bunny {
+      2: private String color;
+      3: public Bunny(String color) {
+      4: this.color = color;  // notice, color = this.color is not allowed. code won't complie in that case.
+          // in above statement this.color refers to instance variable of class and right hand side color refers to method parameter.
+      5: } }
+
+  -------- Default Constructor --> Every class in Java has a constructor whether you code one or not. If you don’t include any constructors in the class, Java will create one for you without any parameters. This Java-created constructor is called the default constructor or no-arguments constructor.
+    The default constructor has an empty parameter list and an empty body. example:- public Rabbit() {}
+    We keep saying generated. This happens during the compile step.
+    Remember that a default constructor is only supplied if there are no constructors present.
+   ** Having a private constructor in a class tells the compiler not to provide a default no-argument constructor. It also prevents other classes from instantiating the class. This is useful when a class only has static methods or the class wants to control all calls to create new instances of itself.
+   
+------- Overloading Constructors --> means, multiple constructors in the same class with same name as of class, as long as they have different method signatures.
+
+  ---> Constructors can be called only by writing new before the name of the constructor. They are not like normal methods that you can just call. ** exam tricky ques on this **
+
+    --> another tricky concept ---> When you have 2 constructors, means methods with same name as of class, but with different parameter and you want to call one constructor inside another, you can use this keyword, as discussed below. (page 200)
+   --> When "this" is used as if it were a method, Java calls another constructor on the same instance of the class.
+    --> this() has one special rule! If you choose to call it, the this() call must be the first noncommented statement in the constructor. Comments don't run Java statements and are allowed anywhere.
+   Example:-
+      public Hamster(int weight) {
+        this(weight, "brown"); // it will call a constructor Hamster(int a, String b){}
+        Hamster(weight, "brown"); // DOES NOT COMPILE
+        new Hamster(weight, "brown"); // Compiles but does not do what we want, because of multiple object being created on method call 
+        this(weight, "brown"); // Does not compile, because it has to be first uncommented line
+      }
+
+      ------ Constructor Chaining --> Overloaded constructors often call each other. One common technique is to have each constructor add one parameter until getting to the constructor that does all the work. This approach is called constructor chaining.
+      
+ ------- Final Fields ---> final instance variables must be assigned a value exactly once. We saw this happen in the line of the declaration and in an instance initializer. There is one more location this assignment can be done: in the constructor.
+ By the time the constructor completes, all final instance variables must have been set.
+ 
+  -------- Order of Initialization ---->  *** Very imp (page 202)    
+        1. If there is a superclass, initialize it first (we’ll cover this rule in the next chapter. For now, just say “no superclass” and go on to the next rule.)
+        2. Static variable declarations and static initializers in the order they appear in the file.
+        3. Instance variable declarations and instance initializers in the order they appear in the file.
+        4. Any other statements that is making any changes to instance variable in the order they appear in the file.
+        5. The constructor.
+
+      /// Keep in mind that the four rules apply only if an object is instantiated. If the class is referred to without a new call, only rules 1 and 2 apply. The other two rules relate to instances and constructors. They have to wait until there is code to instantiate the object. Example:- (page 203)
+        1: public class InitializationOrder {
+        2: private String name = "Torchie";
+        3: { System.out.println(name); }
+        4: private static int COUNT = 0;
+        5: static { System.out.println(COUNT); }
+        6: { COUNT++; System.out.println(COUNT); }
+        7: public InitializationOrder() {
+        8: System.out.println("constructor");
+        9: }
+        10: public static void main(String[] args) {
+        11: System.out.println("read to construct");
+        12: new InitializationOrder();
+        13: }
+        14: }
+        The output looks like this:
+        0
+        read to construct
+        Torchie
+        1
+        constructor
+
+  ------- Encapsulating Data --> Encapsulation means we set up the class so only methods in the class with the variables can refer to the instance variables. Callers are required to use these methods. Example, getters (accessor method) and setters (mutator method) method.
+      --> remember that data (an instance variable) is private and getters/setters are public.
+      --> Encapsulating data is helpful because it prevents callers from making uncontrolled changes to your class.
+  
+Rules for JavaBeans naming conventions -->                     
+1. Properties are private.  ---> Example:-- private int numEggs;
+2. Getter methods begin with "is" if the property is a boolean. Example:--
+    public boolean isHappy() {
+    return happy;
+    }
+3. Getter methods begin with get if the property is not a boolean. Example:-- 
+    public int getNumEggs() {
+    return numEggs;
+    }
+4. Setter methods begin with set. return type is void.  Example:--
+    public void setHappy(boolean happy) {
+    this.happy = happy;
+    }
+5. The method name must have a prefix of set/get/is, followed by the first letter of the property in uppercase, followed by the rest of the property name. Example:--
+    public void setNumEggs(int num) {
+    numEggs = num;
+    }
+ ----- Creating Immutable Classes --> creating unchangable classes
+      One step in making a class immutable is to omit the setters.
+      but we include a constructor that allows a value to be set. This is to set initial value.
+      Remember, immutable is only measured after the object is constructed. Immutable classes are allowed to have values. They just can't change after instantiation.
+   
+**** important to remember --->
+encapsulation refers to preventing callers from changing the instance variables directly.
+Immutability refers to preventing callers from changing the instance variables at all. means, not changable.
+        
+--- Writing Simple Lambdas ---> Functional programming is a way of writing code more declaratively. You specify what you want to do rather than dealing with the state of objects. You focus more on expressions than loops.
+
+    --> A lambda expression is like a method that you can be passed as if its a variable. It has parameters and a body just like full-fledged methods do, but it doesn’t have a name like a real method.
+    --> an interface specifies the methods that our class needs to implement.    
+     example, simplest lambda expressions -->
+      a -> a.canHop();
+      (Animal a) -> { return a.canHop(); } // both statement doing same
+      
+      Below are the three major parts of lambda:
+        ■ Specify a single parameter with the name a.
+            --> The parentheses can only be omitted if there is a single parameter and its type is not explicitly stated.
+        ■ The arrow operator to separate the parameter and body
+        ■ A body that calls a single method and returns the result of that method. 
+            --> Java doesn’t require you to type return or use a semicolon when no braces are used. but with two or more statements this is similar to any other method body.
+      few example for valid lambda expression --> 
+        3: print(() -> true); // 0 parameters
+        4: print(a -> a.startsWith("test")); // 1 parameter
+        5: print((String a) -> a.startsWith("test")); // 1 parameter
+        6: print((a, b) -> a.startsWith("test")); // 2 parameters
+        7: print((String a, String b) -> a.startsWith("test")); // 2 parameters
+      few example for invalid lambda expression --> 
+        print(a, b -> a.startsWith("test")); // DOES NOT COMPILE // needs parentheses around the parameter list
+        print(a -> { a.startsWith("test"); }); // DOES NOT COMPILE // missing the return keyword
+        print(a -> { return a.startsWith("test") }); // DOES NOT COMPILE // missing the semicolon for return statement
+        
+        
+  --- redeclaring variable is not allowed in lambdas -->
+    Java doesn’t allow us to redeclare a local variable, the following is an issue:
+    (a, b) -> { int a = 0; return 5;} // DOES NOT COMPILE
+    We tried to redeclare a, which is not allowed. By contrast, the following line is okay because it uses a different variable name:
+    (a, b) -> { int c = 0; return 5;}
+    
+** ---> Lambdas work with interfaces that have only one method. These are called functional interfaces—interfaces that can be used with functional programming.
+--> Hence, what to do if you want more than one method, you need to create multiple interfaces with one method in each or create on generic interface that can handle all types of method. see below:
+  --> java provides such an interface as generic interface with one method. It’s in the package java.util.function and the gist of it is as follows. We can define the method definition in our lambda. Hence, now we can directly call this Predicate method in our class without coding it again.
+  Example:---         public interface Predicate<T> {
+                      boolean test(T t);
+                      }
+  example, how to use predicate method:-
+      1: import java.util.*;
+      2: import java.util.function.*;
+      3: public class PredicateSearch {
+      4: public static void main(String[] args) {
+      5: List<Animal> animals = new ArrayList<Animal>();
+      6: animals.add(new Animal("fish", false, true));
+      8: print(animals, a -> a.canHop());
+      9: }
+      10: private static void print(List<Animal> animals, Predicate<Animal> checker) {
+      11: for (Animal animal : animals) {
+      12: if (checker.test(animal))
+      13: System.out.print(animal + " ");
+      14: }
+      15: System.out.println();
+      16: }
+      17: }
+      
+ --> Java 8 even integrated the Predicate interface into some existing classes. for OCA we need to know only one, 
+    ArrayList declares a removeIf() method that takes a Predicate.
+    
+see example below:-
+3: List<String> bunnies = new ArrayList<>();
+4: bunnies.add("long ear");
+5: bunnies.add("floppy");
+6: bunnies.add("hoppy");
+7: System.out.println(bunnies); // [long ear, floppy, hoppy]
+8: bunnies.removeIf(s -> s.charAt(0) != 'h'); // It defines a predicate that takes a String and returns a boolean. The removeIf() method does the rest.
+9: System.out.println(bunnies); // [hoppy]
+
+Review Notes from Questions in attempt 1 -->
+
+We don't need to specify "default" keyword for method to be package private. Which means if we don't specify any access modifier then it will automatically be default. default access omits the access modifier rather than specifying default.
+
+In method definition, there will be only method name can come after method return type. Only the access modifier or optional specifiers are allowed before the return type.
+
+In method definition, "final" and "static" are optional specifiers and can be placed interchagablly and are allowed in any order, anywhere between access modifier and return type of method. 
+
+If any method tries to return null value using return statement as "return null;", then we must check that null requires a reference object as the return type of method. "void" is not a reference object since it is a marker for no return type, hence code does not compile. int is not a reference object since it is a primitive type, hence code does not compile. A reference type refers to an object (an instance of a class). 
+
+Difference between varargs and array:-
+Remember, array can be more than one in method parameter, as shown below. Array can come at any place, but varargs must be last parameter in method. When calling a method with a vararg parameter, you have a choice. You can pass in an array (need to declare an array properly. It should be new boolean[] {array values here} or new boolean[array_size].), or you can list the elements of the array and let Java create it for you. You can even omit the vararg values in the method call and Java will create an array of length zero for you.
+example for method with array as parameter :- public void moreG(String[] values, int[] nums) {}
+
+Immutability uses private instance variables and allowing only getters. common implementation for encapsulation by setting
+all fields to be private and all methods to be public. Encapsulation, allows getter and setter both.
+
+Static members can be called using instance variable as well as static members. Also, if we import Static member of other class into any specific class then we can directly call Static member, without explicitly using classname.
+Static member can't access or call instance members.
+
+StringBuilder are mutable objects. Hence, if you perform any operation on same StringBuilder multiple times, it all referenece to same StringBuilder. Incase, you create new StringBuilder Object then thats the new reference for that object. It wouldn't impact the earlier StringBuilder.
+
+this() is used to call default constructor. We can call any constructor within another constructor. 
+
+Remember, method parameters have no business in an import statements.
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+Review Question Attempt 1:- 
+1. B, C
+2. A, D
+3. A, C, D
+4. A, B (N)
+5. F, G (N)
+6. B, D, (N)
+7. C (N)
+8. B, C, D, E (N)
+9. C, E
+10. F (N)
+11. B, E
+12. E (N) -- start analysis from here --
+13. D (N)
+14. B, C (N)
+15. E
+16. B
+17. A, D (N)
+18. B, C, F (N)
+19. A, D (N)
+20. A, B, E, F (N)
+21. C
+22. B (N)
+23. D (N)
+24. C, E (N)
+25. A, F (N)
+26. A
+27. D (N)
+28. A, D, F
+29. A, F
+
+Confusing points / concepts -->
+10. concepts to remember -- in case of static members in class
+1. Java allows calling a static method through an instance variable or through class name, if we imported class properly.
+2. if you imported static members using import statement then it allows to use them directly without even class name.
+
+11. Remember String and Object reference type can have null value and you can call method on top it. As java looks at the type of the reference and translates the call to ReferenceType.methodName().
+example: 
+13: Rope rope = new Rope();
+14: rope.play();
+15: Rope rope2 = null;
+16: rope2.play(); // this statement at run-time will become Rope.play()
+
+
+18.
+Static method can access only static memebers. 
+Instance method can access both static and non-static (instance) members.
+constructor can never be private.
+
+19.
+Constructor have same name as class and no return type.
+
+20. 
+Can we have both super() and this() in the same constructor. As we know first line in every constructor is super(), if not explicitly specified.
+
+21. 
+Can we access instance variable within same class, without instantiating the class (new className()).  
+
+22.
+Need to memories order of initialization rules. already noted in the notes.
+
+25. 
+Question:- Can we have constructor with wrapper class as well.
+Answer:- Yes
+Question:- what will happen if we have all these constructors with wrapper class, with varargs, and with object. Which will get preference.
+Answer:- Java looks for the most specific constructor to call. Java prefers autoboxing (wrapper class) over varargs.
+preference in sequencial order --> primitive type --> autoboxing --> Object class --> varargs or array
+
+1. If we have only one aurgument pass to the cosntructor than wrapper class will get preference over varargs and Object parameter constructor.
+2. If wrapper class constructor is not present then Object parameter will get preference over varargs parameter constructor.
+
+26.
+Need to memorise how Predicate class works, and how test method behaves.
+
+27. Need to look concept of this question again.
+ 
+
+attempt 2 -------------------------------------
+1. B, C
+2. A, D, 
+3. A, C, D, 
+4. A, B, G
+5. D, F, G
+6. B
+7. C, D, F
+8. B, C, D, F
+9. C, E
+10. D (N) --> very imp question for exam, need to understand it very carefully
+11. B, E
+12. A (N) --> very imp question and need to remember static variable properties. Also, all the rules for Order of Initialization and how it works.
+13. D (N) --> very tricky, need to calculate properly and carefully
+14. B, C (N) --> very nice tricky question
+15. E
+16. B
+17. B, D, E
+18. F, C
+19. A, C, 
+20. E, F (N) --> very good question. you almost correct identified all reasons. remember, this() call must be first in constructor.
+21. C
+22. E
+23. D
+
+----- attempt 3 -->
+ch - 4 -- attempt 2 -->
+1. B, C
+2. A, D
+3. A, C, D
+4. A, B, G
+5. D, F, G
+6. A, C
+7. B, D, F
+8. B, C
+9. C, E
+10. D, E -- (N) -- very tricky question, need to remember and understand the concept very well --
+11. B, E -- tricky question -- need to understand when we get NullPointerException
+12. D
+13. E
+14. B
+15. E
+16. B
+17. B, D, E
+18. E, F
+19. A, D
+20. E
+21. C 
+22. E
+23. A
+24. C, E
+25. A, G
+26. A --> tricky question -- need to understand how lambda was working
+27. E (N) --> not at all able to understand any concept behind this question -- need to understand it carefully
+28. A, D, F
+29. A, F

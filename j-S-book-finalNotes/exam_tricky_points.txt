@@ -1,0 +1,96 @@
+-- from ch 2 -->
+1. questions on the exam that try to apply a logical complement operator, !, to a numeric expression, and a negation operator, -, to a boolean expression. cause the code to fail to compile.
+2. pay attention to questions that use Increment and decrement operators, ++ and --, on the same variable multiple time in same statement.
+3. short-circuit operators or conditional operators, && and ||, --> the right-hand side of the expression may never be evaluated if the final result can be determined by the left-hand side of the expression.
+4. Pay close attention to the data types when you see an equality operator (== and !=) on the exam. The exam creators also have a habit of mixing assignment operators and equality operators.
+5. during the OCA exam, you may be pre- sented with classnames that are unfamiliar, such as File. Many times you can answer ques- tions about these classes without knowing the specific details of these classes. 
+6. exam writers trick on if-then statements without braces ({}). 
+  In below example, print statement will run only when if condition satisfied. but incrementing variable will always run, not dependent on if statement.
+if(hourOfDay < 11) 
+  System.out.println("Good Morning"); 
+  morningGreetingCount++;
+7. Another exam writers trick on if-then statements is, providing code where the boolean expression inside the if-then statement is not actually a boolean expression. For example,
+int x = 1;
+if(x) { // DOES NOT COMPILE
+....
+}
+8. No paranthesis applied to ternary oprator expression, as its an optional. 
+9. exam tricks --> only one of the right-hand expressions of the ternary operator will be evaluated at runtime. Means, if boolean expression is true then 1st expression will only evaluate at run-time and if boolean expression is false then 2nd expression.
+Its very similar to short-circuit operators.
+int x = y<10 ? y++ : z++; // only one will increment, either y or z based on y value
+10. The exam creators are fond of switch examples that are missing break statements! on the exam, always consider that multiple branches
+may be visited in a single execution.
+11. Be wary of any exam questions in which a variable declared within the initialization block of a for loop is available outside the loop.
+12. Need to understand the traditional difference between List and Array
+** 13. "break;" statements are not allowed in if-else statement directly, means its allowed on all loops (do, for, while) and switch statements. Understand few things here carefully, if-else and switch are statements not loops, but (do, for, while) are loops and not statements. Hence, if you use break; statement directly in if-else statement, code will not compile but if you use break; statement in if-else statement, which is inside a for loop (like, a nested loop), then this break statement will apply on for loop and code will run properly.
+
+-- from ch 3 ----> very weak on this chapter (need to work on it again)
+1. OCA exam creators like string concatenation because the + operator can be used in two ways within the same line of code. (addition and concatenation)
+2. String is immutable, means cant be changed once created. Exam will trick you with concate method, but dont get tricked. Example:
+String s1 = "1"; 
+String s2 = s1.concat("2");
+s2.concat("3");
+System.out.println(s2); \\ it will print "12", as string is immutable. s1 can't be changed but s2 is object created using String methods. Hence, s2 can be changed but we need to assign an method output back to variable so that it gets updated.
+Remember, left-side is reference pointing to objects created on right-side. Hence, in every assignement a new String object is created and assigned to String reference and the old object becomes eligible for garbage collection.
+3. The substring() method is the trickiest String method on the exam.
+4. The exam will likely try to trick you with respect to String being immutable and StringBuilder being mutable.
+5. stringBuilder insert method --> The exam creators will try to trip you up on this. As we add and remove characters, their indexes change. When you see a question dealing with such operations, draw what is going on so you won’t be confused.
+6. Remember, IndexOutofBound exceptions are very common scenarios for exam when using StringBuilder methods.
+7. pay attention to object reference, while creating object using String class or the Class in which it is used. like Tiger class. Since, Tiger class did't implement equals method, object comparison "t1.equals(t2)" results false.
+8. for an array, The exam will test whether you are being observant by trying to access elements that are not in the array. why,  there can be ArrayIndexOutOfBoundsException will be thrown.
+9. binarySearch for unsorted array means result will be unpredictable output.
+10. arrayList method signature important for exam. In exam, note on paper to keep track of items in ArrayList, add(), remove().
+11. Also, which method takes what aurgument, means data value or index value. Whats there written type.
+12. Remember, OCA exam doesn't cover timezone part for Date and time new API.
+13. No constructor for Date and Time classes. The exam creators may try to throw something like this at you. Don’t fall for this. You are not allowed to construct a date or time object directly.
+LocalDate d = new LocalDate(); // DOES NOT COMPILE
+14. When you have a lot of manipulations to make, this chaining comes in handy. There are two ways the exam creators can try to trick you. What do you think this prints?
+LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); 
+date.plusDays(10);
+System.out.println(date); // It prints January 20, 2020. Adding 10 days was useless because we ignored the result.
+15. The exam also may test to see if you remember what each of the date and time objects includes. Do you see what is wrong here?
+LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(1); // DOES NOT COMPILE //LocalDate does not contain time, so we can't use manupulating methods for minutes.
+16. There are two predefined formats that can show up on the exam: SHORT and MEDIUM. This is to format date and time objects.
+17. Exam, will trick you to see which ofLocalizedXXXX() method can be used with which date and time objects.
+18. LocalDate and LocalTime objects are immutable, hence we need to store it in variable, in order not to get lost.
+19. Exam will trick you on inserting wrong date or time values. Code will compile but there will be runTime exception.
+20. Remember, asList() is the method of Arrays class and in aurgument we need to pass array object. example below:
+  List<Integer> list = Arrays.asList(10, 4, -1, 5); // this will compile 
+  but below will give compile error -->
+  String [] names = {"Tom", "Dick", "Harry"};
+  List<String> list = names.asList(); // compile error because asList() method can't be used on array object.
+
+---- ch 4 --->
+1. to access static members, just put the classname before the method or variable. you don't need to create an instance of the class. but even if you create an instane of class, The compiler checks for the type of the reference and uses that instead of the object. exam creator use this trick.
+2. another exam trick, A static member cannot call an instance member. 
+3. The exam will try to trick you with misusing static imports statement.
+4. exam tricks,  If result of method (returned value from method) is not stored in variable, it is being ignored by Java. But if it is stored in variable then Java uses that and doesn't ignore it.
+5. overloading methods complex scenarios can be seen in exam for sure.
+6. exam will trick on the way we should refer this keyword in method. "this" not allowed in right hand side of "=" assignment operator.
+  Doest Not compile --> length = this.length;
+  compile --> this.length = length;
+7. be careful in exam for private constructors. As its not possible to instantiate private constructors.
+8. Constructors can be called only by writing new before the name of the constructor. They are not like normal methods that you can just call. ** exam tricky ques on this **
+9. For encapsulation, remember javaBeans nameing convention for variables and methods name.
+10. OCA exam limits the scope for lambda, lambdas return a boolean only for now.
+11. For the OCA exam, you only need to know how to implement lambda expressions that use the Predicate interface.
+
+
+---------- ch 5 --->
+1. You should be wary of any exam question in which the parent class defines a constructor that takes arguments and doesn’t define a no-argument constructor. Be sure to check that the code compiles before answering a question about it.
+2. Make sure you understand defining Constructor Rules; the exam will often provide code that breaks one or many of these rules and therefore doesn’t compile.
+3. The exam creators are fond of questions that try to get you to determine the output of statements involving constructors. Just remember to “think like the compiler” as much as possible and insert the missing constructors or statements as needed.
+4. When you see super() or super on the exam, be sure to check that they are being used correctly. The exam may try to trick you by using both super() and super in a constructor.
+5. Any time you see a method on the exam with the same name as a method in the parent class, determine whether the method is being overloaded or overridden first; doing so will help you with questions about whether the code will compile.
+6. Exam will trick you on questions regarding hidden vs overridden method.
+7. The exam creators are fond of questions like this one, which mixes nonabstract classes with abstract methods and vice versa.
+8. They are also fond of questions with abstract methods marked as abstract for which an implementation is also defined. Code will not compile in such cases.
+9. When you see a concrete class extending an abstract class on the exam, check that it implements all of the required abstract methods. Sometime, question miss implementation of one or more method. That causes code not to compile.
+10. at least one question on the exam in which an interface or interface method uses an invalid modifier.
+11. Be wary of examples on the exam that mix class and interface defi nitions. Make sure the only connection between a class and an interface is with the class implements interface syntax.
+12. there will probably be a few questions on the exam about default method in interfaces.
+13. Exam trick you on rules of casting objects for polymorphism. especially rule 3.
+14. When reviewing a question on the exam that involves casting and polymorphism, be sure to remember what the instance of the object actually is. Then, focus on whether the compiler will allow the object to be referenced with or without explicit casts.
+
+---------- ch 6 --->
+

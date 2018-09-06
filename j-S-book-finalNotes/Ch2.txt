@@ -1,0 +1,424 @@
+Chapter 2 -- Operators and Statements
+
+--- Understanding Java Operators --
+it is a special symbol that can be applied to a set of variables, values, or literals—referred to as operands—and that returns a result.
+3 types --> unary, binary, and ternary
+
+Java operators are not necessarily evaluated from left-to-right order.
+Unless overridden with parentheses, Java operators follow order of operation from higher-to-lower precedence.
+If two operators have the same level of precedence, then Java guarantees left-to-right evaluation.
+
+Order of operator     precedence
+Operator   ----------->      Symbols and examples
+Post-unary operators   ----------->       expression++, expression--
+Pre-unary operators   ----------->       ++expression, --expression
+Other unary operators   ----------->       +, -, !
+Multiplication/Division/Modulus   ----------->       *, /, %
+Addition/Subtraction   ----------->      +, -
+Shift operators   ----------->      <<, >>, >>>  (// not in OCA exam)
+Relational operators   ----------->      <, >, <=, >=, instanceof
+Equal to/not equal to   ----------->      ==, !=
+Logical operators   ----------->      &, ^, |
+Short-circuit logical operators   ----------->      &&, ||
+Ternary operators   ----------->      boolean expression ? expression1 : expression2
+Assignment operators   ----------->      =, +=, -=, *=, /=, %=, &=, ^=, !=, <<=, >>=, >>>=
+
+
+---- Working with Binary Arithmetic Operators --> used to perform mathematical operations on variables, create logical expressions, as well as perform basic variable assignments.
+
+  --- Arithmetic Operators -->  include addition (+), subtraction (-), multiplication (*), division (/), and modulus (%)
+, include the unary operators, ++ and --.
+the multiplicative operators (*, /, %) have a higher order of precedence than the additive operators (+, -).
+you can change the order of operation explicitly by wrapping parentheses around the sections you want to evaluate first.
+
+arithmetic operators may be applied to any Java primitives, except boolean and String
+only the addition operators '+' and Assignment operators '+=' may be applied to String values, which results in String concatenation.
+The modulus (%), or remainder operator, is simply prints the remainder when two numbers are divided.
+
+For integer values, division results in the floor value of the nearest integer that fulfills the operation, whereas modulus is the remainder value. 
+For a given divisory, which is 3 in these examples, the modulus operation results in a value between 0 and (y - 1) for positive dividends. This means that the result of a modulus operation is always 0, 1, or 2.
+Example: 
+System.out.print(10 / 3); // Outputs 3
+System.out.print(10 % 3); // Outputs 1
+
+-- Numeric Promotion -->  Numeric Promotion Rules
+    1. If two values have different data types, Java will automatically promote one of the values to the larger of the two data types.
+    2. If one of the values is integral and the other is floating-point, Java will automatically promote the integral value to the floating-point value’s data type.
+    3. Smaller data types, namely byte, short, and char, are first promoted to int any time they’re used with a Java binary arithmetic operator, even if neither of the operands is int. For the third rule, note that unary operators are excluded from this rule. For example, applying ++ to a short value results in a short value.
+    4. After all promotion has occurred and the operands have the same data type, the resulting value will have the same data type as its promoted operands.
+
+Need to remember below tricky question:-
+Q:-  What is the data type of x + y?
+      double x = 39.21;
+      float y = 2.1;
+Answer:- Code will give compile error
+Reason:- floating-point literals are assumed to be double, unless postfixed with an f, as in 2.1f.
+    If y = 2.1f, then it will be promoted to double while calculating the expression.
+    (similarly, we need do for long as well. example:- long x = 1078798685465L; but if we assign a valid int value to long then we don't need to postfix with L, for example:- long x = 7; would compile with no error.)
+Q:- What is the data type of x / y?
+      short x = 10;
+      short y = 3;
+Answer:- the output data type would be "int". as per 3rd rule.
+
+---- Working with Unary Operators ---> a unary operator is one that requires exactly one operand, or variable, to function.
+    they often perform simple tasks, such as increasing a numeric variable by one, or negating a boolean value.
+    Unary operator ------> Description
+        + ------>  Indicates a number is positive, although numbers are assumed to be positive in Java unless accompanied by a negative unary operator.
+        - -----> Indicates a literal number is negative or negates an expression
+        ++ -----> Increments a value by 1
+        -- ------> Decrements a value by 1
+        ! ------> Inverts a Boolean’s logical value
+
+----- Logical Complement and Negation Operators ----> The logical complement operator, !, flips the value of a boolean expression.
+
+Imp rule to remember for exam ---> you cannot apply a negation operator, -, to a boolean expression, nor can you apply a logical complement operator, !, to a numeric expression. You will get compile error in such case.
+--> in Java, true and '1' are not related in any way, just as '0' and false are not related.
+
+--- Increment and Decrement Operators --> ++ and --, respectively, can be applied to numeric operands and have the higher order or precedence, as compared to binary operators. In other words, they often get applied first to an expression.
+  --> pre-increment and pre-decrement operator, operator is placed before the operand, the operator is applied first and the value return is the new value of the expression.
+  ---> post-increment operator and the post-decrement operator, operator is placed after the operand, then the original value of the expression is returned, with operator applied after the value is returned.
+      The following code snippet illustrates this distinction:
+      int counter = 0;
+      System.out.println(counter); // Outputs 0
+      System.out.println(++counter); // Outputs 1
+      System.out.println(counter); // Outputs 1
+      System.out.println(counter--); // Outputs 1
+      System.out.println(counter); // Outputs 0
+
+--- Using Additional Binary Operators --> 
+  -- Assignment Operators --> that modifies, or assigns, the variable on the left-hand side of the operator, with the result of the value on the right-hand side of the equation. The simplest assignment operator is the = assignment, which you have seen already:
+  int x = 1;
+Java will automatically promote from smaller to larger data types, but it will throw a compiler exception if it detects you are trying to convert from larger to smaller data types.
+
+Casting Primitive Values --> Casting primitives is required any time you are going from a larger numerical data type to a smaller numerical data type, or converting from a floating-point number to an integral value.
+  example:- int x = (int)1.0;
+            short y = (short)1921222; // Stored as 20678
+            int z = (int)9l;
+            long t = 192301398193810323L;
+            
+---- Overflow and Underflow -->  The expressions in the previous example now compile, although there’s a cost. The second value, 1,921,222, is too large to be stored as a short, so numeric overflow occurs and it becomes 20,678. Overflow is when a number is so large that it will no longer fit within the data type, so the system “wraps around” to the next lowest value and counts up from there. There’s also an analogous underflow, when the number is too low to fit in the data type. This is beyond the scope of the exam, but something to be careful of in your own code.
+  For example, the following statement outputs a negative number:
+  System.out.print(2147483647+1); // -2147483648
+  Since 2147483647 is the maximum int value, adding any strictly positive value to it will cause it to wrap to the next negative number.        
+Be wary of examples like this in exam:- examples:
+short x = 10;
+short y = 3;
+short z = x * y; // DOES NOT COMPILE
+why the last line of this statement will not compile? Answer, short values are automatically promoted to int when applying any arithmetic operator, with the resulting value being of type int. Trying to set a short variable to an int results in a compiler error, as Java thinks you are trying to implicitly convert from a larger data type to a smaller one.
+
+--- Compound Assignment Operators --->  Only few of the compound operators are required for the exam, += and -=, *=, etc.
+  compound operators cannot be used to declare a new variable. Variables, should be declared before using this.
+-- very imp for exam --> compound oprator will automatically cast the lower data type value to upper data type value, while calculating the expression.
+  inserting the assignment operator = in the middle of an expression and apply that value in calculation is completely valid. for example:- long y = (x=3);
+          System.out.println(x); // Outputs 3
+          System.out.println(y); // Also, outputs 3
+
+---- Relational Operators ---> compare two expressions and return a *boolean* value
+    If the two numeric operands are not of the same data type, the smaller one is promoted to upper numerical data type.
+  < ---> Strictly less than
+  <= ---> Less than or equal to
+  > ----> Strictly greater than
+  >= ---> Greater than or equal to
+
+  a instanceof b ---> True if the reference that a points to is an instance of a class, subclass, or class that implements a particular interface, as named in b. (out of scope for OCA)
+  
+----- Logical Operators --->  (&), (|), and (^), may be applied to both numeric and boolean data types. 
+  When they’re applied to boolean data types, they’re referred to as logical operators. 
+  (out of scope for OCA) Alternatively, when they’re applied to numeric data types, they’re referred to as bitwise operators.
+
+x & y (AND) --> if both are ture then only true, else always false.
+x | y (INCLUSIVE OR) --> if any of this is true then true, else false.
+x ^ y (EXCLUSIVE OR) --> if both are same then false, else true.
+
+--- conditional operators --> && and ||, which are often referred to as short-circuit operators.
+    nearly identical to the logical operators, & and |, respectively, except that the right-hand side of the expression may never be evaluated if the final result can be determined by the left-hand side of the expression. For example, consider the following statement:
+    boolean x = true || (y < 4); // result is true, but we don't need to evaluate the right hand side expression (y<4). 
+ /// useful in checking for null objects before performing an operation
+
+----- Equality Operators ---> the equals operator == and not equals operator !=. they compare two operands and return a boolean value.
+    The equality operators are strictly used in one of three scenarios: 
+      1. Comparing two numeric primitive types. If the numeric values are of different data types, the values are automatically promoted as previously described. For example, 5 == 5.00 returns true since the left side is promoted to a double.
+      2. Comparing two boolean values.
+      3. Comparing two objects, including null and String values. 
+        For object comparison, the equality operator is applied to the references to the objects, not the objects they point to.
+        Two references are equal if and only if they point to the same object, or both point to null.
+          example 1:- String a = null;
+                    String b = null;
+                    System.out.println(a == b); // true
+
+          example 2:
+          File x = new File("myFile.txt");
+          File y = new File("myFile.txt");
+          File z = x;
+          System.out.println(x == y); // Outputs false
+          System.out.println(x == z); // Outputs true
+
+---- Understanding Java Statements ---> 
+A Java statement is a complete unit of execution in Java, terminated with a semicolon (;).
+Control flow statements break up the flow of execution by using decision making, looping, and branching, allowing the application to selectively execute particular segments of code.
+
+----- The if-then Statement -->
+    exam tricks --> exam writers will try to trip you up on if-then statements without braces ({}). Curly braces required for block of multiple statements, optional for single statement.
+
+----- The if-then-else Statement ---> order is important for multiple if-else.
+execution of each branch is mutually exclusive, means only one branch can execute.
+0 and 1 are not considered as boolean values.
+If statement requires boolean values. Exam will try to trick on this as well. Code will not compile in such case.
+
+---- Ternary Operator --> also known as conditional operator. only operator that takes three operands and is of the form:
+booleanExpression ? expression1 : expression2
+The ternary operation is really a condensed form of an if- then-else statement that returns a value. 
+
+int y = 10;
+int x = (y > 5) ? (2 * y) : (3 * y);
+Note that it is often helpful for readability to add parentheses around the expressions in ternary operations, although it is certainly not required.
+
+There is no requirement that second and third expressions in ternary operations have the same data types, although it may come into play when combined with the assignment operator. Compare the following two statements:
+System.out.println((y > 5) ? 21 : "Zebra");
+int animal = (y < 91) ? 9 : "Horse"; // DOES NOT COMPILE
+
+exam tricks --> only one of the right-hand expressions of the ternary operator will be evaluated at runtime. Means, if boolean expression is true then 1st expression will only evaluate at run-time and if boolean expression is false then 2nd expression.
+Its very similar to short-circuit operators.
+
+--- switch statement --> a single value is evaluated and flow is redirected to the first matching branch, known as a case statement. 
+If no matching case statement is found then, an optional default statement will be called. If no such default optional statement is available, the entire switch statement will be skipped. Remember, default block is optional and position of case and default block is not needed to be in a particular order.
+
+supported Data types by switch statements:
+■ int and Integer wrapper class
+■ byte and Byte wrapper class
+■ short and Short wrapper class
+■ char and Character wrapper class
+■ String
+■ enum values
+
+**Note that boolean, long, double, float, and their associated wrapper classes, are not supported by switch statements yet.
+default block run only --> if there is no matching case value for the switch statement, regardless of its position.
+
+---- Compile-time Constant Values --->
+The data type of case statements value must match the data type of the switch statment value and it must be compile-time constant values. means, The case statement value must be a literal, enum constant, or final constant variable so that it will not change at compile time.
+
+break; --> this statment is optional and it terminate the switch statement and return flow control to the enclosing statement. if you leave out the break statement, flow will continue to the next proceeding case without considering case value and it will execute case statements or default block automatically.
+
+***** -----------
+exam creators are fond of switch examples that are missing break statements! When evaluating switch statements on the exam, always consider that multiple branches may be visited in a single execution.
+----------
+
+-- example of switch statment, with proper syntext --> ** very imp to understand each stuff in below example properly
+
+private int getSortOrder(String firstName, final String lastName) {
+String middleName = "Patricia";
+final String suffix = "JR";
+int id = 0;
+switch(firstName) { 
+case "Test":
+return 52; /// a return statement, like a break statement, can be used to exit the switch statement early.
+case middleName: // DOES NOT COMPILE // because middleName is not a final variable or constant 
+id = 5;
+break;
+case suffix: // compiles because suffix is a final constant variable
+id = 0;
+break;
+case lastName: // DOES NOT COMPILE // despite lastName being final, it is not constant as it is passed to the function
+id = 8;
+break;
+case 5: // DOES NOT COMPILE // do not have a matching data type (String)
+id = 7;
+break;
+case 'J': // DOES NOT COMPILE // do not have a matching data type  (String)
+id = 10;
+break;
+case java.time.DayOfWeek.SUNDAY: // DOES NOT COMPILE // do not have a matching data type (String), this is enum data type value
+id=15;
+break;
+}
+return id;
+}
+
+---- Remember, if there is no break; or return ; statement (as these are optional) then all the subsequent case statement and default block will execute. In such scenario, case value doesn't need to be matched, but data type needs to be matched, else code wouldn't compile.
+
+--- if you pass null directly to switch statement [switch(null){}] or if you kept switch statement blank [switch(){}] then code will not compile.
+---- if you pass null to switch statement using any class method parameter then "NULLPointException" will be thrown.
+example:-- int a = gso.getSortOrder(null, "hello"); //"NULLPointException" will be thrown
+---- you can't have any constant variables with null value. code will not compile.
+example:--- final String suffix = null ; // DOES NOT COMPILE //
+
+----- The while Statement ---> Like all repetition control structures, it has a termination condition, implemented as a boolean expression, that will continue as long as the expression evaluates to true. example:-- while(booleanExpression){ //body }
+  -- the boolean expression is evaluated before each iteration of the loop and exits if the evaluation returns false.
+  -- hence, its possible the block may never be executed if the initial evaluation return false.
+  -- We need to make sure, that loop should terminate at some condition. There is no compile error or exception will be thrown with infite loop but its not a best programming practice.
+  
+---- The do-while Statement ---> same as while loop, though, a do-while loop guarantees that the statement or block will be executed at least once. example:-- do { //body } while(booleanExpression); // notice do-while has require semicolon at the end. // there is no semicolon in while loop.
+  
+--- The for Statement -->  structure of a basic for statement:- 
+  for(initialization; booleanExpression; updateStatement) { //body } 
+     --> Curly braces are required for block of multiple statements, optional for single statement
+     --> Note that each section is separated by a semicolon, which is also required
+     --> The initialization and update sections may contain multiple statements, separated by commas.
+     --> be careful in exam, Variables declared in the initialization block of a for loop have limited scope and are only accessible within the for loop. if it is declared before and outside of for loop, then it can be used outside and inside for loop.
+   
+     
+Steps in which for loop performs any operation -->
+    1 - Initialization statement executes
+    2 - If booleanExpression is true then continue else exit loop
+    3 - Body executes
+    4 - Execute updateStatements
+    5 - Return to Step 2
+
+Below are five kinds of scenarios that you might see on exam with some twists -->
+  1. Creating an Infinite Loop
+        for( ; ; ) {
+        System.out.println("Hello World");
+        }
+    ---> the components of the for loop are each optional.
+    --> although, semicolons separating the three sections are required
+    --> it will compile and run without issue.
+
+  2. Adding Multiple Terms to the for Statement. 
+        int x = 0;
+        for(long y = 0, z = 4; x < 5 && y < 10; x++, y++) {
+        System.out.print(y + " ");
+        }
+        System.out.print(x);
+    --> above code will compile and run perfectly fine.
+
+  3. Redeclaring a Variable in the Initialization Block. // DOES NOT COMPILE 
+      int x = 0;
+      for(long y = 0, x = 4; x < 5 && y < 10; x++, y++) { // DOES NOT COMPILE
+      System.out.print(x + " ");
+      }
+    --> The difference is that x is repeated in the initialization block after already being declared before the loop, resulting in the compiler stopping because of a duplicate variable declaration. Remember, redeclaration is not allowed, but reassigning a value is allowed.
+ 
+  4. Using Incompatible or multiple Data Types in the Initialization Block not allowed. 
+      for(long y = 0, int x = 4; x < 5 && y<10; x++, y++) { // DOES NOT COMPILE
+      System.out.print(x + " ");
+      }
+    --> The variables in the initialization block must all be of the same type.
+
+  5. Using Loop Variables Outside the Loop.
+    for(long y = 0, x = 4; x < 5 && y < 10; x++, y++) {
+    System.out.print(y + " ");
+    }
+    System.out.print(x); // DOES NOT COMPILE
+  --> notice, x is defined in the initialization block of the loop, and then used after the loop terminates. Since x was only scoped for the loop, using it outside the loop will throw a compiler error.
+ 
+ 6. if only update statement missing in for loop -->
+      for(int i=0; i<10 ; ) {
+         i = i++; 
+         System.out.println("Hello World");
+       }
+    --> loop will become infinite in this case as "0" value of i is assigned every time loop executes.
+    --> if we change above code with "i = ++i;", loop will terminate after 10 time. Means, print "Hello World" - 10 times.
+     
+---- The for-each Statement --->  specifically designed for iterating over arrays and Collection objects. structure of an enhanced for statement:-   for(datatype instance : collection) { //body }
+ --> Curly braces required for block of multiple statements, optional for single statement.
+ --> colon is also required within bracketes.
+ --> declaration is composed of an initialization section and an object to be iterated over.
+--> The left-hand side of the for-each loop must include a declaration for an instance of a variable, whose data type matches the type of a member of the array or collection in the right-hand side of the statement.
+
+Let’s review some examples: --> page 84
+*** ---------------------------
+When you see a for-each loop on the exam, make sure the right-hand side is an array or Iterable object and the left-hand side has a matching type.
+----------------------------
+Why will the following fail to compile?
+String names = "Lisa";
+for(String name : names) { // DOES NOT COMPILE // names is not iterable object
+System.out.print(name + " ");
+}
+Why will the following fail to compile?
+String[] names = new String[3];
+for(int name : names) { // DOES NOT COMPILE // int at left side and String at right side
+System.out.print(name + " ");
+}
+ ----- Notice that in this last example, the array is initialized with three null pointer values. In and of itself, that will not cause the code to not compile, as a corrected loop would just output null three times. ---- 
+
+----> Remember, for array index "-1" would always throw exception IndexOutOfBoundsException error.
+
+----- Understanding Advanced Flow Control ---> 
+
+---- Nested Loops ---> loops can contain other loops
+
+--- Adding Optional Labels --> (Not in OCA exam) in loops, A label is an optional pointer to the head of a statement that allows the application flow to jump to it or break from it. It is a single word that is proceeded by a colon (:). For example, we can add optional labels to one of the previous examples:
+
+----- The break Statement --->  it will end the loop early, a break statement transfers the flow of control out to the enclosing statement. Below example shows nested loops, labels and how break statement can help in that:--
+      PARENT_LOOP: for(int i=0; i<list.length; i++) {
+        for(int j=0; j<list[i].length; j++) {
+          if(list[i][j]==searchValue) {
+            positionX = i;
+            positionY = j;
+            break PARENT_LOOP;
+          }
+          ...
+        }
+        ...
+      }
+
+** "break;" statements are not allowed in if-else statement directly, means its allowed on all loops (do, for, while) and switch statements. Understand few things here carefully, if-else and switch are statements not loops, but (do, for, while) are loops and not statements. Hence, if you use break; statement directly in if-else statement, code will not compile but if you use break; statement in if-else statement, which is inside a for loop (like, a nested loop), then this break statement will apply on for loop and code will run properly.
+
+----- The continue Statement ---> a statement that causes flow to finish the execution of the current loop. The structure of a continue statement is same as block statement. They are even used in similar way but differ in result. means, While the break statement transfers control to the enclosing statement, the continue statement transfers control to the boolean expression that determines if the loop should continue. In other words, it ends the current iteration of the loop, but loop can continue to iterate again if boolean expression of loop still continue to satisfy condition.
+  -- remember, continue statement only allowed in loops (do, for, while) and not in if-else or switch statement.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------
+
+Review questions:- Attempt 1
+1. A, D
+2. A, B, D, E, F (N)
+3. F 
+4. B, C, F (N)
+5. C
+6. F
+7. F (N)
+8. D (N)
+9. B (N)
+10. C (N)
+11. A
+12. D
+13. A
+14. C
+15. E
+16. E (N)
+17. D 
+18. B (N)
+19. D 
+20. C (N)
+
+
+--- Attempt 2 --
+ch 2 -->
+1. A, D
+2. A, B
+3. F
+4. B, C, D, F (N)
+5. C
+6. E (N)
+7. D
+8. B
+9. B (N) -- need to understand the logic
+10. C (N) -- nice and tricky question, very imp for exam
+11. A
+12. D
+13. A
+14. C
+15. E
+16. E (N) -- nice and tricky question, very imp for exam
+17. D
+18. B
+19. D
+20. E (N) -- nice question, need to practice more for switch statement

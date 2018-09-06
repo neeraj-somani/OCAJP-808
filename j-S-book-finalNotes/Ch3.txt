@@ -1,0 +1,782 @@
+Core Java APIs:-  API (Application Programming Interface)
+Interface:- it can be a group of class or interface defi nitions that gives you access to a service or functionality.
+
+Few important fundamental Classes (Java Core APIs) --> String  , StringBuilder , ArrayList
+String and StringBuilder are used for text data.
+Array and ArrayList are used when we have multiple values to process.
+
+A string is basically a sequence of characters; here’s an example: String name = "Fluffy";
+A string has reference types and are created using the new keyword.
+String class is special and doesn’t need to be instantiated with new, as Both give you a reference variable of type name pointing to the String object "Fluffy", but they are subtly different.
+String name = "Fluffy"; // this will get store in string pool
+String name = new String("Fluffy"); // this will create a new object, even though its less efficient
+
+String API imp properties --> concatenation, immutability, the string pool, common methods, and method chaining.
+
+<-- String --> Concatenation --> 3 rules 
+    1. If both operands are numeric, + means numeric addition.
+    2. If either operand is a String, + means concatenation.
+    3. The expression is evaluated left to right.
+
+Immutability -> (unchangable) --> String objects can't be changed once created.
+
+The String Pool --> also known as the intern pool, is a location in the Java virtual machine (JVM) that collects all these strings.  It contains literal values.
+For example, “name” is a literal and therefore goes into the string pool. myObject.toString() is a string but not a literal, so it does not go into the string pool. Strings not in the string pool are garbage collected just like any other object.
+    
+Important String Methods --> a string is a sequence of characters and Java counts from 0 when indexed.
+   1.  length() --> returns the number of characters in the String.
+   2.  charAt() --> lets you query the string using index value, return specific charachter at that index.
+        An Exception "IndexOutOfBound" will be thrown if index not found. 
+   3.  indexOf() --> indexOf can work with an individual character or a whole String as input and return index. It can also start from a requested index position. indexOf() returns –1 when no match is found and doesn't throw an exception.
+      The method signatures are as follows:
+        int indexOf(char ch)
+        int indexOf(char ch, index fromIndex)
+        int indexOf(String str)
+        int indexOf(String str, index fromIndex)
+   4. substring() --> returns parts of the string. There can be 2 parameters first one is to start with and second one to end at specific index position (endIndex is non-inclusive). The method signatures are as follows:
+        int substring(int beginIndex)
+        int substring(int beginIndex, int endIndex) // endIndex is non-inclusive
+        tricks --> 
+        1. if endIndex is one greater than the last index value of the String, it wouldn't throw exception. Reason, as its non-inclusive
+        2. but if endIndex is two greater than the last index value of the String, it will throw exception "IndexOutOfBound"
+        3. if start index and end index is same, substring function will return empty string.ex:-string.substring(3, 3); // empty string
+        4. if endIndex is less than StartIndex, then it will throw exception. as java knows indexes cant be backward. ex:- string.substring(3, 2)); // throws exception
+  5.  toLowerCase() and toUpperCase() --> converts characters to uppercase/lowercase and return new string, as original string is immutable.
+      String toLowerCase(String str)
+      String toUpperCase(String str)
+  6.  equals() and equalsIgnoreCase() --> checks whether two String objects contain exactly the same characters in the same order.
+    boolean equals(String str) 
+    boolean equalsIgnoreCase(String str) 
+ 7.  startsWith() and endsWith() --> methods look at whether the provided value matches part of the String.
+    boolean startsWith(String prefix)
+    boolean endsWith(String suffix)
+8.  contains() --> method also looks for matches in the String. the match can be anywhere in the String. 
+    boolean contains(String str)
+9.  replace() --> method does a simple search and replace on the string.
+    String replace(char oldChar, char newChar) // notice here we can pass char values
+    String replace(CharSequence oldChar, CharSequence newChar) // notice here we can pass String values
+10.  trim() --> method removes whitespace from the beginning and end of a String.
+     example -->
+        System.out.println("abc".trim()); // abc
+        System.out.println("\t a b c\n".trim()); // a b c
+  
+<-- StringBuilder --> This class creates a String without storing all interim String values. StringBuilder is mutable/changable.
+  Chaining --> the StringBuilder changes its own state and returns a reference to itself!
+  
+StringBuilder API imp properties -->  creating a StringBuilder, Mutability and Chaining,  common methods, and a comparison to StringBuffer.
+
+1. Creating a StringBuilder -->  There are three ways to construct a StringBuilder:
+StringBuilder sb1 = new StringBuilder(); // creating sb1 reference to empty StringBuilder object 
+StringBuilder sb2 = new StringBuilder("animal"); // creating sb2 reference to StringBuilder object that contains "animal"
+StringBuilder sb3 = new StringBuilder(10); //creating sb3 reference to empty StringBuilder object having initial capacity of storing 10 charachters. 
+  Size vs Capacity --> Size is the number of characters currently in the sequence, and capacity is the number of characters the sequence can currently hold. important --> Size <= capacity or capacity >= size
+
+2. Mutability and Chaining --> StringBuilder is mutable. Chaining StringBuilder objects, changes its own state and returns a reference to itself! example:-
+        StringBuilder a = new StringBuilder("abc");
+        StringBuilder b = a.append("de");
+        b = b.append("f").append("g");
+        System.out.println("a=" + a); // abcdefg // a and b both pointing to same StringBuilder object
+        System.out.println("b=" + b); // abcdefg // a and b both pointing to same StringBuilder object
+reason:- We know that because new StringBuilder() was called only once.
+
+3. StringBuilder Methods -->
+  charAt(), indexOf(), length(), and substring()
+  All above methods works exactly same as described in String class. Notice that substring() returns a String rather than a StringBuilder. Hence when used with StringBuilder, doesn't directly change StringBuilder object.
+ append() --> it adds the parameter to the StringBuilder and returns a reference to the current StringBuilder.
+  One of the method signatures is as follows:
+    StringBuilder append(String str) // Notice there are around 10 similar method signature for different datatypes as parameter.
+insert() --> method adds characters to the StringBuilder at the requested index and returns a reference to the current StringBuilder.    Just like append(), there are lots of  method signatures for different types. Here’s one:
+  StringBuilder insert(int offset, String str)
+delete() and deleteCharAt() --> 
+  The delete() method , It removes characters from the sequence and returns a reference to the current StringBuilder. 
+  The deleteCharAt() method to delete only one character. The method signatures are as follows:
+        StringBuilder delete(int start, int end)
+        StringBuilder deleteCharAt(int index) 
+reverse() --> it reverses the characters in the sequences and returns a reference to the current StringBuilder.
+  The method signature : StringBuilder reverse()
+toString() --> converts a StringBuilder into a String.
+  
+StringBuilder vs. StringBuffer -->
+  StringBuilder was added to Java in Java 5. In older version / code, you will see StringBuffer used for this purpose.
+  StringBuffer does the same thing but more slowly because it is thread safe.
+  
+Understanding Equality -->
+    equals() method is used to check the values inside the String rather than the String object itself.
+    If you call equals() on two StringBuilder instances, it will check reference equality.
+    If a class doesn’t have an equals method, Java determines whether the references point to the same object—which is exactly what == does. "==" this checks whether two references pointing to same object or not.
+
+-- Difference between == and .equals() method in Java -->
+    1. Main difference between .equals() method and == operator is that one is method and other is operator.
+    2. We can use == operators for reference comparison (address comparison) and .equals() method for content/data comparison. In simple words, == checks if both objects point to the same memory location whereas .equals() evaluates to the comparison of values in the objects.
+    3. If a class does not override the equals method, then by default it uses equals(Object o) method of the closest parent class that has overridden this method.
+Example -->
+    public class Rope {
+        public static void main(String[] agrs) {
+            Thread t1 = new Thread();
+            Thread t2 = new Thread();
+            Thread t3 = t1;
+
+            String s1 = new String("GEEKS"); // Both s1 and s2 refers to different objects
+            String s2 = new String("GEEKS"); // Both s1 and s2 refers to different objects
+            String s3 = s1;
+
+            System.out.println(t1 == t3); // true, as both t1 and t3 pointing to same object 
+            System.out.println(t1 == t2); // false, as both t1 and t2 pointing to different objects 
+            System.out.println(t1.equals(t3)); // true, as both t1 and t3 pointing to same object, having same value
+            System.out.println(t1.equals(t2)); // false, as both t1 and t2 pointing to different objects, even having same null value, // also Thread has not implemented equals method to compare values.
+
+            System.out.println(" ");
+
+            System.out.println(s1 == s3); // true, as both t1 and t3 pointing to same object 
+            System.out.println(s1 == s2); // false,  as both have different addresses in memory **
+            System.out.println(s1.equals(s3)); // true, as both s1 and s3 pointing to same object, having same value
+            System.out.println(s1.equals(s2)); // true because its only comparing the values given in s1 and s2 **
+        }
+    }
+
+Notes:-  
+1. We can apply equality operators (==) for every primitive types including boolean type. we can also apply equality operators for object types.
+2. If we apply equality operators (==) for object types then, there should be compatibility between arguments types (either child to parent or parent to child or same type). Otherwise code will throw compile time error.
+
+Java Arrays --> An array is an area of memory on the heap with space for a designated number of elements. An array is an ordered list. It can contain duplicates. It is fixed in size.
+  String Array --> A String is implemented as an array, when dealing with characters specifically.
+  StringBuilder Array --> implemented so that, the array object is replaced with a new bigger array object when it runs out of space to store all the characters.
+  Important --> big difference is that an array can be of any other Java primitive data type.
+  
+Array imp concepts --> look at creating an array of primitives and objects, sorting, searching, varargs, and multidimensional arrays.  
+
+Creating an Array of Primitives -->
+  int[] numbers1 = new int[3]; --> It specifies the type of the array (int) and the size (3). The brackets tell you this is an array.
+  Another way to create an array is to specify all the elements it should start out with:
+    int[] numbers2 = new int[] {42, 55, 99}; 
+  or int[] numbers2 = {42, 55, 99}; // known as anonymous array
+  
+  below are 4 different valid ways for creating Array -->
+  int[] numAnimals;
+  int [] numAnimals2; // adding space in between int and []
+  int numAnimals3[];
+  int numAnimals4 []; // adding space in between reference variable and []
+  
+ ** Tricks to remember --> array Variable must provide either dimension expressions or an array initializer.
+  below are few invalid array declaration:
+        String beans[] = new beans[6]; // beans can't be a data type
+        int[][] types = new int[]; // incorrect declaration
+        int[][] java = new int[][]; // no dimension expressions
+  ** we can create array even for Wrapper classes as well. example:
+    Integer array[] = list.toArray(new Integer[4]);
+  
+  Multiple “Arrays” in Declarations -->
+    int[] ids, types; // creates two array variables of type int
+    int ids[], types; // creates one array variable of type int and one regular variable of type int
+    
+Creating an Array with Reference Variables -->
+  As per below code we have created "alias" array from "bugs" array. where "alias" and "bugs" both are referece variable of String type array. 
+  Below is sample code -->
+      public class ArrayType {
+      public static void main(String args[]) {
+      String [] bugs = { "cricket", "beetle", "ladybug" };
+      String [] alias = bugs;
+      System.out.println(bugs.equals(alias)); // true // why?? answer explanation below --
+      System.out.println(bugs.toString()); // [Ljava.lang.String;@160bc7c0
+      } }
+answer explanation below --
+** imp points --> The equals() method on arrays does not look at the elements of the array.
+    Remember, this would work even on an int[] too. int is a primitive; int[] is an object. We can call equals() because an array is an object. It returns true because of reference equality. this is because,  If a class doesn’t have an equals method, Java determines whether the references point to the same object—which is exactly what == does. "==" this checks whether two references pointing to same object or not.
+** imp points --> bugs.toString() method wouldn't convert array to string but it will return some object reference value, that consist of [L means it is an array, java.lang.String is the reference type, and 160bc7c0 is the hash code. 
+
+** imp --> all exam questions are written long back hence, new Array method is not still used in exam. Java has provided a method that prints an array nicely: java.util.Arrays.toString(bugs) would print [cricket, beetle, ladybug]. 
+
+** --> The array does not allocate space for the String objects. Instead, it allocates space for a reference to where the objects are really stored.
+
+** very imp --> casting is possible in array as well, when you wanted to force a bigger type into a smaller type.
+example:- 
+String[] strings = { "stringValue" }; // creates an array of type String 
+Object[] objects = strings; // reference object name "objects" of type Object pointing to strings object. this doesn’t require a cast because Object is a broader type than String.
+String[] againStrings = (String[]) objects; // a cast is needed because we are moving to a more specific type.
+againStrings[0] = new StringBuilder(); // DOES NOT COMPILE // because a String[] only allows String objects and StringBuilder is not a String.
+objects[0] = new StringBuilder(); // careful! a runtime exception will be thrown // because A StringBuilder object can clearly go in an Object[]. The problem is that we don’t actually have an Object[]. We have a String[] referred to from an Object[] variable. At runtime, the code throws an ArrayStoreException.
+
+Using an Array --> Example, declaing, initiallizing and accessing array using index.
+  4: String[] mammals = {"monkey", "chimp", "donkey"};
+  5: System.out.println(mammals.length); // 3
+  6: System.out.println(mammals[0]); // monkey
+  7: System.out.println(mammals[1]); // chimp
+  8: System.out.println(mammals[2]); // donkey
+  
+Sorting --> This requires an import statement to inport sort method of Array class.
+    import java.util.* // import whole package including Arrays
+    import java.util.Arrays; // import just Arrays // or use this full path while using Arrays class
+
+using int type -->
+  int[] numbers = { 6, 9, 1 };
+  Arrays.sort(numbers);
+  for (int i = 0; i < numbers.length; i++)
+  L System.out.print (numbers[i] + " ");
+    The result is 1 6 9, Notice that we had to loop through the output to print the values in the array. Just printing the array variable directly would give the annoying hash of [I@2bd9c3e7.
+The sort method sorts original array and assign it to original reference object, no need to assign to create new object for sort result to store.
+
+using String type -->    
+    String[] strings = { "10", "9", "100" };
+    Arrays.sort(strings);
+    for (String string : strings)
+    System.out.print(string + " ");
+    
+    This time the result might not be what you expect. This code outputs 10 100 9. The problem is that String sorts in alphabetic order, and 1 sorts before 9. (Numbers sort before letters and uppercase sorts before lowercase, in case you were wondering.)
+    
+    
+Searching --> only sorted array
+Three rules for binary search -->
+    1. Target element found in sorted array --> Index of match
+    2. Target element not found in sorted array --> Negative value showing one smaller than the negative of index, where a match needs to be inserted to preserve sorted order.
+    3. Unsorted array -->  A surprise—this result isn’t predictable
+  
+  example for sorted array:
+    3: int[] numbers = {2,4,6,8};
+    4: System.out.println(Arrays.binarySearch(numbers, 2)); // 0
+    5: System.out.println(Arrays.binarySearch(numbers, 4)); // 1
+    6: System.out.println(Arrays.binarySearch(numbers, 1)); // -1
+    7: System.out.println(Arrays.binarySearch(numbers, 3)); // -2
+    8: System.out.println(Arrays.binarySearch(numbers, 9)); // -5
+    
+  example for unsorted array: 
+    5: int numbers[] = new int[] {3,2,1}; // in book it is wrongly printed, be careful!
+    6: System.out.println(Arrays.binarySearch(numbers, 2)); // unpredictable output.
+    7: System.out.println(Arrays.binarySearch(numbers, 3)); // unpredictable output.
+    
+    Note for Exam --> As soon as you see the array isn’t sorted, look for an answer choice about unpredictable output.
+    you can get length of array but there is no method for capacity or size.
+    
+    
+Varargs --> (variable arguments) -- chapter 4 has more details.
+  Below are few valid example for declaring Array in method and how to use Array methods within method definition.
+    public static void main(String[] args)
+    public static void main(String args[])
+    public static void main(String... args) // varargs
+
+Multidimensional Arrays -->
+  Arrays are objects, and array components can also be an objects. arrays can hold other arrays.
+  few example of Multidimensional Array declaration :
+    int[][] vars1; // 2D array
+    int vars2 [][]; // 2D array
+    int[] vars3[]; // 2D array
+    int[] vars4 [], space [][]; // a 2D AND a 3D array
+    String [][] args = new String[3][2]; // declaring the size as well // note args.length is 3 here. which is how many rows in 2D array
+    int [][] args = new int[4][];
+    
+ArrayList --> ArrayList can change size at runtime as needed. ArrayList is an ordered sequence that allows duplicates.
+    ArrayList also requires import statements:
+    import java.util.* // import whole package including ArrayList
+    import java.util.ArrayList; // import just ArrayList
+
+imp concepts --> creating an ArrayList, common methods, autoboxing, conversion, and sorting.
+
+
+three old ways but still valid ways, to create an ArrayList: These works today as well but defined before java 5
+ArrayList list1 = new ArrayList();
+ArrayList list2 = new ArrayList(10);
+ArrayList list3 = new ArrayList(list2);
+
+two other ways to create an ArrayList:
+ArrayList<String> list4 = new ArrayList<String>(); // this introduced starting java 5
+ArrayList<String> list5 = new ArrayList<>(); // this introduced starting java 7
+
+**ArrayList implements an interface called List.
+List<String> list6 = new ArrayList<>();
+ArrayList<String> list7 = new List<>(); // DOES NOT COMPILE // reason is that List is an interface and interfaces can’t be instantiated.
+
+Using an ArrayList --> 
+    ArrayList methods signature consist of a “class” named E. E is used by convention in generics to mean “any class that this array can hold.” If you didn’t specify a type when creating the ArrayList, E means Object. Otherwise, it means the class you put between < and >.
+  --> ArrayList implements toString() to print content easily. Arrays do not do produce such pretty output.
+
+add() methods --> insert a new value in the ArrayList
+  boolean add(E element) // means it can hold “any class that this array can hold.”
+  void add(int index, E element) // means need to provide index number and any object class
+  
+  example -->
+    4: List<String> birds = new ArrayList<>();
+    5: birds.add("hawk"); // [hawk]
+    6: birds.add(1, "robin"); // [hawk, robin]
+    7: birds.add(0, "blue jay"); // [blue jay, hawk, robin]
+    8: birds.add(1, "cardinal"); // [blue jay, cardinal, hawk, robin]
+    9: System.out.println(birds); // [blue jay, cardinal, hawk, robin]
+
+remove() methods --> remove the first matching value in the ArrayList or remove the element at a specified index. 
+  boolean remove(Object object) // this tells us whether a match was removed (true or false)
+  E remove(int index) // this tells us the element that actually got removed
+     Example -->
+      3: List<String> birds = new ArrayList<>();
+      4: birds.add("hawk"); // [hawk]
+      5: birds.add("hawk"); // [hawk, hawk]
+      6: System.out.println(birds.remove("cardinal")); // prints false
+      7: System.out.println(birds.remove("hawk")); // prints true
+      8: System.out.println(birds.remove(0)); // prints hawk
+      9: System.out.println(birds); // []
+      
+set() method --> changes one of the elements of the ArrayList without changing the size.
+  E set(int index, E newElement) // The E return type is the element that got replaced.
+  Example -->
+    15: List<String> birds = new ArrayList<>();
+    16: birds.add("hawk"); // [hawk]
+    17: System.out.println(birds.size()); // 1
+    18: birds.set(0, "robin"); // [robin]
+    19: System.out.println(birds.size()); // 1
+    20: birds.set(1, "robin"); // IndexOutOfBoundsException
+
+isEmpty() and size() methods --> look at how many of the slots are in use.
+  boolean isEmpty()
+  int size()
+  Example --> 
+      System.out.println(birds.isEmpty()); // true
+      System.out.println(birds.size()); // 0
+      birds.add("hawk"); // [hawk]
+      birds.add("hawk"); // [hawk, hawk]
+      System.out.println(birds.isEmpty()); // false
+      System.out.println(birds.size()); // 2
+
+**Arraylist don't have any method for capacity and length.
+
+clear() method --> provides an easy way to discard all elements of the ArrayList.
+    void clear() 
+      example -->
+        List<String> birds = new ArrayList<>();
+        birds.add("hawk"); // [hawk]
+        birds.add("hawk"); // [hawk, hawk]
+        System.out.println(birds.isEmpty()); // false
+        System.out.println(birds.size()); // 2
+        birds.clear(); // []
+        System.out.println(birds.isEmpty()); // true
+        System.out.println(birds.size()); // 0
+
+contains() method --> checks whether a certain value is in the ArrayList. This method calls equals() on each element of the ArrayList to see whether there are any matches.
+  boolean contains(Object object)
+  example -->
+    List<String> birds = new ArrayList<>();
+    birds.add("hawk"); // [hawk]
+    System.out.println(birds.contains("hawk")); // true
+    System.out.println(birds.contains("robin")); // false
+
+**imp method -->
+  equals() method --> to compare two lists,  if they contain the same elements in the same order.
+  boolean equals(Object object)
+  exmaple -->
+      31: List<String> one = new ArrayList<>();
+      32: List<String> two = new ArrayList<>();
+      33: System.out.println(one.equals(two)); // true
+      34: one.add("a"); // [a]
+      35: System.out.println(one.equals(two)); // false
+      36: two.add("a"); // [a]
+      37: System.out.println(one.equals(two)); // true
+      38: one.add("b"); // [a,b]
+      39: two.add(0, "b"); // [b,a]
+      40: System.out.println(one.equals(two)); // false
+     
+Wrapper Classes --> This is helpful when we need to store any value other than String type in Array or ArrayList. (means primitive type) 
+  wrapper class is an object type that corresponds to the specific primitive type.
+  
+      Primitive type -- Wrapper class -- Example of constructing
+      boolean -- Boolean -- new Boolean(true)
+      byte -- Byte -- new Byte((byte) 1)
+      short -- Short -- new Short((short) 1)
+      int -- Integer -- new Integer(1)
+      long -- Long -- new Long(1)
+      float -- Float -- new Float(1.0)
+      double -- Double -- new Double(1.0)
+      char -- Character -- new Character('c')
+      
+   Wrapper classes methods --> a method that converts back to a primitive type. 
+   ** for exam, no need to know much about constructors of wrapper class and intValue() type method. you might see in exam because question was written long back but it was not in OCA because of Autoboxing. No need to search for any trick in those statements.
+      
+      imp methods --> for converting a String to a primitive or wrapper class
+          parseInt() --> The parse methods, return a primitive. In this case int value
+          The valueOf() --> method returns a wrapper class
+      **// need to understand with example what is the need for converting these values to primitve and wrapper class.
+      
+    example --> 
+      int primitive = Integer.parseInt("123"); // converts a String to an int primitive
+      Integer wrapper = Integer.valueOf("123"); // converts a String to an Integer wrapper class.
+    
+Java throws an exception for any invalid match -->
+    int bad1 = Integer.parseInt("a"); // throws NumberFormatException
+    Integer bad2 = Integer.valueOf("123.45"); // throws NumberFormatException
+
+very imp **--> There is no ParseCharachter() or valueOf() method for Charachter wrapper class. Since a String is made up of characters, you can just call charAt() normally.
+
+In general we don't need to be worry about these parseInt() or valueOf() method, because autoboxing is taking care of it by itself.
+
+Autoboxing --> just type the primitive value and Java will convert it to the relevant wrapper class for you.
+    Example -->
+      4: List<Double> weights = new ArrayList<>();
+      5: weights.add(50.5); // [50.5] // autoboxes the double primitive into a Double object
+      6: weights.add(new Double(60)); // [50.5, 60.0] // still write code the long way and pass in a wrapper object
+      7: weights.remove(50.5); // [60.0] // autoboxes into the wrapper object and passes it to remove().
+      8: double first = weights.get(0); // 60.0 // retrieves the Double and unboxes it into a double primitive
+      
+      Note --> if you try to unbox a null, you will get NullPointerException, but you can autobox or pass null without any issue
+      3: List<Integer> heights = new ArrayList<>();
+      4: heights.add(null); // this is legal, because a null reference can be assigned to any reference variable.
+      5: int h = heights.get(0); // NullPointerException // because we try to unbox that null to an int primitive.
+
+**//While using different methods need to understand which method looks for index value and which looks for actual data value.
+example:-- 
+    List<Integer> numbers = new ArrayList<>(); 
+    numbers.add(1); // [1]
+    numbers.add(2); // [1,2]
+    numbers.remove(1); //[1]
+    System.out.println(numbers); // [1], this will print 1. 
+Reason, there is already one remove method in ArrayList that takes index value to remove element of List. Hence, be careful.
+
+
+Converting Between array and List (ArrayList) --> toArray() method and Arrays.asList() method
+  1) List to array --> this will convert an Arraylist into an Array of same size at the time of conversion. Array size can't be chnaged after that.
+        Example:- 
+          3: List<String> list = new ArrayList<>();
+          4: list.add("hawk");
+          Understanding an ArrayList 137
+          5: list.add("robin");
+          6: Object[] objectArray = list.toArray();
+          7: System.out.println(objectArray.length); // 2
+          8: String[] stringArray = list.toArray(new String[0]);
+          9: System.out.println(stringArray.length); // 2
+  2) Array to a List --> 
+        this will convert a fixed size array into fixed size List at the time of conversion. As we know we can't change array size once created but list can grow and Shrink. In this case List also can't chnages its size and hence known as Backed-List. 
+        The original array and created array backed List are linked. When a change is made to one, it is available in the other. Although, change here means updating values, not changing the size. Changing the size will through exception.
+        Example:-
+          20: String[] array = { "hawk", "robin" }; // [hawk, robin]
+          21: List<String> list = Arrays.asList(array); // returns fixed size list
+          22: System.out.println(list.size()); // 2
+          23: list.set(1, "test"); // [hawk, test]
+          24: array[0] = "new"; // [new, test]
+          25: for (String b : array) System.out.print(b + " "); // new test
+          26: list.remove(1); // throws UnsupportedOperation Exception, because changing list size is not allowed here
+          
+few imp methods -->
+asList() method --> takes varargs, which let you pass in an array or just type out the String values.
+  List<String> list = Arrays.asList("one", "two");
+        
+Sort() method --> Sorting an ArrayList is very similar to sorting an array. You just use a different (Collections) helper class:
+    example-->
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(99);
+        numbers.add(5);
+        numbers.add(81);
+        Collections.sort(numbers); // Collections is the helper class
+        System.out.println(numbers); [5, 81, 99]
+        
+Working with Dates and Times --> all date and time classes are in this package. 
+    import java.time.*; // import date and time classes 
+    ** Month is a special type of class called an enum, which is like constant variable.
+    
+  LocalDate --> this class Contains just a date — no time and no time zone.
+    LocalDate date1 = LocalDate.of(2015, Month.JANUARY, 20);
+    LocalDate date2 = LocalDate.of(2015, 1, 20);
+    System.out.println(LocalDate.now()); // this will print current date as per system
+    ---LocalDate can use below methods----
+      plusYears/minusYears 
+      plusMonths/minusMonths 
+      plusWeeks/minusWeeks 
+      plusDays/minusDays
+    
+  LocalTime --> Contains just a time—no date and no time zone.
+    LocalTime time1 = LocalTime.of(6, 15); // hour and minute
+    LocalTime time2 = LocalTime.of(6, 15, 30); // + seconds
+    LocalTime time3 = LocalTime.of(6, 15, 30, 200); // + nanoseconds
+    System.out.println(LocalTime.now()); // this will print current time as per system
+      ---LocalTime can use below methods---- 
+      plusHours/minusHours 
+      plusMinutes/minusMinutes 
+      plusSeconds/minusSeconds
+      plusNanos/minusNanos
+      
+  LocalDateTime --> Contains both a date and time but no time zone.
+    System.out.println(LocalDateTime.now()); // this will print current date and time as per system
+  
+      public static LocalDateTime of(int year, int month, int dayOfMonth, int hour, int minute)
+      public static LocalDateTime of(int year, int month, int dayOfMonth, int hour, int minute, int second)
+      public static LocalDateTime of(int year, int month, int dayOfMonth, int hour, int minute, int second, int nanos)
+      public static LocalDateTime of(int year, Month month, int dayOfMonth, int hour, int minute)
+      public static LocalDateTime of(int year, Month month, int dayOfMonth, int hour, int minute, int second)
+      public static LocalDateTime of(int year, Month month, int dayOfMonth, int hour, int minute, int second, int nanos)
+      public static LocalDateTime of(LocalDate date, LocalTime)
+  
+      ---LocalDateTime can use below methods----
+      plusYears/minusYears 
+      plusMonths/minusMonths 
+      plusWeeks/minusWeeks 
+      plusDays/minusDays 
+      plusHours/minusHours 
+      plusMinutes/minusMinutes 
+      plusSeconds/minusSeconds
+      plusNanos/minusNanos
+ 
+imp points / tricks --> 
+ 1. No constructor for Date and Time classes. The exam creators may try to throw something like this at you. Don’t fall for this. You are not allowed to construct a date or time object directly.
+    LocalDate d = new LocalDate(); // DOES NOT COMPILE
+  
+2. you can't pass wrong values, code will compile but there will be runTime exception.
+LocalDate.of(2015, Month.JANUARY, 32) // throws DateTimeException // 
+
+3. The date and time classes are immutable, just like String was. Means, remember to assign the results of these methods to a reference variable, so they are not lost because of Garbage Collector. 
+
+4. There are two ways the exam creators can try to trick you. What do you think this prints?
+LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); 
+date.plusDays(10);
+System.out.println(date); // It prints January 20, 2020. Adding 10 days was useless because we ignored the result.
+
+5. The exam also may test to see if you remember what each of the date and time objects includes. Do you see what is wrong here?
+LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(1); // DOES NOT COMPILE //LocalDate does not contain time.
+
+6. Earlier to Java 8, there was Calendar class in java.util package to create date & time objects. you can see some question with this code as well in exam. example:
+   import java.util.Calendar;
+   LocalDate date = LocalDate.of(2014, Calendar.JUNE, 21);
+    
+    
+---- Working with Periods --- 
+    A Period is generic class used for creating a specific periods of time and that can be used to manipulate dates.
+    plus() method is used to manipulate date with period generic class.
+    
+    There are five ways to create a Period class:
+      Period annually = Period.ofYears(1); // every 1 year
+      Period quarterly = Period.ofMonths(3); // every 3 months
+      Period everyThreeWeeks = Period.ofWeeks(3); // every 3 weeks
+      Period everyOtherDay = Period.ofDays(2); // every 2 days
+      Period everyYearAndAWeek = Period.of(1, 0, 7); // every year and 7 days
+   
+   LocalDate start = LocalDate.of(2015, Month.JANUARY, 1);
+   LocalDate end = LocalDate.of(2015, Month.MARCH, 30);
+        start = start.plus(annually);
+        
+   Tricks to remember: 
+    1. when you chain methods in Period, only the last method in chain will be evaluated. example below:
+        Period wrong = Period.ofYears(1).ofWeeks(1); // every week
+    2. a Period is a day or more of time, means ofDays(), ofWeeks(), ofMonths() and ofYears().
+    3. There is another class known as Duration, For Duration, you can specify the number of days, hours, minutes, seconds, or nanoseconds. This is not on OCA exam.
+    
+
+  --- Formatting Dates and Times --- 
+  lets look at some method which are useful to fetch specific details from date or time objects
+    LocalDate date = LocalDate.of(2020, Month.MARCH, 20);
+    System.out.println(date.getDayOfWeek());  // MONDAY
+    System.out.println(date.getMonth()); // JANUARY
+    System.out.println(date.getYear()); // 2020
+    System.out.println(date.getDayOfYear());  // 80
+    System.out.println(date.getDayOfMonth());  // 20
+ 
+DateTimeFormatter can be used to format any type of date and/or time object. 
+DateTimeFormatter is in the package java.time.format.
+
+import java.time.format.*;
+import java.time.*;
+
+LocalDate date = LocalDate.of(2020, Month.JANUARY, 20);
+LocalTime time = LocalTime.of(11, 12, 34);
+LocalDateTime dateTime = LocalDateTime.of(date, time);
+System.out.println(date.format(DateTimeFormatter.ISO_LOCAL_DATE)); //2020-01-20
+System.out.println(time.format(DateTimeFormatter.ISO_LOCAL_TIME)); // 11:12:34
+System.out.println(dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)); //2020-01-20T11:12:34
+
+there are some predefined formats that are more useful and easy to format the display of date and time -->
+
+DateTimeFormatter shortDateTime = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+System.out.println(shortDateTime.format(dateTime)); // 1/20/20 
+System.out.println(shortDateTime.format(date)); // 1/20/20 
+System.out.println(shortDateTime.format(time)); // UnsupportedTemporalTypeException, because a time cannot be formatted as a date
+
+--> above commands can also be written as below. The format() method is declared on both the formatter objects and the date/time objects, allowing you to reference the objects in either order.
+--> The format() method Formats the date using the specified formatter. This date will be passed to the formatter to produce a string.
+
+
+DateTimeFormatter shortDateTime = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+System.out.println(dateTime.format(shortDateTime)); // 1/20/20 
+System.out.println(date.format(shortDateTime)); // 1/20/20 
+System.out.println(time.format(shortDateTime)); // UnsupportedTemporalTypeException, because a time cannot be formatted as a date
+
+** imp for exam -->
+Remember below method uses (else understand from page - 149)
+    1. ofLocalizedDate method --> can be used only with LocalDate and LocalDateTime objects.
+    2. ofLocalizedDateTime method --> can be used only with LocalDateTime objects.
+    3. ofLocalizedTime method --> can be used only with LocalTime and LocalDateTime objects.
+
+** imp --> There are two predefined formats that can show up on the exam: SHORT and MEDIUM.
+example:-
+LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); 
+LocalTime time = LocalTime.of(11, 12, 34); 
+LocalDateTime dateTime = LocalDateTime.of(date, time);
+DateTimeFormatter shortF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+DateTimeFormatter mediumF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+System.out.println(shortF.format(dateTime));  // 1/20/20 11:12 AM
+System.out.println(mediumF.format(dateTime)); // Jan 20, 2020 11:12:34 AM
+
+DateTimeFormat class allow you to create your own custom format style. ofPattern() method we need to use.
+example:-
+DateTimeFormatter f = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm"); 
+System.out.println(dateTime.format(f)); // January 20, 2020, 11:12
+
+
+  --- Parsing Dates and Times ----
+    Just like the format() method, the parse() method also takes a formatter. If you don’t specify one, it uses the default for that type. 
+    So, parse method is used to display date or time in most readable format, from the entered DateTimeFormatter pattern. 
+    Obtains an instance of LocalTime from a text string such as 10:15.  The string must represent a valid time and is parsed using DateTimeFormatter.ISO_LOCAL_TIME.
+
+    DateTimeFormatter f = DateTimeFormatter.ofPattern("MM dd yyyy");
+    LocalDate date = LocalDate.parse("01 02 2015", f);
+    LocalTime time = LocalTime.parse("11:22");
+    System.out.println(date); // 2015-01-02
+    System.out.println(time); // 11:22
+
+---- Notes from Review Questions -->
+String object can't directly convert other primitive type data. Means, incase we want to pass int value to String object, we need to cast it explicitly.
+String testStr = 4 + 1; // code will not compile. Either need explicit cast or need one string value to pass
+
+--- equals() method ---
+1. remember equals() method checks actual values of object. 
+2. We can't invoke equals() method on null or any other primitive type, code will give compile error. But we can pass null value to the equals() method as aurgument. (remember, you can't assign null value to any primitive type variable in java, so only objects like String, StringBuilder or wrapper classes like Interger, Boolean with null value can be passed).
+3. this is the method signature --> public boolean equals(Object anObject)]. 
+4. equals() method can compare for same type of object. Means, if we compare String with StringBuilder or Integer with String, equals() method return "false" without comparing any value. Remember, code will compile as both are objects.
+
+---- operator "==" ---
+1. this "==" operator checks where the left-side and right-side pointing/referencing to same object or different. Remember, for any object type, if you created 2 seperate object using "new" keyword, either with the same value or different value, this "==" consider them as two seperate reference point for object. Because, java created two seperate object.
+2. It can compare both object type as well as primitive type. means, this operator can compare same type wrapper classes with same primitive type. For example:- int primitive type can be compared with Integer wrapper class, same as boolean primitive type can be compared with Boolean wrapper class. 
+3. But you can't compare String with StringBuilder or with Integer wrapper class. code will not compile.
+4. Remember, it can't compare double with float even if it has same value. But it can compare byte, short, int, and long with each other. Because internally, java convert byte and short to int and even if needed converts byte, short and int to long. 
+5. only String class can be initiated with null value and this "==" operator compares values perfectly fine, even if String is null. means, code will compile properly. (remember, you can't assign null value to any primitive type variable in java and you can't create object of any wrapper class with null value)
+5.1 - 
+we can't create object of wrapper classes by passing "null" value as aurgument. code will not compile.
+example:- StringBuilder sb2 = new StringBuilder(null); // does not compile
+
+Always check return type of method and save method returned result to an object so that it will not get ignored or garbage collected.
+
+Remember, for Substring function of String or StringBuilder, if start index and end index are same then it will return blank result. Means, will not return anything but code will compile and run properly.
+Althrough, for Substring function of String or StringBuilder, if end index value is less then start index value, java will throw exception "StringIndexOutOfBoundsException". Because String index out of range: -1.
+Remember, if you apply a substring function on String or StringBuilder you need to store the result of it into another valriable. Substring function doesn't change original object value. 
+
+Remember, String can concatenate any data type variable value or object value using '+' operator.
+Remember, StringBuilder has insert, delete, append functions. While, ArrayList has add, remove function. Need to understand each functions definition and functionality properly.
+
+Remember, you can't pass directly an String value to an StringBuilder object. Code doesn't compile.
+example:- StringBuilder b = "rumble"; // code does not compile
+
+Remember, while declaring an array variable, we must provide either dimension expressions or an array initializer. Also, same data type should be declared at both the side of the definition.
+example:- int[][] scores = new int[5][]; // compile properly
+          String beans[] = new beans[6]; // does not compile, becoz incorrect datatype
+          java.util.Date[] dates[] = new java.util.Date[2][]; // compile properly
+          int[][] java = new int[][]; // does not compile, no dimension expressions or an array initializer
+
+-- Java understand even if you don't provide space in between array declaration and array variable name. see example below:
+example:- char[]c = new char[2]; // code will compile properly
+
+  -- Need to understand all the methods/functions that can be invoke on array object.
+  for example:- you can't call size() or capacity() method on c array object, means there is not function like this for array. But you can call clone(), length for any primitive type array. and equals(), notify(), and wait() method on any object type array. Notice, length method don't have bracket in its definition.        
+
+  -- Need to understand all the methods/functions that can be invoke on ArrayList object and how ArrayList can be declared.
+  ** -- The equals() method on arrays does not look at the elements of the array, but it look either they both point/referencing to same object or not. Remember, this would work even on an int[] too. int is a primitive; int[] is an object.
+  
+ -- Remember and understand below points:-
+1. Two arrays with the same content are not equal. because, they might can point to different object.
+2. Two ArrayLists with the same content are equal.
+3. If you call remove(0) using an empty ArrayList object, it will compile successfully.
+4. If you call remove(0) using an empty ArrayList object, it will not run successfully. Because, it will throw "IndexOutOfBound" exception.
+
+-- two lists are defined to be equal if they contain the same elements in the same order. --
+for example:-- if one and two are two list that contain same data then this statment return true --> one.equals(two)
+          but --> one == two will return false as objects reference are different.
+
+-- The method add(int, String) in the type List<String> is not applicable for the arguments (int). Need to understand all ArrayList and List methods properly. if List is of type String then it will accept only String type aurgument.
+-- List, add() method can't accept "null" value as aurgument. Code will compile but thrown NullPointerException.
+
+-- Need to memories all concepts regarding BinarySearch method of Arrays class.
+-- Remember, List uses special class library for sorting. ---> Collections.sort(list);
+-- Remember, List uses special class library for binary searching. --> Collections.binarySearch();
+
+---- Confusing points from Review Questions -->
+
+What are possible conditions for an object to be garbage collected? Can an immutable object be garbage collected?
+Need to check when we need to use "L" for creating long variable. 
+  Example below:-
+  long l2 = 12; 
+  long l3 = 12L;
+-- Note sure if ArrayList is immutable and ordered, like Array. Need to check.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Review Question Attempt 1 -->
+1. A, D (N)
+2. A, C, D
+3. B, E, D
+4. B
+5. E (N)
+6. D (N)
+7. E
+8. A (N)
+9. C
+10. C (N)
+11. A (N)
+12. A
+13. F
+14. A, C
+15. D, E (N)
+16. B, F (N)
+17. C (N) -- Need to verify answer --
+18. A, C, D, F -- Need to verify answer --
+19. A, B (N)
+20. B (N)
+21. C
+22. A
+23. D (N)
+24. C
+25. F (N)
+26. A, D (N)
+27. C (N)
+28. D, F
+29. D
+30. F
+31. B
+32. C (N)
+33. E (N)
+
+
+------------------------------------------------------------
+
+Review Questions -- Attempt -2 --->
+1. G
+2. A, C, D
+3. B, D, E
+4. B 
+5. B (N) -- very nice and tricky question
+6. B
+7. B, D, E
+8. A, E, D
+9. C
+10. E, F (N)
+11. E
+12. A
+13. F
+14. A, D (N) -- need to be more careful for calculating result
+15. D, E (N)
+16. C, F (N)
+17. B, F (N)
+18. A, C, D, E 
+19. C (N)
+20. D
+21. C
+22. D 
+23. E (N)
+24. A (N)
+25. D
+26. B, D (N) -- good trick, need to verify all the options
+27. B
+28. D, E, F (N)
+29. B (N)
+30. F
+31. B
+32. A (N)
+33. B
