@@ -91,3 +91,33 @@ format method of LocalDate / Time can be applied only on object of LocalDate / T
 ----- Need to learn Array , ArrayList very well ---
 -- Need to learn Date/Time API ---
 --- 
+
+---- chapter 5 -->
+1. B
+2. C (N)
+remember, while loop validation condition runs at the very end as well, to make sure its not validating to true and any evaluation at this step can also make some change to final result. 
+3. C
+4. B
+5. A, B, D (N)
+Case statment label requires a compile time constant variable.
+Remember, when you use "/" this division operator, the result of its evaluation is only division and not remainder. (for example, 10/3 = 3 as a result and remainder 3 will be discarded). Hence this can be used in case statmenent to compare value against int variable of switch statment.
+6. C (N)
+very important point, The case labels requires compile-time constant values. Even if you define a final variable, assigning a value to that variable in the next line, means after its declaration, java doesn't count it as compile time constant.
+7. E (N)
+Java performs integer calculations at compile time only, if there is no object for which value can be changed at run-time. 
+Hence, if 2 case statement evaluate to same value then java throws a compile error.
+8. A
+9. C
+10. F
+
+chapter 6 -->
+1. A
+2. D
+3. B, C (N)
+4. B
+5. D
+6. A, B
+7. A
+8. B, C
+9. A, D (N)
+10. A
