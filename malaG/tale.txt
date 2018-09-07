@@ -34,6 +34,73 @@ short-circuit operators -->
 3.3 --> E
 
 4.1 --> A
-4.2 --> D
-4.3 --> B, C, D
+important to remember, tale 
+1.1 --> C, D
+A .java file must have only one public class or one public interface, and file name should be the same as public class or interface. A .java file can have multiple class or interfaces.
 
+1.2 --> A, C, D
+
+1.3 --> A, B
+
+1.4 --> shreya (N) --> The Top-level class or primary class within any .java file can't be declared with private or protected access modifiers.
+The primary class in a .java file must be public or package protected (default) class.
+Also, notice if a class is package protected means its by default not visible outside package. Programmer has to import the package and extend the class in-order to use this class. Hence, default access modifier makes class invisible outside package.
+
+2.1 --> 
+The underscore can't be placed in between (0_x or 0_b) or even just after the initials (0b_10 or 0x_25). only exception it can be placed after first 0 (ex:- 0_1010_11). For hexaDecimal values the letter can be till f or F only, G and further is not allowed.
+
+2.2 --> A, B, C, E
+--> remember, when you have to select all incorrect answers means, select all false statement.
+ 
+2.3 --> 32
+11 + 11 + 10 - 9 + 9 
+2.4 --> 
+line 1 --> true (both will evaluate)
+line 2 --> false (only first will evaluate)
+line 3 --> fasle (only first)
+line 4 --> false (all will evaluate)
+line 5 --> false (only first expression for && clause and then right part of || will also evaluate)
+
+short-circuit operators --> 
+&& --> if first expression is false then it won't evaluate second expression.
+|| --> if first expression is true then it won't evaluate second expression.
+
+3.1 --> A
+3.2 --> infinite loop, as construtor calling itself. code fails to compile with the error stating recursive constructor invocation
+3.3 --> E
+
+4.1 --> A
+its important to remember which string method takes what type of arguments, for example, 
+method "indexOf" can accept both String and char values.
+method startsWith and endsWith can accept only String values.
+method charAt can accept only method aurgument of type int. but remember, since java stored char values as unsigned integer values, its possible to pass char values as well in this method.
+
+4.2 --> D
+StringBuilder default object capacity is 16 char.
+
+4.3 --> B, D
+An array element can be assigned to null, and if all row elements are not same in array, its known as asymmetric array.
+4.4 --> A
+
+5.1 --> F
+5.2 --> C
+5.3 --> Harry
+Very imp to note, Switch statement can't accept long, double, and float primitive data type and its wrapper classes.
+Switch statement can accept only byte, short, char, int data type and its wrapper class. it can also accept String, and enum.
+5.4 --> B (N)
+Note, break statment end the execution of the inner loop. it can be used in any loop (while, do-while, for) or in switch statment.
+
+
+6.1 --> E
+6.2 --> A, C, D (N)
+very important, you can't create an object of an interface, code won't compile.
+6.3 --> B
+6.4 --> A
+
+7.1 --> C (N)
+A finally block can't be placed before catch block.
+7.2 --> A
+7.3 --> C (N)
+Always remember errors shouldn't be handled programmatically and they should be left for JVM to take care of. Hence, catch block for StackOverFlowError or VirtualMachineError will throw exception.
+7.4 --> B, D 
+7.5 --> C 
