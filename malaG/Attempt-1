@@ -1,0 +1,93 @@
+sample questions - chapter 1 --> 
+1. E
+Need to understand how to import classes of default package.
+You can't import classes from the default package. The only way to access classes in the default package is from another class in the default package. A class or interface that is defined in a package can't access classes or interfaces defined in default package.
+In other words a non-public class can't be accessed outside a package in which it is defined, even if it is explicitely imported. Because class itself is not accessible.
+ 
+2. A, B, D
+3. D, F (N)
+make sure to check all capital and small case letters. java is case sensitive.
+
+4. B, C
+5. D
+6. C
+7. C
+8. B
+9. C
+10. A (N)
+a non-public class can't be accessed outside a package in which it is defined, even if it is explicitely imported. Because class itself is not accessible.
+11. A
+you can't add an access modifier to the method parameters.
+
+
+sample questions - chapter 2 -->
+1. C (N)
+Remember, when a char primitive data type used with arithmetic operators, its ASCII value is used, which is int value only. 
+2. A, C (N)
+points to remember, 
+1. you can't assign a negative int value to a char data type without casting.
+2. If you are using a variable in any specific statement that becomes undefined due to compile error that statement will also through compile error.
+
+3. C (N) 
+multiplication operator has higher precedence over addision or subtraction operator.
+4. D
+5. C, D, F, G
+6. A, C
+7. D 
+8. D
+9. B (N)
+remember, bracket resolves first in any expression.
+10. D (N)
+Assignment operator (=) is allowed in System.out.print() statment. 
+
+Sample Question -- chapter 3 -->
+1. D
+2. D
+3. B, C, D (N)
+Remember, if a method aurgument expecting a double or float, you can't pass int value in the method aurgument.
+on the other side, if method aurgument is of type long, then you can pass int value to it.
+4. B, C, D (N)
+5. B
+6. C
+7. C, D, E, G (N)
+Overloaded method can change the access modifier but changing only access modifier won't make it overlioaded method. means, method signature must be changed to make it overloaded.
+ArrayList<String>, char[], String, float, int are few valid return type of any method.
+8. C
+9. C (N)
+notes,
+you can define overloaded constructors with different access modifiers.
+you can define overloaded methods as well with different access modifiers.
+Also, private methods or cosntructors are also counted as overloaded methods. 
+10. A, C, E (N)
+A class can have constructor of any access modifier. If user defines a constructor for a class with any access modifier then java won't create default constructor for that class.
+Remember, a constructor don't have any return type. But a class can have a method name and signature same as constructor, only distinction would be return type of method.
+
+----
+chapter 4 -->
+1. E
+2. B (N)
+you can't assign an Array of char to an Array of int data type.
+3. A, B, D (N)
+you can't initialize an array with new keyword and array default construtor like in general we do for all other class. Instead, Array is initialzed using new keyword followed by type of array.
+4. B, C (N)
+The default type of a non-floating numeric literal value is int. we can't add an int to an ArrayList of type Long. Only long type value can be added to ArrayList of Long type.
+Switch statment accepts variables of type String. and since an Arraylist can have String values, it can be passed to switch construct as well.
+ArrayList clear() method is used to remove all elements of ArrayList.
+ArrayList remove() method is used to remove specific element of ArrayList.
+If you frequently add elements to ArrayList, its a good idea to create an ArrayList of large size.
+Calling Clone() method on an ArrayList will create a separate reference variable that stored the same number of elements as the original ArrayList. But each individual ArrayList element will still refer to original object, means, ArrayList elements are not cloned.
+An ArrayList can store any type of objects. Wrapper classes are created for ArrayList only.
+5. A, B, C, 
+6. B, D, E, H, J (N)
+The method contains() of ArrayList accepts an object and compares it with the actual values of the list.
+7. C
+8. B
+9. E
+10. A
+11. C
+12. C (N)
+format method of LocalDate / Time can be applied only on object of LocalDate / Time. not on any string or text value. Need to understnad this question again.
+
+----- Need to learn Array , ArrayList very well ---
+-- Need to learn Date/Time API ---
+--- 
