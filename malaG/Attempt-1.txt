@@ -121,3 +121,15 @@ chapter 6 -->
 8. B, C
 9. A, D (N)
 10. A
+
+chapter 7 -->
+1. A (N)
+2. B, C, D, 
+3. A (N)
+4. E (N)
+5. C
+6. B, C, D (N)
+7. C
+8. B
+9. C, D
+10. C (N)
