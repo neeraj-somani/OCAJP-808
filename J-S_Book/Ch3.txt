@@ -26,7 +26,8 @@ For example, “name” is a literal and therefore goes into the string pool. my
 Important String Methods --> a string is a sequence of characters and Java counts from 0 when indexed.
    1.  length() --> returns the number of characters in the String.
    2.  charAt() --> lets you query the string using index value, return specific charachter at that index.
-        An Exception "IndexOutOfBound" will be thrown if index not found. 
+        An Exception "IndexOutOfBound" will be thrown if index not found. (two subtype ArrayIndexOutOfBound or StringIndexOutOfBound)
+        charAt() can accept char type values as well, as java use ASCII value of charachter while evaluating.
    3.  indexOf() --> indexOf can work with an individual character or a whole String as input and return index. It can also start from a requested index position. indexOf() returns –1 when no match is found and doesn't throw an exception.
       The method signatures are as follows:
         int indexOf(char ch)
@@ -38,16 +39,16 @@ Important String Methods --> a string is a sequence of characters and Java count
         int substring(int beginIndex, int endIndex) // endIndex is non-inclusive
         tricks --> 
         1. if endIndex is one greater than the last index value of the String, it wouldn't throw exception. Reason, as its non-inclusive
-        2. but if endIndex is two greater than the last index value of the String, it will throw exception "IndexOutOfBound"
+        2. but if endIndex is two position greater than the last index value of the String, it will throw exception "ArrayIndexOutOfBound"
         3. if start index and end index is same, substring function will return empty string.ex:-string.substring(3, 3); // empty string
-        4. if endIndex is less than StartIndex, then it will throw exception. as java knows indexes cant be backward. ex:- string.substring(3, 2)); // throws exception
+        4. if endIndex is less than StartIndex, then it will throw exception. as java knows indexes cant be backward. ex:- string.substring(3, 2)); // throws exception StringIndexOutOfBoundsException
   5.  toLowerCase() and toUpperCase() --> converts characters to uppercase/lowercase and return new string, as original string is immutable.
       String toLowerCase(String str)
       String toUpperCase(String str)
-  6.  equals() and equalsIgnoreCase() --> checks whether two String objects contain exactly the same characters in the same order.
+  6.  equals() and equalsIgnoreCase() --> checks whether two String objects contain exactly the same characters in the same order. It actually checks exact value of string and not object of string.
     boolean equals(String str) 
     boolean equalsIgnoreCase(String str) 
- 7.  startsWith() and endsWith() --> methods look at whether the provided value matches part of the String.
+ 7.  startsWith() and endsWith() --> methods look at whether the provided value matches part of the String. Accept only String type.
     boolean startsWith(String prefix)
     boolean endsWith(String suffix)
 8.  contains() --> method also looks for matches in the String. the match can be anywhere in the String. 
@@ -123,7 +124,7 @@ Example -->
             System.out.println(t1 == t3); // true, as both t1 and t3 pointing to same object 
             System.out.println(t1 == t2); // false, as both t1 and t2 pointing to different objects 
             System.out.println(t1.equals(t3)); // true, as both t1 and t3 pointing to same object, having same value
-            System.out.println(t1.equals(t2)); // false, as both t1 and t2 pointing to different objects, even having same null value, // also Thread has not implemented equals method to compare values.
+            System.out.println(t1.equals(t2)); // false, as both t1 and t2 pointing to different objects, even having same null value, // also Thread has not implemented equals method to compare values, hence its comparing reference object.
 
             System.out.println(" ");
 
@@ -196,7 +197,7 @@ String[] againStrings = (String[]) objects; // a cast is needed because we are m
 againStrings[0] = new StringBuilder(); // DOES NOT COMPILE // because a String[] only allows String objects and StringBuilder is not a String.
 objects[0] = new StringBuilder(); // careful! a runtime exception will be thrown // because A StringBuilder object can clearly go in an Object[]. The problem is that we don’t actually have an Object[]. We have a String[] referred to from an Object[] variable. At runtime, the code throws an ArrayStoreException.
 
-Using an Array --> Example, declaing, initiallizing and accessing array using index.
+Using an Array --> Example, declaring, initiallizing and accessing array using index.
   4: String[] mammals = {"monkey", "chimp", "donkey"};
   5: System.out.println(mammals.length); // 3
   6: System.out.println(mammals[0]); // monkey
@@ -547,7 +548,7 @@ LocalDate date = LocalDate.of(2020, Month.JANUARY, 20); date = date.plusMinutes(
         
    Tricks to remember: 
     1. when you chain methods in Period, only the last method in chain will be evaluated. example below:
-        Period wrong = Period.ofYears(1).ofWeeks(1); // every week
+        Period wrong = Period.ofYears(1).ofWeeks(1); // this will evaluate ofWeeks() method only. means, every week
     2. a Period is a day or more of time, means ofDays(), ofWeeks(), ofMonths() and ofYears().
     3. There is another class known as Duration, For Duration, you can specify the number of days, hours, minutes, seconds, or nanoseconds. This is not on OCA exam.
     
@@ -570,7 +571,7 @@ import java.time.*;
 LocalDate date = LocalDate.of(2020, Month.JANUARY, 20);
 LocalTime time = LocalTime.of(11, 12, 34);
 LocalDateTime dateTime = LocalDateTime.of(date, time);
-System.out.println(date.format(DateTimeFormatter.ISO_LOCAL_DATE)); //2020-01-20
+System.out.println(date.format(DateTimeFormatter.ISO_LOCAL_DATE)); //2020-01-20 
 System.out.println(time.format(DateTimeFormatter.ISO_LOCAL_TIME)); // 11:12:34
 System.out.println(dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)); //2020-01-20T11:12:34
 
