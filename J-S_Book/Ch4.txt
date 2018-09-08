@@ -318,7 +318,7 @@ Immutability refers to preventing callers from changing the instance variables a
 --- Writing Simple Lambdas ---> Functional programming is a way of writing code more declaratively. You specify what you want to do rather than dealing with the state of objects. You focus more on expressions than loops.
 
     --> A lambda expression is like a method that you can be passed as if its a variable. It has parameters and a body just like full-fledged methods do, but it doesn’t have a name like a real method.
-    --> an interface specifies the methods that our class needs to implement.    
+    --> an interface specifies the methods that a class needs to implement.    
      example, simplest lambda expressions -->
       a -> a.canHop();
       (Animal a) -> { return a.canHop(); } // both statement doing same
@@ -353,7 +353,7 @@ Immutability refers to preventing callers from changing the instance variables a
   Example:---         public interface Predicate<T> {
                       boolean test(T t);
                       }
-  example, how to use predicate method:-
+  example, how to use predicate interface method:-
       1: import java.util.*;
       2: import java.util.function.*;
       3: public class PredicateSearch {
