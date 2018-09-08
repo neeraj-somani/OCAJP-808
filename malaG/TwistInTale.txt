@@ -63,6 +63,6 @@ A finally block can't be placed before catch block.
 7.2 --> A
 7.3 --> C (N)
 Always remember errors shouldn't be handled programmatically and they should be left for JVM to take care of. Hence, catch block for StackOverFlowError or VirtualMachineError will still throw exception, even after handling them in catch block.
-Errors are usually good to left for JVM to handle or throw.
+Errors are usually good to left for JVM to handle or throw. still you are free to write throw statement or catch statement for Errors, code compile properly.
 7.4 --> B, D 
 7.5 --> C 
