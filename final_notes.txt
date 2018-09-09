@@ -1,6 +1,6 @@
 --> There are all primitive type wrapper class. no need to get confuse.
 --> switch statement limitation --> it can't accept long, boolean, double and float value in its consturct aurgument.
---> Array.binarySearch(number, 2); --> used for binary search
+--> Array.binarySearch(number, 2); -> used for binary search (if number not found then (negate the expected position of number and add -1)
 --> Sorting for Array string type has specfic order --> first number, then uppercase then lowercase
 --> Note --> if you try to unbox a null, you will get NullPointerException, but you can autobox or pass null without any issue
       3: List<Integer> heights = new ArrayList<>();
@@ -19,5 +19,9 @@
 --> asList() method --> takes varargs, which let you pass in an array or just type out the String values.
 --> Sorting an ArrayList, using Collections.sort(numbers); // Collections is the helper class
 
-      
+------ instanceof operator ---- type operator ---
+used to test whether the object is an instance of the specified type (class or subclass or interface).
+It returns either true or false. If we apply the instanceof operator with any variable that has null value, it returns false.
+
+--> you can explicitely cast any object to an interface, even if class doesn't implement it. and the code will compile. but if the object's class doesn't implement interface, the code will throw ClassCaseException at runtime.
   
