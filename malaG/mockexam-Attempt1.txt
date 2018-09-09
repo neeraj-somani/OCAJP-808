@@ -1,4 +1,12 @@
 1. B, C (N)
+--> A reference variable of Derived (Child) class can't be used to refer an object of base (parent) class.
+example:- 
+class Animal {}
+class Lion extends Animal implements Jumpable {}
+--> you can explicitely cast any object to an interface, even if it doesn't implement it to make the compile. but if the object's class doesn't implement interface, the code will throw ClassCaseException at runtime.
+example:-
+interface Jumpable {}
+Jumpable var6 = (Jumpable)(new Animal()); // runtime exception
 2. C
 3. D
 4. B
@@ -9,25 +17,51 @@
 9. A, C
 10. H
 11. C (N)
+--> remember below defaulty value for all primitive type --> 
+--> char - \u0000 | byte,short,int - 0 | long - 0L | 
+--> float - 0.0f | double - 0.0d | boolean - false | objects - null
+--> but when these value passed to print method it will print without specific data type charachter (exmple, for float it will print 0.0, for long it will print 0, etc.)
+--> Remember, you can't pass an uninitialized variable directly to print statement. (long ln; System.out.println(ln); // does not compile) --> we need to either initialze it or use it with class object (because java will initialze it then)  
 12. A (N)
+A reference variable of base class can't access variable and methods of child class without explicit cast. The best way to do that is:
+--> ((LaserPrinter) myPrinter).pagePerMin; // casting to subclass
 13. B (N)
+--> The local variable (variables that are declared within a method) aren't initialzed with their default values. If you try to print the value of a local variable before initializing it, the code won't compile. 
+--> On the other side, class and instance variable, initialize variable with default value.
 14. C
 15. D
 16. D
 17. B (N)
+---> Always remember, if a main method needs to access a variable directly it must be static. or the variable can be access via instance variable.
+--> because, a non-static variable can't be accessed via static method.
 18. B (N)
+--> Creation of an object of the class Emp requires the creation of an instance variable mgr and its initialization with an object of the same class. Hence, Emp object creation calls itself recusrsively, resulting in StackOverFlowError.
+--> this is very tricky question. understand it through book explanation only. if above statement doesn't make sense.
 19. A, E, G
 20. A, B, D (N)
+--> An array declaration becomes invalid, when you specify the size of  array within square bracket and declaring, instantiating and initializing an array at the single line of code.
+example:-
+int eArry5[] = new int[2] {10,20}; // this is invalid
+int[] eArry2 = new int[10]; // valid
+int eArry3[] = new int[] {}; // empty declaration is also valid
 21. B, D
 22. A, D (N) -- Re
+--> need to check this again as this requires calculation
 23. B, C
 24. A, C, E -- Re
+--> A constructor can't be defined using a non-access modifiers like, final, abstract or static
+--> A constructor can't be defined with return type
+--> A constructor can be defined with any access modifier, like public, private, protected, and package private(default)
 25. A
 26. E
 27. A
 28. A
 29. D (N) -- Re
+--> very tricky and nice question, need to understand it multiple time
+--> concept, if you modify the state of the loop variable, the modified object state will be reflected in the array. but if you assign a new object to the loop variable, it won't be reflected in the list or the array that's being iterated. you can compare this behavior of the enhanced for loop variable with the behavior of object references passed as arguments to a method.
 30. B (N) -- Re
+--> static method of a class are hidden methods
+--> calling static method is tied to the type of the reference variable and doesn't depend on the type of the object that's assigned to the reference variable. The static method belongs to a class and not to its objects. 
 31. A, C, D
 32. B, C
 33. B (N)
@@ -75,3 +109,48 @@
 75. E
 76. B (N)
 77. C
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
