@@ -3,7 +3,7 @@
 example:- 
 class Animal {}
 class Lion extends Animal implements Jumpable {}
---> you can explicitely cast any object to an interface, even if it doesn't implement it to make the compile. but if the object's class doesn't implement interface, the code will throw ClassCaseException at runtime.
+--> you can explicitely cast any object to an interface, even if class doesn't implement it. and the code will compile. but if the object's class doesn't implement interface, the code will throw ClassCaseException at runtime.
 example:-
 interface Jumpable {}
 Jumpable var6 = (Jumpable)(new Animal()); // runtime exception
@@ -21,13 +21,13 @@ Jumpable var6 = (Jumpable)(new Animal()); // runtime exception
 --> char - \u0000 | byte,short,int - 0 | long - 0L | 
 --> float - 0.0f | double - 0.0d | boolean - false | objects - null
 --> but when these value passed to print method it will print without specific data type charachter (exmple, for float it will print 0.0, for long it will print 0, etc.)
---> Remember, you can't pass an uninitialized variable directly to print statement. (long ln; System.out.println(ln); // does not compile) --> we need to either initialze it or use it with class object (because java will initialze it then)  
+--> The local variable (variables that are declared within a method) aren't initialzed with their default values. If you try to print the value of a local variable before initializing it, the code won't compile. 
+--> On the other side, class and instance variable, initialize variable with default value.  
 12. A (N)
 A reference variable of base class can't access variable and methods of child class without explicit cast. The best way to do that is:
---> ((LaserPrinter) myPrinter).pagePerMin; // casting to subclass
+--> ((LaserPrinter) myPrinter).pagePerMin; // casting to subclass (child class)
 13. B (N)
---> The local variable (variables that are declared within a method) aren't initialzed with their default values. If you try to print the value of a local variable before initializing it, the code won't compile. 
---> On the other side, class and instance variable, initialize variable with default value.
+--> same as 11
 14. C
 15. D
 16. D
@@ -39,11 +39,11 @@ A reference variable of base class can't access variable and methods of child cl
 --> this is very tricky question. understand it through book explanation only. if above statement doesn't make sense.
 19. A, E, G
 20. A, B, D (N)
---> An array declaration becomes invalid, when you specify the size of  array within square bracket and declaring, instantiating and initializing an array at the single line of code.
+--> An array declaration becomes invalid, when you specify the size of array within square bracket and declaring, instantiating and initializing an array at the single line of code.
 example:-
 int eArry5[] = new int[2] {10,20}; // this is invalid
 int[] eArry2 = new int[10]; // valid
-int eArry3[] = new int[] {}; // empty declaration is also valid
+int eArry3[] = new int[] {}; // valid -- empty declaration
 21. B, D
 22. A, D (N) -- Re
 --> need to check this again as this requires calculation
@@ -91,28 +91,31 @@ int eArry3[] = new int[] {}; // empty declaration is also valid
 49. B (N) -- Re
 --> break; statement breaks the execution of current loop. means, if you have a loop that should execute from 0 to 9 and you hit break; statement at 5 position then loop will not run for any value after 5, means from 6 to 9.
 --> continue; statment, if you hit continue statment at 5 position, it will stop the current execution but continue run of loop from 6 to 9 value iteration.
---> also, remember, this break or continue statements are for iteration of loops (for, do, while) and not for if-else statement. 
+--> also, remember, break or continue statements are for iteration of loops (for, do, while) and not for if-else statement. 
 50. D
 51. C
 52. B -- Re
---> any non-static method when inherited and overridden, reference variable refers to the objects created for that class. means, reference variable will refer to method based on object and not based on reference variable.  
+--> same as 53 , see below 
+--> but in case of static methods (which is hidden method), it completely depends on reference variable type. As static method belogs to class. means, if reference variable is of parent class the static method of parent class would be called. Not the static method of child (because it can't be overridden). if reference variable of child class is used, then it will call child class method.
+--> there is one exception, since child class inherit all method of parent, if child class doesn't define static method then on child class reference variable call, parent method would be called, as it not became a member of child class as well.
 53. A (N)
 --> example with explanation:-
 --> polymorphism (overloading and overridding), object vs reference variable 
 Phone phone1 = new Phone(); // only phone members accessible, even child overridden method not accessible
-		// Tablet tablet1 =  new Phone(); // compile error -- explicit cast is needed (Tablet)
-	    // Tablet tablet1 = (Tablet) new Phone(); // compile successfully but ClassCastException at runtime
-		Phone phone2 = new Tablet(); // only phone members accessible, child overridden method accessible
-							// to access child members, need to cast explicitly //System.out.println(((Tablet)phone2).playmovie);
-		Tablet tablet2 = new Tablet(); // all parent and child members accessible as child inherit them
+// Tablet tablet1 =  new Phone(); // compile error -- explicit cast is needed (Tablet)
+// Tablet tablet1 = (Tablet) new Phone(); // compile successfully but ClassCastException at runtime
+Phone phone2 = new Tablet(); // only phone members accessible, child overridden method accessible
+	// to access child members, need to cast explicitly //System.out.println(((Tablet)phone2).playmovie);
+Tablet tablet2 = new Tablet(); // all parent and child members accessible as child inherit them
 54. D (N)
 --> Code that tries to access an uninitialized local variable won't compile. 
 55. A (N)
---> every object operations should be assigned to reference variable. if you don't assign object to reference variable, it is not stored and become elegible for garbage collection.
+--> every object operations should be assigned to reference variable. if you don't assign object to reference variable, it is not stored and become eligible for garbage collection.
+--> need to understand this again
 56. C (N)
 --> each type of loop can accept single statement without curly braces but multiple statement should be inside curly braces.
 57. A, C, D, F (N)
---> array should either declare size or initialze  properly.
+--> array should either declare size or initialze  properly. empty array initialization is valid as shown below.
 below are few valid example:-
 --> String egj2[] [] = new String [] [] { {}, {} };
 --> String egj4 [] [] = new String [] [] {{null}, new String[] {"a", "b", "c"}, {new String()}};
@@ -134,7 +137,7 @@ below are few valid example:-
 --> A base class can use reference variables and objects of its derived class. even as a method aurgument which is defined in base class.
 66. E
 67. A, B (N)
---> Any class that extends Exception class becomes a checked exception class.
+--> Any class that extends Exception class becomes a checked exception.
 --> Hence, when you call a method that throws a checked exception, you can either handle it using try-catch block or declare it to be thrown in caller method signature.
 68. D
 69. D
