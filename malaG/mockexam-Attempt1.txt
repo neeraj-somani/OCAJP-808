@@ -65,12 +65,19 @@ int eArry3[] = new int[] {}; // empty declaration is also valid
 31. A, C, D
 32. B, C
 33. B (N)
+--> static method can access only static members of a class. code won't compile otherwise.
 34. B
 35. D
 36. A (N)
+--> Substring method of String class can't accept negative value. (for example: str.substring(2, -1) will throw runtime exception).
 37. B, E (N)
+--> When an object reference is marked as null, the object is marked for garbage collection. But you can't be sure exactly when a garbage collector will kick in to garbage collect the objects. A garbage collector is low-priority thread, its execution depends on OS> you can never be sure about which object have been garbage collected. you can only be sure about how many objects are eligible for garbage collection.
 38. A (N)
+--> remember, equals method is a public method defined in java.lang.Object class, which is inherited by all classes. but default implementation of equals method is to compare the object reference pointing to same object, then return TRUE else FALSE. Any class can override this method to implement other logic. Here, no override happneded.
+--> Need to check in general which classes overrides equals() method. 
 39. A, C (N)
+--> There is no concat method in StringBuilder. There is append method in StringBuilder to append any string.
+--> Also, insert method can be used to insert char, number, or String at any specified position of StringBuilder.
 40. A, C, D
 41. E
 42. E
@@ -78,13 +85,19 @@ int eArry3[] = new int[] {}; // empty declaration is also valid
 44. G
 45. D
 46. B -- Re
+--> explanation of this is same as question 38.
 47. B
 48. C
 49. B (N) -- Re
+--> break; statement breaks the execution of current loop. means, if you have a loop that should execute from 0 to 9 and you hit break; statement at 5 position then loop will not run for any value after 5, means from 6 to 9.
+--> continue; statment, if you hit continue statment at 5 position, it will stop the current execution but continue run of loop from 6 to 9 value iteration.
+--> also, remember, this break or continue statements are for iteration of loops (for, do, while) and not for if-else statement. 
 50. D
 51. C
 52. B -- Re
+--> any non-static method when inherited and overridden, reference variable refers to the objects created for that class. means, reference variable will refer to method based on object and not based on reference variable.  
 53. A (N)
+--> 
 54. D (N)
 55. A (N)
 56. C (N)
