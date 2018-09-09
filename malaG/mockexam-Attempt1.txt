@@ -97,21 +97,45 @@ int eArry3[] = new int[] {}; // empty declaration is also valid
 52. B -- Re
 --> any non-static method when inherited and overridden, reference variable refers to the objects created for that class. means, reference variable will refer to method based on object and not based on reference variable.  
 53. A (N)
---> 
+--> example with explanation:-
+--> polymorphism (overloading and overridding), object vs reference variable 
+Phone phone1 = new Phone(); // only phone members accessible, even child overridden method not accessible
+		// Tablet tablet1 =  new Phone(); // compile error -- explicit cast is needed (Tablet)
+	    // Tablet tablet1 = (Tablet) new Phone(); // compile successfully but ClassCastException at runtime
+		Phone phone2 = new Tablet(); // only phone members accessible, child overridden method accessible
+							// to access child members, need to cast explicitly //System.out.println(((Tablet)phone2).playmovie);
+		Tablet tablet2 = new Tablet(); // all parent and child members accessible as child inherit them
 54. D (N)
+--> Code that tries to access an uninitialized local variable won't compile. 
 55. A (N)
+--> every object operations should be assigned to reference variable. if you don't assign object to reference variable, it is not stored and become elegible for garbage collection.
 56. C (N)
+--> each type of loop can accept single statement without curly braces but multiple statement should be inside curly braces.
 57. A, C, D, F (N)
+--> array should either declare size or initialze  properly.
+below are few valid example:-
+--> String egj2[] [] = new String [] [] { {}, {} };
+--> String egj4 [] [] = new String [] [] {{null}, new String[] {"a", "b", "c"}, {new String()}};
+
 58. C (N) --Re
+--> you need to keep track of object initialization and its reference variables. 
+--> In this case Laptop reference variable and life reference variable are referring to two different objects. ANy changes on these object will not impact each other.
 59. D (N)
+--> Any class object can be explicitly cast to any interface, code will compile but if that class doesn't implement that interface then ClassCastException will be thrown at runtime.
 60. D
 61. B
 62. A
 63. C (N)
+--> "instanceof" is all smallcase letter operator to compare an object for its class instance.
 64. B, C
 65. A, D (N)
+--> Remember, a constructor can't have return type. 
+--> An overload method name and constructor name can be same but return type is the difference.
+--> A base class can use reference variables and objects of its derived class. even as a method aurgument which is defined in base class.
 66. E
 67. A, B (N)
+--> Any class that extends Exception class becomes a checked exception class.
+--> Hence, when you call a method that throws a checked exception, you can either handle it using try-catch block or declare it to be thrown in caller method signature.
 68. D
 69. D
 70. F
@@ -121,6 +145,7 @@ int eArry3[] = new int[] {}; // empty declaration is also valid
 74. B
 75. E
 76. B (N)
+--> Always remember to indent your code if it is unindented to avoid confusion.
 77. C
 
 
