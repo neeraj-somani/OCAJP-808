@@ -45,7 +45,7 @@ Here are some points that you should keep in mind about the new Date/Time classe
 
 3. LocalDate, LocalTime, and LocalDateTime classes do not have any parent/child relationship among themselves. As their names imply, LocalDate contains just the date information and no time information, LocalTime contains only time and no date, while LocalDateTime contains date as well as time. None of them contains zone information. For that, you can use ZonedDateTime. 
 
-These classes are immutable and have no public constructors. You create objects of these classes using their static factory methods such as of(...) and from(TemporalAccessor ).  For example, 
+These classes are immutable and have no public constructors. You can create objects of these classes using their static factory methods such as of(...) and from(TemporalAccessor ).  For example, 
 LocalDate ld = LocalDate.of(2015, Month.JANUARY, 1); or LocalDate ld = LocalDate.from(anotherDate); or LocalDateTime ldt = LocalDateTime.of(2015, Month.JANUARY, 1, 21, 10); //9.10 PM
 
 Since you can't modify them once created, if you want to create new object with some changes to the original, you can use the instance method named with(...). For example, 
@@ -84,8 +84,10 @@ java.time.temporal Package: This package contains temporal objects and we can us
 --> The integral types are byte, short, int, and long, whose values are 8-bit, 16-bit, 32-bit and 64-bit signed two's-complement integers, respectively, and char, whose
 values are 16-bit unsigned integers representing UTF-16 code units.
 --> & can have integral as well as boolean operands. (unlike &&), & will not "short circuit" the expression if used on boolean parameters. means it will evaluate both operands or both side expression.
---> The modulus operator % can only be used with integer operands.
-It can be used on floating points operands also. For example, 5.5 % 3 = 2.5
+--> The logical operators, (&), (|), and (^), evaluates both operands, but is similar as (&& or ||, respectively)
+It may be applied to both numeric (known as bit-wise opertaor - not in OCA) and boolean (known as logical operators) data types.
+
+--> The modulus operator % can only be used with integer operands. It can be used on floating points operands also. For example, 5.5 % 3 = 2.5
 --> !, && and || operate only on booleans.
 --> ~ Operates only on integral types
 
@@ -103,17 +105,18 @@ interface Predicate<T> {
     boolean test(T t);
 }
 
+provided by the standard java library in java.util.function package.
 The purpose of this interface is to provide a method that operates on an object of class T and return a boolean.
--------------------------------------------
-private, protected and public can be applied to a nested class.
 
-Although not too important for the exam, you should still know the following terminology: A top level class is a class that is not a nested class. A nested class is any class whose declaration occurs within the body of another class or interface.
+-------------------------------------------
+private, protected and public can be applied to a nested class (not in OCA).A top level class is a class that is not a nested class. A nested class is any class whose declaration occurs within the body of another class or interface.
 
 synchronized keyword can never be applied to a class or non-primitive variables. It can only be applied to a method or a block.
 final keyword can be applied to class, variable and methods.
 final keyword when applied to a class means the class cannot be subclassed, when applied to a method means the method cannot be overridden (it can be overloaded though) and when applied to a variable means that the variable is a constant.
 A final variable can be hidden in a subclass.
 
+--> native method cannot be abstract.
 ----------------------------
 non-public class can't be accessed outside a package in which it is defined, even if it is explicitely imported. Because class itself is not accessible / visible. Only protected class can be accessed if you have import and inherite (extend) them and use it with child class object. 
 
@@ -134,6 +137,10 @@ Remember, a constructor don't have any return type. But a class can have a metho
 --> A constructor can't be defined using a non-access modifiers like, final, abstract or static
 --> A constructor can't be defined with return type
 --> A constructor can be defined with any access modifier, like public, private, protected, and package private(default)
+--> constructors can not be inherited.
+--> The default constructor is provided by the compiler only when a class does not define ANY constructor explicitly. 
+--> The access type of a default constructor (created by Java) is same as the access type of the class. Thus, if a class is public, the default constructor will be public.
+--> A constructor is non-static, and so it can access directly both the static and non-static members of the class.
 ---------------------------------- 
 
 --> you can't assign an Array of char to an Array of int data type.
@@ -187,6 +194,16 @@ Throwable is parent class of Exception class.
 
 --> If a try block throw an exception and catch block handles it properly, then other catch block will not run, but if present finally block will run. Any statement after catch or finally block will execute as regular statement.
 --> A finally block can't be placed before catch block.
+--> finally is always executed (even if you throw an exception in try or catch) but this is the exception to the rule.
+When you call System.exit(...); The JVM exits so there is no way to execute the finally block. 
+
+--> If there is not catch block for a thrown exception then any uncaught exception will cause the JVM to kill the thread. means, Any remaining code of the method will not be executed.
+--> The catch argument type declares the type of exception that the handler can handle and must be the name of a class that extends Throwable or Throwable itself.
+--> A try without resources must have either a catch or a finally. It may have both as well.
+--> A catch can catch multiple exceptions:
+try{
+}
+catch(Exception1|Exception2|Exception3 e){  } 
 
 --> Any class that extends Exception class becomes a checked exception.
 --> Hence, when you call a method that throws a checked exception, you can either handle it using try-catch block or declare it to be thrown in caller method signature.
@@ -209,6 +226,8 @@ interface Jumpable {}
 class Animal {}
 class Lion extends Animal implements Jumpable {}
 Jumpable var6 = (Jumpable)(new Animal()); // runtime exception
+
+---> a protected member is accessible in the subclass only using a reference whose declared type is of the same subclass (or its subclass.). 
 -------------
 --> polymorphism (overloading and overridding), object vs reference variable 
 Phone phone1 = new Phone(); // only phone members accessible, even child overridden method not accessible
@@ -226,6 +245,22 @@ Tablet tablet2 = new Tablet(); // all parent and child members accessible as chi
 --> but when these value passed to print method it will print without specific data type charachter (exmple, for float it will print 0.0, for long it will print 0, etc.)
 --> The local variable (variables that are declared within a method) aren't initialzed with their default values. If you try to print the value of a local variable before initializing it, the code won't compile. 
 --> On the other side, class and instance variable, initialize variable with default value.
+--> Conversion from char to long does not need a cast. 
+Conversion from byte to short does not need a cast.
+Conversion from short to char needs a cast. The reverse is also true. Because their ranges are not compatible.
+a float can hold any value of int hence conversion not needed. Note that opposite is not true because of loss of precision.
+Conversion from byte, char or short to int, long or float does not need a cast. Because int, long or float are bigger that byte char or short.
+
+int i = 10;
+byte b = 20;
+b = i;//will not compile because byte is smaller than int
+b = (byte) i; //OK
+Further, if you have a final variable and its value fits into a smaller type, then you can assign it without a cast because compiler already knows its value and realizes that it can fit into the smaller type. This is called implicit narrowing and is allowed between byte, int, char, and, short but not for long, float, and double.
+final int k = 10;
+b = k; //Okay because k is final and 10 fits into a byte
+final float f = 10.0;//will not compile because 10.0 is a double even though the value 10.0 fits into a float
+i = f;//will not compile.
+
 --------------------
 
 --> a static member can access only static members but instance member can access both static and non-static (instance) members.
@@ -267,4 +302,54 @@ System.out.println(te.charAt(3)); // this will compile successfully and print 4
 
 --> The underscore can't be placed in between (0_x or 0_b) or even just after the initials (0b_10 or 0x_25). only exception it can be placed after first 0 (ex:- 0_1010_11). For hexaDecimal values the letter can be till f or F only, G and further is not allowed.
 
---> 
+--> --> An abstract method must have the abstract keyword and must not have a method body i.e. { }.
+
+--> variable types in a class ----
+"class level" means static fields and they can be accessed from anywhere (i.e. static as well as non-static methods) in the class (and from outside the class depending on their accessibility).
+"instance level" means the instance fields and they can be accessed only from instance methods in the class.
+local variables are basically defined within a method and it must be initailized before use, else code won't compile.
+
+--> correct order of restrictiveness for access modifiers...
+public < protected < package (i.e. no modifier) < private
+--> Members with default accessibility are only accessible within the class itself and from classes in the same package.
+Protected members are in addition accessible from subclasses. Members with private accessibility are only accessible
+within the class itself.
+
+--> To call myMethod(int m, Object p, double d), you must pass exactly three parameters. If you try to pass less (or more) number of parameters, the code will not compile. Note that method parameters are not assigned default values.
+It is possible to declare a method that can take variable number of parameters. For example: 
+public static void someMethod(Object... params){
+        System.out.println(params.length); }
+You can call this method by passing any number of parameters. In this case, calling someMethod() without any parameter will print 0. i.e. the length of params array will be 0. params will NOT be null.
+
+--> The visibility of the class is not limited by the visibility of its members. A class with all the members declared private can still be declared public or a class having all public members may be declared private.
+
+--> Note that calling super(); will not always work because if the super class has defined a constructor with arguments and has not defined a no args constructor then no args constructor will not be provided by the compiler. It is provided only to the class that does not define ANY constructor explicitly.
+
+--> Fields in an interface are implicitly public, static and final. Although you can put these words in the interface definition but it is not a good practice to do so.
+
+--> You cannot apply any modifier except final to a local variable. i.e. you cannot make them transient, volatile, static, public, and private.
+But you can apply access modifiers (public private and protected) and final, transient, volatile, static to instance variables.
+You cannot apply native and synchronized to any kind of variable.
+
+------------- switch statement basics ----
+You should remember the following rules for a switch statement:
+
+1. Only String, byte, char, short, int, and enum values can be used as types of a switch variable. (String is allowed since Java 7.) Wrapper classes Byte, Character, Short, and Integer are allowed as well.
+
+2. The case constants must be assignable to the switch variable. For example, if your switch variable is of class String, your case labels must use Strings as well.
+
+3. The switch variable must be big enough to hold all the case constants. For example, if the switch variable is of type char, then none of the case constants can be greater than 65535 because a char's range is from 0 to 65535. Similarly, the following will not compile because 300 cannot be assigned to 'by', which can only hold values from -128 to 127.
+byte by = 10;
+switch(by){
+    case 200 :  //some code;
+    case 300 :  //some code;
+}
+
+4.  All case labels should be COMPILE TIME CONSTANTS. 
+
+5. No two of the case constant expressions associated with a switch statement may have the same value.
+
+6. At most one default label may be associated with the same switch statement.
+7. Default clause is not compulsory in switch consturt.
+---------------------------
+
