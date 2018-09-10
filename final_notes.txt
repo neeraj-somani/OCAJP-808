@@ -103,4 +103,38 @@ final keyword can be applied to class, variable and methods.
 final keyword when applied to a class means the class cannot be subclassed, when applied to a method means the method cannot be overridden (it can be overloaded though) and when applied to a variable means that the variable is a constant.
 A final variable can be hidden in a subclass.
 
+----------------------------
+non-public class can't be accessed outside a package in which it is defined, even if it is explicitely imported. Because class itself is not accessible / visible. Only protected class can be accessed if you have import and inherite (extend) them and use it with child class object. 
 
+--> You can't import classes from the default package. The only way to access classes in the default package is from another class in the default package. A class or interface that is defined in any other package can't access classes or interfaces defined in default package.
+
+--> Also, remember, Java allows a class to only public or package private (default). there is no concept of class with private modifier unless it is a nested class.
+
+--> Remember, when a char primitive data type used with arithmetic operators, its ASCII value is used, which is int value only. 
+
+--> you can't assign a negative int value to a char data type without casting. (example, char ch = (char) -97;)
+If you are using a variable in any specific statement that becomes undefined due to compile error than the statement which is using that variable will also through compile error because that variable is undefined for it.
+
+--> Remember, if a method aurgument expecting a double or float, you can't pass int value in the method aurgument.
+on the other side, if method aurgument is of type long, then you can pass int value to it.
+--> you can define overloaded constructors or methods with different access modifiers.
+Remember, a constructor don't have any return type. But a class can have a method name and signature same as constructor, only distinction would be return type of method.
+
+--> you can't assign an Array of char to an Array of int data type.
+Array and ArrayList are very specific to its datatype, means you can't pass any other data type values to it.
+not even char or byte can compare with int and int can't be comapred with long type array. all are independent to specific type.
+
+--> you can't initialize an array with new keyword and array default construtor like in general we do for all other class. Instead, Array is initialzed using new keyword followed by type of array. {(example:- new Array() not allowed), (but int arr[] = new int[5] is allowed)}
+Also remember, you can't create an array like this "int arr[] = new int[]", means you must either give array dimensions or array initializer values. even creating empty array is legal, means Array of Zero length. 
+like int arr[] = new int[5], or int arr[] = new int[] {5, 2}, or int arr[] = new int[] {}
+
+--> Switch statment accepts variables of type String. and since an Arraylist can have String values, it can be passed to switch construct as well.
+ArrayList clear() method is used to remove all elements of ArrayList.
+ArrayList remove() method is used to remove specific element of ArrayList.
+If you frequently add elements to ArrayList, its a good idea to create an ArrayList of large size.
+Calling Clone() method on an ArrayList will create a separate reference variable that stored the same number of elements as the original ArrayList. But each individual ArrayList element will still refer to original object, means, ArrayList elements are not cloned.
+An ArrayList can store any type of objects. Wrapper classes are created for ArrayList only.
+
+--> The method contains() of ArrayList accepts an object and compares it with the actual values of the list. Means, it behaves very similar to equals() method, which checks objects actual value and not object itself.
+
+--> format method of LocalDate / Time can be applied only on object of LocalDate / Time. not on any string or text value.
