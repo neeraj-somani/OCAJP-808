@@ -1,11 +1,12 @@
 1. B, C (N)
 --> A reference variable of Derived (Child) class can't be used to refer an object of base (parent) class.
+example:- Dog dog = new Animal(); // does not compile
 example:- 
-class Animal {}
-class Lion extends Animal implements Jumpable {}
 --> you can explicitely cast any object to an interface, even if class doesn't implement it. and the code will compile. but if the object's class doesn't implement interface, the code will throw ClassCaseException at runtime.
 example:-
 interface Jumpable {}
+class Animal {}
+class Lion extends Animal implements Jumpable {}
 Jumpable var6 = (Jumpable)(new Animal()); // runtime exception
 2. C
 3. D
@@ -96,8 +97,8 @@ int eArry3[] = new int[] {}; // valid -- empty declaration
 51. C
 52. B -- Re
 --> same as 53 , see below 
---> but in case of static methods (which is hidden method), it completely depends on reference variable type. As static method belogs to class. means, if reference variable is of parent class the static method of parent class would be called. Not the static method of child (because it can't be overridden). if reference variable of child class is used, then it will call child class method.
---> there is one exception, since child class inherit all method of parent, if child class doesn't define static method then on child class reference variable call, parent method would be called, as it not became a member of child class as well.
+--> but in case of static methods (which is hidden method), it completely depends on reference variable type. As static method belogs to class. means, if reference variable is of parent class the static method of parent class would be called. Not the static method of child (because it can't be overridden). if reference variable of child class is used, then it will call child class static method.
+--> there is one exception, since child class inherit all method of parent, if child class doesn't define static method then on child class reference variable call, parent method would be called, as this static method of parent is now became a member of child class as well.
 53. A (N)
 --> example with explanation:-
 --> polymorphism (overloading and overridding), object vs reference variable 
@@ -122,7 +123,7 @@ below are few valid example:-
 
 58. C (N) --Re
 --> you need to keep track of object initialization and its reference variables. 
---> In this case Laptop reference variable and life reference variable are referring to two different objects. ANy changes on these object will not impact each other.
+--> In this case Laptop reference variable and life reference variable are referring to two different objects. Any changes on any specific  object will not impact each other.
 59. D (N)
 --> Any class object can be explicitly cast to any interface, code will compile but if that class doesn't implement that interface then ClassCastException will be thrown at runtime.
 60. D
@@ -134,7 +135,7 @@ below are few valid example:-
 65. A, D (N)
 --> Remember, a constructor can't have return type. 
 --> An overload method name and constructor name can be same but return type is the difference.
---> A base class can use reference variables and objects of its derived class. even as a method aurgument which is defined in base class.
+--> A base (parent) class can use reference variables and objects of its derived (child) class. even as a method aurgument which is defined in base class.
 66. E
 67. A, B (N)
 --> Any class that extends Exception class becomes a checked exception.
