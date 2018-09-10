@@ -1,0 +1,120 @@
+Enthuware - foundation test notes
+67.
+--> An abstract method must have the abstract keyword and must not have a method body i.e. { }.
+66.
+--> A break statement with no label attempts to transfer control to the innermost enclosing switch, while, do, or for statement; this statement, which is called the break target, then immediately completes normally. If no switch, while, do, or for statement encloses the break statement, a compile-time error occurs.
+
+--> A break statement with label Identifier attempts to transfer control to the enclosing labeled statement  that has the same Identifier as its label; this statement, which is called the break target, then immediately completes normally. In this case, the break target need not be a while, do, for, or switch statement.
+
+--> A continue statement with no label attempts to transfer control to the innermost enclosing while, do, or for statement; this statement, which is called the continue target, then immediately ends the current iteration and begins a new one. If no while, do, or for statement encloses the continue statement, a compile-time error occurs.
+
+--> A continue statement with label Identifier attempts to transfer control to the enclosing labelled statement that has the same Identifier as its label; that statement, which is called the continue target, then immediately ends the current iteration and begins a new one. The continue target must be a while, do, or for statement or a compile-time error occurs. If no labelled statement with Identifier as its label contains the continue statement, a compile-time error occurs.
+
+64.
+--> conceptually nothing is wrong from me in this question.
+
+63. 
+--> you cannot change a String object, once it is created.
+--> String class implements Comparable interface.
+62. 
+--> The keyword implements is used when a class inherits method prototypes from an interface. The keyword extends is used when an interface inherits from another interface, or a class inherits from another class.
+61. 
+--> java.util.function.Predicate is one of the several functional interfaces that have been added to Java 8. This interface has exactly one abstract method named test, which takes any object as input and returns a boolean. 
+60.
+--> NoClassDefFoundError is thrown by the JVM when it attempts to load a class and is unable to find the class file. 
+Note that it extends java.lang.Error and Errors are always thrown by the JVM. A programmer should never throw an Error explicitly.
+
+59.
+--> A static method can be called without instantiating a class. using directly classname.staticMethod(). 
+--> Also, remember a static method can't be abstract.
+58.
+--> An instance member belongs to a single instance, not the class as a whole. An instance member is a member variable or a member method that belongs to a specific object instance. All non-static members are instance members.
+
+56.
+Here are the rules for a switch statement:
+--> Only String, byte, char, short, int, (and their wrapper classes Byte, Character, Short, and Integer), and enums can be used as types of a switch variable. (String is allowed only since Java 7).
+--> boolean, long, float and double cannot be used. 
+--> The case constants must be assignable to the switch variable. For example, if your switch variable is of class String, your case labels must use Strings as well.
+--> The switch variable must be big enough to hold all the case constants. For example, if the switch variable is of type char, then none of the case constants can be greater than 65535 because a char's range is from 0 to 65535.
+-->  All case labels should be COMPILE TIME CONSTANTS. 
+--> No two of the case constant expressions associated with a switch statement may have the same value.
+--> At most one default label may be associated with the same switch statement.
+--> An empty switch block is a valid construct.
+--> Case and default label can be in any order.
+55.
+--> You need to remember the following points about Boolean:
+
+1. Boolean class has two constructors - Boolean(String) and Boolean(boolean)
+The String constructor allocates a Boolean object representing the value true if the string argument is not null and is equal, ignoring case, to the string "true". Otherwise, allocate a Boolean object representing the value false. Examples: new Boolean("True") produces a Boolean object that represents true. new Boolean("yes") produces a Boolean object that represents false.
+
+The boolean constructor is self explanatory.
+
+2. Boolean class has two static helper methods for creating booleans - parseBoolean and valueOf.
+Boolean.parseBoolean(String ) method returns a primitive boolean and not a Boolean object (Note - Same is with the case with other parseXXX methods such as Integer.parseInt - they return primitives and not objects). The boolean returned represents the value true if the string argument is not null and is equal, ignoring case, to the string "true". 
+
+Boolean.valueOf(String ) and its overloaded Boolean.valueOf(boolean ) version, on the other hand, work similarly but return a reference to either Boolean.TRUE or Boolean.FALSE wrapper objects. Observe that they dont create a new Boolean object but just return the static constants TRUE or FALSE defined in Boolean class.
+
+3. When you use the equality operator ( == ) with booleans, if exactly one of the operands is a Boolean wrapper, it is first unboxed into a boolean primitive and then the two are compared (JLS 15.21.2). If both are Boolean wrappers, then their references are compared just like in the case of other objects. Thus, new Boolean("true") == new Boolean("true") is false, but new Boolean("true") == Boolean.parseBoolean("true") is true.
+
+--> TRUE and FALSE are valid static members of Boolean class.
+
+54.
+--> String is a final class and final classes cannot be extended. 
+There are questions on this aspect in the exam and so you should remember that StringBuffer and StringBuilder are also final. All Primitive wrappers are also final (i.e. Boolean, Integer, Byte etc).
+java.lang.System is also final.
+
+53.
+--> Things to remember about if-else statement:
+The expression (a = b) does not compare the variables a and b, but rather assigns the value of b to the variable a. The result of the expression is the value being assigned. Since a and b are boolean variables, the value returned by the expression is also boolean. This allows the expressions to be used as the condition for an if-statement.
+if-clause and the else-clause can have empty statements. Empty statement ( i.e. just ; ) is a valid statement.
+But this is illegal :
+if (true) else;
+because the if part doesn't contain any valid statement. ( A statement cannot start with an else!)
+So, the following is valid.
+if(true) if(false);
+because if(false); is a valid statement.
+
+--> if-clause and the else-clause can have empty statements. Empty statement ( i.e. just  a semi-colon ) is a valid statement.
+example:- The statement : if (false) ; else ; is legal.
+
+52. 
+--> Need to understand more about bitwise operators ('&', '|', '~')
+
+50.
+--> Consider this code:
+
+class C extends B implements X2{
+   D d = new D();
+}
+
+Now, Inheritance defines an is-a relation , so C is-a B because C extends B. This actually means that C can be used in all the places where B is used. C can substitute for B anywhere because C is-a B. As all objects have Object as their super class, every object 'is-a' Object.
+
+Since C implements X2, it is sometimes said that C 'is-like-a' X2. That is, although C is not an X2 but for all purposes C is like an X2. The distinction between is-a and is-like-a is not important for the exam. For the purpose of the exam, is-like-a is same as is-a. Therefore, C is-a X2 as well.
+
+Aggregation defines a has-a relation. Here, D is a member object in C. In other words, D is contained within C. It is therefore said that C 'has-a' D.
+
+All Java objects have the class Object as the ultimate superclass, and so Object is always at the root of any inheritance hierarchy.
+
+49.
+--> important points regarding Date-Time API
+--> It uses the calendar system defined in ISO-8601 as the default calendar.
+--> Most of the actual date related classes in the Date-Time API such as LocalDate, LocalTime, and LocalDateTime are immutable.
+These classes do not have any setters. Once created you cannot change their contents. Even their constructors are private.
+--> None of LocalDate, LocalDateTime, or LocalTime store timezone information.
+
+48.
+--> These classes do not have any public constructors. You need to use their static factory methods to get their instances.
+For example: 
+
+java.time.LocalDate d1 = java.time.LocalDate.of(2015, Month.JANUARY, 31);
+
+java.time.LocalDateTime d2 = java.time.LocalDateTime.of(2015, Month.JANUARY, 31, 10, 56);
+
+java.time.LocalDateTime d3 = java.time.LocalDateTime.parse("2015-01-02T17:13:50");
+//Note that this will throw a  java.time.format.DateTimeParseException if the input string lacks the time component i.e.T17:13:50
+
+java.time.LocalDate d4 = java.time.LocalDate.parse("2015-01-02");
+//Note that this will throw a  java.time.format.DateTimeParseException if the input string contains the time component
+
+java.time.LocalTime d5 = java.time.LocalTime.parse("02:13:59.985"); 
+//Note that this will throw a  java.time.format.DateTimeParseException if the input string contains the Date component
