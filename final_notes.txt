@@ -137,4 +137,29 @@ An ArrayList can store any type of objects. Wrapper classes are created for Arra
 
 --> The method contains() of ArrayList accepts an object and compares it with the actual values of the list. Means, it behaves very similar to equals() method, which checks objects actual value and not object itself.
 
---> format method of LocalDate / Time can be applied only on object of LocalDate / Time. not on any string or text value.
+--> format method of LocalDate / Time can be applied only on object of LocalDate / Time or DateTimeFormater object. not on any string or text value.
+--> remember, while loop validation condition runs at the very end as well, to make sure its not validating to true and any evaluation at this step can also make some change to final result.
+--> Case statment label requires a compile time constant variable/values. Even if you define a final variable, assigning a value to that variable in the next line, means after its declaration, java doesn't count it as compile time constant.
+Remember, when you use "/" this division operator, the result of its evaluation is only division and not remainder. (for example, 10/3 = 3 as a result and remainder 3 will be discarded). Hence this can be used in case statmenent to compare value against int variable of switch statment.
+--> Java performs integer calculations at compile time only, if there is no object for which value can be changed at run-time. 
+Hence, if 2 case statement evaluate to same value then java throws a compile error.
+
+--> you can't instantiate an interface but you can create a reference of an interface to access its variable and methods.
+--> a method in an interface is implicitly (assumed to be) public. Hence, any class then implements this interface and its method should also be public.
+--> The easiest way to identify the StackOverflowError is to find out the recursive call of method.
+
+--> ArrayIndexOutOfBoundException and StringIndexOutOfBoundException is a derived (child) class of IndexOutOfBoundException. 
+Always remember, sequence of catch block is important based on Exception. Catch block of derived class should always come first than catch block of base class. Else, code doesn't compile.
+
+--> remember, return; statement is used to end the execution of method. but where we use it is also important.
+In this case, guru() method is called inside a try block, when an error or exception occur in try block, java looks for catch block. It couldn't find in guru() method hence control goes to method() which is upper method and java looks for catch block in that, but found finally block. Hence, run the code for finally block and then throws error with JVM.
+Note:- you can still catch an exception which was thrown using throw statement inside a method.
+
+--> Runtime exception can be thrown without declaring them and exception methods can pass variable as an aurgument.
+but checked exception either needs to be declared or handled.
+Remember, you can even create an object of exception class like (new StackOverFlowErrorException()) and can use it as normal object.
+Throwable is parent class of Exception class.
+
+--> If a try block throw an exception and catch block handles it properly, then other catch block will not run, but if present finally block will run. Any statement after catch or finally block will execute as regular statement.
+
+
