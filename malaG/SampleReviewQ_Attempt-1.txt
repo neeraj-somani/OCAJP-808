@@ -1,6 +1,6 @@
 sample questions - chapter 1 --> 
 1. E
-You can't import classes from the default package. The only way to access classes in the default package is from another class in the default package. A class or interface that is defined in a package can't access classes or interfaces defined in default package.
+You can't import classes from the default package. The only way to access classes in the default package is from another class in the default package. A class or interface that is defined in any other package can't access classes or interfaces defined in default package.
 In other words a non-public class can't be accessed outside a package in which it is defined, even if it is explicitely imported. Because class itself is not accessible.
 2. A, B, D
 3. D, F (N)
@@ -12,8 +12,7 @@ make sure to check all capital and small case letters for each statement. java i
 8. B
 9. C
 10. A (N)
-a non-public class can't be accessed outside a package in which it is defined, even if it is explicitely imported. Because class itself is not accessible.
-Also, remember, Java allows a class to only public or package private. there is no concept of class with private modifier.
+Also, remember, Java allows a class to only public or package private (default). there is no concept of class with private modifier unless it is a nested class.
 11. A
 you can't add an access modifier to the method parameters.
 
@@ -22,7 +21,7 @@ sample questions - chapter 2 -->
 Remember, when a char primitive data type used with arithmetic operators, its ASCII value is used, which is int value only. 
 2. A, C (N)
 you can't assign a negative int value to a char data type without casting. (example, char ch = (char) -97;)
-If you are using a variable in any specific statement that becomes undefined due to compile error than the statement which is using that variable will also through compile error.
+If you are using a variable in any specific statement that becomes undefined due to compile error than the statement which is using that variable will also through compile error because that variable is undefined for it.
 3. C (N) 
 multiplication operator has higher precedence over addision or subtraction operator.
 4. D
@@ -45,7 +44,7 @@ on the other side, if method aurgument is of type long, then you can pass int va
 5. B
 6. C
 7. C, D, E, G (N)
-Overloaded method can change the access modifier but changing only access modifier won't make it overlioaded method. means, method signature must be changed to make it overloaded.
+Overloaded method can change the access modifier but changing only access modifier won't make it overloaded method. means, method signature must be changed to make it overloaded. 
 ArrayList<String>, char[], String, float, int are few valid return type of any method.
 8. C
 9. C (N)
@@ -65,7 +64,8 @@ Array and ArrayList are very specific to its datatype, means you can't pass any 
 not even char or byte can compare with int and int can't be comapred with long type array. all are independent to specific type.
 3. A, B, D (N)
 you can't initialize an array with new keyword and array default construtor like in general we do for all other class. Instead, Array is initialzed using new keyword followed by type of array. {(example:- new Array() not allowed), (but int arr[] = new int[5] is allowed)}
-Also remember, you can't create an like this "int arr[] = new int[]", means you must either give array dimensions or array initializer values. like int arr[] = new int[5], or int arr[] = new int[] {5, 2}
+Also remember, you can't create an array like this "int arr[] = new int[]", means you must either give array dimensions or array initializer values. even creating empty array is legal, means Array of Zero length. 
+like int arr[] = new int[5], or int arr[] = new int[] {5, 2}, or int arr[] = new int[] {}
 
 4. B, C (N)
 The default type of a non-floating numeric literal value is int. we can't add an int to an ArrayList of type Long. Only long type value can be added to ArrayList of Long type.
@@ -84,7 +84,7 @@ The method contains() of ArrayList accepts an object and compares it with the ac
 10. A
 11. C
 12. C (N)
-format method of LocalDate / Time can be applied only on object of LocalDate / Time. not on any string or text value. Need to understnad this question again.
+format method of LocalDate / Time can be applied only on object of LocalDate / Time or DateTimeFormater object. not on any string or text value. Need to understnad this question again.
 
 ----- Need to learn Array , ArrayList very well ---
 -- Need to learn Date/Time API ---
@@ -119,7 +119,7 @@ Remember, you can't instantiate an interface but you can create a reference of a
 7. A
 8. B, C
 9. A, D (N)
-Remember, a method in an interface is implicitly (assumed to be) public. Hence, any class then implements this interface and its method shoudl also have same or more accessibility.
+Remember, a method in an interface is implicitly (assumed to be) public. Hence, any class then implements this interface and its method should also be public.
 10. A
 
 chapter 7 -->
@@ -127,20 +127,20 @@ chapter 7 -->
 -- The easiest way to identify the StackOverflowError is to find out the recursive call of method. Here Course constructor while creating object calling it self. Hence, a runtime error or exception will be thrown.
 2. B, C, D, 
 3. A (N)
-ArrayIndexOutOfBoundException is a derived (child) class of IndexOutOfBoundException. 
+ArrayIndexOutOfBoundException and StringIndexOutOfBoundException is a derived (child) class of IndexOutOfBoundException. 
 Always remember, sequence of catch block is important based on Exception. Catch block of derived class should always come first than catch block of base class. Else, code doesn't compile.
 4. E (N)
 remember, return; statement is used to end the execution of method. but where we use it is also important.
-In this case, guru() method is called inside a try block, when an error or exception occur in try block, java looks for catch block. It couldn't find in guru() method hence control goes to method() method and java looks for catch block, but found finally block. Hence, run the code for finally block and then throws error with JVM.
-Note:- you can still catch an exception which was thrown ussing throw statement inside a method.
+In this case, guru() method is called inside a try block, when an error or exception occur in try block, java looks for catch block. It couldn't find in guru() method hence control goes to method() which is upper method and java looks for catch block in that, but found finally block. Hence, run the code for finally block and then throws error with JVM.
+Note:- you can still catch an exception which was thrown using throw statement inside a method.
 5. C
 6. B, C, D (N)
-Runtime exception can be thrown withour declaring them and exception methods can pass variable as an aurgument.
-Hence, if there is a throw statement in a method for checked exception then you must declare it as well in throws statement.
+Runtime exception can be thrown without declaring them and exception methods can pass variable as an aurgument.
+but checked exception either needs to be declared or handled.
 Remember, you can even create an object of exception class like (new StackOverFlowErrorException()) and can use it as normal object.
-Throwable is parent class or Exception class. 
+Throwable is parent class of Exception class. 
 7. C
 8. B
 9. C, D
 10. C (N)
-If a try block throw an exception and catch block handles it properly, then any statement after catch block will execute as regular statement.
+If a try block throw an exception and catch block handles it properly, then other catch block will not run, but if present finally block will run. Any statement after catch or finally block will execute as regular statement.
