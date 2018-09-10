@@ -27,6 +27,14 @@ It returns either true or false. If we apply the instanceof operator with any va
   
 --> an overriding method is allowed to change the return type to any subclass of the original return type, also known as covariant return type. This does not apply to primitives, in which case, the return type of the overriding method must match exactly to the return type of the overridden method.
 
+--> Code that tries to access an uninitialized local variable won't compile.
+--> each type of loop can accept single statement without curly braces but multiple statement should be inside curly braces.
+--> In this case Laptop reference variable and life reference variable are referring to two different objects. Any changes on any specific  object will not impact each other.
+
+--> A .java file must have only one public class or one public interface, and file name should be the same as public class or interface. A .java file can have multiple class or interfaces.
+--> for an interface only public, default access modifier & abstract non-access modifier are permitted.
+--> for a class only public, default access modifier, and abstract & final non-access modifier are permitted.
+
 -----------------------------------------------------------------------
 --> most imp points for JAVA Date-Time API:------------------------------
 Here are some points that you should keep in mind about the new Date/Time classes introduced in Java 8 - 
@@ -75,12 +83,15 @@ java.time.temporal Package: This package contains temporal objects and we can us
 
 --> The integral types are byte, short, int, and long, whose values are 8-bit, 16-bit, 32-bit and 64-bit signed two's-complement integers, respectively, and char, whose
 values are 16-bit unsigned integers representing UTF-16 code units.
---> & can have integral as well as boolean operands.
-unlike &&, & will not "short circuit" the expression if used on boolean parameters.
+--> & can have integral as well as boolean operands. (unlike &&), & will not "short circuit" the expression if used on boolean parameters. means it will evaluate both operands or both side expression.
 --> The modulus operator % can only be used with integer operands.
 It can be used on floating points operands also. For example, 5.5 % 3 = 2.5
 --> !, && and || operate only on booleans.
 --> ~ Operates only on integral types
+
+short-circuit operators --> 
+&& --> if first expression is false then it won't evaluate second expression.
+|| --> if first expression is true then it won't evaluate second expression.
 
 --> following are valid methods of String class:- trim, length, concate, and hashCode,
 --> following are valid method for StringBuilder/StringBuffer --> reverse() 
@@ -115,20 +126,33 @@ non-public class can't be accessed outside a package in which it is defined, eve
 --> you can't assign a negative int value to a char data type without casting. (example, char ch = (char) -97;)
 If you are using a variable in any specific statement that becomes undefined due to compile error than the statement which is using that variable will also through compile error because that variable is undefined for it.
 
+---------------------- constructors and general methods -------------
 --> Remember, if a method aurgument expecting a double or float, you can't pass int value in the method aurgument.
 on the other side, if method aurgument is of type long, then you can pass int value to it.
 --> you can define overloaded constructors or methods with different access modifiers.
 Remember, a constructor don't have any return type. But a class can have a method name and signature same as constructor, only distinction would be return type of method.
+--> A constructor can't be defined using a non-access modifiers like, final, abstract or static
+--> A constructor can't be defined with return type
+--> A constructor can be defined with any access modifier, like public, private, protected, and package private(default)
+---------------------------------- 
 
 --> you can't assign an Array of char to an Array of int data type.
 Array and ArrayList are very specific to its datatype, means you can't pass any other data type values to it.
 not even char or byte can compare with int and int can't be comapred with long type array. all are independent to specific type.
+--> An array element can be assigned to null.
 
 --> you can't initialize an array with new keyword and array default construtor like in general we do for all other class. Instead, Array is initialzed using new keyword followed by type of array. {(example:- new Array() not allowed), (but int arr[] = new int[5] is allowed)}
 Also remember, you can't create an array like this "int arr[] = new int[]", means you must either give array dimensions or array initializer values. even creating empty array is legal, means Array of Zero length. 
-like int arr[] = new int[5], or int arr[] = new int[] {5, 2}, or int arr[] = new int[] {}
+like int arr[] = new int[5], or int arr[] = new int[] {5, 2}, or int arr[] = new int[] {} // all valid
+
+--> An array declaration becomes invalid, when you specify the size of array within square bracket and declaring, instantiating and initializing an array at the single line of code.
+example:-
+int eArry5[] = new int[2] {10,20}; // this is invalid
 
 --> Switch statment accepts variables of type String. and since an Arraylist can have String values, it can be passed to switch construct as well.
+--> Switch statement can't accept boolean, long, double, and float primitive data type and its wrapper classes as an aurgument. 
+--> Switch statement can accept only byte, short, char, int data type and its wrapper class. it can also accept String, and enum.
+
 ArrayList clear() method is used to remove all elements of ArrayList.
 ArrayList remove() method is used to remove specific element of ArrayList.
 If you frequently add elements to ArrayList, its a good idea to create an ArrayList of large size.
@@ -137,6 +161,7 @@ An ArrayList can store any type of objects. Wrapper classes are created for Arra
 
 --> The method contains() of ArrayList accepts an object and compares it with the actual values of the list. Means, it behaves very similar to equals() method, which checks objects actual value and not object itself.
 
+-------------------------------------
 --> format method of LocalDate / Time can be applied only on object of LocalDate / Time or DateTimeFormater object. not on any string or text value.
 --> remember, while loop validation condition runs at the very end as well, to make sure its not validating to true and any evaluation at this step can also make some change to final result.
 --> Case statment label requires a compile time constant variable/values. Even if you define a final variable, assigning a value to that variable in the next line, means after its declaration, java doesn't count it as compile time constant.
@@ -161,5 +186,85 @@ Remember, you can even create an object of exception class like (new StackOverFl
 Throwable is parent class of Exception class.
 
 --> If a try block throw an exception and catch block handles it properly, then other catch block will not run, but if present finally block will run. Any statement after catch or finally block will execute as regular statement.
+--> A finally block can't be placed before catch block.
 
+--> Any class that extends Exception class becomes a checked exception.
+--> Hence, when you call a method that throws a checked exception, you can either handle it using try-catch block or declare it to be thrown in caller method signature.
 
+-->  "instanceof" is all smallcase letter operator to compare an object for its class instance.
+
+---------- polymorphism (overloading and overridding), object vs reference variable ----------------------
+--> A base (parent) class can use reference variables and objects of its derived (child) class. even as a method aurgument which is defined in base class.
+
+--> A reference variable of Derived (Child) class can't be used to refer an object of base (parent) class.
+example:- 
+Dog dog = new Animal(); // does not compile, object of parent class and reference of child class not allowed.
+Animal animal = new Lion(); // valid -  it will access all Animal class members
+((Lion) animal).age; // valid, explicitly casting to child class to access child class members ( in this case age)
+Lion lion = new Lion(); // valid, child class object and child class reference
+example:- 
+--> you can explicitely cast any object to an interface, even if class doesn't implement it. and the code will compile. but if the object's class doesn't implement interface, the code will throw ClassCaseException at runtime.
+example:-
+interface Jumpable {}
+class Animal {}
+class Lion extends Animal implements Jumpable {}
+Jumpable var6 = (Jumpable)(new Animal()); // runtime exception
+-------------
+--> polymorphism (overloading and overridding), object vs reference variable 
+Phone phone1 = new Phone(); // only phone members accessible, even child overridden method not accessible
+// Tablet tablet1 =  new Phone(); // compile error -- explicit cast is needed (Tablet)
+// Tablet tablet1 = (Tablet) new Phone(); // compile successfully but ClassCastException at runtime
+Phone phone2 = new Tablet(); // only phone members accessible, child overridden method accessible
+	// to access child members, need to cast explicitly //System.out.println(((Tablet)phone2).playmovie);
+Tablet tablet2 = new Tablet(); // all parent and child members accessible as child inherit them
+
+-----------------------------------------------------
+
+--> --> remember below defaulty value for all primitive type --> 
+--> char - \u0000 | byte,short,int - 0 | long - 0L | 
+--> float - 0.0f | double - 0.0d | boolean - false | objects - null
+--> but when these value passed to print method it will print without specific data type charachter (exmple, for float it will print 0.0, for long it will print 0, etc.)
+--> The local variable (variables that are declared within a method) aren't initialzed with their default values. If you try to print the value of a local variable before initializing it, the code won't compile. 
+--> On the other side, class and instance variable, initialize variable with default value.
+--------------------
+
+--> a static member can access only static members but instance member can access both static and non-static (instance) members.
+example:- if a main method needs to access a variable directly it must be static.   code won't compile otherwise.
+
+--> static method of a class are hidden methods
+--> calling static method is tied to the type of the reference variable and doesn't depend on the type of the object that's assigned to the reference variable. The static method belongs to a class and not to its objects. means, if reference variable is of parent class the static method of parent class would be called. Not the static method of child (because it can't be overridden). if reference variable of child class is used, then it will call child class static method.
+      --> --> there is one exception, since child class inherit all method of parent, if child class doesn't define static method then on child class reference variable call, parent method would be called, as this static method of parent is now became a member of child class as well.
+
+---> --> concept, if you modify the state of the loop variable, the modified object state will be reflected in the array. but if you assign a new object to the loop variable, it won't be reflected in the list or the array that's being iterated. you can compare this behavior of the enhanced for loop variable with the behavior of object references passed as arguments to a method.
+
+--> --> Substring method of String class can't accept negative value. (for example: str.substring(2, -1) will throw runtime exception).
+--> its important to remember which string method takes what type of arguments, for example, 
+method "indexOf" can accept both String and char values.
+method startsWith and endsWith can accept only String values. Can't accept char value.
+method charAt can accept only method aurgument of type int. but remember, since java stored char values as unsigned integer values, its possible to pass char values as well in this method.
+example:- 
+String te = "12345";
+System.out.println(te.charAt('3')); // in this case it will throw exception StringIndexOutOfBoundsException, because charachter '3' is equal to (51) in unsigned integer value.
+System.out.println(te.charAt(3)); // this will compile successfully and print 4
+--> StringBuilder default object capacity is 16 char. (StringBuilder sb1 = new StringBuilder();)
+--------------------------------
+--> --> When an object reference is marked as null, the object is marked for garbage collection. But you can't be sure exactly when a garbage collector will kick in to garbage collect the objects. A garbage collector is low-priority thread, its execution depends on OS> you can never be sure about which object have been garbage collected. you can only be sure about how many objects are eligible for garbage collection.
+
+--> --> remember, equals method is a public method defined in java.lang.Object class, which is inherited by all classes. but default implementation of equals method is to compare the object reference pointing to same object, then return TRUE else FALSE. Any class can override this method to implement other logic. Here, no override happneded.
+--> Need to check in general which classes overrides equals() method. 
+
+--> --> There is no concat method in StringBuilder. There is append method in StringBuilder to append any string.
+--> Also, insert method can be used to insert char, number, or String at any specified position of StringBuilder.
+
+------------ break and continue statements -------------
+--> break; statement breaks the execution of current loop. means, if you have a loop that should execute from 0 to 9 and you hit break; statement at 5 position then loop will not run for any value after 5, means from 6 to 9.
+--> break statement are valid in iteration of loops (for, do, while) and in switch statement but not in if-else statement.
+--> continue; statment, if you hit continue statment at 5 position, it will stop the current execution but continue run of loop from 6 to 9 value iteration.
+--> continue; statement are valid in iteration of loops only (for, do, while) but invalid in switch or if-else statement.
+
+-------------------------------------------------------------
+--> every object operations should be assigned to reference variable. if you don't assign object to reference variable, it is not stored and become eligible for garbage collection.
+
+--> The underscore can't be placed in between (0_x or 0_b) or even just after the initials (0b_10 or 0x_25). only exception it can be placed after first 0 (ex:- 0_1010_11). For hexaDecimal values the letter can be till f or F only, G and further is not allowed.
+
+--> 
