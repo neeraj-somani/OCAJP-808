@@ -33,7 +33,7 @@ method startsWith and endsWith can accept only String values. Can't accept char 
 method charAt can accept only method aurgument of type int. but remember, since java stored char values as unsigned integer values, its possible to pass char values as well in this method.
 example:- 
 String te = "12345";
-System.out.println(te.charAt('3')); // in this case it will throw exception StringIndexOutOfBoundsException, because charachter '3' is eual to (51) in unsigned integer value.
+System.out.println(te.charAt('3')); // in this case it will throw exception StringIndexOutOfBoundsException, because charachter '3' is equal to (51) in unsigned integer value.
 System.out.println(te.charAt(3)); // this will compile successfully and print 4
 
 4.2 --> D
@@ -46,7 +46,7 @@ An array element can be assigned to null, and if all row elements are not same i
 5.1 --> F
 5.2 --> C
 5.3 --> Harry
-Very imp to note, Switch statement can't accept long, double, and float primitive data type and its wrapper classes as an aurgument.
+Very imp to note, Switch statement can't accept boolean, long, double, and float primitive data type and its wrapper classes as an aurgument.
 Switch statement can accept only byte, short, char, int data type and its wrapper class. it can also accept String, and enum.
 5.4 --> B (N)
 Note, break statment end the execution of the inner loop. it can be used in any loop (while, do-while, for) or in switch statment.
