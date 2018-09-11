@@ -256,13 +256,13 @@ Note that implicit narrowing conversion does not apply to long or double. So, ch
 --> Conversion from char to long does not need a cast. 
 Conversion from byte to short does not need a cast.
 Conversion from short to char needs a cast. The reverse is also true. Because their ranges are not compatible.
-a float can hold any value of int hence conversion not needed. Note that opposite is not true because of loss of precision.
+a float can hold any value of int hence conversion or explicit casting not needed. Note that opposite is not true because of loss of precision.
 Conversion from byte, char or short to int, long or float does not need a cast. Because int, long or float are bigger that byte, char or short.
---> float (32 bit) is smalled than double (64-bit), hence float can't handle double value.
+--> float (32 bit) is smalled than double (64-bit), hence float can handle any integral primitive (byte, short, char, int, long) but can't accept double value. even negative integer is acceptable in float.
 --> char (16-bit) and short (16-bit), hence explicit cast is needed. char can accept unsigned int value upto 16-bit.
 --> float d = 0 * 1.5f; and float d = 0 * (float)1.5 ; are OK, (but not like float d = 0 * 1.5).
 --> float f = -123; // ok - Implicit widening conversion will occur in this case.
---> float (32-bit) and int (32-bit), hence explicit cast is needed. implicit is only for type of the variable is byte, short, or char.
+
 
 int i = 10;
 byte b = 20;
@@ -358,7 +358,7 @@ switch(by){
     case 300 :  //some code;
 }
 
-4.  All case labels should be COMPILE TIME CONSTANTS. 
+4.  All case labels should be COMPILE TIME CONSTANTS. It is ok for Switch statement expression not to be COMPILE TIME CONSTANTS.
 
 5. No two of the case constant expressions associated with a switch statement may have the same value.
 
@@ -464,7 +464,7 @@ java.lang.SecurityException.
 This exception extends RuntimeException and is thrown by the security manager upon security violation. For example, when a java program runs in a sandbox (such as an applet) and it tries to use prohibited APIs such as File I/O, the security manager throws this exception.
 Since this exception is explicitly thrown using the new keyword by a security manager class, it can be considered to be thrown by the application programmer.
 
---> Very important for exam:-
+--> Very important for exam:----------------- labeled break or continue statements ------------
 you can assign label to any statment in java file. but when that label is used with break statment, then that break statment must be within the scope of label. else code won't compile.
 example:-
 void crazyLoop(){
@@ -476,7 +476,16 @@ void crazyLoop(){
 }
 here, Because break JILL; would be valid only when it is within the block of code under the scope of the label JILL. 
 In this case, the scope of JILL extends only up till System.out.println(c); and break JILL; is out of the scope of the label.
+Here, we need to understand that label is either declared for specific loop (while, do-while, for) or for specific individual statements. 
 
+Remember that a labeled break or continue statement must always exist inside the loop where the label is declared. Here, if(j == 4) break POINT1; is a labelled break that is occurring in the second loop while the label POINT1 is declared for the first loop.
+
+You can apply a label to any code block or a block level statement (such as a for statement) but not to declarations. For example: loopX : int i = 10;
+
+Even if the break statment takes the control out of the try-catch-finally block, the finally clause will be executed. A break without a label breaks the current loop (i.e. no iterations any more) and a break with a label tries to pass the control to the given label.
+'Tries to' means that if the break is in a try block and the try block has a finally clause associated with it then it will be executed.
+
+------------------------------------
 --> When you create an array of Objects ( here, Strings) all the elements are initialized to null. So in the line 3, null is assigned to myStr.
 Note that. empty string is "" ( String str = ""; ) and is not same as null.
 
@@ -510,8 +519,13 @@ Boolean.valueOf(String ) and its overloaded Boolean.valueOf(boolean ) version, o
 -------------------------
 
 --> imp points regarding for loop ---
- for loop Cannot use an existing/predefined variable in the variable declaration part.
- final is the only modifier (excluding annotations) that is allowed in the variable declaration part of for loop.
+ ehanced for loop Cannot use an existing/predefined variable in the variable declaration part, also you cannot declare same variable which you declared at class level. final is the only modifier (excluding annotations) that is allowed in the variable declaration part of for loop.
+ example:- class A { 
+ int i =0; int[][] intArr = {{0, 2, 5}}; 
+ for (i : intArr[0]){} // invalid, enhanced for loop (means, enhanced for loop can't use same class variable)
+ for (int j:intArr[0]){} // valid, enhanced for loop
+ for (; i<5; i++){} // valid, regular for loop (means, regular for loop can use same class variable)
+ for (int k; k<0; k++){} //invalid, k must be declared and initialzed as well, to use it inside for loop
 
 --> The concept to understand here is as follows -
 If the compiler can figure out that something can NEVER happen, then it flags an error. In this question, the compiler knows that ln, i or d can never point to the same object in any case because they are references to different classes of objects that have no relation ( superclass/subclass ) between themselves. Although, equals() method can be applied to any of them for comparision, as equals methods takes Objects as Aurgument.
@@ -520,4 +534,24 @@ Integer i = new Integer(42);
 Long ln = new Long(42);
 Double d = new Double(42.0);
 
---> 
+--> classes that can't be inherited because those are final classes ---
+String, StringBuilder, and StringBuffer - all are final classes.
+1. Remember that wrapper classes for primitives (java.lang.Boolean, java.lang.Integer, java.lang.Long, java.lang.Short etc.) are also final and so they cannot be extended. 
+2. java.lang.Number, however, is not final. Integer, Long, Double etc. extend Number.
+3. java.lang.System is final as well.
+
+---> need to memorize this point --
+It is not required for a class to have a main method. The main method is required only if you want to execute that class directly from a command line.  Further, running from command line is not the only way to test a class.
+
+--> Garbage collection.  All you need to know is: --------------------------
+1. An object can be made eligible for garbage collection by making sure there are no references pointing to that object.
+2. You cannot directly invoke the garbage collector. You can suggest the JVM to perform garbage collection by calling System.gc();
+----------------
+
+-------- Order of Initialization ---->  *** Very imp (page 202)    
+        1. If there is a superclass, initialize it first. 
+        2. Static variable declarations and static initializers in the order they appear in the file.
+        3. Instance variable declarations and instance initializers in the order they appear in the file.
+        4. Any other statements that is making any changes to instance variable in the order they appear in the file.
+        5. The constructor.
+------------------------------------------------------	
