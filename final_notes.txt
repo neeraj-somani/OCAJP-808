@@ -342,3 +342,140 @@ switch(by){
 7. Default clause is not compulsory in switch consturt.
 ---------------------------
 
+enthuware test 1 -->
+lots of confusion with inheritence - how interface, classes behaves with object and reference variable, considering polymorphism (override and overload of methods)
+
+Need to understand these questions:- 6, 
+
+--> The order of keywords for a static import must be "import static ... ".
+You can either import all the static members using import static java.lang.Integer.* or one specific member using import static java.lang.Integer.MAX_VALUE;
+You must specify the full package name of the class that you are importing (just like the regular import statement). So, import static Integer.*; is wrong.
+example:- import static java.lang.System.*; // valid (so that we can use out field of System,like this out.println("test"); directly.
+
+--> The point to note here is that the j in for loop is different from the instance member j. The for loop j is inside a method as well as inside the for loop. Therefore, j++ occuring in the for loop doesn't affect the while loop. The for loop prints 1 2 3 4 5.
+The while loop runs for the values 0 to 5 i.e. 6 iterations. Thus, 1 2 3 4 5 is printed 6 times. Note that after the end of the while loop the value of j is 6.
+
+--> note, x is primitive int.You cannot call any methods on a primitive. so this.x.setInt(...) or this.y.setInt(...) don't make any sense.
+Remember, a private valriable one class can't be accessed in another class by any means.
+
+--> The return type should be same for overridden and overriding method, if return type is primitime type.
+Note that when a method returns objects (as opposed to primitives, like in this question), the principle of covariant returns applies. Meaning, the overriding method is allowed to return a subclass of the return type defined in the overridden method. Thus, if a base class's method is: public A m(); then a subclass is free to override it with: public A1 m(); if A1 extends A.
+
+--> Below are the rules to understand for any expression evaluation:
+here, int i = 0; and The statement iA[i] = i = 30 ; will be processed as follows:
+iA[i] = i = 30; => iA[0] = i = 30 ;  =>  i = 30; iA[0] = i ; =>   iA[0] = 30 ;
+
+Here is what JLS says on this:
+1 Evaluate Left-Hand Operand First  
+2 Evaluate Operands before Operation  
+3 Evaluation Respects Parentheses and Precedence  
+4 Argument Lists are Evaluated Left-to-Right  
+
+For Arrays: First, the dimension expressions are evaluated, left-to-right. If any of the expression evaluations completes abruptly, the expressions to the right of it are not evaluated.
+
+
+--> An important aspect of encapsulation is that other classes should not be able to modify the state fields of a class directly. Therefore, the data members should be private (or protected if you want to allow subclasses to inherit the field) and if the class wants to allow access to these fields, it should provide appropriate setters and getters with public access.
+
+private ArrayList<Integer> scores;
+Change getScores to return a copy of the scores list:
+   public ArrayList<Integer> getScores(){ 
+     return new ArrayList(scores); 
+  }
+If you return the same scores list, the caller would be able to add or remove elements from it, thereby rendering the average incorrect.
+This can be prevented by returning a copy of the list.
+
+--> nested if-else statements are very tricky. need to focus more on this. if there is any else statment (doesn't matter about its indentation in java), belongs to the most inner if statement. means, the inner if statement might conceivably own the else clause and outer most if doesn't have even any else clause. also, remember, there can't be 2 else associtaed with one if. its always if-else.
+
+--> ****** very important ******** few exam question must be on this
+--- Printing an Exception --> three ways to print an exception
+    1. let Java print it out, 
+    2. print just the message, or
+    3. print where the stack trace comes from
+  This example shows all three approaches:
+      5: public static void main(String[] args) {
+      6: try {
+      7: hop();
+      8: } catch (Exception e) {
+      9: System.out.println(e); // Just the name of the exception class and the message is printed.
+      10: System.out.println(e.getMessage()); // print just the message
+      11: e.printStackTrace(); // print complete chain of the names of the methods called, along with the line numbers
+      12: }
+      13: }
+      14: private static void hop() {
+      15: throw new RuntimeException("cannot hop");
+      16: }
+    This code results in the following output:
+	java.lang.RuntimeException: cannot hop  // Just the name of the exception class and the message is printed.
+	cannot hop
+	java.lang.RuntimeException: cannot hop //print complete chain of the names of the methods called, along with the line numbers
+	at trycatch.Handling.hop(Handling.java:15)
+	at trycatch.Handling.main(Handling.java:7)
+
+--> Need to memorize few java rules:
+while (false) { x=3; } is a compile-time error because the statement x=3; is not reachable;
+Similarly, for( int i = 0; false; i++) x = 3; is also a compile time error because x= 3 is unreachable.
+
+In if(false){ x=3; }, although the body of the condition is unreachable, this is not an error because the JLS explicitly defines this as an exception to the rule. It allows this construct to support optimizations through the conditional compilation. For example,
+
+if(DEBUG){ System.out.println("beginning task 1"); } 
+Here, the DEBUG variable can be set to false in the code while generating the production version of the class file, which will allow the compiler to optimize the code by removing the whole if statement entirely from the class file.
+
+example:- 
+if (false) { x=3; } // valid
+for( int i = 0; i< 0; i++) x = 3; // valid
+
+--> Note that it is OK to override a method by an abstract method.
+
+--> few java Exception classes example:-
+java.io.FileNotFoundException   / java.io.IOException
+java.lang.OutOfMemoryError      /  java.lang.StackOverflowError
+java.lang.SecurityException. 
+This exception extends RuntimeException and is thrown by the security manager upon security violation. For example, when a java program runs in a sandbox (such as an applet) and it tries to use prohibited APIs such as File I/O, the security manager throws this exception.
+Since this exception is explicitly thrown using the new keyword by a security manager class, it can be considered to be thrown by the application programmer.
+
+--> Very important for exam:-
+you can assign label to any statment in java file. but when that label is used with break statment, then that break statment must be within the scope of label. else code won't compile.
+example:-
+void crazyLoop(){
+   int c = 0;
+   JACK: while (c < 8){
+       JILL: System.out.println(c);
+       if (c > 3) break JILL; else c++;
+   }
+}
+here, Because break JILL; would be valid only when it is within the block of code under the scope of the label JILL. 
+In this case, the scope of JILL extends only up till System.out.println(c); and break JILL; is out of the scope of the label.
+
+--> When you create an array of Objects ( here, Strings) all the elements are initialized to null. So in the line 3, null is assigned to myStr.
+Note that. empty string is "" ( String str = ""; ) and is not same as null.
+
+--> some Array vs Arraylist points
+An ArrayList resized dynamically at run time as per the situation. An array cannot be resized once created. This reduces the amount of boiler plate code that is required to do the same task using an array.
+Neither an ArrayList nor an array is thread safe. If you have multiple threads trying to add and remove elements from an ArrayList or an array, you have to write additional code to ensure thread safety.
+arrays do not implement Collection interface. ArrayList does. This is actually an advantage of an ArrayList over an array.
+
+--> a good question about how an expression can be evaluated with function and different operators
+int s = 5;
+s = s + s + mx(s) + ++s; // here value of s is assinged first to all the operands at a single strech, as you can see below
+s = 5 + 5 + mx(5) + 6; // then the calculation started
+s = 5 + 5+ 8 + 6;
+s = 24;
+
+------------------------
+--> You need to remember the following points about Boolean:
+
+1. Boolean class has two constructors - Boolean(String) and Boolean(boolean)
+The String constructor allocates a Boolean object representing the value true if the string argument is not null and is equal, ignoring case, to the string "true". Otherwise, allocate a Boolean object representing the value false. Examples: new Boolean("True") produces a Boolean object that represents true. new Boolean("yes") produces a Boolean object that represents false.
+
+The boolean constructor is self explanatory.
+
+2. Boolean class has two static helper methods for creating booleans - parseBoolean and valueOf.
+Boolean.parseBoolean(String ) method returns a primitive boolean and not a Boolean object (Note - Same is with the case with other parseXXX methods such as Integer.parseInt - they return primitives and not objects). The boolean returned represents the value true if the string argument is not null and is equal, ignoring case, to the string "true". 
+
+Boolean.valueOf(String ) and its overloaded Boolean.valueOf(boolean ) version, on the other hand, work similarly but return a reference to either Boolean.TRUE or Boolean.FALSE wrapper objects. Observe that they dont create a new Boolean object but just return the static constants TRUE or FALSE defined in Boolean class.
+
+3. When you use the equality operator ( == ) with booleans, if exactly one of the operands is a Boolean wrapper, it is first unboxed into a boolean primitive and then the two are compared (JLS 15.21.2). If both are Boolean wrappers, then their references are compared just like in the case of other objects. Thus, new Boolean("true") == new Boolean("true") is false, but new Boolean("true") == Boolean.parseBoolean("true") is true.
+
+-------------------------
+
+-->  at Q 28
