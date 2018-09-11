@@ -345,7 +345,14 @@ switch(by){
 enthuware test 1 -->
 lots of confusion with inheritence - how interface, classes behaves with object and reference variable, considering polymorphism (override and overload of methods)
 
-Need to understand these questions:- 6, 
+----------- Inheritance - Polymorphism (override, overload, hidden) ------------------
+1. Interface variables are public static final implicitly, means constant and hidden. they can be called only using interface reference and not by any class who is implementing this interface.
+2. In case of methods, an interface can have static, default or regular method with (public access modifier, this is implicit).
+	--> static is again hidden method and can't be access directly but it can be accessed only using Interface name. example: Movable.test1();. means, you can't access it even using instance of derived class who is implementing it.
+	--> default method can be empty or can give default implementation of a method. it can be overrided as well. it can also be access by interface reference variable in the class where class implemented an interface.
+	--> regular method behaves also similar to default method. its an abstract method by default and can be overridden and accessed using reference variable of interface or derived class.
+
+--------------------------------------
 
 --> The order of keywords for a static import must be "import static ... ".
 You can either import all the static members using import static java.lang.Integer.* or one specific member using import static java.lang.Integer.MAX_VALUE;
