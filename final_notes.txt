@@ -1,6 +1,17 @@
 --> There are all primitive type wrapper class. no need to get confuse.
 --> switch statement limitation --> it can't accept long, boolean, double and float value in its consturct aurgument.
 --> Array.binarySearch(number, 2); -> used for binary search (if number not found then (negate the expected position of number and add -1)
+--> System.out.println(s + sb); // addision operator can be applied to String and StringBuilder both. // here s is String object and sb is StringBuilder object.
+
+--> The getClass method always returns the Class object for the actual object on which the method is called irrespective of the type of the reference. Since s refers to an object of class String, s.getClass returns Class object for String  and similarly list.getClass returns Class object for ArrayList.
+example:- 	List<String> list = new ArrayList<>();
+		StringBuilder sb = new StringBuilder("mrx");
+		String s = sb.toString();
+		list.add(s);
+		System.out.println(s.getClass()); // class java.lang.String
+		System.out.println(list.getClass()); // class java.util.ArrayList
+
+
 --> Sorting for Array string type has specfic order --> first number, then uppercase then lowercase
 --> Note --> if you try to unbox a null, you will get NullPointerException, but you can autobox or pass null without any issue
       3: List<Integer> heights = new ArrayList<>();
@@ -229,8 +240,16 @@ Tablet tablet2 = new Tablet(); // all parent and child members accessible as chi
 -----------------------------------------------------
 
 --> --> remember below defaulty value for all primitive type --> 
---> char - \u0000 | byte,short,int - 0 | long - 0L | 
---> float - 0.0f | double - 0.0d | boolean - false | objects - null
+--> (16-bit)char - \u0000 | (8-bit)byte,short(16-bit),int(32-bit) - 0 | (64-bit)long - 0L | 
+--> (32-bit)float - 0.0f | (64-bit)double - 0.0d | boolean - false | objects - null
+
+
+An implicit narrowing primitive conversion may be used if all of the following conditions are satisfied:
+1. The expression is a compile time constant expression of type byte, char, short, or int.
+2. The type of the variable is byte, short, or char.
+3. The value of the expression (which is known at compile time, because it is a constant expression) is representable in the type of the variable.
+Note that implicit narrowing conversion does not apply to long or double. So, char ch = 30L; will fail even though 30 is representable in char.
+
 --> but when these value passed to print method it will print without specific data type charachter (exmple, for float it will print 0.0, for long it will print 0, etc.)
 --> The local variable (variables that are declared within a method) aren't initialzed with their default values. If you try to print the value of a local variable before initializing it, the code won't compile. 
 --> On the other side, class and instance variable, initialize variable with default value.
@@ -238,7 +257,12 @@ Tablet tablet2 = new Tablet(); // all parent and child members accessible as chi
 Conversion from byte to short does not need a cast.
 Conversion from short to char needs a cast. The reverse is also true. Because their ranges are not compatible.
 a float can hold any value of int hence conversion not needed. Note that opposite is not true because of loss of precision.
-Conversion from byte, char or short to int, long or float does not need a cast. Because int, long or float are bigger that byte char or short.
+Conversion from byte, char or short to int, long or float does not need a cast. Because int, long or float are bigger that byte, char or short.
+--> float (32 bit) is smalled than double (64-bit), hence float can't handle double value.
+--> char (16-bit) and short (16-bit), hence explicit cast is needed. char can accept unsigned int value upto 16-bit.
+--> float d = 0 * 1.5f; and float d = 0 * (float)1.5 ; are OK, (but not like float d = 0 * 1.5).
+--> float f = -123; // ok - Implicit widening conversion will occur in this case.
+--> float (32-bit) and int (32-bit), hence explicit cast is needed. implicit is only for type of the variable is byte, short, or char.
 
 int i = 10;
 byte b = 20;
@@ -485,4 +509,15 @@ Boolean.valueOf(String ) and its overloaded Boolean.valueOf(boolean ) version, o
 
 -------------------------
 
--->  at Q 28
+--> imp points regarding for loop ---
+ for loop Cannot use an existing/predefined variable in the variable declaration part.
+ final is the only modifier (excluding annotations) that is allowed in the variable declaration part of for loop.
+
+--> The concept to understand here is as follows -
+If the compiler can figure out that something can NEVER happen, then it flags an error. In this question, the compiler knows that ln, i or d can never point to the same object in any case because they are references to different classes of objects that have no relation ( superclass/subclass ) between themselves. Although, equals() method can be applied to any of them for comparision, as equals methods takes Objects as Aurgument.
+example:-
+Integer i = new Integer(42);
+Long ln = new Long(42);
+Double d = new Double(42.0);
+
+--> 
