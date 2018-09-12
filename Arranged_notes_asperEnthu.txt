@@ -1,0 +1,231 @@
+--------- Content page -------------------------
+Java Basics - 
+Java Basics - OO Concepts -
+Working with Java Data Types - 
+Working with Java Data Types - Garbage Collection - 
+Using Operators and Decision Constructs - 
+Creating and Using Arrays - 
+Using Loop Constructs - 
+Constructors -
+Working with Methods - 
+Working with Methods - Overloading - 
+Working with Inheritance - 
+Working with Inheritance - instanceof -
+Handling Exceptions - 
+Lambda Expressions - 
+Working with Java API - ArrayList - 
+Working with Java API - String, StringBuilder - 
+Working with Java API - Time and Date -
+
+------------------------ from line 200 -- need to copy
+
+***************************************Java Basics - ***************************************
+private, protected and public can be applied to a nested class (not in OCA).A top level class is a class that is not a nested class. A nested class is any class whose declaration occurs within the body of another class or interface.
+
+synchronized keyword can never be applied to a class or non-primitive variables. It can only be applied to a method or a block.
+final keyword can be applied to class, variable and methods.
+final keyword when applied to a class means the class cannot be subclassed, when applied to a method means the method cannot be overridden (it can be overloaded though) and when applied to a variable means that the variable is a constant.
+A final variable can be hidden in a subclass.
+
+--> native method cannot be abstract.
+----------------------------
+non-public class can't be accessed outside a package in which it is defined, even if it is explicitely imported. Because class itself is not accessible / visible. Only protected class can be accessed if you have import and inherite (extend) them and use it with child class object. 
+
+--> You can't import classes from the default package. The only way to access classes in the default package is from another class in the default package. A class or interface that is defined in any other package can't access classes or interfaces defined in default package.
+
+--> Also, remember, Java allows a class to only public or package private (default). there is no concept of class with private modifier unless it is a nested class.
+If you are using a variable in any specific statement that becomes undefined due to compile error than the statement which is using that variable will also through compile error because that variable is undefined for it.
+
+
+*************************************** Java Basics - OO Concepts -*************************************** 
+
+--> Code that tries to access an uninitialized local variable won't compile.
+--> In this case Laptop reference variable and life reference variable are referring to two different objects. Any changes on any specific  object will not impact each other.
+--> A .java file must have only one public class or one public interface, and file name should be the same as public class or interface. A .java file can have multiple class or interfaces.
+--> for an interface only public, default access modifier & abstract non-access modifier are permitted.
+--> for a class only public, default access modifier, and abstract & final non-access modifier are permitted.
+
+
+
+*************************************** Working with Java Data Types - ***************************************
+--> The integral types are byte, short, int, and long, whose values are 8-bit, 16-bit, 32-bit and 64-bit signed two's-complement integers, respectively, and char, whose values are 16-bit unsigned integers representing UTF-16 code units.
+--> Remember, when a char primitive data type used with arithmetic operators, its ASCII value is used, which is int value only. 
+
+--> you can't assign a negative int value to a char data type without casting. (example, char ch = (char) -97;)
+
+*************************************** Working with Java Data Types - Garbage Collection -  ***************************************
+
+
+*************************************** Using Operators and Decision Constructs -  ***************************************
+------ instanceof operator ---- type operator ---
+used to test whether the object is an instance of the specified type (class or subclass or interface).
+It returns either true or false. If we apply the instanceof operator with any variable that has null value, it returns false.
+
+--> & can have integral as well as boolean operands. (unlike &&), & will not "short circuit" the expression if used on boolean parameters. means it will evaluate both operands or both side expression.
+--> The logical operators, (&), (|), and (^), evaluates both operands, but is similar as (&& or ||, respectively)
+It may be applied to both numeric (known as bit-wise opertaor - not in OCA) and boolean (known as logical operators) data types.
+
+--> The modulus operator % can only be used with integer operands. It can be used on floating points operands also. For example, 5.5 % 3 = 2.5
+--> !, && and || operate only on booleans.
+--> ~ Operates only on integral types
+
+short-circuit operators --> 
+&& --> if first expression is false then it won't evaluate second expression.
+|| --> if first expression is true then it won't evaluate second expression.
+
+*************************************** Using Loop Constructs - ***************************************
+--> switch statement limitation --> it can't accept long, boolean, double and float value in its consturct aurgument.
+--> each type of loop can accept single statement without curly braces but multiple statement should be inside curly braces.
+--> Switch statment accepts variables of type String. and since an Arraylist can have String values, it can be passed to switch construct as well.
+--> Switch statement can't accept boolean, long, double, and float primitive data type and its wrapper classes as an aurgument. 
+--> Switch statement can accept only byte, short, char, int data type and its wrapper class. it can also accept String, and enum.
+
+--> remember, while loop validation condition runs at the very end as well, to make sure its not validating to true and any evaluation at this step can also make some change to final result.
+--> Case statment label requires a compile time constant variable/values. Even if you define a final variable, assigning a value to that variable in the next line, means after its declaration, java doesn't count it as compile time constant.
+Remember, when you use "/" this division operator, the result of its evaluation is only division and not remainder. (for example, 10/3 = 3 as a result and remainder 3 will be discarded). Hence this can be used in case statmenent to compare value against int variable of switch statment.
+--> Java performs integer calculations at compile time only, if there is no object for which value can be changed at run-time. 
+Hence, if 2 case statement evaluate to same value then java throws a compile error.
+
+
+
+*************************************** Constructors - ***************************************
+--> Remember, if a method aurgument expecting a double or float, you can't pass int value in the method aurgument.
+on the other side, if method aurgument is of type long, then you can pass int value to it.
+--> you can define overloaded constructors or methods with different access modifiers.
+Remember, a constructor don't have any return type. But a class can have a method name and signature same as constructor, only distinction would be return type of method.
+--> A constructor can't be defined using a non-access modifiers like, final, abstract or static
+--> A constructor can't be defined with return type
+--> A constructor can be defined with any access modifier, like public, private, protected, and package private(default)
+--> constructors can not be inherited.
+--> The default constructor is provided by the compiler only when a class does not define ANY constructor explicitly. 
+--> The access type of a default constructor (created by Java) is same as the access type of the class. Thus, if a class is public, the default constructor will be public.
+--> A constructor is non-static, and so it can access directly both the static and non-static members of the class.
+
+
+*************************************** Working with Methods - ***************************************
+*************************************** Working with Methods - Overloading - ***************************************
+--> an overriding method is allowed to change the return type to any subclass of the original return type, also known as covariant return type. Above statement valid for class objects. This does not apply to primitives, in which case, the return type of the overriding method must match exactly to the return type of the overridden method.
+
+
+*************************************** Working with Inheritance - ***************************************
+
+
+*************************************** Working with Inheritance - instanceof - ***************************************
+-->  "instanceof" is all smallcase letter operator to compare an object for its class instance.
+The instanceof operator returns true if the object-reference on its left, points to an object of class-type on its right, otherwise,
+The instanceof operator returns false, if there is a mismatch between object reference and class-type.
+
+*************************************** Handling Exceptions - ***************************************
+--> Note --> if you try to unbox a null, you will get NullPointerException, but you can autobox or pass null without any issue
+      3: List<Integer> heights = new ArrayList<>();
+      4: heights.add(null); // this is legal, because a null reference can be assigned to any reference variable.
+      5: int h = heights.get(0); // NullPointerException // because we try to unbox that null to an int primitive.
+      
+ --> you can explicitely cast any object to an interface, even if class doesn't implement it. and the code will compile. but if the object's class doesn't implement interface, the code will throw ClassCaseException at runtime.
+ 
+ 
+*************************************** Lambda Expressions - ***************************************
+A functional interface is an interface that contains exactly one abstract method. It may contain zero or more default methods and/or static methods. Because a functional interface contains exactly one abstract method, you can omit the name of that method when you implement it using a lambda expression. For example, consider the following interface - 
+interface Predicate<T> {
+    boolean test(T t);
+}
+
+provided by the standard java library in java.util.function package.
+The purpose of this interface is to provide a method that operates on an object of class T and return a boolean.
+
+*************************************** Creating and Using Arrays - ***************************************
+
+--> Array.binarySearch(number, 2); -> used for binary search (if number not found then (negate the expected position of number and add -1)
+--> Sorting for Array string type has specfic order --> first number, then uppercase then lowercase
+--> converting Array to List and vice versa -->
+      Arrays.asList(array); // note, it returns fixed size list // here, any changes to list or Array will impact each other, as both pointing to same.
+      list.toArray(); --> is normal fixed size array
+--> asList() method --> takes varargs, which let you pass in an array or just type out the String values.
+--> A null pointer is different from an array of length zero. A reference being null or pointing to null means it is not pointing to anything at all. But an array of length zero is a valid object. Thus, a reference pointing to such an array is not pointing to null.
+For example, if you have int[] intArr = new int[0]; then (intArr == null) is false.
+
+--> you can't assign an Array of char to an Array of int data type.
+Array and ArrayList are very specific to its datatype, means you can't pass any other data type values to it.
+not even char or byte can compare with int and int can't be comapred with long type array. all are independent to specific type.
+--> An array element can be assigned to null.
+
+--> you can't initialize an array with new keyword and array default construtor like in general we do for all other class. Instead, Array is initialzed using new keyword followed by type of array. {(example:- new Array() not allowed), (but int arr[] = new int[5] is allowed)}
+Also remember, you can't create an array like this "int arr[] = new int[]", means you must either give array dimensions or array initializer values. even creating empty array is legal, means Array of Zero length. 
+like int arr[] = new int[5], or int arr[] = new int[] {5, 2}, or int arr[] = new int[] {} // all valid
+String[] sA = {new String( "aaa")}; // valid
+
+--> An array declaration becomes invalid, when you specify the size of array within square bracket and declaring, instantiating and initializing an array at the single line of code.
+example:-
+int eArry5[] = new int[2] {10,20}; // this is invalid
+
+*************************************** Working with Java API - ArrayList - ***************************************
+--> remove method in ArrayList that takes index value to remove element of List. Hence, be careful.
+    example:-- 
+    List<Integer> numbers = new ArrayList<>(); 
+    numbers.add(1); // [1]
+    numbers.add(2); // [1,2]
+    numbers.remove(1); //[1]
+    System.out.println(numbers); // [1], this will print 1. 
+    
+--> Sorting an ArrayList, using Collections.sort(numbers); // Collections is the helper class
+ArrayList clear() method is used to remove all elements of ArrayList.
+ArrayList remove() method is used to remove specific element of ArrayList.
+If you frequently add elements to ArrayList, its a good idea to create an ArrayList of large size.
+Calling Clone() method on an ArrayList will create a separate reference variable that stored the same number of elements as the original ArrayList. But each individual ArrayList element will still refer to original object, means, ArrayList elements are not cloned.
+An ArrayList can store any type of objects. Wrapper classes are created for ArrayList only.
+
+--> The method contains() of ArrayList accepts an object and compares it with the actual values of the list. Means, it behaves very similar to equals() method, which checks objects actual value and not object itself.
+
+
+*************************************** Working with Java API - String, StringBuilder - ***************************************
+
+--> System.out.println(s + sb); // addision operator can be applied to String and StringBuilder both. // here s is String object and sb is StringBuilder object.
+
+--> The getClass method always returns the Class object for the actual object on which the method is called irrespective of the type of the reference. Since s refers to an object of class String, s.getClass returns Class object for String  and similarly list.getClass returns Class object for ArrayList.
+example:- 	List<String> list = new ArrayList<>();
+		StringBuilder sb = new StringBuilder("mrx");
+		String s = sb.toString();
+		list.add(s);
+		System.out.println(s.getClass()); // class java.lang.String
+		System.out.println(list.getClass()); // class java.util.ArrayList
+    
+ --> following are valid methods of String class:- trim, length, concate, and hashCode,
+--> following are valid method for StringBuilder/StringBuffer --> reverse() 
+(Note, reverse method is not available in String class)   
+    
+*************************************** Working with Java API - Time and Date - ***************************************
+
+--> most imp points for JAVA Date-Time API:------------------------------
+Here are some points that you should keep in mind about the new Date/Time classes introduced in Java 8 - 
+
+1. They are in package java.time and they have no relation at all to the old java.util.Date and java.sql.Date.
+
+2. java.time.temporal.TemporalAccessor is the base interface that is implemented by LocalDate, LocalTime, and LocalDateTime concrete classes. This interface defines read-only access to temporal objects, such as a date, time, offset or some combination of these, which are represented by the interface TemporalField.
+
+3. LocalDate, LocalTime, and LocalDateTime classes do not have any parent/child relationship among themselves. As their names imply, LocalDate contains just the date information and no time information, LocalTime contains only time and no date, while LocalDateTime contains date as well as time. None of them contains zone information. For that, you can use ZonedDateTime. 
+
+These classes are immutable and have no public constructors. You can create objects of these classes using their static factory methods such as of(...) and from(TemporalAccessor ).  For example, 
+LocalDate ld = LocalDate.of(2015, Month.JANUARY, 1); or LocalDate ld = LocalDate.from(anotherDate); or LocalDateTime ldt = LocalDateTime.of(2015, Month.JANUARY, 1, 21, 10); //9.10 PM
+
+Since you can't modify them once created, if you want to create new object with some changes to the original, you can use the instance method named with(...). For example, 
+LocalDate sunday = ld.with(java.time.temporal.TemporalAdjusters.next(DayOfWeek.SUNDAY));
+
+4. Formatting of date objects into String and parsing of Strings into date objects is done by java.time.format.DateTimeFormatter class. This class provides public static references to readymade DateTimeFormatter objects through the fields named ISO_DATE, ISO_LOCAL_DATE, ISO_LOCAL_DATE_TIME, etc.  For example - 
+        
+LocalDate d1 = LocalDate.parse("2015-01-01", DateTimeFormatter.ISO_LOCAL_DATE);
+
+The parameter type and return type of the methods of DateTimeFormatter class is the base interface TemporalAccessor instead of concrete classes such as LocalDate or LocalDateTime. So you shouldn't directly cast the returned values to concrete classes like this - 
+   LocalDate d2 = (LocalDate) DateTimeFormatter.ISO_LOCAL_DATE.parse("2015-01-01"); //will compile but may or may not throw a ClassCastException at runtime.
+You should do like this - 
+   LocalDate d2 = LocalDate.from(DateTimeFormatter.ISO_LOCAL_DATE.parse("2015-01-01"));
+
+5. Besides dates, java.time package also provides Period and Duration classes. Period is used for quantity or amount of time in terms of years, months and days, while Duration is used for quantity or amount of time in terms of hour, minute, and seconds.
+
+Durations and periods differ in their treatment of daylight savings time when added to ZonedDateTime. A Duration will add an exact number of seconds, thus a duration of one day is always exactly 24 hours. By contrast, a Period will add a conceptual day, trying to maintain the local time.
+
+For example, consider adding a period of one day and a duration of one day to 18:00 on the evening before a daylight savings gap. The Period will add the conceptual day and result in a ZonedDateTime at 18:00 the following day. By contrast, the Duration will add exactly 24 hours, resulting in a ZonedDateTime at 19:00 the following day (assuming a one hour DST gap).
+
+-----
+--> format method of LocalDate / Time can be applied only on object of LocalDate / Time or DateTimeFormater object. not on any string or text value.
+
+
