@@ -2,6 +2,7 @@
 --> switch statement limitation --> it can't accept long, boolean, double and float value in its consturct aurgument.
 --> Array.binarySearch(number, 2); -> used for binary search (if number not found then (negate the expected position of number and add -1)
 --> System.out.println(s + sb); // addision operator can be applied to String and StringBuilder both. // here s is String object and sb is StringBuilder object.
+--> java Math.round(-2.1) => -2, hence this round function converts values to nearest bigger interger number. This function auto imported by java.lang.*;
 
 --> The getClass method always returns the Class object for the actual object on which the method is called irrespective of the type of the reference. Since s refers to an object of class String, s.getClass returns Class object for String  and similarly list.getClass returns Class object for ArrayList.
 example:- 	List<String> list = new ArrayList<>();
@@ -237,6 +238,12 @@ Phone phone1 = new Phone(); // only phone members accessible, even child overrid
 Phone phone2 = new Tablet(); // only phone members accessible, child overridden method accessible
 	// to access child members, need to cast explicitly //System.out.println(((Tablet)phone2).playmovie);
 Tablet tablet2 = new Tablet(); // all parent and child members accessible as child inherit them
+
+Basics of Inheritance -->
+Which variable (or static method) will be used depends on the class that the variable is declared of.
+Which instance method will be used depends on the actual class of the object that is referenced by the variable.
+
+A method is said to be overloaded when the other method's name is same and parameters ( either the number or their order) are different. Also, there is no restrcition on return type of method, It can be any primitive or object class. Return type of overloaded method need not to be covariant.
 
 -----------------------------------------------------
 
@@ -609,3 +616,80 @@ The add method of ArrayList returns a boolean. Further, it returns true if the l
 Now, since both the operands of / are ints, it is an integer division. This means the resulting value is truncated (and not rounded). Therefore, the above statement will print 11 and not 12.
 
 --> 
+Note that  boolean operators have more precedence than =. (In fact, = has least precedence of all operators.)
+so, in (b2 != b1 = !b2)  first b2 != b1 is evaluated which returns a value 'false'. So the expression becomes false = !b2. And this is illegal because false is a value and not a variable!
+
+Had it been something like (b2 = b1 != b2) then it is valid because it will boil down to : b2 = false.
+Because all an if() needs is a boolean, now b1 != b2 returns false which is a boolean and as b2 =  false is an expression and every expression has a return value (which is actually the Left Hand Side of the expression). Here, it returns false, which is again a boolean.
+
+Note that return value of expression :  i = 10 , where i is an int, is 10 (an int).
+
+--> If the array reference expression produces null instead of a reference to an array, then a NullPointerException is thrown at runtime, but only after all parts of the array reference expression have been evaluated and only if these evaluations completed normally. 
+
+This means, first index = 2 will be executed, which assigns 2 to index. After that null[2] is executed, which throws a NullPointerException. But this exception is caught by the catch block, which prints nothing. So it seems like NullPointerException is not thrown but it actually is.
+In other words, the embedded assignment of 2 to index occurs before the check for array reference produced by getArray().
+In an array access, the expression to the left of the brackets appears to be fully evaluated before any part of the expression within the brackets is evaluated. Note that if evaluation of the expression to the left of the brackets completes abruptly, no part of the expression within the brackets will appear to have been evaluated.
+
+means, first array should be build properly. Then only we will go to access it. then any other part of the statement will be evaluated.
+Remember, whenever you will refer null and perform operation on it. it will throw NullPointerException.
+
+--> Different types of Exceptions -->
+java.lang.SecurityException -->  extends RuntimeException:
+java.lang.ClassCastException --> extends RuntimeException:
+java.lang.NullPointerException --> extends RuntimeException:
+java.lang.IndexOutOfBoundsException --> extends RuntimeException
+IllegalArgumentException ---> extends RuntimeException: 
+IllegalStateException ---> extends RuntimeException:
+------
+java.lang.CloneNotSupportedException --> extends Exception
+
+Below are brief description of each Exception class -->
+java.lang.SecurityException
+SecurityException extends RuntimeException: It is thrown by the security manager upon security violation. For example, when a java program runs in a sandbox (such as an applet) and it tries to use prohibited APIs such as File I/O, the security manager throws this exception.
+Since this exception is explicitly thrown using the new keyword by a security manager class, it can be considered to be thrown by the application programmer.
+
+java.lang.ClassCastException
+ClassCastException extends RuntimeException: Usually thrown by the JVM. Thrown to indicate that the code has attempted to cast an object to a subclass of which it is not an instance. For example, the following code generates a ClassCastException: 
+     Object x = new Integer(0);
+     System.out.println((String)x);
+
+java.lang.NullPointerException
+NullPointerException extends RuntimeException: Usually thrown by the JVM. Thrown when an application attempts to use null in a case where an object is required. These include: 
+  Calling the instance method of a null object. 
+  Accessing or modifying the field of a null object. 
+  Taking the length of null as if it were an array. 
+  Accessing or modifying the slots of null as if it were an array. 
+  Throwing null as if it were a Throwable value. 
+Applications should throw instances of this class to indicate other illegal uses of the null object.
+
+java.lang.IndexOutOfBoundsException
+IndexOutOfBoundsException extends RuntimeException: 
+Usually thrown by the JVM. Thrown to indicate that an index of some sort (such as to an array, to a string, or to a vector) is out of range.  Applications can subclass this class to indicate similar exceptions.
+ArrayIndexOutOfBoundsException and StringIndexOutOfBoundsException both extend IndexOutOfBoundsException.
+
+IllegalArgumentException extends RuntimeException: If a parameter passed to a method is not valid. Usually thrown by the application.
+
+IllegalStateException extends RuntimeException: Signals that a method has been invoked at an illegal or inappropriate time. In other words, the Java environment or Java application is not in an appropriate state for the requested operation. Usually thrown by the application. 
+
+java.lang.CloneNotSupportedException
+public class CloneNotSupportedException extends Exception
+Thrown to indicate that the clone method in class Object has been called to clone an object, but that the object's class does not implement the Cloneable interface.
+Applications that override the clone method can also throw this exception to indicate that an object could not or should not be cloned.
+
+------------- facts about String Class ---- Q. 13 (Test 1)
+These are the six facts on Strings:
+1. Literal strings within the same class in the same package represent references to the same String object. 
+2. Literal strings within different classes in the same package represent references to the same String object. 
+3. Literal strings within different classes in different packages likewise represent references to the same String object. 
+4. Strings computed by constant expressions are computed at compile time and then treated as if they were literals. 
+5. Strings computed at run time are newly created and therefore are distinct. (So line 4 prints false.)
+6. The result of explicitly interning a computed string is the same string as any pre-existing literal string with the same contents. (So line 5 prints true.)
+
+----------
+String s = null;
+s = s + 'C'; // this will assign "nullC" string value to s. keep in mind.
+
+Since newStr is null at the beginning, the first iteration of the loop assigns "nullg" to newStr. Therefore, at the end of the loop, newStr is actually "nullgood".
+Had newStr been defined as String newStr = ""; then the program would have printed false for newStr == myStr because both the references are pointing to two different objects, and true for newStr.equals(myStr) because both the objects contain the exact same String.
+
+----------- Q 11
