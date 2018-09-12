@@ -1,8 +1,29 @@
+--------- Content page -------------------------
+Java Basics - 
+Java Basics - OO Concepts -
+Working with Java Data Types - 
+Working with Java Data Types - Garbage Collection - 
+Using Operators and Decision Constructs - 
+Creating and Using Arrays - 
+Using Loop Constructs - 
+Constructors -
+Working with Methods - 
+Working with Methods - Overloading - 
+Working with Inheritance - 
+Working with Inheritance - instanceof -
+Handling Exceptions - 
+Lambda Expressions - 
+Working with Java API - ArrayList - 
+Working with Java API - String, StringBuilder - 
+Working with Java API - Time and Date -
+
+
+
 --> There are all primitive type wrapper class. no need to get confuse.
 --> switch statement limitation --> it can't accept long, boolean, double and float value in its consturct aurgument.
 --> Array.binarySearch(number, 2); -> used for binary search (if number not found then (negate the expected position of number and add -1)
 --> System.out.println(s + sb); // addision operator can be applied to String and StringBuilder both. // here s is String object and sb is StringBuilder object.
---> java Math.round(-2.1) => -2, hence this round function converts values to nearest bigger interger number. This function auto imported by java.lang.*;
+
 
 --> The getClass method always returns the Class object for the actual object on which the method is called irrespective of the type of the reference. Since s refers to an object of class String, s.getClass returns Class object for String  and similarly list.getClass returns Class object for ArrayList.
 example:- 	List<String> list = new ArrayList<>();
@@ -82,8 +103,7 @@ For example, consider adding a period of one day and a duration of one day to 18
 
 ------------------------------------------------------
 
---> The integral types are byte, short, int, and long, whose values are 8-bit, 16-bit, 32-bit and 64-bit signed two's-complement integers, respectively, and char, whose
-values are 16-bit unsigned integers representing UTF-16 code units.
+--> The integral types are byte, short, int, and long, whose values are 8-bit, 16-bit, 32-bit and 64-bit signed two's-complement integers, respectively, and char, whose values are 16-bit unsigned integers representing UTF-16 code units.
 --> & can have integral as well as boolean operands. (unlike &&), & will not "short circuit" the expression if used on boolean parameters. means it will evaluate both operands or both side expression.
 --> The logical operators, (&), (|), and (^), evaluates both operands, but is similar as (&& or ||, respectively)
 It may be applied to both numeric (known as bit-wise opertaor - not in OCA) and boolean (known as logical operators) data types.
@@ -772,6 +792,35 @@ In this question, StringWrapper class does not implement toString method and so 
 ---------------- Java Basics ---
 1. you can have class with Super or This as well. Don't get confuse with super()/ this() keywords which are all in small-case. While the class and its constructor follow CamelCase letter format.
 
+-----  Using Operators and Decision Constructs --
+Object t = new Integer(107); 
+int k = (Integer) t.intValue()/9; // invalid, casting of parent object reference to child reference 
+Compiler will complain that the method intValue() is not available in Object. This is because the . operator has more precedence than the cast operator. So you have to write it like this:
+    int k = ((Integer) t).intValue()/9; // valid way of casting, bracket will evaluate first
+Now, since both the operands of / are ints, it is an integer division. This means the resulting value is truncated (and not rounded). Therefore, the above statement will print 11 and not 12.
+
+----- Arrays and ArrayList --
+Remember, ArrayList class implements List interface. which means List is superclass and ArrayList is child.
+---- lambda expression --
+Predicate interface type listed in your method must match the type that you pass through lambda.
+Predicate is typed to List (not ArrayList) in the checkList method, therefore, the parameter type in the lambda expression must also be List. It cannot be ArrayList.
+
+--------- for garbage Collection ---
+Any object will become eligible for garbage collection just after the line statement in which, no references pointing to that object.
+not at the same line but from the next line.
+----
+
+--- points regarding enhanced for loop ---
+--> It can iterate over an array or a Collection but not a Map.
+An enhanced for loop needs either an array or an object of a class that implements java.lang.Iterable. Map does not implement Iterable, though you can use keySet() or values() methods to get a Collection (which extends Iterable) and then iterate over that Collection.
+--> Since there is no explicit condition check written in the code, it provides less opportunity to write code that causes infinite loop.
+--> You cannot find out the number of the current iteration while iterating.
+Unlike in a regular for loop, there is no iteration variable available in an enhanced for loop, so it is not possible to determine the number of the iteration just by using the enhanced for loop.
+
+--- inheritance ---
+A final class cannot be subclassed.
+Although declaring a method static usually implies that it is also final, this is not true for classes. An inner class can be declared static and still be extended.
+Note that for classes, final means it cannot be extended, while for methods, final means it cannot be overridden in a subclass.
+The native keyword can only be used on methods, not on classes and or variables.
+
 --- 
-
-
