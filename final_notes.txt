@@ -692,4 +692,53 @@ s = s + 'C'; // this will assign "nullC" string value to s. keep in mind.
 Since newStr is null at the beginning, the first iteration of the loop assigns "nullg" to newStr. Therefore, at the end of the loop, newStr is actually "nullgood".
 Had newStr been defined as String newStr = ""; then the program would have printed false for newStr == myStr because both the references are pointing to two different objects, and true for newStr.equals(myStr) because both the objects contain the exact same String.
 
------------ Q 11
+-----
+interface doesn't inherits java.lang.Object class. because, interface can extends only other interfaces and not classes. Though an instance of an object that implements an interface inherits java.lang.Object. Otherwise, Java would support multiple inheritance for objects, which it doesn’t.
+why we can see Objects class methods in interface because, An interface implicitly declared one method for each public method in Object. Thus the equals method is implicitly declared as a member in an interface (unless it already inherits it from a superinterface).
+
+----------- few Wrapper class concepts -->
+1. new Long(mStr); // this is valid as, Auto unboxing will occur // here Long Wrapper class use constructor to convert the value
+2. Long.parseLong(mStr); // this is valid and it will return primitive value for any string aurgument
+3. Long.valueOf(mStr).longValue(); // Long.valueOf(mStr) returns a Long object containing 123. longValue() on the Long object returns 123.
+4. Long.longValue(mStr); // invalid, does not compile // longValue() is a non-static method in Long class, hence longValue() method can be accessed by reference variable only.
+5. (new Long()).parseLong(mStr); // Long (or any wrapper class) does not have a no-args constructor, so new Long() is invalid.
+
+Notes :
+The string passed to second constructor should be parse-able to number , otherwise you will get run time NumberFormatException.
+Wrapper Class Character has only one constructor which takes char type as an argument. It doesn’t have a constructor which takes String as an argument. Because, String can not be converted into Character.
+Wrapper class Float has three constructors. The third constructor takes double type as an argument.
+
+	Byte B1 = new Byte((byte) 10);     //Constructor which takes byte value as an argument
+        Byte B2 = new Byte("10");          //Constructor which takes String as an argument
+ 
+        //Byte B3 = new Byte("abc");      //Run Time Error : NumberFormatException
+ 
+        //Because, String abc can not be parse-able to byte
+ 
+        Short S1 = new Short((short) 20);   //Constructor which takes short value as an argument
+        Short S2 = new Short("10");         //Constructor which takes String as an argument
+ 
+        Integer I1 = new Integer(30);     //Constructor which takes int value as an argument
+        Integer I2 = new Integer("30");   //Constructor which takes String as an argument
+ 
+        Long L1 = new Long(40);      //Constructor which takes long value as an argument
+        Long L2 = new Long("40");    //Constructor which takes String as an argument
+ 
+        Float F1 = new Float(12.2f);      //Constructor which takes float value as an argument
+        Float F2 = new Float("15.6");   //Constructor which takes String as an argument
+        Float F3 = new Float(15.6d);    //Constructor which takes double value as an argument
+ 
+        Double D1 = new Double(17.8d);       //Constructor which takes double value as an argument
+        Double D2 = new Double("17.8");     //Constructor which takes String as an argument
+ 
+        Boolean BLN1 = new Boolean(false);       //Constructor which takes boolean value as an argument
+        Boolean BLN2 = new Boolean("true");      //Constructor which takes String as an argument
+	// If you pass a string other than true or false to the second constructor of Boolean wrapper class, the object is initialized with false. example: Boolean BLN3 = new Boolean("abc");     //passed string "abc" // return false boolean value
+	
+ 
+        Character C1 = new Character('D');      //Constructor which takes char value as an argument
+        Character C2 = new Character("abc");    //Compile time error : String abc can not be converted to character
+	
+	
+	
+-----------------------------
