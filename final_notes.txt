@@ -151,6 +151,7 @@ not even char or byte can compare with int and int can't be comapred with long t
 --> you can't initialize an array with new keyword and array default construtor like in general we do for all other class. Instead, Array is initialzed using new keyword followed by type of array. {(example:- new Array() not allowed), (but int arr[] = new int[5] is allowed)}
 Also remember, you can't create an array like this "int arr[] = new int[]", means you must either give array dimensions or array initializer values. even creating empty array is legal, means Array of Zero length. 
 like int arr[] = new int[5], or int arr[] = new int[] {5, 2}, or int arr[] = new int[] {} // all valid
+String[] sA = {new String( "aaa")}; // valid
 
 --> An array declaration becomes invalid, when you specify the size of array within square bracket and declaring, instantiating and initializing an array at the single line of code.
 example:-
@@ -555,3 +556,56 @@ It is not required for a class to have a main method. The main method is require
         4. Any other statements that is making any changes to instance variable in the order they appear in the file.
         5. The constructor.
 ------------------------------------------------------	
+
+
+enthuware Standard test 1 --> 
+--> Trying to override a static method with a non-static method (and vice-versa) in a class or interface will result in a compilation error. Although,
+You can, however, have a default method in a subinterface with the same signature as a static method of its super interface because a static method of an interface can only be called using that interface's name. 
+Example:
+interface I{
+   public default void invalid(){ }
+   public static void valid(){ } //Can be called only using I.valid();
+}
+interface I2 extends I{
+   public static void invalid(){ } //WILL NOT COMPILE
+   public default void valid(){ } //this is ok. 
+}
+-->  static methods can never be abstract (neither in an interface nor in a class).
+-->  An interface can have a static method but the method must have a body.
+-->  An interface method cannot be default and static at the same time because a default method is always an instance method.
+
+--> Signature of equals method is : boolean equals(Object o); So it can take any object.
+The equals methods of all wrapper classes first check if the two object are of same class or not. If not, they immediately return false. Hence it will print not equal.
+
+--> checked exception must be declared or handled by all caller methods, in hirarchical way.
+java.lang.Exception is a checked Exception. Which means, the method that throws this exception must declare it in the throws clause. Hence, yourMethod must declare throws Exception in its throws clause.
+Change declaration of all the three method to include throws Exception or handle in catch block of method respectively.
+
+--> Here, b refers to an object of class Beta so b.getH() will always call the overridden (subclass's method). However, the type of reference of b is Baap. so b.h will always refer to Baap's h.
+
+Further, inside Beta's getH(), Beta's h will be accessed instead of Baap's h because you are accessing this.h ('this' is implicit) and the type of this is Beta.
+
+--> Although generics are not included in this exam, some candidates have reported getting similar questions that incidently touch generic syntax but are not really about generics.
+
+This question is based on your understand of is-a relationship. When class A extends or implements B directly or indirectly, you can say that A is-a B. Here, Car directly extends Vehicle and directly implements Drivable. Therefore, a Car is-a Vehicle and a Car is-a Drivable.
+Similarly, an SUV is-a Car and since Car is-a Vehicle and is-a Drivable, SUV is also a Vehicle and a Drivable.
+
+Now, the rule is that if you have a container that is meant to contain A, then you can add anything that is-a A to that container. For example, if you have ArrayList<Car>, you can add a SUV to it because an SUV is-a Car. But if you have ArrayList<SUV>, you cannot add a Car to it because a Car is not an SUV.
+
+--> String[] sA = new String[1] { "aaa"}; // does not compile // Array can't declare and initialze at the same line.
+Array size cannot be given here as the array is being initialized in the declaration.
+
+--> Only java.lang package is imported automatically. All other packages including exception package must be imported explicitly.
+
+--> n case of overriding, the return type of the overriding method must match exactly to the return type of the overridden method if the return type is a primitive.
+(In case of objects, the return type of the overriding method may be a subclass of the return type of the overridden method.)
+
+--> Lambda expression points to be noted:-
+Predicate is typed to List (not ArrayList) in the checkList method, therefore, the parameter type in the lambda expression must also be List. It cannot be ArrayList.
+The add method of ArrayList returns a boolean. Further, it returns true if the list is altered because of the call to add. In this case, al.add("hello") indeed alters the list because a new element is added to the list.
+
+--> Compiler will complain that the method intValue() is not available in Object. This is because the . operator has more precedence than the cast operator. So you have to write it like this:
+    int k = ((Integer) t).intValue()/9;
+Now, since both the operands of / are ints, it is an integer division. This means the resulting value is truncated (and not rounded). Therefore, the above statement will print 11 and not 12.
+
+--> 
