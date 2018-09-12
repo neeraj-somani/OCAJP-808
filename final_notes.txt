@@ -710,7 +710,7 @@ why we can see Objects class methods in interface because, An interface implicit
 ----------- few Wrapper class concepts -->
 1. new Long(mStr); // this is valid as, Auto unboxing will occur // here Long Wrapper class use constructor to convert the value
 2. Long.parseLong(mStr); // this is valid and it will return primitive value for any string aurgument
-3. Long.valueOf(mStr).longValue(); // Long.valueOf(mStr) returns a Long object containing 123. longValue() on the Long object returns 123.
+3. Long.valueOf(mStr).longValue(); // Long.valueOf(mStr) returns a Long object containing 123. longValue() on the Long object returns 123, which long primitive type value.
 4. Long.longValue(mStr); // invalid, does not compile // longValue() is a non-static method in Long class, hence longValue() method can be accessed by reference variable only.
 5. (new Long()).parseLong(mStr); // Long (or any wrapper class) does not have a no-args constructor, so new Long() is invalid.
 
@@ -769,6 +769,9 @@ int bin = 0b1111_0000_1100_1100;
 
 In this question, StringWrapper class does not implement toString method and so Object class's version is used.
 
-----------------
+---------------- Java Basics ---
+1. you can have class with Super or This as well. Don't get confuse with super()/ this() keywords which are all in small-case. While the class and its constructor follow CamelCase letter format.
+
+--- 
 
 
