@@ -634,14 +634,17 @@ means, first array should be build properly. Then only we will go to access it. 
 Remember, whenever you will refer null and perform operation on it. it will throw NullPointerException.
 
 --> Different types of Exceptions -->
+-------- ------ Unchecked (Runtime) Exception ---
 java.lang.SecurityException -->  extends RuntimeException:
 java.lang.ClassCastException --> extends RuntimeException:
 java.lang.NullPointerException --> extends RuntimeException:
 java.lang.IndexOutOfBoundsException --> extends RuntimeException
 IllegalArgumentException ---> extends RuntimeException: 
 IllegalStateException ---> extends RuntimeException:
-------
+------ checked Exception ---
 java.lang.CloneNotSupportedException --> extends Exception
+FileNotFoundException --> extends Exception
+IOException --> extends Exception
 
 Below are brief description of each Exception class -->
 java.lang.SecurityException
@@ -685,6 +688,14 @@ These are the six facts on Strings:
 5. Strings computed at run time are newly created and therefore are distinct. (So line 4 prints false.)
 6. The result of explicitly interning a computed string is the same string as any pre-existing literal string with the same contents. (So line 5 prints true.)
 
+example:- below lines in testPackage.Test.java file.
+ 	String hello = "Hello", lo = "lo";
+      System.out.print((testPackage.Other.hello == hello) + " ");    //line 1 // true
+      System.out.print((other.Other.hello == hello) + " ");   //line 2 //true
+      System.out.print((hello == ("Hel"+"lo")) + " ");           //line 3 // true
+      System.out.print((hello == ("Hel"+lo)) + " ");              //line 4 // false
+      System.out.println(hello == ("Hel"+lo).intern());          //line 5 // true
+
 ----------
 String s = null;
 s = s + 'C'; // this will assign "nullC" string value to s. keep in mind.
@@ -703,10 +714,10 @@ why we can see Objects class methods in interface because, An interface implicit
 4. Long.longValue(mStr); // invalid, does not compile // longValue() is a non-static method in Long class, hence longValue() method can be accessed by reference variable only.
 5. (new Long()).parseLong(mStr); // Long (or any wrapper class) does not have a no-args constructor, so new Long() is invalid.
 
-Notes :
-The string passed to second constructor should be parse-able to number , otherwise you will get run time NumberFormatException.
-Wrapper Class Character has only one constructor which takes char type as an argument. It doesn’t have a constructor which takes String as an argument. Because, String can not be converted into Character.
-Wrapper class Float has three constructors. The third constructor takes double type as an argument.
+Notes - 3 points:
+--> The string passed to second constructor should be parse-able to number , otherwise you will get run time NumberFormatException.
+--> Wrapper Class Character has only one constructor which takes char type as an argument. It doesn’t have a constructor which takes String as an argument. Because, String can not be converted into Character.
+--> Wrapper class Float has three constructors. The third constructor takes double type as an argument.
 
 	Byte B1 = new Byte((byte) 10);     //Constructor which takes byte value as an argument
         Byte B2 = new Byte("10");          //Constructor which takes String as an argument
@@ -739,6 +750,25 @@ Wrapper class Float has three constructors. The third constructor takes double t
         Character C1 = new Character('D');      //Constructor which takes char value as an argument
         Character C2 = new Character("abc");    //Compile time error : String abc can not be converted to character
 	
-	
-	
 -----------------------------
+Classes that overrides equals method ----
+--> String , Array and Arraylist override equals method, because they want to compare values passing to them.
+--> SringBuffer/StringBuilder -- don't override equals method because these are mutable classes and hence, equals method on them perform default implementation that is object comparision, same as (==).
+
+------------- how to put underscore (_) in between for any interger values ----
+--> An underscore can only occur in between two digits. 
+--> You may use underscore for all kinds of numbers including long, double, float, binary, as well as hex.  For example, the following are all valid numbers - 
+int hex = 0xCAFE_BABE;
+float f = 9898_7878.333_333f;
+int bin = 0b1111_0000_1100_1100;
+
+----- String / StringBuilder --
+1. When one of the operands of the + operator is a String and other is an object (other than String), toString method is called on the other operand and then both the Strings are concatenated to produce the result of the operation.
+2. Object class contains an implementation of toString that returns the name of the class (including the package name) and the hash code of the object in the format <classname>@<hashcode>. For example, System.out.println("Hello, "+new Object()); will print Hello, java.lang.Object@3cd1a2f1, where 3cd1a2f1 is the hash code of the object.
+3. StringBuilder class provides its own implementation of toString method, which returns the String value of its contents.
+
+In this question, StringWrapper class does not implement toString method and so Object class's version is used.
+
+----------------
+
+
