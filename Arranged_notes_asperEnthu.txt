@@ -30,6 +30,16 @@ Similarly, an SUV is-a Car and since Car is-a Vehicle and is-a Drivable, SUV is 
 
 Now, the rule is that if you have a container that is meant to contain A, then you can add anything that is-a A to that container. For example, if you have ArrayList<Car>, you can add a SUV to it because an SUV is-a Car. But if you have ArrayList<SUV>, you cannot add a Car to it because a Car is not an SUV.
 
+IS-A Relationship
+* IS-A relationship also known as ‘inheritance’.
+* By using extends keyword we can implement inheritance.
+* The main advantage is reusability.
+
+HAS – A Relationship
+* Also known as Composition or Aggregation .
+* There is no specific keyword, but most of the cases we can implemented by using new keyword.
+* Main advantage is reusability.
+
 
 --> classes that can't be inherited because those are final classes ---
 String, StringBuilder, and StringBuffer - all are final classes.
