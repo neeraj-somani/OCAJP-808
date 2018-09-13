@@ -20,6 +20,27 @@ Working with Java API - Time and Date -
 ------------------------ from line 314 -- need to start copy
 
 ***************************************Java Basics - ***************************************
+--> Only java.lang package is imported automatically. All other packages must be imported explicitly.
+
+---------------- Java Basics ---
+1. you can have class with Super or This keywords as well. Don't get confuse with super()/ this() keywords which are all in small-case. While the class and its constructor follow CamelCase letter format.
+
+ When class A extends or implements B directly or indirectly, you can say that A is-a B. Here, Car directly extends Vehicle and directly implements Drivable. Therefore, a Car is-a Vehicle and a Car is-a Drivable.
+Similarly, an SUV is-a Car and since Car is-a Vehicle and is-a Drivable, SUV is also a Vehicle and a Drivable.
+
+Now, the rule is that if you have a container that is meant to contain A, then you can add anything that is-a A to that container. For example, if you have ArrayList<Car>, you can add a SUV to it because an SUV is-a Car. But if you have ArrayList<SUV>, you cannot add a Car to it because a Car is not an SUV.
+
+
+--> classes that can't be inherited because those are final classes ---
+String, StringBuilder, and StringBuffer - all are final classes.
+1. Remember that wrapper classes for primitives (java.lang.Boolean, java.lang.Integer, java.lang.Long, java.lang.Short etc.) are also final and so they cannot be extended. 
+2. java.lang.Number, however, is not final. Integer, Long, Double etc. extend Number.
+3. java.lang.System is final as well.
+
+---> need to memorize this point --
+It is not required for a class to have a main method. The main method is required only if you want to execute that class directly from a command line.  Further, running from command line is not the only way to test a class.
+
+--> classes that can't be inherited because those are final classes ---
 private, protected and public can be applied to a nested class (not in OCA).A top level class is a class that is not a nested class. A nested class is any class whose declaration occurs within the body of another class or interface.
 
 synchronized keyword can never be applied to a class or non-primitive variables. It can only be applied to a method or a block.
@@ -47,7 +68,65 @@ example:- if a main method needs to access a variable directly it must be static
 --> calling static method is tied to the type of the reference variable and doesn't depend on the type of the object that's assigned to the reference variable. The static method belongs to a class and not to its objects. means, if reference variable is of parent class the static method of parent class would be called. Not the static method of child (because it can't be overridden). if reference variable of child class is used, then it will call child class static method.
       --> --> there is one exception, since child class inherit all method of parent, if child class doesn't define static method then on child class reference variable call, parent method would be called, as this static method of parent is now became a member of child class as well.
 
+--> variable types in a class ----
+"class level" means static fields and they can be accessed from anywhere (i.e. static as well as non-static methods) in the class (and from outside the class depending on their accessibility).
+"instance level" means the instance fields and they can be accessed only from instance methods in the class.
+local variables are basically defined within a method and it must be initailized before use, else code won't compile.
+
+--> correct order of restrictiveness for access modifiers...
+public < protected < package (i.e. no modifier) < private
+--> Members with default accessibility are only accessible within the class itself and from classes in the same package.
+Protected members are in addition accessible from subclasses. Members with private accessibility are only accessible
+within the class itself.
+
+--> The visibility of the class is not limited by the visibility of its members. A class with all the members declared private can still be declared public or a class having all public members may be declared private.
+
+--> Note that calling super(); will not always work because if the super class has defined a constructor with arguments and has not defined a no args constructor then no args constructor will not be provided by the compiler. It is provided only to the class that does not define ANY constructor explicitly.
+
+--> Fields in an interface are implicitly public, static and final. Although you can put these words in the interface definition but it is not a good practice to do so.
+
+--> You cannot apply any modifier except final to a local variable. i.e. you cannot make them transient, volatile, static, public, and private.
+But you can apply access modifiers (public private and protected) and final, transient, volatile, static to instance variables.
+You cannot apply native and synchronized to any kind of variable.
+
+
+--> The order of keywords for a static import must be "import static ... ".
+You can either import all the static members using import static java.lang.Integer.* or one specific member using import static java.lang.Integer.MAX_VALUE;
+You must specify the full package name of the class that you are importing (just like the regular import statement). So, import static Integer.*; is wrong.
+example:- import static java.lang.System.*; // valid (so that we can use out field of System,like this out.println("test"); directly.
+
+
+
 *************************************** Java Basics - OO Concepts -*************************************** 
+
+-------- Order of Initialization ---->  *** Very imp (page 202)    
+        1. If there is a superclass, initialize it first. 
+        2. Static variable declarations and static initializers in the order they appear in the file.
+        3. Instance variable declarations and instance initializers in the order they appear in the file.
+        4. Any other statements that is making any changes to instance variable in the order they appear in the file.
+        5. The constructor.
+------------------------------------------------------
+
+-----
+interface doesn't inherits java.lang.Object class. because, interface can extends only other interfaces and not classes. Though an instance of an object that implements an interface inherits java.lang.Object. Otherwise, Java would support multiple inheritance for objects, which it doesn’t.
+why we can see Objects class methods in interface because, An interface implicitly declared one method for each public method in Object. Thus the equals method is implicitly declared as a member in an interface (unless it already inherits it from a superinterface).
+
+
+--> Trying to override a static method with a non-static method (and vice-versa) in a class or interface will result in a compilation error. Although,
+You can, however, have a default method in a subinterface with the same signature as a static method of its super interface because a static method of an interface can only be called using that interface's name. 
+Example:
+interface I{
+   public default void invalid(){ }
+   public static void valid(){ } //Can be called only using I.valid();
+}
+interface I2 extends I{
+   public static void invalid(){ } //WILL NOT COMPILE
+   public default void valid(){ } //this is ok. 
+}
+-->  static methods can never be abstract (neither in an interface nor in a class).
+-->  An interface can have a static method but the method must have a body.
+-->  An interface method cannot be default and static at the same time because a default method is always an instance method.
+
 
 --> Code that tries to access an uninitialized local variable won't compile.
 --> In this case Laptop reference variable and life reference variable are referring to two different objects. Any changes on any specific  object will not impact each other.
@@ -76,9 +155,20 @@ getClass().getName() + '@' + Integer.toHexString(hashCode())
 
 if we override toString() method of Object class then the response of "this" keyword would depend on the return value of overridden toString() method.
 
+--> An important aspect of encapsulation is that other classes should not be able to modify the state fields of a class directly. Therefore, the data members should be private (or protected if you want to allow subclasses to inherit the field) and if the class wants to allow access to these fields, it should provide appropriate setters and getters with public access.
+
 
 
 *************************************** Working with Java Data Types - ***************************************
+
+------------- how to put underscore (_) in between for any interger values ----
+--> An underscore can only occur in between two digits. 
+--> You may use underscore for all kinds of numbers including long, double, float, binary, as well as hex.  For example, the following are all valid numbers - 
+int hex = 0xCAFE_BABE;
+float f = 9898_7878.333_333f;
+int bin = 0b1111_0000_1100_1100;
+
+
 --> The integral types are byte, short, int, and long, whose values are 8-bit, 16-bit, 32-bit and 64-bit signed two's-complement integers, respectively, and char, whose values are 16-bit unsigned integers representing UTF-16 code units.
 --> Remember, when a char primitive data type used with arithmetic operators, its ASCII value is used, which is int value only. 
 
@@ -119,9 +209,18 @@ b = k; //Okay because k is final and 10 fits into a byte
 final float f = 10.0;//will not compile because 10.0 is a double even though the value 10.0 fits into a float
 i = f;//will not compile.
 
+--> The underscore can't be placed in between (0_x or 0_b) or even just after the initials (0b_10 or 0x_25). only exception it can be placed after first 0 (ex:- 0_1010_11). For hexaDecimal values the letter can be till f or F only, G and further is not allowed.
+
+--> note, x is primitive int. You cannot call any methods on a primitive. so this.x.setInt(...) or this.y.setInt(...) don't make any sense.
+
 
 *************************************** Working with Java Data Types - Garbage Collection -  ***************************************
 --> as soon as an object is set to null, the object held by the reference variable is free and is eligible for GC. when it gets Garbage collected will always be unknown.
+
+--------- for garbage Collection ---
+Any object will become eligible for garbage collection just after the line statement in which, no references pointing to that object.
+not at the same line but from the next line.
+----
 
 Remember that static and instance variables are automatically assigned a value even if you don't initialize them explicitly but local variables must be initialized explicitly before they are used.
 
@@ -131,6 +230,13 @@ Having uninitialized variables itself is not a problem. So there is no compilati
 
 Had percent been defined as final ( static final double percent = 0; ), the code would work. because compiler knows percent value at compile time and evaluate if statment to assign initial values to local variables
 
+--> --> When an object reference is marked as null, the object is marked for garbage collection. But you can't be sure exactly when a garbage collector will kick in to garbage collect the objects. A garbage collector is low-priority thread, its execution depends on OS> you can never be sure about which object have been garbage collected. you can only be sure about how many objects are eligible for garbage collection.
+
+--> every object operations should be assigned to reference variable. if you don't assign object to reference variable, it is not stored and become eligible for garbage collection.
+
+--> Garbage collection.  All you need to know is: --------------------------
+1. An object can be made eligible for garbage collection by making sure there are no references pointing to that object.
+2. You cannot directly invoke the garbage collector. You can suggest the JVM to perform garbage collection by calling System.gc();
 
 *************************************** Using Operators and Decision Constructs -  ***************************************
 ------ instanceof operator ---- type operator ---
@@ -161,9 +267,60 @@ If one operand expression is of type String, then string conversion is performed
   A value x of primitive type T is first converted to a reference value as if by giving it as an argument to an appropriate class instance creation expression e.g. if T is boolean, then use new Boolean(x) .
   toString() is defined by the primordial class Object; many classes override it, notably Boolean, Character, Integer, Long, Float, Double, and String.
 
+--> Below are the rules to understand for any expression evaluation:
+here, int i = 0; and The statement iA[i] = i = 30 ; will be processed as follows:
+iA[i] = i = 30; => iA[0] = i = 30 ;  =>  i = 30; iA[0] = i ; =>   iA[0] = 30 ;
+
+Here is what JLS says on this:
+1 Evaluate Left-Hand Operand First  
+2 Evaluate Operands before Operation  
+3 Evaluation Respects Parentheses and Precedence  
+4 Argument Lists are Evaluated Left-to-Right  
+
+--> a good question about how an expression can be evaluated with function and different operators
+int s = 5;
+s = s + s + mx(s) + ++s; // here value of s is assinged first to all the operands at a single strech, as you can see below
+s = 5 + 5 + mx(5) + 6; // then the calculation started
+s = 5 + 5+ 8 + 6;
+s = 24;
+
+
+--> 
+Note that  boolean operators have more precedence than =. (In fact, = has least precedence of all operators.)
+so, in (b2 != b1 = !b2)  first b2 != b1 is evaluated which returns a value 'false'. So the expression becomes false = !b2. And this is illegal because false is a value and not a variable!
+
+Had it been something like (b2 = b1 != b2) then it is valid because it will boil down to : b2 = false.
+Because all an if() needs is a boolean, now b1 != b2 returns false which is a boolean and as b2 =  false is an expression and every expression has a return value (which is actually the Left Hand Side of the expression). Here, it returns false, which is again a boolean.
+
+Note that return value of expression :  i = 10 , where i is an int, is 10 (an int).
+
+-----  Using Operators and Decision Constructs --
+Object t = new Integer(107); 
+int k = (Integer) t.intValue()/9; // invalid, casting of parent object reference to child reference 
+Compiler will complain that the method intValue() is not available in Object. This is because the . operator has more precedence than the cast operator. So you have to write it like this:
+    int k = ((Integer) t).intValue()/9; // valid way of casting, bracket will evaluate first
+Now, since both the operands of / are ints, it is an integer division. This means the resulting value is truncated (and not rounded). Therefore, the above statement will print 11 and not 12.
+
 
 *************************************** Using Loop Constructs - ***************************************
 
+--> Need to memorize few java rules:
+while (false) { x=3; } is a compile-time error because the statement x=3; is not reachable;
+Similarly, for( int i = 0; false; i++) x = 3; is also a compile time error because x= 3 is unreachable.
+
+In if(false){ x=3; }, although the body of the condition is unreachable, this is not an error because the JLS explicitly defines this as an exception to the rule. It allows this construct to support optimizations through the conditional compilation. For example,
+
+if(DEBUG){ System.out.println("beginning task 1"); } 
+Here, the DEBUG variable can be set to false in the code while generating the production version of the class file, which will allow the compiler to optimize the code by removing the whole if statement entirely from the class file.
+
+example:- 
+if (false) { x=3; } // valid
+for( int i = 0; i< 0; i++) x = 3; // valid
+
+--> Note that it is OK to override a method by an abstract method.
+
+
+--> nested if-else statements are very tricky. need to focus more on this. if there is any else statment (doesn't matter about its indentation in java), belongs to the most inner if statement. means, the inner if statement might conceivably own the else clause and outer most if doesn't have even any else clause. also, remember, there can't be 2 else associtaed with one if. its always if-else.
 
 --> switch statement limitation --> it can't accept long, boolean, double and float value in its consturct aurgument.
 --> each type of loop can accept single statement without curly braces but multiple statement should be inside curly braces.
@@ -183,6 +340,79 @@ As per the API documentation for charAt, it throws IndexOutOfBoundsException if 
 Both - ArrayIndexOutOfBoundsException and StringIndexOutOfBoundsException, extend IndexOutOfBoundsException and although in practice, the charAt method throws StringIndexOutOfBoundsException, it is not a valid option because the implementation is free to throw some other exception as long as it is an IndexOutOfBoundsException. There are questions in the exam on this aspect.
 
 -->  "instanceof" is all smallcase letter operator to compare an object for its class instance.
+
+---> --> concept, if you modify the state of the loop variable, the modified object state will be reflected in the array. but if you assign a new object to the loop variable, it won't be reflected in the list or the array that's being iterated. you can compare this behavior of the enhanced for loop variable with the behavior of object references passed as arguments to a method.
+
+--> break; statement breaks the execution of current loop. means, if you have a loop that should execute from 0 to 9 and you hit break; statement at 5 position then loop will not run for any value after 5, means from 6 to 9.
+--> break statement are valid in iteration of loops (for, do, while) and in switch statement but not in if-else statement.
+--> continue; statment, if you hit continue statment at 5 position, it will stop the current execution but continue run of loop from 6 to 9 value iteration.
+--> continue; statement are valid in iteration of loops only (for, do, while) but invalid in switch or if-else statement.
+
+
+--> Very important for exam:----------------- labeled break or continue statements ------------
+you can assign label to any statment in java file. but when that label is used with break statment, then that break statment must be within the scope of label. else code won't compile.
+example:-
+void crazyLoop(){
+   int c = 0;
+   JACK: while (c < 8){
+       JILL: System.out.println(c);
+       if (c > 3) break JILL; else c++;
+   }
+}
+here, Because break JILL; would be valid only when it is within the block of code under the scope of the label JILL. 
+In this case, the scope of JILL extends only up till System.out.println(c); and break JILL; is out of the scope of the label.
+Here, we need to understand that label is either declared for specific loop (while, do-while, for) or for specific individual statements. 
+
+Remember that a labeled break or continue statement must always exist inside the loop where the label is declared. Here, if(j == 4) break POINT1; is a labelled break that is occurring in the second loop while the label POINT1 is declared for the first loop.
+
+You can apply a label to any code block or a block level statement (such as a for statement) but not to declarations. For example: loopX : int i = 10;
+
+Even if the break statment takes the control out of the try-catch-finally block, the finally clause will be executed. A break without a label breaks the current loop (i.e. no iterations any more) and a break with a label tries to pass the control to the given label.
+'Tries to' means that if the break is in a try block and the try block has a finally clause associated with it then it will be executed.
+
+
+
+------------- switch statement basics ----
+You should remember the following rules for a switch statement:
+
+1. Only String, byte, char, short, int, and enum values can be used as types of a switch variable. (String is allowed since Java 7.) Wrapper classes Byte, Character, Short, and Integer are allowed as well.
+
+2. The case constants must be assignable to the switch variable. For example, if your switch variable is of class String, your case labels must use Strings as well.
+
+3. The switch variable must be big enough to hold all the case constants. For example, if the switch variable is of type char, then none of the case constants can be greater than 65535 because a char's range is from 0 to 65535. Similarly, the following will not compile because 300 cannot be assigned to 'by', which can only hold values from -128 to 127.
+byte by = 10;
+switch(by){
+    case 200 :  //some code;
+    case 300 :  //some code;
+}
+
+4.  All case labels should be COMPILE TIME CONSTANTS. It is ok for Switch statement expression not to be COMPILE TIME CONSTANTS.
+
+5. No two of the case constant expressions associated with a switch statement may have the same value.
+
+6. At most one default label may be associated with the same switch statement.
+7. Default clause is not compulsory in switch consturt.
+---------------------------
+
+--> The point to note here is that the j in for loop is different from the instance member j. The for loop j is inside a method as well as inside the for loop. Therefore, j++ occuring in the for loop doesn't affect the while loop. The for loop prints 1 2 3 4 5.
+The while loop runs for the values 0 to 5 i.e. 6 iterations. Thus, 1 2 3 4 5 is printed 6 times. Note that after the end of the while loop the value of j is 6.
+
+
+--> imp points regarding for loop ---
+ ehanced for loop Cannot use an existing/predefined variable in the variable declaration part, also you cannot declare same variable which you declared at class level. final is the only modifier (excluding annotations) that is allowed in the variable declaration part of for loop.
+ example:- class A { 
+ int i =0; int[][] intArr = {{0, 2, 5}}; 
+ for (i : intArr[0]){} // invalid, enhanced for loop (means, enhanced for loop can't use same class variable)
+ for (int j:intArr[0]){} // valid, enhanced for loop
+ for (; i<5; i++){} // valid, regular for loop (means, regular for loop can use same class variable)
+ for (int k; k<0; k++){} //invalid, k must be declared and initialzed as well, to use it inside for loop
+
+--- points regarding enhanced for loop ---
+--> It can iterate over an array or a Collection but not a Map.
+An enhanced for loop needs either an array or an object of a class that implements java.lang.Iterable. Map does not implement Iterable, though you can use keySet() or values() methods to get a Collection (which extends Iterable) and then iterate over that Collection.
+--> Since there is no explicit condition check written in the code, it provides less opportunity to write code that causes infinite loop.
+--> You cannot find out the number of the current iteration while iterating.
+Unlike in a regular for loop, there is no iteration variable available in an enhanced for loop, so it is not possible to determine the number of the iteration just by using the enhanced for loop.
 
 *************************************** Constructors - ***************************************
 
@@ -204,16 +434,39 @@ Remember, a constructor don't have any return type. But a class can have a metho
 --> you can't instantiate an interface but you can create a reference of an interface to access its variable and methods.
 --> a method in an interface is implicitly (assumed to be) public. Hence, any class then implements this interface and its method should also be public.
 --> remember, return; statement is used to end the execution of method. but where we use it is also important.
+--> --> An abstract method must have the abstract keyword and must not have a method body i.e. { }.
+
+
 
 *************************************** Working with Methods - Overloading / overriding - ***************************************
+
+--> in case of overriding, the return type of the overriding method must match exactly to the return type of the overridden method if the return type is a primitive.
+(In case of objects, the return type of the overriding method may be a subclass of the return type of the overridden method.)
 
 --> an overriding method is allowed to change the return type to any subclass of the original return type, also known as covariant return type. Above statement valid for class objects. This does not apply to primitives, in which case, the return type of the overriding method must match exactly to the return type of the overridden method.
 --> The concept here is that an overriding method cannot make the overridden method more private.
 The access hierarchy in increasing levels of accessibility is:
 private->'no modifier'->protected->public ( public is accessible to all and private is accessible to none except itself.)
 
---> 
+--> --> --> remember, equals method is a public method defined in java.lang.Object class, which is inherited by all classes. but default implementation of equals method is to compare the object reference pointing to same object, then return TRUE else FALSE. Any class can override this method to implement other logic. Here, no override happneded.
+--> Need to check in general which classes overrides equals() method. 
+
+--> To call myMethod(int m, Object p, double d), you must pass exactly three parameters. If you try to pass less (or more) number of parameters, the code will not compile. Note that method parameters are not assigned default values.
+It is possible to declare a method that can take variable number of parameters. For example: 
+public static void someMethod(Object... params){
+        System.out.println(params.length); }
+You can call this method by passing any number of parameters. In this case, calling someMethod() without any parameter will print 0. i.e. the length of params array will be 0. params will NOT be null.
+
+--> The return type should be same for overridden and overriding method, if return type is primitime type.
+Note that when a method returns objects (as opposed to primitives, like in this question), the principle of covariant returns applies. Meaning, the overriding method is allowed to return a subclass of the return type defined in the overridden method. Thus, if a base class's method is: public A m(); then a subclass is free to override it with: public A1 m(); if A1 extends A.
+
 *************************************** Working with Inheritance - ***************************************
+--- inheritance ---
+A final class cannot be subclassed.
+Although declaring a method static usually implies that it is also final, this is not true for classes. An inner class can be declared static and still be extended.
+Note that for classes, final means it cannot be extended, while for methods, final means it cannot be overridden in a subclass.
+The native keyword can only be used on methods, not on classes and or variables.
+
 
 Basics of Inheritance -->
 Which variable (or static method) will be used depends on the class that the variable is declared of.
@@ -248,6 +501,15 @@ Phone phone2 = new Tablet(); // only phone members accessible, child overridden 
 	// to access child members, need to cast explicitly //System.out.println(((Tablet)phone2).playmovie);
 Tablet tablet2 = new Tablet(); // all parent and child members accessible as child inherit them
 
+----------- Inheritance / Polymorphism (override, overload, hidden) ------------------
+1. Interface variables are public static final implicitly, means constant and hidden. they can be called only using interface reference and not by any class who is implementing this interface.
+2. In case of methods, an interface can have static, default or regular method with (public access modifier, this is implicit).
+	--> static is again hidden method and can't be access directly but it can be accessed only using Interface name. example: Movable.test1();. means, you can't access it even using instance of derived class who is implementing it.
+	--> default method can be empty or can give default implementation of a method. it can be overrided as well. it can also be access by interface reference variable in the class where class implemented an interface.
+	--> regular method behaves also similar to default method. its an abstract method by default and can be overridden and accessed using reference variable of interface or derived class.
+
+
+
 *************************************** Working with Inheritance - instanceof - ***************************************
 -->  "instanceof" is all smallcase letter operator to compare an object for its class instance.
 The instanceof operator returns true if the object-reference on its left, points to an object of class-type on its right, otherwise,
@@ -255,6 +517,62 @@ The instanceof operator returns false, if there is a mismatch between object ref
 
 *************************************** Handling Exceptions - ***************************************
 
+--> If the array reference expression produces null instead of a reference to an array, then a NullPointerException is thrown at runtime, but only after all parts of the array reference expression have been evaluated and only if these evaluations completed normally. 
+
+This means, first index = 2 will be executed, which assigns 2 to index. After that null[2] is executed, which throws a NullPointerException. But this exception is caught by the catch block, which prints nothing. So it seems like NullPointerException is not thrown but it actually is.
+In other words, the embedded assignment of 2 to index occurs before the check for array reference produced by getArray().
+In an array access, the expression to the left of the brackets appears to be fully evaluated before any part of the expression within the brackets is evaluated. Note that if evaluation of the expression to the left of the brackets completes abruptly, no part of the expression within the brackets will appear to have been evaluated.
+
+means, first array should be build properly. Then only we will go to access it. then any other part of the statement will be evaluated.
+Remember, whenever you will refer null and perform operation on it. it will throw NullPointerException.
+
+--> Different types of Exceptions -->
+-------- ------ Unchecked (Runtime) Exception ---
+java.lang.SecurityException -->  extends RuntimeException:
+java.lang.ClassCastException --> extends RuntimeException:
+java.lang.NullPointerException --> extends RuntimeException:
+java.lang.IndexOutOfBoundsException --> extends RuntimeException
+IllegalArgumentException ---> extends RuntimeException: 
+IllegalStateException ---> extends RuntimeException:
+------ checked Exception ---
+java.lang.CloneNotSupportedException --> extends Exception
+FileNotFoundException --> extends Exception
+IOException --> extends Exception
+
+Below are brief description of each Exception class -->
+java.lang.SecurityException
+SecurityException extends RuntimeException: It is thrown by the security manager upon security violation. For example, when a java program runs in a sandbox (such as an applet) and it tries to use prohibited APIs such as File I/O, the security manager throws this exception.
+Since this exception is explicitly thrown using the new keyword by a security manager class, it can be considered to be thrown by the application programmer.
+
+java.lang.ClassCastException
+ClassCastException extends RuntimeException: Usually thrown by the JVM. Thrown to indicate that the code has attempted to cast an object to a subclass of which it is not an instance. For example, the following code generates a ClassCastException: 
+     Object x = new Integer(0);
+     System.out.println((String)x);
+
+java.lang.NullPointerException
+NullPointerException extends RuntimeException: Usually thrown by the JVM. Thrown when an application attempts to use null in a case where an object is required. These include: 
+  Calling the instance method of a null object. 
+  Accessing or modifying the field of a null object. 
+  Taking the length of null as if it were an array. 
+  Accessing or modifying the slots of null as if it were an array. 
+  Throwing null as if it were a Throwable value. 
+Applications should throw instances of this class to indicate other illegal uses of the null object.
+
+java.lang.IndexOutOfBoundsException
+IndexOutOfBoundsException extends RuntimeException: 
+Usually thrown by the JVM. Thrown to indicate that an index of some sort (such as to an array, to a string, or to a vector) is out of range.  Applications can subclass this class to indicate similar exceptions.
+ArrayIndexOutOfBoundsException and StringIndexOutOfBoundsException both extend IndexOutOfBoundsException.
+
+IllegalArgumentException extends RuntimeException: If a parameter passed to a method is not valid. Usually thrown by the application.
+
+IllegalStateException extends RuntimeException: Signals that a method has been invoked at an illegal or inappropriate time. In other words, the Java environment or Java application is not in an appropriate state for the requested operation. Usually thrown by the application. 
+
+java.lang.CloneNotSupportedException
+public class CloneNotSupportedException extends Exception
+Thrown to indicate that the clone method in class Object has been called to clone an object, but that the object's class does not implement the Cloneable interface.
+Applications that override the clone method can also throw this exception to indicate that an object could not or should not be cloned.
+
+----------
 --> Note --> if you try to unbox a null, you will get NullPointerException, but you can autobox or pass null without any issue
       3: List<Integer> heights = new ArrayList<>();
       4: heights.add(null); // this is legal, because a null reference can be assigned to any reference variable.
@@ -308,6 +626,41 @@ catch(Exception1|Exception2|Exception3 e){  }
 --> Any class that extends Exception class becomes a checked exception.
 --> Hence, when you call a method that throws a checked exception, you can either handle it using try-catch block or declare it to be thrown in caller method signature.
 
+--- Printing an Exception --> three ways to print an exception
+    1. let Java print it out, 
+    2. print just the message, or
+    3. print where the stack trace comes from
+  This example shows all three approaches:
+      5: public static void main(String[] args) {
+      6: try {
+      7: hop();
+      8: } catch (Exception e) {
+      9: System.out.println(e); // Just the name of the exception class and the message is printed.
+      10: System.out.println(e.getMessage()); // print just the message
+      11: e.printStackTrace(); // print complete chain of the names of the methods called, along with the line numbers
+      12: }
+      13: }
+      14: private static void hop() {
+      15: throw new RuntimeException("cannot hop");
+      16: }
+    This code results in the following output:
+	java.lang.RuntimeException: cannot hop  // Just the name of the exception class and the message is printed.
+	cannot hop
+	java.lang.RuntimeException: cannot hop //print complete chain of the names of the methods called, along with the line numbers
+	at trycatch.Handling.hop(Handling.java:15)
+	at trycatch.Handling.main(Handling.java:7)
+	
+--> few java Exception classes example:-
+java.io.FileNotFoundException   / java.io.IOException
+java.lang.OutOfMemoryError      /  java.lang.StackOverflowError
+java.lang.SecurityException. 
+This exception extends RuntimeException and is thrown by the security manager upon security violation. For example, when a java program runs in a sandbox (such as an applet) and it tries to use prohibited APIs such as File I/O, the security manager throws this exception.
+Since this exception is explicitly thrown using the new keyword by a security manager class, it can be considered to be thrown by the application programmer.
+
+--> checked exception must be declared or handled by all caller methods, in hirarchical way.
+java.lang.Exception is a checked Exception. Which means, the method that throws this exception must declare it in the throws clause. Hence, yourMethod must declare throws Exception in its throws clause.
+Change declaration of all the three method to include throws Exception or handle in catch block of method respectively.
+
 *************************************** Lambda Expressions - ***************************************
 A functional interface is an interface that contains exactly one abstract method. It may contain zero or more default methods and/or static methods. Because a functional interface contains exactly one abstract method, you can omit the name of that method when you implement it using a lambda expression. For example, consider the following interface - 
 interface Predicate<T> {
@@ -317,7 +670,19 @@ interface Predicate<T> {
 provided by the standard java library in java.util.function package.
 The purpose of this interface is to provide a method that operates on an object of class T and return a boolean.
 
+--> Lambda expression points to be noted:-
+Predicate is typed to List (not ArrayList) in the checkList method, therefore, the parameter type in the lambda expression must also be List. It cannot be ArrayList.
+The add method of ArrayList returns a boolean. Further, it returns true if the list is altered because of the call to add. In this case, al.add("hello") indeed alters the list because a new element is added to the list.
+
+---- lambda expression --
+Predicate interface type listed in your method must match the type that you pass through lambda.
+Predicate is typed to List (not ArrayList) in the checkList method, therefore, the parameter type in the lambda expression must also be List. It cannot be ArrayList.
+
+
 *************************************** Creating and Using Arrays - ***************************************
+--> String[] sA = new String[1] { "aaa"}; // does not compile // Array can't declare and initialze at the same line.
+Array size cannot be given here as the array is being initialized in the declaration.
+
 
 --> Array.binarySearch(number, 2); -> used for binary search (if number not found then (negate the expected position of number and add -1)
 --> Sorting for Array string type has specfic order --> first number, then uppercase then lowercase
@@ -354,7 +719,14 @@ Note that if evaluation of a dimension expression completes abruptly, no part of
 ia[0] --> will return 2D array, accessing 0th position 2D array of ia-3D array
 ia[0][0] --> will return 1D array, because we are going to access the 1D array.
 
+For Arrays: First, the dimension expressions are evaluated, left-to-right. If any of the expression evaluations completes abruptly, the expressions to the right of it are not evaluated.
+
 *************************************** Working with Java API - ArrayList - ***************************************
+
+-----------------------------
+Classes that overrides equals method ----
+--> String , Array and Arraylist override equals method, because they want to compare values passing to them.
+--> SringBuffer/StringBuilder -- don't override equals method because these are mutable classes and hence, equals method on them perform default implementation that is object comparision, same as (==).
 
 --> remove method in ArrayList that takes index value to remove element of List. Hence, be careful.
     example:-- 
@@ -384,10 +756,66 @@ System.out.println(al.indexOf(1.0));
 ArrayList does not have a field named length. It does have a method named size() though. So you can do:
 Double d = al.get(al.size()); It will compile but will throw IndexOutOfBoundsException at run time in this case because al.size() will return 0 and al.get(0) will try to get the first element in the list.
 
+private ArrayList<Integer> scores;
+Change getScores to return a copy of the scores list:
+   public ArrayList<Integer> getScores(){ 
+     return new ArrayList(scores); 
+  }
+If you return the same scores list, the caller would be able to add or remove elements from it, thereby rendering the average incorrect.
+This can be prevented by returning a copy of the list.
+
+--> When you create an array of Objects ( here, Strings) all the elements are initialized to null. So in the line 3, null is assigned to myStr.
+Note that. empty string is "" ( String str = ""; ) and is not same as null.
+
+--> some Array vs Arraylist points
+An ArrayList resized dynamically at run time as per the situation. An array cannot be resized once created. This reduces the amount of boiler plate code that is required to do the same task using an array.
+Neither an ArrayList nor an array is thread safe. If you have multiple threads trying to add and remove elements from an ArrayList or an array, you have to write additional code to ensure thread safety.
+arrays do not implement Collection interface. ArrayList does. This is actually an advantage of an ArrayList over an array.
+
+--> The concept to understand here is as follows -
+If the compiler can figure out that something can NEVER happen, then it flags an error. In this question, the compiler knows that ln, i or d can never point to the same object in any case because they are references to different classes of objects that have no relation ( superclass/subclass ) between themselves. Although, equals() method can be applied to any of them for comparision, as equals methods takes Objects as Aurgument.
+example:-
+Integer i = new Integer(42);
+Long ln = new Long(42);
+Double d = new Double(42.0);
+
 
 *************************************** Working with Java API - String, StringBuilder - ***************************************
 
+------------- facts about String Class ---- Q. 13 (Test 1)
+These are the six facts on Strings:
+1. Literal strings within the same class in the same package represent references to the same String object. 
+2. Literal strings within different classes in the same package represent references to the same String object. 
+3. Literal strings within different classes in different packages likewise represent references to the same String object. 
+4. Strings computed by constant expressions are computed at compile time and then treated as if they were literals. 
+5. Strings computed at run time are newly created and therefore are distinct. (So line 4 prints false.)
+6. The result of explicitly interning a computed string is the same string as any pre-existing literal string with the same contents. (So line 5 prints true.)
+
+example:- below lines in testPackage.Test.java file.
+ 	String hello = "Hello", lo = "lo";
+      System.out.print((testPackage.Other.hello == hello) + " ");    //line 1 // true
+      System.out.print((other.Other.hello == hello) + " ");   //line 2 //true
+      System.out.print((hello == ("Hel"+"lo")) + " ");           //line 3 // true
+      System.out.print((hello == ("Hel"+lo)) + " ");              //line 4 // false
+      System.out.println(hello == ("Hel"+lo).intern());          //line 5 // true
+
+----------
+String s = null;
+s = s + 'C'; // this will assign "nullC" string value to s. keep in mind.
+
+Since newStr is null at the beginning, the first iteration of the loop assigns "nullg" to newStr. Therefore, at the end of the loop, newStr is actually "nullgood".
+Had newStr been defined as String newStr = ""; then the program would have printed false for newStr == myStr because both the references are pointing to two different objects, and true for newStr.equals(myStr) because both the objects contain the exact same String.
+
 --> System.out.println(s + sb); // addision operator can be applied to String and StringBuilder both. // here s is String object and sb is StringBuilder object.
+
+
+----- String / StringBuilder --
+1. When one of the operands of the + operator is a String and other is an object (other than String), toString method is called on the other operand and then both the Strings are concatenated to produce the result of the operation.
+2. Object class contains an implementation of toString that returns the name of the class (including the package name) and the hash code of the object in the format <classname>@<hashcode>. For example, System.out.println("Hello, "+new Object()); will print Hello, java.lang.Object@3cd1a2f1, where 3cd1a2f1 is the hash code of the object.
+3. StringBuilder class provides its own implementation of toString method, which returns the String value of its contents.
+
+In this question, StringWrapper class does not implement toString method and so Object class's version is used.
+
 
 --> The getClass method always returns the Class object for the actual object on which the method is called irrespective of the type of the reference. Since s refers to an object of class String, s.getClass returns Class object for String  and similarly list.getClass returns Class object for ArrayList.
 example:- 	List<String> list = new ArrayList<>();
@@ -414,6 +842,89 @@ Here, the variable String is in scope and therefore the length of the string poi
 --> IndexOutOfBoundsException - if the any index in substring function is negative, or endIndex is larger than the length of this String object, or beginIndex is larger than endIndex.
 
 --> Need to understand all StringBuilder and String methods.
+
+--> --> Substring method of String class can't accept negative value. (for example: str.substring(2, -1) will throw runtime exception).
+--> its important to remember which string method takes what type of arguments, for example, 
+method "indexOf" can accept both String and char values.
+method startsWith and endsWith can accept only String values. Can't accept char value.
+method charAt can accept only method aurgument of type int. but remember, since java stored char values as unsigned integer values, its possible to pass char values as well in this method.
+example:- 
+String te = "12345";
+System.out.println(te.charAt('3')); // in this case it will throw exception StringIndexOutOfBoundsException, because charachter '3' is equal to (51) in unsigned integer value.
+System.out.println(te.charAt(3)); // this will compile successfully and print 4
+--> StringBuilder default object capacity is 16 char. (StringBuilder sb1 = new StringBuilder();)
+--> --> There is no concat method in StringBuilder. There is append method in StringBuilder to append any string.
+--> Also, insert method can be used to insert char, number, or String at any specified position of StringBuilder.
+
+Wrapper class --
+
+----------- few Wrapper class concepts -->
+1. new Long(mStr); // this is valid as, Auto unboxing will occur // here Long Wrapper class use constructor to convert the value
+2. Long.parseLong(mStr); // this is valid and it will return primitive value for any string aurgument
+3. Long.valueOf(mStr).longValue(); // Long.valueOf(mStr) returns a Long object containing 123. longValue() on the Long object returns 123, which long primitive type value.
+4. Long.longValue(mStr); // invalid, does not compile // longValue() is a non-static method in Long class, hence longValue() method can be accessed by reference variable only.
+5. (new Long()).parseLong(mStr); // Long (or any wrapper class) does not have a no-args constructor, so new Long() is invalid.
+
+Notes - 3 points:
+--> The string passed to second constructor should be parse-able to number , otherwise you will get run time NumberFormatException.
+--> Wrapper Class Character has only one constructor which takes char type as an argument. It doesn’t have a constructor which takes String as an argument. Because, String can not be converted into Character.
+--> Wrapper class Float has three constructors. The third constructor takes double type as an argument.
+
+	Byte B1 = new Byte((byte) 10);     //Constructor which takes byte value as an argument
+        Byte B2 = new Byte("10");          //Constructor which takes String as an argument
+ 
+        //Byte B3 = new Byte("abc");      //Run Time Error : NumberFormatException
+ 
+        //Because, String abc can not be parse-able to byte
+ 
+        Short S1 = new Short((short) 20);   //Constructor which takes short value as an argument
+        Short S2 = new Short("10");         //Constructor which takes String as an argument
+ 
+        Integer I1 = new Integer(30);     //Constructor which takes int value as an argument
+        Integer I2 = new Integer("30");   //Constructor which takes String as an argument
+ 
+        Long L1 = new Long(40);      //Constructor which takes long value as an argument
+        Long L2 = new Long("40");    //Constructor which takes String as an argument
+ 
+        Float F1 = new Float(12.2f);      //Constructor which takes float value as an argument
+        Float F2 = new Float("15.6");   //Constructor which takes String as an argument
+        Float F3 = new Float(15.6d);    //Constructor which takes double value as an argument
+ 
+        Double D1 = new Double(17.8d);       //Constructor which takes double value as an argument
+        Double D2 = new Double("17.8");     //Constructor which takes String as an argument
+ 
+        Boolean BLN1 = new Boolean(false);       //Constructor which takes boolean value as an argument
+        Boolean BLN2 = new Boolean("true");      //Constructor which takes String as an argument
+	// If you pass a string other than true or false to the second constructor of Boolean wrapper class, the object is initialized with false. example: Boolean BLN3 = new Boolean("abc");     //passed string "abc" // return false boolean value
+	
+ 
+        Character C1 = new Character('D');      //Constructor which takes char value as an argument
+        Character C2 = new Character("abc");    //Compile time error : String abc can not be converted to character
+	
+	
+	
+--> You need to remember the following points about Boolean:
+
+1. Boolean class has two constructors - Boolean(String) and Boolean(boolean)
+The String constructor allocates a Boolean object representing the value true if the string argument is not null and is equal, ignoring case, to the string "true". Otherwise, allocate a Boolean object representing the value false. Examples: new Boolean("True") produces a Boolean object that represents true. new Boolean("yes") produces a Boolean object that represents false.
+
+The boolean constructor is self explanatory.
+
+2. Boolean class has two static helper methods for creating booleans - parseBoolean and valueOf.
+Boolean.parseBoolean(String ) method returns a primitive boolean and not a Boolean object (Note - Same is with the case with other parseXXX methods such as Integer.parseInt - they return primitives and not objects). The boolean returned represents the value true if the string argument is not null and is equal, ignoring case, to the string "true". 
+
+Boolean.valueOf(String ) and its overloaded Boolean.valueOf(boolean ) version, on the other hand, work similarly but return a reference to either Boolean.TRUE or Boolean.FALSE wrapper objects. Observe that they dont create a new Boolean object but just return the static constants TRUE or FALSE defined in Boolean class.
+
+3. When you use the equality operator ( == ) with booleans, if exactly one of the operands is a Boolean wrapper, it is first unboxed into a boolean primitive and then the two are compared (JLS 15.21.2). If both are Boolean wrappers, then their references are compared just like in the case of other objects. Thus, new Boolean("true") == new Boolean("true") is false, but new Boolean("true") == Boolean.parseBoolean("true") is true.
+
+--> Signature of equals method is : boolean equals(Object o); So it can take any object.
+The equals methods of all wrapper classes first check if the two object are of same class or not. If not, they immediately return false. Hence it will print not equal.
+
+--> Compiler will complain that the method intValue() is not available in Object. This is because the . operator has more precedence than the cast operator. So you have to write it like this:
+    int k = ((Integer) t).intValue()/9;
+Now, since both the operands of / are ints, it is an integer division. This means the resulting value is truncated (and not rounded). Therefore, the above statement will print 11 and not 12.
+
+
 
 *************************************** Working with Java API - Time and Date - ***************************************
 
