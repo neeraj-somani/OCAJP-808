@@ -397,7 +397,7 @@ switch(by){
 enthuware test 1 -->
 lots of confusion with inheritence - how interface, classes behaves with object and reference variable, considering polymorphism (override and overload of methods)
 
------------ Inheritance - Polymorphism (override, overload, hidden) ------------------
+----------- Inheritance / Polymorphism (override, overload, hidden) ------------------
 1. Interface variables are public static final implicitly, means constant and hidden. they can be called only using interface reference and not by any class who is implementing this interface.
 2. In case of methods, an interface can have static, default or regular method with (public access modifier, this is implicit).
 	--> static is again hidden method and can't be access directly but it can be accessed only using Interface name. example: Movable.test1();. means, you can't access it even using instance of derived class who is implementing it.
@@ -414,8 +414,8 @@ example:- import static java.lang.System.*; // valid (so that we can use out fie
 --> The point to note here is that the j in for loop is different from the instance member j. The for loop j is inside a method as well as inside the for loop. Therefore, j++ occuring in the for loop doesn't affect the while loop. The for loop prints 1 2 3 4 5.
 The while loop runs for the values 0 to 5 i.e. 6 iterations. Thus, 1 2 3 4 5 is printed 6 times. Note that after the end of the while loop the value of j is 6.
 
---> note, x is primitive int.You cannot call any methods on a primitive. so this.x.setInt(...) or this.y.setInt(...) don't make any sense.
-Remember, a private valriable one class can't be accessed in another class by any means.
+--> note, x is primitive int. You cannot call any methods on a primitive. so this.x.setInt(...) or this.y.setInt(...) don't make any sense.
+
 
 --> The return type should be same for overridden and overriding method, if return type is primitime type.
 Note that when a method returns objects (as opposed to primitives, like in this question), the principle of covariant returns applies. Meaning, the overriding method is allowed to return a subclass of the return type defined in the overridden method. Thus, if a base class's method is: public A m(); then a subclass is free to override it with: public A1 m(); if A1 extends A.
@@ -608,13 +608,7 @@ The equals methods of all wrapper classes first check if the two object are of s
 java.lang.Exception is a checked Exception. Which means, the method that throws this exception must declare it in the throws clause. Hence, yourMethod must declare throws Exception in its throws clause.
 Change declaration of all the three method to include throws Exception or handle in catch block of method respectively.
 
---> Here, b refers to an object of class Beta so b.getH() will always call the overridden (subclass's method). However, the type of reference of b is Baap. so b.h will always refer to Baap's h.
-
-Further, inside Beta's getH(), Beta's h will be accessed instead of Baap's h because you are accessing this.h ('this' is implicit) and the type of this is Beta.
-
---> Although generics are not included in this exam, some candidates have reported getting similar questions that incidently touch generic syntax but are not really about generics.
-
-This question is based on your understand of is-a relationship. When class A extends or implements B directly or indirectly, you can say that A is-a B. Here, Car directly extends Vehicle and directly implements Drivable. Therefore, a Car is-a Vehicle and a Car is-a Drivable.
+ When class A extends or implements B directly or indirectly, you can say that A is-a B. Here, Car directly extends Vehicle and directly implements Drivable. Therefore, a Car is-a Vehicle and a Car is-a Drivable.
 Similarly, an SUV is-a Car and since Car is-a Vehicle and is-a Drivable, SUV is also a Vehicle and a Drivable.
 
 Now, the rule is that if you have a container that is meant to contain A, then you can add anything that is-a A to that container. For example, if you have ArrayList<Car>, you can add a SUV to it because an SUV is-a Car. But if you have ArrayList<SUV>, you cannot add a Car to it because a Car is not an SUV.
@@ -622,9 +616,9 @@ Now, the rule is that if you have a container that is meant to contain A, then y
 --> String[] sA = new String[1] { "aaa"}; // does not compile // Array can't declare and initialze at the same line.
 Array size cannot be given here as the array is being initialized in the declaration.
 
---> Only java.lang package is imported automatically. All other packages including exception package must be imported explicitly.
+--> Only java.lang package is imported automatically. All other packages must be imported explicitly.
 
---> n case of overriding, the return type of the overriding method must match exactly to the return type of the overridden method if the return type is a primitive.
+--> in case of overriding, the return type of the overriding method must match exactly to the return type of the overridden method if the return type is a primitive.
 (In case of objects, the return type of the overriding method may be a subclass of the return type of the overridden method.)
 
 --> Lambda expression points to be noted:-
@@ -790,7 +784,7 @@ int bin = 0b1111_0000_1100_1100;
 In this question, StringWrapper class does not implement toString method and so Object class's version is used.
 
 ---------------- Java Basics ---
-1. you can have class with Super or This as well. Don't get confuse with super()/ this() keywords which are all in small-case. While the class and its constructor follow CamelCase letter format.
+1. you can have class with Super or This keywords as well. Don't get confuse with super()/ this() keywords which are all in small-case. While the class and its constructor follow CamelCase letter format.
 
 -----  Using Operators and Decision Constructs --
 Object t = new Integer(107); 
@@ -799,8 +793,7 @@ Compiler will complain that the method intValue() is not available in Object. Th
     int k = ((Integer) t).intValue()/9; // valid way of casting, bracket will evaluate first
 Now, since both the operands of / are ints, it is an integer division. This means the resulting value is truncated (and not rounded). Therefore, the above statement will print 11 and not 12.
 
------ Arrays and ArrayList --
-Remember, ArrayList class implements List interface. which means List is superclass and ArrayList is child.
+
 ---- lambda expression --
 Predicate interface type listed in your method must match the type that you pass through lambda.
 Predicate is typed to List (not ArrayList) in the checkList method, therefore, the parameter type in the lambda expression must also be List. It cannot be ArrayList.
