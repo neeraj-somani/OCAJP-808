@@ -22,6 +22,11 @@ Working with Java API - Time and Date -
 ***************************************Java Basics - ***************************************
 --> Only java.lang package is imported automatically. All other packages must be imported explicitly.
 
+There are three distinct meanings for the final keyword in Java.
+A final class cannot be extended.
+A final method cannot be overridden.
+A final variable cannot be assigned to after it has been initialized.
+
 ---------------- Java Basics ---
 1. you can have class with Super or This keywords as well. Don't get confuse with super()/ this() keywords which are all in small-case. While the class and its constructor follow CamelCase letter format.
 
@@ -41,7 +46,8 @@ HAS – A Relationship
 * Main advantage is reusability.
 
 
---> classes that can't be inherited because those are final classes ---
+--> final classes can't be inherited.
+
 String, StringBuilder, and StringBuffer - all are final classes.
 1. Remember that wrapper classes for primitives (java.lang.Boolean, java.lang.Integer, java.lang.Long, java.lang.Short etc.) are also final and so they cannot be extended. 
 2. java.lang.Number, however, is not final. Integer, Long, Double etc. extend Number.
@@ -71,12 +77,13 @@ If you are using a variable in any specific statement that becomes undefined due
 
 --> A ".java" file can compile successfully even without having main method. Although, It will not make the class executable from the command line. be aware about this concept of java for exam.
 
---> a static member can access only static members but instance member can access both static and non-static (instance) members.
-example:- if a main method needs to access a variable directly it must be static.   code won't compile otherwise.
+--> a static member can access only static members but instance reference variable can access both static and non-static (instance) members.
+example:- if a main method needs to access a variable directly it must be static. code won't compile otherwise.
 
---> static method of a class are hidden methods
+--> static method of a class are hidden methods.
+
 --> calling static method is tied to the type of the reference variable and doesn't depend on the type of the object that's assigned to the reference variable. The static method belongs to a class and not to its objects. means, if reference variable is of parent class the static method of parent class would be called. Not the static method of child (because it can't be overridden). if reference variable of child class is used, then it will call child class static method.
-      --> --> there is one exception, since child class inherit all method of parent, if child class doesn't define static method then on child class reference variable call, parent method would be called, as this static method of parent is now became a member of child class as well.
+      --> --> there is one exception, since child class inherit all method of parent, if child class doesn't define static method then on child class reference variable call, parent class method would be called, as this static method of parent is now became a member of child class as well.
 
 --> variable types in a class ----
 "class level" means static fields and they can be accessed from anywhere (i.e. static as well as non-static methods) in the class (and from outside the class depending on their accessibility).
