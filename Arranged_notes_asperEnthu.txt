@@ -17,10 +17,19 @@ Working with Java API - ArrayList -
 Working with Java API - String, StringBuilder - 
 Working with Java API - Time and Date -
 
+-----------Disclaimer notes-----------
+1. In exam there could be few questions that does not follow standard naming convention. Be aware of that. like, class name in all smallcase letters. for those questions its ok, and we need to focus on concept.
+
+
 ------------------------ from line 314 -- need to start copy
 
 ***************************************Java Basics - ***************************************
 --> Only java.lang package is imported automatically. All other packages must be imported explicitly.
+
+It is not necessary for a java file to have a public class. The requirement is that if a class (or enum) is public then that class (or enum) must be defined in a file by the same name and that there can be only one public class (or enum) in a file.
+class main's main method will be executed. final is a valid modifier for the standard main method. 
+Note that final means a method cannot be overridden. Although static methods can never be overridden (they can be hidden), making a static method final prevents the subclass from implementing the same static method.
+
 
 There are three distinct meanings for the final keyword in Java.
 A final class cannot be extended.
@@ -45,7 +54,7 @@ HAS – A Relationship
 * There is no specific keyword, but most of the cases we can implemented by using new keyword.
 * Main advantage is reusability.
 
-
+--> If you have any line of code that is unreable in the the entire life of program them compiler will complain and code does not compile.
 --> final classes can't be inherited.
 
 String, StringBuilder, and StringBuffer - all are final classes.
@@ -112,7 +121,23 @@ You can either import all the static members using import static java.lang.Integ
 You must specify the full package name of the class that you are importing (just like the regular import statement). So, import static Integer.*; is wrong.
 example:- import static java.lang.System.*; // valid (so that we can use out field of System,like this out.println("test"); directly.
 
+--> you are not allowed to use any java reserved keywords in your code as an identifier or in loop label. like, for, while, int, etc.
+example:-
+Note that for is a reserved keyword, hence we can't use "for" keyword in place of "String" which is used as loop label. But you can use any other identifier as a label.
+For example, The following code is valid even though String is a class name and String is also used as an identifier!
+     String String = "";   //This is valid.
+     String : for(int i = 0; i< 10; i++) //This is valid too!
+     {
+        for (int j = 0; j< 10; j++){
+             if ( i+ j > 10 )  break String;
+        }
+       System.out.println( "hello");
+      }
+It will print hello 2 times.
 
+This is a very simple loop to follow if you know what break and continue do.
+break breaks the nearest outer loop. Once a break is encountered, no further iterations of that loop will execute.
+continue simply starts the next iteration of the loop. Once a continue is encountered, rest of the statements within that loop are ignored (not executed ) and the next iteration is started.
 
 *************************************** Java Basics - OO Concepts -*************************************** 
 
@@ -457,6 +482,17 @@ Remember, a constructor don't have any return type. But a class can have a metho
 
 *************************************** Working with Methods - Overloading / overriding - ***************************************
 
+--> To override a method in the subclass, the overriding method (i.e. the one in the subclass) MUST HAVE:
+.same name
+.same return type in case of primitives (a subclass is allowed for classes, this is also known as covariant return types).
+.same type and order of parameters
+.it may throw only those exceptions that are declared in the throws clause of the superclass's method or exceptions that are subclasses of the declared exceptions. It may also choose NOT to throw any exception.
+The names of the parameter types do not matter. For example, void methodX(int i) is same as void methodX(int k)
+--> you can make it abstract!! You would have to make the class as abstract as well though.
+--> If the original (overridden) method does not have any throws clause, the overriding method cannot declare any checked exceptions.
+--> but It can declare any RuntimeException in throws clause.
+
+
 --> in case of overriding, the return type of the overriding method must match exactly to the return type of the overridden method if the return type is a primitive.
 (In case of objects, the return type of the overriding method may be a subclass of the return type of the overridden method.)
 
@@ -674,9 +710,10 @@ java.lang.SecurityException.
 This exception extends RuntimeException and is thrown by the security manager upon security violation. For example, when a java program runs in a sandbox (such as an applet) and it tries to use prohibited APIs such as File I/O, the security manager throws this exception.
 Since this exception is explicitly thrown using the new keyword by a security manager class, it can be considered to be thrown by the application programmer.
 
---> checked exception must be declared or handled by all caller methods, in hirarchical way.
-java.lang.Exception is a checked Exception. Which means, the method that throws this exception must declare it in the throws clause. Hence, yourMethod must declare throws Exception in its throws clause.
-Change declaration of all the three method to include throws Exception or handle in catch block of method respectively.
+Any checked exceptions must either be handled using a try block or the method that generates the exception must declare that it throws that exception. 
+In this case, doA() declares that it throws Exception. doB() is calling doA but it is not handling the exception generated by doA(). So, it must declare that it throws Exception. Now, the main() method is calling doB(), which generates an exception (due to a call to doA()). Therefore, main() must also either wrap the call to doB() in a try block or declare it in its throws clause.
+
+The main(String[] args) method is the last point in your program where any unhandled checked exception can bubble up to. After that the exception is thrown to the JVM and the JVM kills the thread.
 
 *************************************** Lambda Expressions - ***************************************
 A functional interface is an interface that contains exactly one abstract method. It may contain zero or more default methods and/or static methods. Because a functional interface contains exactly one abstract method, you can omit the name of that method when you implement it using a lambda expression. For example, consider the following interface - 
@@ -695,8 +732,25 @@ The add method of ArrayList returns a boolean. Further, it returns true if the l
 Predicate interface type listed in your method must match the type that you pass through lambda.
 Predicate is typed to List (not ArrayList) in the checkList method, therefore, the parameter type in the lambda expression must also be List. It cannot be ArrayList.
 
+If interface method does not take any parameter, the parameter list part of the lambda expression must be (). Further, if interface method is void means, it does not return anything, the body part should ideally be such that it does not return anything either.
+
 
 *************************************** Creating and Using Arrays - ***************************************
+
+Array Basic points -->
+1. An array of objects can store Objects of any class.
+2. Primitives (i.e. int, byte, char, short, boolean, long, double, and float) are NOT objects.
+3. An array (of primitives as well as of objects) is an Object.
+
+This is valid way for creating array:-
+--> new Object[]{ "aaa", new Object(), new ArrayList(), 10}; // 10 is a primitive and not an Object but due to auto-boxing it will be converted into an Integer object and that object will then be stored into the array of Objects.
+
+This is invalid way for creating array:-
+--> new Object[]{ "aaa", new Object(), new ArrayList(), {} }; //{} is not a valid way to create an Object here. However, it is valid while creating an array. For example, the following are valid:
+String[] sa = { }; //assigns a valid String[] object of length 0 to sa
+Object arr[][] = new Object[][] {new String[5], {} }; //assigns a valid Object[] object of length 0 to arr[1].
+
+--------------------
 --> String[] sA = new String[1] { "aaa"}; // does not compile // Array can't declare and initialze at the same line.
 Array size cannot be given here as the array is being initialized in the declaration.
 
@@ -796,7 +850,30 @@ Integer i = new Integer(42);
 Long ln = new Long(42);
 Double d = new Double(42.0);
 
+--> ArrayList is a subclass of AbstractList.
+--> Below is the class hirarchy for ArrayList. Means, ArrayList extends AbstractList, which extracts AbstractCollection<E> and ulimately it extends Object class.
 
+java.lang.Object
+ -  java.util.AbstractCollection<E>
+   -    java.util.AbstractList<E>
+     -      java.util.ArrayList<E>
+
+--> Below are All Interfaces that ArrayList Implements -->
+Serializable, Cloneable, Iterable<E>, Collection<E>, List<E>, RandomAccess
+
+--> It allows you to access its elements in random order.
+This is true because you can directly access any element using get(index) method. (This is unlike a LinkedList, in which you have to go through all the elements occuring before Nth element before you can access the Nth element.)
+
+--> ArrayList can still use non-generic form. For example, instead of using
+ArrayList<String> listOfStrings;
+you can use:
+ArrayList listOfStrings;
+Of course, if you use non generic version, you will lose the compile time type checking.
+
+--> RandomAccess is a marker interface used by List implementations to indicate that they support fast (generally constant time) random access. The primary purpose of this interface is to allow generic algorithms to alter their behavior to provide good performance when applied to either random or sequential access lists. 
+
+--> You can sort its elements using Collections.sort() method.
+An ArrayList is a List so you can use it where ever a List is required. This include Collections methods such as sort, reverse, and shuffle.
 *************************************** Working with Java API - String, StringBuilder - ***************************************
 
 ------------- facts about String Class ---- Q. 13 (Test 1)
