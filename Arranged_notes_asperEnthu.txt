@@ -20,31 +20,28 @@ Working with Java API - Time and Date -
 -----------Disclaimer notes-----------
 1. In exam there could be few questions that does not follow standard naming convention. Be aware of that. like, class name in all smallcase letters. for those questions its ok, and we need to focus on concept.
 
-
------------------------- from line 314 -- need to start copy
-
 ***************************************Java Basics - ***************************************
 --> Only java.lang package is imported automatically. All other packages must be imported explicitly.
 
-It is not necessary for a java file to have a public class. The requirement is that if a class (or enum) is public then that class (or enum) must be defined in a file by the same name and that there can be only one public class (or enum) in a file.
-class main's main method will be executed. final is a valid modifier for the standard main method. 
-Note that final means a method cannot be overridden. Although static methods can never be overridden (they can be hidden), making a static method final prevents the subclass from implementing the same static method.
+--> It is not necessary for a java file to have a public class, but if public class (or enum) present, then file name must match the class name and that there can be only one public class (or enum) in a file.
+	its possible to have a class name with small case letters but not java standard guidlines. 
+	final is a valid modifier for the standard main method. 
+	Note that final means a method cannot be overridden. Although static methods can never be overridden (they can be hidden), making a static method final prevents the subclass from implementing the same static method.
 
+--> A ".java" file without main method can compile successfully. Although, It will not make the class executable from the command line.
 
 There are three distinct meanings for the final keyword in Java.
-A final class cannot be extended.
+A final class cannot be extended or can't be inherited.
 A final method cannot be overridden.
-A final variable cannot be assigned to after it has been initialized.
+A final variable cannot be assigned to another value after it has been initialized.
 
----------------- Java Basics ---
-1. you can have class with Super or This keywords as well. Don't get confuse with super()/ this() keywords which are all in small-case. While the class and its constructor follow CamelCase letter format.
+Example:- 
+--> String, StringBuilder, and StringBuffer - all are final classes.
+--> wrapper classes are also final class. (java.lang.Boolean, java.lang.Integer, java.lang.Long, java.lang.Short etc.)
+-->  java.lang.System is final as well.
+--> ** Although, java.lang.Number is not final. Integer, Long, Double etc. extend Number.
 
- When class A extends or implements B directly or indirectly, you can say that A is-a B. Here, Car directly extends Vehicle and directly implements Drivable. Therefore, a Car is-a Vehicle and a Car is-a Drivable.
-Similarly, an SUV is-a Car and since Car is-a Vehicle and is-a Drivable, SUV is also a Vehicle and a Drivable.
-
-Now, the rule is that if you have a container that is meant to contain A, then you can add anything that is-a A to that container. For example, if you have ArrayList<Car>, you can add a SUV to it because an SUV is-a Car. But if you have ArrayList<SUV>, you cannot add a Car to it because a Car is not an SUV.
-
-IS-A Relationship
+IS-A Relationship (inheritance)
 * IS-A relationship also known as ‘inheritance’.
 * By using extends keyword we can implement inheritance.
 * The main advantage is reusability.
@@ -54,73 +51,59 @@ HAS – A Relationship
 * There is no specific keyword, but most of the cases we can implemented by using new keyword.
 * Main advantage is reusability.
 
---> If you have any line of code that is unreable in the the entire life of program them compiler will complain and code does not compile.
---> final classes can't be inherited.
+example:- below example doesn't clear has-a relation 
+When class A extends or implements B directly or indirectly, you can say that A is-a B. Here, Car directly extends Vehicle and directly implements Drivable. Therefore, a Car is-a Vehicle and a Car is-a Drivable.
+Similarly, an SUV is-a Car and since Car is-a Vehicle and is-a Drivable, SUV is also a Vehicle and a Drivable.
 
-String, StringBuilder, and StringBuffer - all are final classes.
-1. Remember that wrapper classes for primitives (java.lang.Boolean, java.lang.Integer, java.lang.Long, java.lang.Short etc.) are also final and so they cannot be extended. 
-2. java.lang.Number, however, is not final. Integer, Long, Double etc. extend Number.
-3. java.lang.System is final as well.
+Now, the rule is that if you have a container that is meant to contain A, then you can add anything that is-a A to that container. For example, if you have ArrayList<Car>, you can add a SUV to it because an SUV is-a Car. But if you have ArrayList<SUV>, you cannot add a Car to it because a Car is not an SUV.
 
----> need to memorize this point --
-It is not required for a class to have a main method. The main method is required only if you want to execute that class directly from a command line.  Further, running from command line is not the only way to test a class.
+--> If you have any line of code that is unreachable in the the entire life of program them compiler will complain and code does not compile.
 
---> classes that can't be inherited because those are final classes ---
-private, protected and public can be applied to a nested class (not in OCA).A top level class is a class that is not a nested class. A nested class is any class whose declaration occurs within the body of another class or interface.
 
-synchronized keyword can never be applied to a class or non-primitive variables. It can only be applied to a method or a block.
-final keyword can be applied to class, variable and methods.
-final keyword when applied to a class means the class cannot be subclassed, when applied to a method means the method cannot be overridden (it can be overloaded though) and when applied to a variable means that the variable is a constant.
-A final variable can be hidden in a subclass.
+--> Top level class can be public or default (means, no access modifier)
+--> private, protected and public can be applied to a nested class (not in OCA).
+--> A top level class is a class that is not a nested class. A nested class is any class whose declaration occurs within the body of another class or interface.
 
+--> synchronized can only be applied to a method or a block.
 --> native method cannot be abstract.
------------
-non-public class can't be accessed outside a package in which it is defined, even if it is explicitely imported. Because class itself is not accessible / visible. Only protected class can be accessed if you have import and inherite (extend) them and use it with child class object. 
 
---> You can't import classes from the default package. The only way to access classes in the default package is from another class in the default package. A class or interface that is defined in any other package can't access classes or interfaces defined in default package.
+-- Access modifiers ------ in most restrict to least restrict order ---
+(most restrictive) private --> can be accessed only within same class.
+default (package private) --> can be accessed only within same packages.
+protected --> same package + subclasses (can be accessed only within same packages and other packages subclasses)
+(least restictive) public --> can be accessed from anywhere.
 
---> Also, remember, Java allows a class to only public or package private (default). there is no concept of class with private modifier unless it is a nested class.
-If you are using a variable in any specific statement that becomes undefined due to compile error than the statement which is using that variable will also through compile error because that variable is undefined for it.
+--> you can't import default package, means classes or interfaces can be accessed only from within default package.
 
----> local variable --> means, variables inside the method should not have any other modifier than "final".
+--> If you are using a variable in any specific statement that becomes undefined due to compile error than the statement which is using that variable will also throw compile error because that variable is undefined for that specific statement.
 
---> A ".java" file can compile successfully even without having main method. Although, It will not make the class executable from the command line. be aware about this concept of java for exam.
+Three types of variables -->
+Instance variable --> defined inside class. Auto initialized if not done explicitly. any modifier other than abstract."
+class variable --> same as instance variable but with static keyword. (makes it hidden variable)
+local variable --> defined within method, allow only "final" modifier and not auto initialized, hence must be initailized before use, else code won't compile.
 
---> a static member can access only static members but instance reference variable can access both static and non-static (instance) members.
-example:- if a main method needs to access a variable directly it must be static. code won't compile otherwise.
+-- Static keyword uses and key points --> 
+in class declaration -->
+in method declaration --> static method of a class are hidden methods (hence, it can't be overridden). can be called using a class name directly outside of class and can be called inside of class without even class name. or can be called using instance reference variable.
+in variable declaration -->
+in Interface declaration --> 
 
---> static method of a class are hidden methods.
-
---> calling static method is tied to the type of the reference variable and doesn't depend on the type of the object that's assigned to the reference variable. The static method belongs to a class and not to its objects. means, if reference variable is of parent class the static method of parent class would be called. Not the static method of child (because it can't be overridden). if reference variable of child class is used, then it will call child class static method.
-      --> --> there is one exception, since child class inherit all method of parent, if child class doesn't define static method then on child class reference variable call, parent class method would be called, as this static method of parent is now became a member of child class as well.
-
---> variable types in a class ----
-"class level" means static fields and they can be accessed from anywhere (i.e. static as well as non-static methods) in the class (and from outside the class depending on their accessibility).
-"instance level" means the instance fields and they can be accessed only from instance methods in the class.
-local variables are basically defined within a method and it must be initailized before use, else code won't compile.
-
---> correct order of restrictiveness for access modifiers...
-public < protected < package (i.e. no modifier) < private
---> Members with default accessibility are only accessible within the class itself and from classes in the same package.
-Protected members are in addition accessible from subclasses. Members with private accessibility are only accessible
-within the class itself.
-
---> The visibility of the class is not limited by the visibility of its members. A class with all the members declared private can still be declared public or a class having all public members may be declared private.
-
---> Note that calling super(); will not always work because if the super class has defined a constructor with arguments and has not defined a no args constructor then no args constructor will not be provided by the compiler. It is provided only to the class that does not define ANY constructor explicitly.
-
---> Fields in an interface are implicitly public, static and final. Although you can put these words in the interface definition but it is not a good practice to do so.
-
---> You cannot apply any modifier except final to a local variable. i.e. you cannot make them transient, volatile, static, public, and private.
-But you can apply access modifiers (public private and protected) and final, transient, volatile, static to instance variables.
-You cannot apply native and synchronized to any kind of variable.
-
-
---> The order of keywords for a static import must be "import static ... ".
+--> "import static ... ", syntext used to import static member of any class. If you imported using complete member path then no need to use even class name while using them.
+example:- 
 You can either import all the static members using import static java.lang.Integer.* or one specific member using import static java.lang.Integer.MAX_VALUE;
 You must specify the full package name of the class that you are importing (just like the regular import statement). So, import static Integer.*; is wrong.
-example:- import static java.lang.System.*; // valid (so that we can use out field of System,like this out.println("test"); directly.
+example:- import static java.lang.System.*; // valid (so that we can use out field of System, like this out.println("test"); directly.
 
+--> a static member can access only static members but instance reference variable can access both static and non-static members.
+example:- if a main method needs to access a variable directly it must be static. code won't compile otherwise.
+
+--> calling static method is tied to the type of the reference variable and doesn't depend on the type of the object that's assigned to the reference variable. The static method belongs to a class and not to its objects. means, if reference variable is of parent class the static method of parent class would be called. Not the static method of child (because it can't be overridden). if reference variable of child class is used, then it will call child class static method.
+      --> --> there is one exception, since child class inherit all method of parent, if child class doesn't define static method then on child class reference variable, parent class method would be called, as this static method of parent is now became a member of child class as well.
+
+--- points regarding Interface -->
+--> Fields in an interface are implicitly public, static and final. Although you can put these words in the interface definition but it is not a good practice to do so.
+--> methods can be abstract (means no method body), default, or static. 
+ 
 --> you are not allowed to use any java reserved keywords in your code as an identifier or in loop label. like, for, while, int, etc.
 example:-
 Note that for is a reserved keyword, hence we can't use "for" keyword in place of "String" which is used as loop label. But you can use any other identifier as a label.
@@ -135,18 +118,15 @@ For example, The following code is valid even though String is a class name and 
       }
 It will print hello 2 times.
 
-This is a very simple loop to follow if you know what break and continue do.
-break breaks the nearest outer loop. Once a break is encountered, no further iterations of that loop will execute.
-continue simply starts the next iteration of the loop. Once a continue is encountered, rest of the statements within that loop are ignored (not executed ) and the next iteration is started.
 
 *************************************** Java Basics - OO Concepts -*************************************** 
 
 -------- Order of Initialization ---->  *** Very imp (page 202)    
-        1. If there is a superclass, initialize it first. 
-        2. Static variable declarations and static initializers in the order they appear in the file.
-        3. Instance variable declarations and instance initializers in the order they appear in the file.
-        4. Any other statements that is making any changes to instance variable in the order they appear in the file.
-        5. The constructor.
+1. If there is a superclass, initialize it first. (using super() or this()) 
+2. Static variable declarations and static initializers in the order they appear in the file.
+3. Instance variable declarations and instance initializers in the order they appear in the file.
+4. Any other statements that is making any changes to instance variable in the order they appear in the file.
+5. The constructor.
 ------------------------------------------------------
 
 -----
@@ -455,6 +435,12 @@ An enhanced for loop needs either an array or an object of a class that implemen
 --> Since there is no explicit condition check written in the code, it provides less opportunity to write code that causes infinite loop.
 --> You cannot find out the number of the current iteration while iterating.
 Unlike in a regular for loop, there is no iteration variable available in an enhanced for loop, so it is not possible to determine the number of the iteration just by using the enhanced for loop.
+
+
+This is a very simple loop to follow if you know what break and continue do.
+break breaks the nearest outer loop. Once a break is encountered, no further iterations of that loop will execute.
+continue simply starts the next iteration of the loop. Once a continue is encountered, rest of the statements within that loop are ignored (not executed ) and the next iteration is started.
+
 
 *************************************** Constructors - ***************************************
 
