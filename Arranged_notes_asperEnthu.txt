@@ -105,6 +105,7 @@ example:- if a main method needs to access a variable directly it must be static
       --> --> there is one exception, since child class inherit all method of parent, if child class doesn't define static method then on child class reference variable, parent class method would be called, as this static method of parent is now became a member of child class as well.
 
 ------- Key points Interface ---------
+--> you can't instantiate an interface but you can create a reference of an interface to access its variable and methods.
 --> for an interface declaration only public, default access modifier & abstract non-access modifier are permitted.
 --> Fields in an interface are implicitly public, static and final. Although you can put these words in the interface definition but it is not a good practice to do so.
 --> methods can be abstract (means no method body), default, or static. 
@@ -127,14 +128,6 @@ It will print hello 2 times.
 
 
 *************************************** Java Basics - OO Concepts -*************************************** 
-
--------- Order of Initialization (instantiaing class) ---->  *** Very imp (page 202)    
-1. If there is a superclass, initialize it first. (using super() or this()) 
-2. Static variable declarations and static initializers in the order they appear in the file.
-3. Instance variable declarations and instance initializers in the order they appear in the file.
-4. Any other statements that is making any changes to instance variable in the order they appear in the file.
-5. The constructor.
-------------------------------------------------------
 
 --> Trying to override a static method with a non-static method (and vice-versa) in a class or interface will result in a compilation error. Although, You can, however, have a default method in a subinterface with the same signature as a static method of its super interface because a static method of an interface can only be called using that interface's name (as interface can't be instanctiated). 
 Example:
@@ -324,10 +317,7 @@ for( int i = 0; i< 0; i++) x = 3; // valid // because for loop has some expressi
 --> The point to note here is that the j in for loop is different from the instance member j. The for loop j is inside a method as well as inside the for loop. Therefore, j++ occuring in the for loop doesn't affect the while loop. The for loop prints 1 2 3 4 5.
 The while loop runs for the values 0 to 5 i.e. 6 iterations. Thus, 1 2 3 4 5 is printed 6 times. Note that after the end of the while loop the value of j is 6.
 
-
-
 --> nested if-else statements are very tricky. need to focus more on this. if there is any else statment (doesn't matter about its indentation in java), belongs to the most inner if statement. means, the inner if statement might conceivably own the else clause and outer most if doesn't have even any else clause. also, remember, there can't be 2 else associtaed with one if. its always if-else.
-
 
 ------------- switch statement basics ----
 You should remember the following rules for a switch statement:
@@ -384,12 +374,7 @@ Here, if(j == 4) break POINT1; is a labelled break that is occurring in the seco
 --> Even if the break statment takes the control out of the try-catch-finally block, the finally clause will be executed. A break without a label breaks the current loop (i.e. no iterations any more) and a break with a label tries to pass the control to the given label.
 'Tries to' means that if the break is in a try block and the try block has a finally clause associated with it then it will be executed.
 
-
-
-
-
-
---> imp points regarding for loop ---
+--> Key points --  for loop and enhanced for loop---
 --> ehanced for loop Cannot use an existing/predefined variable in the variable declaration part, means, you cannot declare same variable which you declared at class level. final is the only modifier (excluding annotations) that is allowed in the variable declaration part of for loop.
 	 example:- class A { 
 	 int i =0; int[][] intArr = {{0, 2, 5}}; 
@@ -406,26 +391,35 @@ Here, if(j == 4) break POINT1; is a labelled break that is occurring in the seco
 
 *************************************** Constructors - ***************************************
 
+-------- Order of Initialization (instantiaing class) ---->  *** Very imp (page 202)    
+1. If there is a superclass, initialize it first. (using super() or this()) 
+2. Static variable declarations and static initializers in the order they appear in the file.
+3. Instance variable declarations and instance initializers in the order they appear in the file.
+4. Any other statements that is making any changes to instance variable in the order they appear in the file.
+5. The constructor.
+------------------------------------------------------
+
 --> Remember, if a method aurgument expecting a double or float, you can't pass int value in the method aurgument.
-on the other side, if method aurgument is of type long, then you can pass int value to it.
---> you can define overloaded constructors or methods with different access modifiers.
-Remember, a constructor don't have any return type. But a class can have a method name and signature same as constructor, only distinction would be return type of method.
---> A constructor can't be defined using a non-access modifiers like, final, abstract or static
---> A constructor can't be defined with return type
+on the other side, if method aurgument is of type long, then you can pass int value to it. (its like data type compatibility)
+
+--> constructors or methods can have different access modifiers. (mean overloaded)
+
+--> A constructor don't have any return type. 
+--> A method must have return type just before method name. A method name and signature could be same as constructor, only distinction would be return type of method.
+--> A constructor can't be defined using a non-access modifiers like, final, abstract or static.
 --> A constructor can be defined with any access modifier, like public, private, protected, and package private(default)
---> constructors can not be inherited.
+--> constructors can not be inherited. 
 --> The default constructor is provided by the compiler only when a class does not define ANY constructor explicitly. 
 --> The access type of a default constructor (created by Java) is same as the access type of the class. Thus, if a class is public, the default constructor will be public.
 --> A constructor is non-static, and so it can access directly both the static and non-static members of the class.
 
-
 *************************************** Working with Methods - ***************************************
---> you can't instantiate an interface but you can create a reference of an interface to access its variable and methods.
+
+
 --> a method in an interface is implicitly (assumed to be) public. Hence, any class then implements this interface and its method should also be public.
+
 --> remember, return; statement is used to end the execution of method. but where we use it is also important.
---> --> An abstract method must have the abstract keyword and must not have a method body i.e. { }.
-
-
+--> An abstract method must have the abstract keyword and must not have a method body i.e. { }.
 
 *************************************** Working with Methods - Overloading / overriding - ***************************************
 
