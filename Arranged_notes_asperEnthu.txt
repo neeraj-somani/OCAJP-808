@@ -59,8 +59,7 @@ Now, the rule is that if you have a container that is meant to contain A, then y
 
 --> If you have any line of code that is unreachable in the the entire life of program them compiler will complain and code does not compile.
 
-
---> Top level class can be public or default (means, no access modifier)
+--> Top level class can be public or default (means, no access modifier) and abstract or final non-access modifier are permitted.
 --> private, protected and public can be applied to a nested class (not in OCA).
 --> A top level class is a class that is not a nested class. A nested class is any class whose declaration occurs within the body of another class or interface.
 
@@ -82,6 +81,11 @@ Instance variable --> defined inside class. Auto initialized if not done explici
 class variable --> same as instance variable but with static keyword. (makes it hidden variable)
 local variable --> defined within method, allow only "final" modifier and not auto initialized, hence must be initailized before use, else code won't compile.
 
+--> example for implication of local variable --->
+--> Now, observe that the calc method declares local variables coupon, offset, and base but does not assign them a value. Even though at run time, we know that since percent is 0 and is thus < 10, a value will be assigned to these variables, the compiler doesn't know this because the compiler doesn't take values of "variables" into consideration while determining the flow of control. It only considers the values of compile time constants. Therefore, as far as the compiler is concerned, coupon, offset, and base may remain uninitialized before they are used.
+	Had percent been defined as final ( static final double percent = 0; ), the code would work. because compiler knows percent value at compile time and evaluate if statment to assign initial values to local variables.
+
+
 -- Static keyword uses and key points --> 
 in class declaration -->
 in method declaration --> static method of a class are hidden methods (hence, it can't be overridden). can be called using a class name directly outside of class and can be called inside of class without even class name. or can be called using instance reference variable.
@@ -100,10 +104,13 @@ example:- if a main method needs to access a variable directly it must be static
 --> calling static method is tied to the type of the reference variable and doesn't depend on the type of the object that's assigned to the reference variable. The static method belongs to a class and not to its objects. means, if reference variable is of parent class the static method of parent class would be called. Not the static method of child (because it can't be overridden). if reference variable of child class is used, then it will call child class static method.
       --> --> there is one exception, since child class inherit all method of parent, if child class doesn't define static method then on child class reference variable, parent class method would be called, as this static method of parent is now became a member of child class as well.
 
---- points regarding Interface -->
+------- Key points Interface ---------
+--> for an interface declaration only public, default access modifier & abstract non-access modifier are permitted.
 --> Fields in an interface are implicitly public, static and final. Although you can put these words in the interface definition but it is not a good practice to do so.
 --> methods can be abstract (means no method body), default, or static. 
- 
+---> Interface doesn't inherits java.lang.Object class. because, interface can extends only other interfaces and not classes. Though an instance of an object (must be a class) that implements an interface inherits java.lang.Object. Otherwise, Java would support multiple inheritance for objects, which it doesn’t.
+--> why we can see Objects class methods in interface because, An interface implicitly declared one method for each public method in Object. Thus the equals method is implicitly declared as a member in an interface (unless it already inherits it from a superinterface).
+
 --> you are not allowed to use any java reserved keywords in your code as an identifier or in loop label. like, for, while, int, etc.
 example:-
 Note that for is a reserved keyword, hence we can't use "for" keyword in place of "String" which is used as loop label. But you can use any other identifier as a label.
@@ -121,7 +128,7 @@ It will print hello 2 times.
 
 *************************************** Java Basics - OO Concepts -*************************************** 
 
--------- Order of Initialization ---->  *** Very imp (page 202)    
+-------- Order of Initialization (instantiaing class) ---->  *** Very imp (page 202)    
 1. If there is a superclass, initialize it first. (using super() or this()) 
 2. Static variable declarations and static initializers in the order they appear in the file.
 3. Instance variable declarations and instance initializers in the order they appear in the file.
@@ -129,13 +136,7 @@ It will print hello 2 times.
 5. The constructor.
 ------------------------------------------------------
 
------
-interface doesn't inherits java.lang.Object class. because, interface can extends only other interfaces and not classes. Though an instance of an object that implements an interface inherits java.lang.Object. Otherwise, Java would support multiple inheritance for objects, which it doesn’t.
-why we can see Objects class methods in interface because, An interface implicitly declared one method for each public method in Object. Thus the equals method is implicitly declared as a member in an interface (unless it already inherits it from a superinterface).
-
-
---> Trying to override a static method with a non-static method (and vice-versa) in a class or interface will result in a compilation error. Although,
-You can, however, have a default method in a subinterface with the same signature as a static method of its super interface because a static method of an interface can only be called using that interface's name. 
+--> Trying to override a static method with a non-static method (and vice-versa) in a class or interface will result in a compilation error. Although, You can, however, have a default method in a subinterface with the same signature as a static method of its super interface because a static method of an interface can only be called using that interface's name (as interface can't be instanctiated). 
 Example:
 interface I{
    public default void invalid(){ }
@@ -145,43 +146,78 @@ interface I2 extends I{
    public static void invalid(){ } //WILL NOT COMPILE
    public default void valid(){ } //this is ok. 
 }
--->  static methods can never be abstract (neither in an interface nor in a class).
--->  An interface can have a static method but the method must have a body.
+-->  static and abstract can't be used together. 
+-->  An abstract method doesn't require body but all other type of method required body. (static and default in case of interface) 
 -->  An interface method cannot be default and static at the same time because a default method is always an instance method.
 
-
---> Code that tries to access an uninitialized local variable won't compile.
 --> In this case Laptop reference variable and life reference variable are referring to two different objects. Any changes on any specific  object will not impact each other.
---> A .java file must have only one public class or one public interface, and file name should be the same as public class or interface. A .java file can have multiple class or interfaces.
---> for an interface only public, default access modifier & abstract non-access modifier are permitted.
---> for a class only public, default access modifier, and abstract & final non-access modifier are permitted.
 
---> the keyword "this" or "super" can be used anywhere in the code. 
-	--> here "this" represents the object of current class, while "super" keyword represents the object of parent class. again, note they represents the object of the respective class.
-	
---------- super() & this() -->
+--- Key points about super and this keywords -----
+
+----- super() & this() methods -->  
 super() - to call parent class constructor.
 this() - to call same class constructor.
-NOTE: We can use super() and this() only in constructor's first line not anywhere else, any attempt to do so will lead to compile-time error.
-We have to keep either super() or this() as the first line of the constructor but NOT both simultaneously.
+--> can use super() or this() only in constructors first line not anywhere else, any attempt to do so will lead to compile-time error.
+--> can NOT use both simultaneously.
 
 ---- super & this keyword --> 
-super - to call parent class members(variables and methods).
-this - to call same class members(variables and methods).
+super - to call parent class members(variables and methods). ("super" keyword represents the object of parent class)
+this - to call same class members(variables and methods). (here "this" represents the reference to the same class object)
 NOTE: We can use both of them anywhere in a class except static areas(static block or method), any attempt to do so will lead to compile-time error.
 
 --> whenever you use "this" keyword, it basically returns the reference to the same class object. but this is happen because of the top Parent class "Objects". Every class implicitly extend this class. This Object calss implements toSting() method and default behaviour of toString method is to return current class object and convert that into string format. (example:- It will print TestClass@nnnnnnnn, where nnnnnnnn is the hash code of the TestClass object referred to by 'this'.) below is explanantion --> 
 
-The toString method for class Object returns a String consisting of the name of the class of which the object is an instance, the at-sign character '@', and the unsigned hexadecimal representation of the hash code of the object. In other words, this method returns a string equal to the value of:
-getClass().getName() + '@' + Integer.toHexString(hashCode())
+	--> The toString method for class Object returns a String consisting of the name of the class of which the object is an instance, the at-sign character '@', and the unsigned hexadecimal representation of the hash code of the object. In other words, this method returns a string equal to the value of:
+getClass().getName() + "@" + Integer.toHexString(hashCode())
 
-if we override toString() method of Object class then the response of "this" keyword would depend on the return value of overridden toString() method.
+--> if we override toString() method of Object class then the response of "this" keyword would depend on the return value of overridden toString() method.
 
---> An important aspect of encapsulation is that other classes should not be able to modify the state fields of a class directly. Therefore, the data members should be private (or protected if you want to allow subclasses to inherit the field) and if the class wants to allow access to these fields, it should provide appropriate setters and getters with public access.
-
-
+-- Encapsulation --
+--> An important aspect of encapsulation is that other classes should not be able to modify the state of fields of a class directly. Therefore, the data members variables should be private (or protected if you want to allow subclasses to inherit the field) and if the class wants to allow access to these fields, it should provide appropriate setters and getters with public access.
 
 *************************************** Working with Java Data Types - ***************************************
+
+--> below are default value for all primitive and object data type --> 
+--> (unsigned) (16-bit)char - \u0000 | (8-bit)byte,short(16-bit),int(32-bit) - 0 | (64-bit)long - 0L | 
+--> (32-bit)float - 0.0f | (64-bit)double - 0.0d | boolean - false | objects - null
+
+--> other than boolean and char, all are signed data types.
+--> Remember, when a char primitive data type used with arithmetic operators, its ASCII value is used, which is int value only. 
+--> you can't assign a negative int value to a char data type without casting. (example, char ch = (char) -97;)
+
+--> An implicit narrowing primitive conversion may be used if all of the following conditions are satisfied:
+1. Allowed only if the type of the variable is byte, short, or char. (from int to any below is possible)
+2. The expression is a compile time constant expression of type byte, char, short, or int.
+3. The value of the expression is representable in the type of the assigned variable. (which is known at compile time, because it is a constant expression) 
+--> Note that implicit narrowing conversion does not apply to long or double. So, char ch = 30L; will fail even though 30 is representable in char.
+
+--> but when these value passed to print method it will print without specific data type charachter (exmple, for float (0.0f) it will print 0.0, for long (0L) it will print 0, etc.)
+
+--> Conversion from char to long does not need a cast. 
+--> Conversion from byte to short does not need a cast.
+--> Conversion from short to char needs a cast. The reverse is also true. Because their ranges are not compatible.
+--> a float can hold any value of int hence conversion or explicit casting not needed. Note that opposite is not true because of loss of precision.
+--> Conversion from byte, char or short to int, long or float does not need a cast. Because int, long or float are bigger that byte, char or short.
+--> float (32 bit) is smalled than double (64-bit), hence float can handle any integral primitive (byte, short, char, int, long) but can't accept double value. even negative integer is acceptable in float.
+--> char (16-bit) and short (16-bit), hence explicit cast is needed. char can accept unsigned int value upto 16-bit.
+--> float d = 0 * 1.5f; and float d = 0 * (float)1.5 ; are OK, (but not like float d = 0 * 1.5).
+--> float f = -123; // ok - Implicit widening conversion will occur in this case.
+example:- 
+int i = 10;
+byte b = 20;
+b = i; //will not compile because byte is smaller than int
+b = (byte) i; // will compile // type cast needed 
+--> Further, if you have a final variable and its value fits into a smaller type, then you can assign it without a cast because compiler already knows its value and realizes that it can fit into the smaller type. This is called implicit narrowing.
+final int k = 10;
+b = k; //Okay because k is final and 10 fits into a byte
+final float f = 10.0; //will not compile because 10.0 is a double even though the value 10.0 fits into a float
+i = f; //will not compile, even if f is valid float value, because its not allowed // explicit cast needed
+
+--- Different integer values --->
+Binary --> 0 and 1
+Decimal --> 0 to 9
+OctaDecimal --> 0 to 7
+Hexadecimal --> 0 to 9 and A (or a) to F (or f),  G and further is not allowed.
 
 ------------- how to put underscore (_) in between for any interger values ----
 --> An underscore can only occur in between two digits. 
@@ -190,69 +226,14 @@ int hex = 0xCAFE_BABE;
 float f = 9898_7878.333_333f;
 int bin = 0b1111_0000_1100_1100;
 
-
---> The integral types are byte, short, int, and long, whose values are 8-bit, 16-bit, 32-bit and 64-bit signed two's-complement integers, respectively, and char, whose values are 16-bit unsigned integers representing UTF-16 code units.
---> Remember, when a char primitive data type used with arithmetic operators, its ASCII value is used, which is int value only. 
-
---> you can't assign a negative int value to a char data type without casting. (example, char ch = (char) -97;)
-
---> --> remember below defaulty value for all primitive type --> 
---> (16-bit)char - \u0000 | (8-bit)byte,short(16-bit),int(32-bit) - 0 | (64-bit)long - 0L | 
---> (32-bit)float - 0.0f | (64-bit)double - 0.0d | boolean - false | objects - null
-
-
-An implicit narrowing primitive conversion may be used if all of the following conditions are satisfied:
-1. The expression is a compile time constant expression of type byte, char, short, or int.
-2. The type of the variable is byte, short, or char.
-3. The value of the expression (which is known at compile time, because it is a constant expression) is representable in the type of the variable.
-Note that implicit narrowing conversion does not apply to long or double. So, char ch = 30L; will fail even though 30 is representable in char.
-
---> but when these value passed to print method it will print without specific data type charachter (exmple, for float it will print 0.0, for long it will print 0, etc.)
---> The local variable (variables that are declared within a method) aren't initialzed with their default values. If you try to print the value of a local variable before initializing it, the code won't compile. 
---> On the other side, class and instance variable, initialize variable with default value.
---> Conversion from char to long does not need a cast. 
-Conversion from byte to short does not need a cast.
-Conversion from short to char needs a cast. The reverse is also true. Because their ranges are not compatible.
-a float can hold any value of int hence conversion or explicit casting not needed. Note that opposite is not true because of loss of precision.
-Conversion from byte, char or short to int, long or float does not need a cast. Because int, long or float are bigger that byte, char or short.
---> float (32 bit) is smalled than double (64-bit), hence float can handle any integral primitive (byte, short, char, int, long) but can't accept double value. even negative integer is acceptable in float.
---> char (16-bit) and short (16-bit), hence explicit cast is needed. char can accept unsigned int value upto 16-bit.
---> float d = 0 * 1.5f; and float d = 0 * (float)1.5 ; are OK, (but not like float d = 0 * 1.5).
---> float f = -123; // ok - Implicit widening conversion will occur in this case.
-
-
-int i = 10;
-byte b = 20;
-b = i;//will not compile because byte is smaller than int
-b = (byte) i; //OK
-Further, if you have a final variable and its value fits into a smaller type, then you can assign it without a cast because compiler already knows its value and realizes that it can fit into the smaller type. This is called implicit narrowing and is allowed between byte, int, char, and, short but not for long, float, and double.
-final int k = 10;
-b = k; //Okay because k is final and 10 fits into a byte
-final float f = 10.0;//will not compile because 10.0 is a double even though the value 10.0 fits into a float
-i = f;//will not compile.
-
---> The underscore can't be placed in between (0_x or 0_b) or even just after the initials (0b_10 or 0x_25). only exception it can be placed after first 0 (ex:- 0_1010_11). For hexaDecimal values the letter can be till f or F only, G and further is not allowed.
-
---> note, x is primitive int. You cannot call any methods on a primitive. so this.x.setInt(...) or this.y.setInt(...) don't make any sense.
-
+--> note if, x is primitive int. You cannot call any methods on a primitive. so this.x.setInt(...) or this.y.setInt(...) don't make any sense.
 
 *************************************** Working with Java Data Types - Garbage Collection -  ***************************************
---> as soon as an object is set to null, the object held by the reference variable is free and is eligible for GC. when it gets Garbage collected will always be unknown.
 
---------- for garbage Collection ---
-Any object will become eligible for garbage collection just after the line statement in which, no references pointing to that object.
-not at the same line but from the next line.
-----
+--> as soon as an object is set to null, the object held by the reference variable is free and is eligible for GC. 
+--> when it gets Garbage collected will always be unknown.
 
-Remember that static and instance variables are automatically assigned a value even if you don't initialize them explicitly but local variables must be initialized explicitly before they are used.
-
-Now, observe that the calc method declares local variables coupon, offset, and base but does not assign them a value. Even though at run time, we know that since percent is 0 and is thus < 10, a value will be assigned to these variables, the compiler doesn't know this because the compiler doesn't take values of "variables" into consideration while determining the flow of control. It only considers the values of compile time constants. Therefore, as far as the compiler is concerned, coupon, offset, and base may remain uninitialized before they are used.
-
-Having uninitialized variables itself is not a problem. So there is no compilation error at //3. However, using them before they are initialized is a problem and therefore the compiler flags an error at //5.
-
-Had percent been defined as final ( static final double percent = 0; ), the code would work. because compiler knows percent value at compile time and evaluate if statment to assign initial values to local variables
-
---> --> When an object reference is marked as null, the object is marked for garbage collection. But you can't be sure exactly when a garbage collector will kick in to garbage collect the objects. A garbage collector is low-priority thread, its execution depends on OS> you can never be sure about which object have been garbage collected. you can only be sure about how many objects are eligible for garbage collection.
+A garbage collector is low-priority thread, its execution depends on OS> you can never be sure about which object have been garbage collected. you can only be sure about how many objects are eligible for garbage collection.
 
 --> every object operations should be assigned to reference variable. if you don't assign object to reference variable, it is not stored and become eligible for garbage collection.
 
@@ -261,137 +242,91 @@ Had percent been defined as final ( static final double percent = 0; ), the code
 2. You cannot directly invoke the garbage collector. You can suggest the JVM to perform garbage collection by calling System.gc();
 
 *************************************** Using Operators and Decision Constructs -  ***************************************
------- instanceof operator ---- type operator ---
-used to test whether the object is an instance of the specified type (class or subclass or interface).
-It returns either true or false. If we apply the instanceof operator with any variable that has null value, it returns false.
 
---> & can have integral as well as boolean operands. (unlike &&), & will not "short circuit" the expression if used on boolean parameters. means it will evaluate both operands or both side expression.
---> The logical operators, (&), (|), and (^), evaluates both operands, but is similar as (&& or ||, respectively)
-It may be applied to both numeric (known as bit-wise opertaor - not in OCA) and boolean (known as logical operators) data types.
+------ instanceof operator ---- type operator --- (all small-case letter)
+--> used to test whether the object is an instance of the specified type (class or subclass or interface).
+It returns either true or false. If we apply the instanceof operator with any variable that has null value, it returns false. 
 
---> The modulus operator % can only be used with integer operands. It can be used on floating points operands also. For example, 5.5 % 3 = 2.5
---> !, && and || operate only on booleans.
+--> Logical opertators --> (&, |, ^) --> evaluates both operands.  (can have integral as well as boolean operands)
+--> Short-circuit Logical operators --> (&& and ||) --> evaluates one operand for below cases and hence known as Short-circuit operator. (can have only on booleans operand)
+&& --> if first expression is false then it won't evaluate second expression, (because overall result is false)
+|| --> if first expression is true then it won't evaluate second expression. (because overall result is true)
+
+--- Arithmetic Operators -->
+--> The modulus operator % allow only integer operands. It can be used on floating points operands also. 
+For example, 5.5 % 3 = 2.5
+
 --> ~ Operates only on integral types
 
-short-circuit operators --> 
-&& --> if first expression is false then it won't evaluate second expression.
-|| --> if first expression is true then it won't evaluate second expression.
-
-question:-
+String values with (+) operator -->
+question and example :-
    System.out.println(null + true); // compile error
    System.out.println(true + null); // compile error
    System.out.println(null + null); // compile error
    System.out.println(null + "good"); // compile successfully, and print "nullgood"
    
 Concept Explanation -->
-If one operand expression is of type String, then string conversion is performed on the other operand to produce a String at run time. The result is a reference to a newly created String object that is the concatenation of the two Strings. The characters of the left-hand operand precede the characters of the right-hand operand in the newly created string.
-  Any type may be converted to type String by string conversion.
-  A value x of primitive type T is first converted to a reference value as if by giving it as an argument to an appropriate class instance creation expression e.g. if T is boolean, then use new Boolean(x) .
-  toString() is defined by the primordial class Object; many classes override it, notably Boolean, Character, Integer, Long, Float, Double, and String.
+--> If one operand expression is of type String, then string conversion is performed on the other operand to produce a String at run time. The result is a reference to a newly created String object that is the concatenation of the two Strings. 
+--> Any type may be converted to type String by string conversion.
+--> A value x of primitive type T is first converted to a reference value as if by giving it as an argument to an appropriate class instance creation expression e.g. if T is boolean, then use new Boolean(x) .
+  toString() is defined by parent class Object; many classes override it, notably String and all Wrapper classes.
 
---> Below are the rules to understand for any expression evaluation:
+--> Below are the rules to understand any expression evaluation:
 here, int i = 0; and The statement iA[i] = i = 30 ; will be processed as follows:
 iA[i] = i = 30; => iA[0] = i = 30 ;  =>  i = 30; iA[0] = i ; =>   iA[0] = 30 ;
 
 Here is what JLS says on this:
 1 Evaluate Left-Hand Operand First  
-2 Evaluate Operands before Operation  
+2 Evaluate all Operands before Operation  
 3 Evaluation Respects Parentheses and Precedence  
 4 Argument Lists are Evaluated Left-to-Right  
 
 --> a good question about how an expression can be evaluated with function and different operators
 int s = 5;
-s = s + s + mx(s) + ++s; // here value of s is assinged first to all the operands at a single strech, as you can see below
-s = 5 + 5 + mx(5) + 6; // then the calculation started
-s = 5 + 5+ 8 + 6;
+s = s + s + mx(s) + ++s; 
+s = 5 + 5 + mx(5) + 6; // value of s is assigned from left to right and evaluated individual oprands
+s = 5 + 5+ 8 + 6; // evaluted function as its an oprand for expression
 s = 24;
 
-
---> 
-Note that  boolean operators have more precedence than =. (In fact, = has least precedence of all operators.)
-so, in (b2 != b1 = !b2)  first b2 != b1 is evaluated which returns a value 'false'. So the expression becomes false = !b2. And this is illegal because false is a value and not a variable!
+--> another example with little twist -->
+Note that boolean operators have more precedence than =. (In fact, = has least precedence of all operators.)
+so, in (b2 != b1 = !b2)  first b2 != b1 is evaluated (left operand of = operator) which returns a value 'false'. So the expression becomes "false = !b2". And this is illegal because false is a value and not a variable!
 
 Had it been something like (b2 = b1 != b2) then it is valid because it will boil down to : b2 = false.
-Because all an if() needs is a boolean, now b1 != b2 returns false which is a boolean and as b2 =  false is an expression and every expression has a return value (which is actually the Left Hand Side of the expression). Here, it returns false, which is again a boolean.
-
-Note that return value of expression :  i = 10 , where i is an int, is 10 (an int).
 
 -----  Using Operators and Decision Constructs --
-Object t = new Integer(107); 
+Object t = new Integer(107); // Integer wrapper class
 int k = (Integer) t.intValue()/9; // invalid, casting of parent object reference to child reference 
-Compiler will complain that the method intValue() is not available in Object. This is because the . operator has more precedence than the cast operator. So you have to write it like this:
+Compiler will complain that the method intValue() is not available in Object. This is because the . operator has more precedence than the cast operator. Hence, "t" reference variable don't have any method as intValue().
+So you have to write it like this:
     int k = ((Integer) t).intValue()/9; // valid way of casting, bracket will evaluate first
-Now, since both the operands of / are ints, it is an integer division. This means the resulting value is truncated (and not rounded). Therefore, the above statement will print 11 and not 12.
+Now, since both the operands of / are ints, it is an integer division. This means the resulting value is only divisor and not the remainder. its truncated (and not rounded). Therefore, the above statement will print 11 and not 12.
 
+--> Remember, when you use "/" this division operator, the result of its evaluation is only division and not remainder. (for example, 10/3 = 3 as a result and remainder 3 will be discarded). Hence this can be used in case statmenent to compare value against int variable of switch statment.
 
 *************************************** Using Loop Constructs - ***************************************
 
---> Need to memorize few java rules:
-while (false) { x=3; } is a compile-time error because the statement x=3; is not reachable;
-Similarly, for( int i = 0; false; i++) x = 3; is also a compile time error because x= 3 is unreachable.
-
-In if(false){ x=3; }, although the body of the condition is unreachable, this is not an error because the JLS explicitly defines this as an exception to the rule. It allows this construct to support optimizations through the conditional compilation. For example,
-
+--> Need to memorize few java rules for loops --> 
+1. while (false) { x=3; } is a compile-time error because the statement x=3; is not reachable;
+2. Similarly, for( int i = 0; false; i++) x = 3; is also a compile time error because x= 3 is unreachable.
+3. Although, In if(false){ x=3; }, although the body of the condition is unreachable, this is not an error because the JLS explicitly defines this as an exception to the rule. It allows this construct to support optimizations through the conditional compilation. For example 1:-
 if(DEBUG){ System.out.println("beginning task 1"); } 
 Here, the DEBUG variable can be set to false in the code while generating the production version of the class file, which will allow the compiler to optimize the code by removing the whole if statement entirely from the class file.
-
-example:- 
+example 2:- 
 if (false) { x=3; } // valid
-for( int i = 0; i< 0; i++) x = 3; // valid
+for( int i = 0; i< 0; i++) x = 3; // valid // because for loop has some expression, that can be true. (not explicitly false)
 
---> Note that it is OK to override a method by an abstract method.
-
-
---> nested if-else statements are very tricky. need to focus more on this. if there is any else statment (doesn't matter about its indentation in java), belongs to the most inner if statement. means, the inner if statement might conceivably own the else clause and outer most if doesn't have even any else clause. also, remember, there can't be 2 else associtaed with one if. its always if-else.
-
---> switch statement limitation --> it can't accept long, boolean, double and float value in its consturct aurgument.
 --> each type of loop can accept single statement without curly braces but multiple statement should be inside curly braces.
---> Switch statment accepts variables of type String. and since an Arraylist can have String values, it can be passed to switch construct as well.
---> Switch statement can't accept boolean, long, double, and float primitive data type and its wrapper classes as an aurgument. 
---> Switch statement can accept only byte, short, char, int data type and its wrapper class. it can also accept String, and enum.
-
---> remember, while loop validation condition runs at the very end as well, to make sure its not validating to true and any evaluation at this step can also make some change to final result.
---> Case statment label requires a compile time constant variable/values. Even if you define a final variable, assigning a value to that variable in the next line, means after its declaration, java doesn't count it as compile time constant.
-Remember, when you use "/" this division operator, the result of its evaluation is only division and not remainder. (for example, 10/3 = 3 as a result and remainder 3 will be discarded). Hence this can be used in case statmenent to compare value against int variable of switch statment.
---> Java performs integer calculations at compile time only, if there is no object for which value can be changed at run-time. 
-Hence, if 2 case statement evaluate to same value then java throws a compile error.
-
-------> some concepts about charAt() method --->
-Since indexing starts with 0, the maximum value that you can pass to charAt is length-1.
-As per the API documentation for charAt, it throws IndexOutOfBoundsException if you pass an invalid value.
-Both - ArrayIndexOutOfBoundsException and StringIndexOutOfBoundsException, extend IndexOutOfBoundsException and although in practice, the charAt method throws StringIndexOutOfBoundsException, it is not a valid option because the implementation is free to throw some other exception as long as it is an IndexOutOfBoundsException. There are questions in the exam on this aspect.
-
--->  "instanceof" is all smallcase letter operator to compare an object for its class instance.
+--> remember, while loop validation condition runs at the very end as well, to make sure its not validating to true and any evaluation at this step can also make some change to final result. (for example, while(i++){} will increment i by 1 count).
 
 ---> --> concept, if you modify the state of the loop variable, the modified object state will be reflected in the array. but if you assign a new object to the loop variable, it won't be reflected in the list or the array that's being iterated. you can compare this behavior of the enhanced for loop variable with the behavior of object references passed as arguments to a method.
 
---> break; statement breaks the execution of current loop. means, if you have a loop that should execute from 0 to 9 and you hit break; statement at 5 position then loop will not run for any value after 5, means from 6 to 9.
---> break statement are valid in iteration of loops (for, do, while) and in switch statement but not in if-else statement.
---> continue; statment, if you hit continue statment at 5 position, it will stop the current execution but continue run of loop from 6 to 9 value iteration.
---> continue; statement are valid in iteration of loops only (for, do, while) but invalid in switch or if-else statement.
+--> The point to note here is that the j in for loop is different from the instance member j. The for loop j is inside a method as well as inside the for loop. Therefore, j++ occuring in the for loop doesn't affect the while loop. The for loop prints 1 2 3 4 5.
+The while loop runs for the values 0 to 5 i.e. 6 iterations. Thus, 1 2 3 4 5 is printed 6 times. Note that after the end of the while loop the value of j is 6.
 
 
---> Very important for exam:----------------- labeled break or continue statements ------------
-you can assign label to any statment in java file. but when that label is used with break statment, then that break statment must be within the scope of label. else code won't compile.
-example:-
-void crazyLoop(){
-   int c = 0;
-   JACK: while (c < 8){
-       JILL: System.out.println(c);
-       if (c > 3) break JILL; else c++;
-   }
-}
-here, Because break JILL; would be valid only when it is within the block of code under the scope of the label JILL. 
-In this case, the scope of JILL extends only up till System.out.println(c); and break JILL; is out of the scope of the label.
-Here, we need to understand that label is either declared for specific loop (while, do-while, for) or for specific individual statements. 
 
-Remember that a labeled break or continue statement must always exist inside the loop where the label is declared. Here, if(j == 4) break POINT1; is a labelled break that is occurring in the second loop while the label POINT1 is declared for the first loop.
-
-You can apply a label to any code block or a block level statement (such as a for statement) but not to declarations. For example: loopX : int i = 10;
-
-Even if the break statment takes the control out of the try-catch-finally block, the finally clause will be executed. A break without a label breaks the current loop (i.e. no iterations any more) and a break with a label tries to pass the control to the given label.
-'Tries to' means that if the break is in a try block and the try block has a finally clause associated with it then it will be executed.
-
+--> nested if-else statements are very tricky. need to focus more on this. if there is any else statment (doesn't matter about its indentation in java), belongs to the most inner if statement. means, the inner if statement might conceivably own the else clause and outer most if doesn't have even any else clause. also, remember, there can't be 2 else associtaed with one if. its always if-else.
 
 
 ------------- switch statement basics ----
@@ -399,51 +334,77 @@ You should remember the following rules for a switch statement:
 
 1. Only String, byte, char, short, int, and enum values can be used as types of a switch variable. (String is allowed since Java 7.) Wrapper classes Byte, Character, Short, and Integer are allowed as well.
 
-2. The case constants must be assignable to the switch variable. For example, if your switch variable is of class String, your case labels must use Strings as well.
+2. Switch statment doesn't allow double, float, long and boolean primitive types.
 
-3. The switch variable must be big enough to hold all the case constants. For example, if the switch variable is of type char, then none of the case constants can be greater than 65535 because a char's range is from 0 to 65535. Similarly, the following will not compile because 300 cannot be assigned to 'by', which can only hold values from -128 to 127.
+3.  All case labels should be COMPILE TIME CONSTANTS. It is ok for Switch statement expression not to be COMPILE TIME CONSTANTS.
+
+4. The case constants must be assignable to the switch variable. For example, if your switch variable is of class String, your case labels must use Strings as well. or if switch variable is of type int, case labels must use byte, short, char or int.
+
+(same as 4) The switch variable must be big enough to hold all the case constants. For example, if the switch variable is of type char, then none of the case constants can be greater than 65535 because a char's range is from 0 to 65535. Similarly, the following will not compile because 300 cannot be assigned to 'by', which can only hold values from -128 to 127.
 byte by = 10;
 switch(by){
     case 200 :  //some code;
     case 300 :  //some code;
 }
 
-4.  All case labels should be COMPILE TIME CONSTANTS. It is ok for Switch statement expression not to be COMPILE TIME CONSTANTS.
-
-5. No two of the case constant expressions associated with a switch statement may have the same value.
-
-6. At most one default label may be associated with the same switch statement.
-7. Default clause is not compulsory in switch consturt.
+5. No two of the case constant expressions may have the same value.
+6. Default clause is not compulsory in switch consturt.
 ---------------------------
 
---> The point to note here is that the j in for loop is different from the instance member j. The for loop j is inside a method as well as inside the for loop. Therefore, j++ occuring in the for loop doesn't affect the while loop. The for loop prints 1 2 3 4 5.
-The while loop runs for the values 0 to 5 i.e. 6 iterations. Thus, 1 2 3 4 5 is printed 6 times. Note that after the end of the while loop the value of j is 6.
+--> Case statment label requires a compile time constant variable/values. Even if you define a final variable, assigning a value to that variable in the next line, means after its declaration, java doesn't count it as compile time constant.
+
+--> Java can performs integer calculations at compile time only, if there is no object for which value can be changed at run-time. 
+Hence, if 2 case statement evaluate to same value then java throws a compile error.
+
+------ break (optional label); and continue (optional label); ------- statments --- 
+
+--> break; statement breaks the execution of current loop. means, if you have a loop that should execute from 0 to 9 and you hit break; statement at 5 position then loop will not run for any value after 5, means from 6 to 9.
+--> break statement are valid in iteration of loops (for, do, while) and in switch statement but not in if-else statement.
+
+--> continue; statment, if you hit continue statment at 5 position, it will stop the current execution but continue run of loop from 6 to 9 value iteration.
+--> continue; statement are valid in iteration of loops only (for, do, while) but invalid in switch or if-else statement.
+
+--> you can assign label to any statment in java file. but when that label is used with break statment, then that break statment must be within the scope of label. else code won't compile.
+example:-
+void crazyLoop(){
+   int c = 0;
+   JACK: while (c < 8){
+       JILL: System.out.println(c); 
+       if (c > 3) break JILL; else c++; // does not compile
+   }
+}
+--> here, Because break JILL; would be valid only when it is within the block of code under the scope of the label JILL. 
+In this case, the scope of JILL extends only up till System.out.println(c); and break JILL; is out of the scope of the label.
+
+--> label can be applied to individual statment or block { } or loop. You can apply a label to any code block or a block level statement (such as a for statement) but not to declarations. For example: loopX : int i = 10;
+
+--> Remember that a labeled break or continue statement must always exist inside that specific loop where the label is declared. in-case of nested loop need to make sure this part carefully. example below:-
+Here, if(j == 4) break POINT1; is a labelled break that is occurring in the second loop while the label POINT1 is declared for the first loop.
+
+--> Even if the break statment takes the control out of the try-catch-finally block, the finally clause will be executed. A break without a label breaks the current loop (i.e. no iterations any more) and a break with a label tries to pass the control to the given label.
+'Tries to' means that if the break is in a try block and the try block has a finally clause associated with it then it will be executed.
+
+
+
+
 
 
 --> imp points regarding for loop ---
- ehanced for loop Cannot use an existing/predefined variable in the variable declaration part, also you cannot declare same variable which you declared at class level. final is the only modifier (excluding annotations) that is allowed in the variable declaration part of for loop.
- example:- class A { 
- int i =0; int[][] intArr = {{0, 2, 5}}; 
- for (i : intArr[0]){} // invalid, enhanced for loop (means, enhanced for loop can't use same class variable)
- for (int j:intArr[0]){} // valid, enhanced for loop
- for (; i<5; i++){} // valid, regular for loop (means, regular for loop can use same class variable)
- for (int k; k<0; k++){} //invalid, k must be declared and initialzed as well, to use it inside for loop
+--> ehanced for loop Cannot use an existing/predefined variable in the variable declaration part, means, you cannot declare same variable which you declared at class level. final is the only modifier (excluding annotations) that is allowed in the variable declaration part of for loop.
+	 example:- class A { 
+	 int i =0; int[][] intArr = {{0, 2, 5}}; 
+	 for (i : intArr[0]){} // invalid, enhanced for loop (means, enhanced for loop can't use same class variable)
+	 for (int j: intArr[0]){} // valid, enhanced for loop
+	 for (; i<5; i++){} // valid, (means, regular for loop can use same class variable)
+	 for (int k; k<0; k++){} //invalid, k must be declared and initialzed as well, to use it inside for loop
 
---- points regarding enhanced for loop ---
---> It can iterate over an array or a Collection but not a Map.
-An enhanced for loop needs either an array or an object of a class that implements java.lang.Iterable. Map does not implement Iterable, though you can use keySet() or values() methods to get a Collection (which extends Iterable) and then iterate over that Collection.
---> Since there is no explicit condition check written in the code, it provides less opportunity to write code that causes infinite loop.
+--> An enhanced for loop can iterate over an array or a Collection but not a Map.
+--> An enhanced for loop needs either an array or an object of a class that implements java.lang.Iterable. Map does not implement Iterable, though you can use keySet() or values() methods to get a Collection (which extends Iterable) and then iterate over that Collection.
+--> Since there is no explicit condition check written in the enhanced for loop code, it provides less opportunity to write code that causes infinite loop.
 --> You cannot find out the number of the current iteration while iterating.
-Unlike in a regular for loop, there is no iteration variable available in an enhanced for loop, so it is not possible to determine the number of the iteration just by using the enhanced for loop.
-
-
-This is a very simple loop to follow if you know what break and continue do.
-break breaks the nearest outer loop. Once a break is encountered, no further iterations of that loop will execute.
-continue simply starts the next iteration of the loop. Once a continue is encountered, rest of the statements within that loop are ignored (not executed ) and the next iteration is started.
 
 
 *************************************** Constructors - ***************************************
-
 
 --> Remember, if a method aurgument expecting a double or float, you can't pass int value in the method aurgument.
 on the other side, if method aurgument is of type long, then you can pass int value to it.
@@ -481,6 +442,8 @@ The names of the parameter types do not matter. For example, void methodX(int i)
 
 --> in case of overriding, the return type of the overriding method must match exactly to the return type of the overridden method if the return type is a primitive.
 (In case of objects, the return type of the overriding method may be a subclass of the return type of the overridden method.)
+
+--> Note that it is OK to override a method by an abstract method.
 
 --> an overriding method is allowed to change the return type to any subclass of the original return type, also known as covariant return type. Above statement valid for class objects. This does not apply to primitives, in which case, the return type of the overriding method must match exactly to the return type of the overridden method.
 --> The concept here is that an overriding method cannot make the overridden method more private.
@@ -922,6 +885,12 @@ Here, the variable String is in scope and therefore the length of the string poi
 --> IndexOutOfBoundsException - if the any index in substring function is negative, or endIndex is larger than the length of this String object, or beginIndex is larger than endIndex.
 
 --> Need to understand all StringBuilder and String methods.
+
+------> some concepts about charAt() method --->
+Since indexing starts with 0, the maximum value that you can pass to charAt is length-1.
+As per the API documentation for charAt, it throws IndexOutOfBoundsException if you pass an invalid value.
+Both - ArrayIndexOutOfBoundsException and StringIndexOutOfBoundsException, extend IndexOutOfBoundsException and although in practice, the charAt method throws StringIndexOutOfBoundsException, it is not a valid option because the implementation is free to throw some other exception as long as it is an IndexOutOfBoundsException. There are questions in the exam on this aspect.
+
 
 --> --> Substring method of String class can't accept negative value. (for example: str.substring(2, -1) will throw runtime exception).
 --> its important to remember which string method takes what type of arguments, for example, 
