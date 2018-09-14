@@ -104,6 +104,8 @@ example:- if a main method needs to access a variable directly it must be static
 --> calling static method is tied to the type of the reference variable and doesn't depend on the type of the object that's assigned to the reference variable. The static method belongs to a class and not to its objects. means, if reference variable is of parent class the static method of parent class would be called. Not the static method of child (because it can't be overridden). if reference variable of child class is used, then it will call child class static method.
       --> --> there is one exception, since child class inherit all method of parent, if child class doesn't define static method then on child class reference variable, parent class method would be called, as this static method of parent is now became a member of child class as well.
 
+---> Although declaring a method static usually implies that it is also final, this is not true for classes. An inner class can be declared static and still be extended.
+
 ------- Key points Interface ---------
 --> you can't instantiate an interface but you can create a reference of an interface to access its variable and methods.
 --> for an interface declaration only public, default access modifier & abstract non-access modifier are permitted.
@@ -423,55 +425,35 @@ on the other side, if method aurgument is of type long, then you can pass int va
 
 *************************************** Working with Methods - Overloading / overriding - ***************************************
 
---> To override a method in the subclass, the overriding method (i.e. the one in the subclass) MUST HAVE:
-.same name
-.same return type in case of primitives (a subclass is allowed for classes, this is also known as covariant return types).
-.same type and order of parameters
-.it may throw only those exceptions that are declared in the throws clause of the superclass's method or exceptions that are subclasses of the declared exceptions. It may also choose NOT to throw any exception.
-The names of the parameter types do not matter. For example, void methodX(int i) is same as void methodX(int k)
---> you can make it abstract!! You would have to make the class as abstract as well though.
---> If the original (overridden) method does not have any throws clause, the overriding method cannot declare any checked exceptions.
---> but It can declare any RuntimeException in throws clause.
+-------- Rules for overriding method (i.e. the one in the subclass) MUST HAVE:
+1. same method name and same signature (type and order of parameters) (The names of the parameter types do not matter. For example, void methodX(int i) is same as void methodX(int k))
+2. same return type in case of primitives, but if parent method return type is Object class type then overriden method can have subclass of that Object class type, this is also known as covariant return types).
+3. The method in the child class must be at least as accessible or more accessible than the method in the parent class. (The concept here is that an overriding method cannot make the overridden method more private.) 
+4. The method in the child class may not throw a checked exception that is new or broader than the class of any exception thrown in the parent class method. In other words, a child method may hide or eliminate a parent method’s exception without issue. but It can declare any RuntimeException in throws clause of overridden method.
+5. you can make it abstract!! You would have to make the class as abstract as well though.
 
-
---> in case of overriding, the return type of the overriding method must match exactly to the return type of the overridden method if the return type is a primitive.
-(In case of objects, the return type of the overriding method may be a subclass of the return type of the overridden method.)
-
---> Note that it is OK to override a method by an abstract method.
-
---> an overriding method is allowed to change the return type to any subclass of the original return type, also known as covariant return type. Above statement valid for class objects. This does not apply to primitives, in which case, the return type of the overriding method must match exactly to the return type of the overridden method.
---> The concept here is that an overriding method cannot make the overridden method more private.
-The access hierarchy in increasing levels of accessibility is:
-private->'no modifier'->protected->public ( public is accessible to all and private is accessible to none except itself.)
-
---> --> --> remember, equals method is a public method defined in java.lang.Object class, which is inherited by all classes. but default implementation of equals method is to compare the object reference pointing to same object, then return TRUE else FALSE. Any class can override this method to implement other logic. Here, no override happneded.
---> Need to check in general which classes overrides equals() method. 
+--> --> remember, equals method is a public method defined in java.lang.Object class, which is inherited by all classes. but default implementation of equals method is to compare the object reference pointing to same object, then return TRUE else FALSE. Any class can override this method to implement other logic. 
+--> Need to check in general which classes overrides equals() method. (Sting, Array and ArrayList overrides equals method, StringBuilder doesn't override).
 
 --> To call myMethod(int m, Object p, double d), you must pass exactly three parameters. If you try to pass less (or more) number of parameters, the code will not compile. Note that method parameters are not assigned default values.
-It is possible to declare a method that can take variable number of parameters. For example: 
+
+It is possible to declare a method that can take any number of aurguments (this is possible because of vararg). For example: 
 public static void someMethod(Object... params){
         System.out.println(params.length); }
 You can call this method by passing any number of parameters. In this case, calling someMethod() without any parameter will print 0. i.e. the length of params array will be 0. params will NOT be null.
 
---> The return type should be same for overridden and overriding method, if return type is primitime type.
-Note that when a method returns objects (as opposed to primitives, like in this question), the principle of covariant returns applies. Meaning, the overriding method is allowed to return a subclass of the return type defined in the overridden method. Thus, if a base class's method is: public A m(); then a subclass is free to override it with: public A1 m(); if A1 extends A.
-
 *************************************** Working with Inheritance - ***************************************
---- inheritance ---
-A final class cannot be subclassed.
-Although declaring a method static usually implies that it is also final, this is not true for classes. An inner class can be declared static and still be extended.
-Note that for classes, final means it cannot be extended, while for methods, final means it cannot be overridden in a subclass.
-The native keyword can only be used on methods, not on classes and or variables.
-
 
 Basics of Inheritance -->
-Which variable (or static method) will be used depends on the class that the variable is declared of.
-Which instance method will be used depends on the actual class of the object that is referenced by the variable.
+--> Which variable (or static method) will be used depends on the class that the reference variable is declared of. (B b)
+--> Which instance method will be used depends on the actual class of the object that is referenced by the variable. (new B())
 
-A method is said to be overloaded when the other method's name is same and parameters ( either the number or their order) are different. Also, there is no restrcition on return type of method, It can be any primitive or object class. Return type of overloaded method need not to be covariant.
+--- Rules for Overloading --> 
+--> same method name but different parameters (either the number or their order are different)
+--> Also, there is no restrcition on return type of method, It can be any primitive or object class. Return type of overloaded method need not to be covariant.
 
 ---------- polymorphism (overloading and overridding), object vs reference variable ----------------------
---> A base (parent) class can use reference variables and objects of its derived (child) class. even as a method aurgument which is defined in base class.
+--> A base (parent) class can use reference variables and objects of its derived (child) class as a method aurgument which is defined in base class.
 
 --> A reference variable of Derived (Child) class can't be used to refer an object of base (parent) class.
 example:- 
@@ -479,7 +461,7 @@ Dog dog = new Animal(); // does not compile, object of parent class and referenc
 Animal animal = new Lion(); // valid -  it will access all Animal class members
 ((Lion) animal).age; // valid, explicitly casting to child class to access child class members ( in this case age)
 Lion lion = new Lion(); // valid, child class object and child class reference
-example:- 
+
 --> you can explicitely cast any object to an interface, even if class doesn't implement it. and the code will compile. but if the object's class doesn't implement interface, the code will throw ClassCaseException at runtime.
 example:-
 interface Jumpable {}
@@ -487,7 +469,6 @@ class Animal {}
 class Lion extends Animal implements Jumpable {}
 Jumpable var6 = (Jumpable)(new Animal()); // runtime exception
 
----> a protected member is accessible in the subclass only using a reference whose declared type is of the same subclass (or its subclass.). 
 -------------
 --> polymorphism (overloading and overridding), object vs reference variable 
 Phone phone1 = new Phone(); // only phone members accessible, even child overridden method not accessible
@@ -504,26 +485,15 @@ Tablet tablet2 = new Tablet(); // all parent and child members accessible as chi
 	--> default method can be empty or can give default implementation of a method. it can be overrided as well. it can also be access by interface reference variable in the class where class implemented an interface.
 	--> regular method behaves also similar to default method. its an abstract method by default and can be overridden and accessed using reference variable of interface or derived class.
 
-
-
 *************************************** Working with Inheritance - instanceof - ***************************************
 -->  "instanceof" is all smallcase letter operator to compare an object for its class instance.
 The instanceof operator returns true if the object-reference on its left, points to an object of class-type on its right, otherwise,
-The instanceof operator returns false, if there is a mismatch between object reference and class-type.
+The instanceof operator returns false, if there is a mismatch between object reference and class-type. (notice even if class type doesn't match, it return false).
 
 *************************************** Handling Exceptions - ***************************************
 
---> If the array reference expression produces null instead of a reference to an array, then a NullPointerException is thrown at runtime, but only after all parts of the array reference expression have been evaluated and only if these evaluations completed normally. 
-
-This means, first index = 2 will be executed, which assigns 2 to index. After that null[2] is executed, which throws a NullPointerException. But this exception is caught by the catch block, which prints nothing. So it seems like NullPointerException is not thrown but it actually is.
-In other words, the embedded assignment of 2 to index occurs before the check for array reference produced by getArray().
-In an array access, the expression to the left of the brackets appears to be fully evaluated before any part of the expression within the brackets is evaluated. Note that if evaluation of the expression to the left of the brackets completes abruptly, no part of the expression within the brackets will appear to have been evaluated.
-
-means, first array should be build properly. Then only we will go to access it. then any other part of the statement will be evaluated.
-Remember, whenever you will refer null and perform operation on it. it will throw NullPointerException.
-
 --> Different types of Exceptions -->
--------- ------ Unchecked (Runtime) Exception ---
+------ Unchecked (Runtime) Exception ---
 java.lang.SecurityException -->  extends RuntimeException:
 java.lang.ClassCastException --> extends RuntimeException:
 java.lang.NullPointerException --> extends RuntimeException:
@@ -734,6 +704,16 @@ ia[0] --> will return 2D array, accessing 0th position 2D array of ia-3D array
 ia[0][0] --> will return 1D array, because we are going to access the 1D array.
 
 For Arrays: First, the dimension expressions are evaluated, left-to-right. If any of the expression evaluations completes abruptly, the expressions to the right of it are not evaluated.
+
+--> If the array reference expression produces null instead of a reference to an array, then a NullPointerException is thrown at runtime, but only after all parts of the array reference expression have been evaluated and only if these evaluations completed normally. 
+
+This means, first index = 2 will be executed, which assigns 2 to index. After that null[2] is executed, which throws a NullPointerException. But this exception is caught by the catch block, which prints nothing. So it seems like NullPointerException is not thrown but it actually is.
+In other words, the embedded assignment of 2 to index occurs before the check for array reference produced by getArray().
+In an array access, the expression to the left of the brackets appears to be fully evaluated before any part of the expression within the brackets is evaluated. Note that if evaluation of the expression to the left of the brackets completes abruptly, no part of the expression within the brackets will appear to have been evaluated.
+
+means, first array should be build properly. Then only we will go to access it. then any other part of the statement will be evaluated.
+Remember, whenever you will refer null and perform operation on it. it will throw NullPointerException.
+
 
 *************************************** Working with Java API - ArrayList - ***************************************
 
