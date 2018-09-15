@@ -170,6 +170,16 @@ getClass().getName() + "@" + Integer.toHexString(hashCode())
 -- Encapsulation --
 --> An important aspect of encapsulation is that other classes should not be able to modify the state of fields of a class directly. Therefore, the data members variables should be private (or protected if you want to allow subclasses to inherit the field) and if the class wants to allow access to these fields, it should provide appropriate setters and getters with public access.
 
+---- Multiple Inheritance --> 
+--> Interfaces, classes, and enums are all "types". Java allows a class to implement multiple interfaces. In this way, Java supports multiple inheritance of types. 
+"State", on the other hand, is represented by instance fields. Only a class can have instance fields and therefore, only a class can have a state. (Fields defined in an interface are always implicitly static, even if you don't specify the keyword static explicitly. Therefore, an interface does not have any state.) Since a class is allowed to extend only from one class at the most, it can inherit only one state. Thus, Java does not support multiple inheritance of state.
+
+--> Methods do not have state. Ability to inherit instance methods from multiple classes is called multiple inheritance of implementation. 
+Default methods introduce one form of multiple inheritance of implementation. A class can implement more than one interface, which can contain default methods that have the same name. However, such a class cannot be compiled. In this case, the implementing class is required to provide its own implementation of the common method to avoid ambiguity.
+
+--> Multiple inheritance of state includes ability to inherit instance fields from multiple classes.
+--> Multiple inheritance of type includes ability to implement multiple interfaces and/or ability to extend from multiple clases.
+
 *************************************** Working with Java Data Types - ***************************************
 
 --> below are default value for all primitive and object data type --> 
@@ -241,6 +251,10 @@ A garbage collector is low-priority thread, its execution depends on OS> you can
 ------ instanceof operator ---- type operator --- (all small-case letter)
 --> used to test whether the object is an instance of the specified type (class or subclass or interface).
 It returns either true or false. If we apply the instanceof operator with any variable that has null value, it returns false. 
+ -- Few other example:- 
+ 
+ System.out.println(s instanceof Short); // does not compile,  The left operand of instanceof MUST be a reference variable and not a primitive.
+Short k = 9; System.out.println( k instanceof s); // does not compile, the Right operand of instanceof MUST be a reference type name, i.e., a class, an interface, or an enum name.
 
 --> Logical opertators --> (&, |, ^) --> evaluates both operands.  (can have integral as well as boolean operands)
 --> Short-circuit Logical operators --> (&& and ||) --> evaluates one operand for below cases and hence known as Short-circuit operator. (can have only on booleans operand)
@@ -298,6 +312,9 @@ So you have to write it like this:
 Now, since both the operands of / are ints, it is an integer division. This means the resulting value is only divisor and not the remainder. its truncated (and not rounded). Therefore, the above statement will print 11 and not 12.
 
 --> Remember, when you use "/" this division operator, the result of its evaluation is only division and not remainder. (for example, 10/3 = 3 as a result and remainder 3 will be discarded). Hence this can be used in case statmenent to compare value against int variable of switch statment.
+------
+int i = 9; System.out.println(s == i); // Any two integral primitives can be compared using == operator.
+(==) oprator can compare two objects reference variable as well.
 
 *************************************** Using Loop Constructs - ***************************************
 
