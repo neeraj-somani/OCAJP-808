@@ -128,6 +128,8 @@ For example, The following code is valid even though String is a class name and 
       }
 It will print hello 2 times.
 
+--> The Object class's toString generates a string using:  getClass().getName() + '@' + Integer.toHexString(hashCode())
+--> But the String class overrides the toString() method that returns just the actual string value.
 
 *************************************** Java Basics - OO Concepts -*************************************** 
 
@@ -183,12 +185,14 @@ Default methods introduce one form of multiple inheritance of implementation. A 
 *************************************** Working with Java Data Types - ***************************************
 
 --> below are default value for all primitive and object data type --> 
---> (unsigned) (16-bit)char - \u0000 | (8-bit)byte,short(16-bit),int(32-bit) - 0 | (64-bit)long - 0L | 
+--> (unsigned) (16-bit)char - \u0000 (an empty space) | (8-bit)byte,short(16-bit),int(32-bit) - 0 | (64-bit)long - 0L | 
 --> (32-bit)float - 0.0f | (64-bit)double - 0.0d | boolean - false | objects - null
 
 --> other than boolean and char, all are signed data types.
 --> Remember, when a char primitive data type used with arithmetic operators, its ASCII value is used, which is int value only. 
 --> you can't assign a negative int value to a char data type without casting. (example, char ch = (char) -97;)
+
+unsigned byte b = 0; // does not compile // There no unsigned keyword in java! A char can be used as an unsigned integer.
 
 --> An implicit narrowing primitive conversion may be used if all of the following conditions are satisfied:
 1. Allowed only if the type of the variable is byte, short, or char. (from int to any below is possible)
@@ -196,6 +200,21 @@ Default methods introduce one form of multiple inheritance of implementation. A 
 3. The value of the expression is representable in the type of the assigned variable. (which is known at compile time, because it is a constant expression) 
 --> Note that implicit narrowing conversion does not apply to long or double. So, char ch = 30L; will fail even though 30 is representable in char.
 
+Remember these rules for primitive types:
+1. Anything bigger than an int can NEVER be assigned to an int or anything smaller than int ( byte, char, or short) without explicit cast.
+2. CONSTANT values up to int can be assigned (without cast) to variables of lesser size ( for example, short to byte) if the value is representable by the variable.( that is, if it fits into the size of the variable).
+3. operands of mathematical operators are ALWAYS promoted to AT LEAST int. (i.e. for byte * byte both bytes will be first promoted to int.) and the return value will be AT LEAST int.
+4. All Compound assignment operators ( +=, *= etc), internally do an explicit cast. have strange ways so read this carefully:
+--> A compound assignment expression of the form E1 op= E2 is equivalent to E1 = (T)((E1) op (E2)), where T is the type of E1, except that E1 is evaluated only once. 
+Note that the implied cast to type T may be either an identity conversion or a narrowing primitive conversion. 
+For example, the following code is correct:
+short x = 3;
+x += 4.6;
+and results in x having the value 7 because it is equivalent to: 
+short x = 3;
+x = (short)(x + 4.6);
+
+---------------------------------------------
 --> but when these value passed to print method it will print without specific data type charachter (exmple, for float (0.0f) it will print 0.0, for long (0L) it will print 0, etc.)
 
 --> Conversion from char to long does not need a cast. 
@@ -255,6 +274,8 @@ It returns either true or false. If we apply the instanceof operator with any va
  
  System.out.println(s instanceof Short); // does not compile,  The left operand of instanceof MUST be a reference variable and not a primitive.
 Short k = 9; System.out.println( k instanceof s); // does not compile, the Right operand of instanceof MUST be a reference type name, i.e., a class, an interface, or an enum name.
+
+--> Division and modulus Operator (/ and %) --> will return int for data tyeps (int, short, byte, char), long (for long and below), float (if input is float), double (if input is double).
 
 --> Logical opertators --> (&, |, ^) --> evaluates both operands.  (can have integral as well as boolean operands)
 --> Short-circuit Logical operators --> (&& and ||) --> evaluates one operand for below cases and hence known as Short-circuit operator. (can have only on booleans operand)
@@ -895,6 +916,10 @@ System.out.println(te.charAt(3)); // this will compile successfully and print 4
 --> StringBuilder default object capacity is 16 char. (StringBuilder sb1 = new StringBuilder();)
 --> --> There is no concat method in StringBuilder. There is append method in StringBuilder to append any string.
 --> Also, insert method can be used to insert char, number, or String at any specified position of StringBuilder.
+
+There are 2 points to remember:
+1. replace(char oldChar, char newChar) method returns the same String object if both the parameters are same, i.e. if there is no change. Thus, "String" == "String".replace('g', 'g') will return true.
+2. replace(CharSequence oldSeq,  CharSequence newSeq) method returns a new String object even if there is no change after replacement. Thus, "String" == "String".replace("g", "g") will return false.
 
 Wrapper class --
 
