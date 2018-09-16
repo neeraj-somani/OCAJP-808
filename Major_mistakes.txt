@@ -1,0 +1,12 @@
+few last exams major mistakes --->
+
+1. Datetime API mistakes, but not conceptual.
+2. Wrapper class (always remember, if right type of value is provided then it will do auto boxing and unboxing properly.)
+3. read about string and StringBUilder methods carefully.
+example:- 
+public void ensureCapacity(int minimumCapacity)
+Ensures that the capacity is at least equal to the specified minimum. If the current capacity is less than the argument, then a new internal array is allocated with greater capacity. The new capacity is the larger of: 
+The minimumCapacity argument. 
+Twice the old capacity, plus 2. 
+If the minimumCapacity argument is nonpositive, this method takes no action and simply returns.
+Observe that the question says "at least 100 characters". In the exam, you may get a question that says "100 characters", in that case, ensureCapacity() may not be a valid option.
