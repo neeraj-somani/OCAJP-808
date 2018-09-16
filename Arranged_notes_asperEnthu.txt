@@ -822,7 +822,7 @@ java.lang.Object
 --> Below are All Interfaces that ArrayList Implements -->
 Serializable, Cloneable, Iterable<E>, Collection<E>, List<E>, RandomAccess
 
---> It allows you to access its elements in random order.
+RandomAccess --> It allows you to access its elements in random order.
 This is true because you can directly access any element using get(index) method. (This is unlike a LinkedList, in which you have to go through all the elements occuring before Nth element before you can access the Nth element.)
 
 --> ArrayList can still use non-generic form. For example, instead of using
@@ -833,8 +833,9 @@ Of course, if you use non generic version, you will lose the compile time type c
 
 --> RandomAccess is a marker interface used by List implementations to indicate that they support fast (generally constant time) random access. The primary purpose of this interface is to allow generic algorithms to alter their behavior to provide good performance when applied to either random or sequential access lists. 
 
---> You can sort its elements using Collections.sort() method.
+--> You can sort ArrayList elements using Collections.sort() method.
 An ArrayList is a List so you can use it where ever a List is required. This include Collections methods such as sort, reverse, and shuffle.
+
 *************************************** Working with Java API - String, StringBuilder - ***************************************
 
 ------------- facts about String Class ---- Q. 13 (Test 1)
@@ -884,8 +885,7 @@ example:- 	List<String> list = new ArrayList<>();
 --> following are valid method for StringBuilder/StringBuffer --> reverse() 
 (Note, reverse method is not available in String class)   
 
---> to find out whether two strings are equal or not,  in terms of the actual characters within the strings. What is the best way to do this?
-Answer:- use String's equals method. (example: x1.equals(x2))
+--> to find out whether two strings are equal or not,  in terms of the actual characters within the strings. What is the best way to do this? Answer:- use String's equals method. (example: x1.equals(x2))
 
 String String = "String"; is a perfectly valid syntax! 
 Java does not allow variables to have the same name as keywords (if, for, else, while, class etc.) and literals (true, false, and, null) but there is no restriction on naming variables after the names of classes. In this case, therefore, String is a valid variable name.
@@ -923,12 +923,12 @@ There are 2 points to remember:
 
 Wrapper class --
 
------------ few Wrapper class concepts -->
+----------- Wrapper class concepts -->
 1. new Long(mStr); // this is valid as, Auto unboxing will occur // here Long Wrapper class use constructor to convert the value
 2. Long.parseLong(mStr); // this is valid and it will return primitive value for any string aurgument
 3. Long.valueOf(mStr).longValue(); // Long.valueOf(mStr) returns a Long object containing 123. longValue() on the Long object returns 123, which long primitive type value.
 4. Long.longValue(mStr); // invalid, does not compile // longValue() is a non-static method in Long class, hence longValue() method can be accessed by reference variable only.
-5. (new Long()).parseLong(mStr); // Long (or any wrapper class) does not have a no-args constructor, so new Long() is invalid.
+5. (new Long()).parseLong(mStr); // invalid, does not compile, Long (or any wrapper class) does not have a no-args constructor.
 
 Notes - 3 points:
 --> The string passed to second constructor should be parse-able to number , otherwise you will get run time NumberFormatException.
@@ -937,9 +937,7 @@ Notes - 3 points:
 
 	Byte B1 = new Byte((byte) 10);     //Constructor which takes byte value as an argument
         Byte B2 = new Byte("10");          //Constructor which takes String as an argument
- 
         //Byte B3 = new Byte("abc");      //Run Time Error : NumberFormatException
- 
         //Because, String abc can not be parse-able to byte
  
         Short S1 = new Short((short) 20);   //Constructor which takes short value as an argument
@@ -965,13 +963,11 @@ Notes - 3 points:
  
         Character C1 = new Character('D');      //Constructor which takes char value as an argument
         Character C2 = new Character("abc");    //Compile time error : String abc can not be converted to character
-	
-	
-	
+		
 --> You need to remember the following points about Boolean:
 
 1. Boolean class has two constructors - Boolean(String) and Boolean(boolean)
-The String constructor allocates a Boolean object representing the value true if the string argument is not null and is equal, ignoring case, to the string "true". Otherwise, allocate a Boolean object representing the value false. Examples: new Boolean("True") produces a Boolean object that represents true. new Boolean("yes") produces a Boolean object that represents false.
+The String constructor allocates a Boolean object representing the value true if the string argument is not null and is equal, ignoring case, to the string "true". Otherwise, allocate a Boolean object representing the value false (even if you pass null). Examples: new Boolean("True") produces a Boolean object that represents true. new Boolean("yes") produces a Boolean object that represents false.
 
 The boolean constructor is self explanatory.
 
@@ -983,7 +979,8 @@ Boolean.valueOf(String ) and its overloaded Boolean.valueOf(boolean ) version, o
 3. When you use the equality operator ( == ) with booleans, if exactly one of the operands is a Boolean wrapper, it is first unboxed into a boolean primitive and then the two are compared (JLS 15.21.2). If both are Boolean wrappers, then their references are compared just like in the case of other objects. Thus, new Boolean("true") == new Boolean("true") is false, but new Boolean("true") == Boolean.parseBoolean("true") is true.
 
 --> Signature of equals method is : boolean equals(Object o); So it can take any object.
-The equals methods of all wrapper classes first check if the two object are of same class or not. If not, they immediately return false. Hence it will print not equal.
+The equals methods of all wrapper classes first check if the two object are of same class or not. If not, they immediately return false. 
+The default implementation of equals method is to compare the reference, but few classes overrides that default behavior and compare actual value of those objects.
 
 --> Compiler will complain that the method intValue() is not available in Object. This is because the . operator has more precedence than the cast operator. So you have to write it like this:
     int k = ((Integer) t).intValue()/9;
