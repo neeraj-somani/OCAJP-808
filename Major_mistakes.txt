@@ -1,7 +1,16 @@
 few last exams major mistakes --->
 
-1. Datetime API mistakes, but not conceptual.
-2. Wrapper class (always remember, if right type of value is provided then it will do auto boxing and unboxing properly.)
+1. Datetime API mistakes, but not conceptual. (3 question were wrong in test 6)
+--> Observe that most of the methods of LocalDate (as well as LocalTime and LocalDateTime) return an object of the same class. This allows you to chain the calls as done in this question. However, these  methods return a new object. They don't modify the object on which the method is called. Because, LocalDate or LocalTime or others are immutable objects. 
+--> Tricks to remember: 
+    --> when you chain methods in Period, only the last method in chain will be evaluated. only on Period not on other, 
+    example below:
+        Period wrong = Period.ofYears(1).ofWeeks(1); // this will evaluate ofWeeks() method only. means, every week
+    --> a Period is a day or more of time, means ofDays(), ofWeeks(), ofMonths() and ofYears().
+    --> For Duration, you can specify the number of days, hours, minutes, seconds, or nanoseconds. This is not on OCA exam.
+    
+2. Wrapper class (always remember, if right type of value is provided then it will do auto-boxing and unboxing properly and return value in the expected format.)
+
 3. read about string and StringBUilder methods carefully.
 example:- 
 public void ensureCapacity(int minimumCapacity)
@@ -10,3 +19,78 @@ The minimumCapacity argument.
 Twice the old capacity, plus 2. 
 If the minimumCapacity argument is nonpositive, this method takes no action and simply returns.
 Observe that the question says "at least 100 characters". In the exam, you may get a question that says "100 characters", in that case, ensureCapacity() may not be a valid option.
+
+4. need to read question and each opetion properly. Lack of concertration. I can discard few options easily.
+
+5. return statment is needed only at one place in method declaration, even if you have try-catch-finally block. best is to have in finally block because it always run in any case, else in try and catch both as any of them can return for method.
+
+Explannation --> Basically, an unreachable statement causes a compilation error (There is one exception: if(false) { ... } is valid.). As such, line 7 is unreachable because of the return statement in finally. This is because finally is always executed and there it returns a value, so there is no way line 7 can be executed!    
+--> When you remove the lines suggested by the options, all the lines of code are executed in one case or another. For example, in option 1, if you comment line 3 and 6, Line 7 will be executed if no exception is thrown in the try block.
+
+6. 
+---- Multiple Inheritance -->
+--> Java supports multiple type inheritance but not multiple state inheritance.
+--> Multiple inheritance of state includes ability to inherit instance fields from multiple classes.
+--> Multiple inheritance of type includes ability to implement multiple interfaces and/or ability to extend from multiple clases.
+
+Java allows a class to implement multiple interfaces. An interface is a "type" and does not contain any state. This implies that Java supports multiple type inheritance.
+A class contains state and extending a class means inheriting the state. Since Java does not allow a class to extend from multiple classes, it means that Java does not support multiple state inheritance.
+
+--> Interfaces, classes, and enums are all "types". Java allows a class to implement multiple interfaces. In this way, Java supports multiple inheritance of types. 
+"State", on the other hand, is represented by instance fields. Only a class can have instance fields and therefore, only a class can have a state. (Fields defined in an interface are always implicitly static, even if you don't specify the keyword static explicitly. Therefore, an interface does not have any state.) Since a class is allowed to extend only from one class at the most, it can inherit only one state. Thus, Java does not support multiple inheritance of state.
+
+--> Methods do not have state. Ability to inherit instance methods from multiple classes is called multiple inheritance of implementation. 
+Default methods introduce one form of multiple inheritance of implementation. A class can implement more than one interface, which can contain default methods that have the same name. However, such a class cannot be compiled. In this case, the implementing class is required to provide its own implementation of the common method to avoid ambiguity.
+
+7. private and public access modifiers with inheritance.
+You cannot access c.i because i is private in B. But you can access ( (A)c).i because i is public in A. Remember that member variables are hidden and not overridden. So, B's i hides A's i and since B's i is private, you can't access A's i unless you cast the reference to A.
+
+8. static method call using object reference variable or instance or class name.
+ it is illegal to invoke a static method of an interface using a reference variable. If you want to invoke a static method of an interface, you need to use the name of the interface. For example, Pow.wow();
+--> You can use a reference variable to invoke a static method of a class or super class though.
+So this is valid: ((Wow)f).wow(); even though it is not a good practice to use a reference to invoke a static method.
+
+9. one question wrong on Array just because of not understanding language of question, try to read question 2 times if not clear in first time.
+
+10. question on operators are also important. (= oprator)
+11. for loop vs enhanced for loop
+12. ArrayList remove and removeIf method very imp for exam. 
+
+--> ArrayList declares a removeIf() method that takes a Predicate.
+example:- System.out.println(bunnies); // [long ear, floppy, hoppy]
+8: bunnies.removeIf(s -> s.charAt(0) != 'h'); // It defines a predicate that takes a String and returns a boolean. The removeIf() method does the rest.
+--> ArrayList's remove(Object ) method removes the first occurence of the given element and returns true if found. It does not remove all occurences of the element. In this case, the first call to s1.remove("a"); will remove only the first "a" and return true, the second call to remove("a") will remove the second "a" and return true. Finally, the call to remove("b") will remove "b". Therefore, only "c" will be left in the list.
+The JavaDoc API description of this method is important for the exam - 
+public boolean remove(Object o)
+Removes the first occurrence of the specified element from this list, if it is present (optional operation). If this list does not contain the element, it is unchanged. More formally, removes the element with the lowest index i such that (o==null ? get(i)==null : o.equals(get(i))) (if such an element exists). Returns true if this list contained the specified element (or equivalently, if this list changed as a result of the call).
+
+13. Inheritance concept -->
+Note that selection of method to be executed depends upon the actual object class. So no matter what you do, in class C you can only access C's m1() even by casting this to B or A. So, this option will not work. (invalid --> You can access class A's m1() using ( (A) this ).m1() from class C.) <-- means, you can not.
+
+--> Although, there is trick here, if A or B m1() method decalres any exception then main method in class C has to handle or declare it as well.
+
+14. Initializing an array like below is not legal, because its an 0 length array which doesn't mean anything:
+static int[] x = new int[0]; // compile but throw Error
+The following is the output when the program is run:
+java.lang.ExceptionInInitializerError
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 0
+        at AX.<clinit>(SM.java:6)
+Exception in thread "main" 
+Java Result: 1
+
+Note that the program ends with ExceptionInInitializerError because any exception thrown in a static block is wrapped into ExceptionInInitializerError and then that ExceptionInInitializerError is thrown. Remember that a static or instance initializer can only throw a RuntimeException. If you try to throw a checked exception from a static or instance initializer block to the outside, the code will not compile.
+
+15. Java Exceptions is a mechanism for --> 
+--> Exceptions provide the means to separate the details of what to do when something out of the ordinary happens from the main logic of a program.
+Once you get an exception, you can catch it and in the catch block you can determine what actions should be taken based on the situation. Thus, the actions that you have to take under exceptional circumstances are isolated from the main flow of the program and improves clarity of the code.
+--> once you catch an exception, you can log the details.
+
+----- from test 7 -->
+1. This question demonstrates that a null reference may be used to access a class (static) variable without causing an exception .
+Note the method signature. It returns a reference to an object of class DatabaseWrapper. Thus, getDatabase().url means we are accessing url field of the object returned by the method. Now, since the class of the object returned by the method is DatabaseWrapper and the field url is a static field of the class, the compiler creates the instruction for the JVM to access this field directly using the class reference instead of the object reference returned by the method at runtime. Thus, the JVM does not need to depend on the actual object returned by the method at run time to access url. So even if the method returns null at run time, it doesn't matter because the JVM doesn't even access the reference returned by the method.
+
+2. Need to make sure about local variable and class variable. sometime both can have same name and need to verify which one is being used for which purpose.
+
+
+
+
