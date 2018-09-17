@@ -107,4 +107,7 @@ For example, consider adding a period of one day and a duration of one day to 18
 
 8. 
 
-
+last day test -->
+need to check operator presedence --->
+binary and hexa decimal system.
+there is reverse method in StringBuilder.
