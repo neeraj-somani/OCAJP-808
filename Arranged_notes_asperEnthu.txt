@@ -182,6 +182,9 @@ Default methods introduce one form of multiple inheritance of implementation. A 
 --> Multiple inheritance of state includes ability to inherit instance fields from multiple classes.
 --> Multiple inheritance of type includes ability to implement multiple interfaces and/or ability to extend from multiple clases.
 
+---> Java allows a class to implement multiple interfaces. An interface is a "type" and does not contain any state. This implies that Java supports multiple type inheritance.
+A class contains state and extending a class means inheriting the state. Since Java does not allow a class to extend from multiple classes, it means that Java does not support multiple state inheritance.
+
 *************************************** Working with Java Data Types - ***************************************
 
 --> below are default value for all primitive and object data type --> 
