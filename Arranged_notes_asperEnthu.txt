@@ -57,7 +57,7 @@ Similarly, an SUV is-a Car and since Car is-a Vehicle and is-a Drivable, SUV is 
 
 Now, the rule is that if you have a container that is meant to contain A, then you can add anything that is-a A to that container. For example, if you have ArrayList<Car>, you can add a SUV to it because an SUV is-a Car. But if you have ArrayList<SUV>, you cannot add a Car to it because a Car is not an SUV.
 
---> If you have any line of code that is unreachable in the the entire life of program them compiler will complain and code does not compile.
+--> If you have any line of code that is unreachable in the entire life of program them compiler will complain and code does not compile.
 
 --> Top level class can be public or default (means, no access modifier) and abstract or final non-access modifier are permitted.
 --> private, protected and public can be applied to a nested class (not in OCA).
@@ -133,7 +133,7 @@ It will print hello 2 times.
 
 *************************************** Java Basics - OO Concepts -*************************************** 
 
---> Trying to override a static method with a non-static method (and vice-versa) in a class or interface will result in a compilation error. Although, You can, however, have a default method in a subinterface with the same signature as a static method of its super interface because a static method of an interface can only be called using that interface's name (as interface can't be instanctiated). 
+--> Trying to override a static method with a non-static method (and vice-versa) in a class or interface will result in a compilation error. Although, You can, however, have a default method in a subinterface with the same signature as a static method of its super interface because a static method of an interface can only be called using that interface's name (as interface can't be instantiated). 
 Example:
 interface I{
    public default void invalid(){ }
